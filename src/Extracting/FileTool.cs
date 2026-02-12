@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
 namespace Extracting
 {
     internal static class FileTool
