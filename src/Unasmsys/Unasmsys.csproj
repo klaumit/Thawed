@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="data\*.com">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="lib\unasmsys.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>unasmsys_win32.dll</TargetPath>
