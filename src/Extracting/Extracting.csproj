@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="lib\unasmsys.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <TargetPath>unasmsys_win32.dll</TargetPath>
-    </None>
+    <PackageReference Include="CliWrap" Version="3.10.0" />
+    <PackageReference Include="Iced" Version="1.21.0" />
   </ItemGroup>
 
 </Project>
