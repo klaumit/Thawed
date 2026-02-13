@@ -27,5 +27,14 @@ namespace Extracting.Tools
         {
             return arrays.Select(a => new TempFile(dir, a));
         }
+
+        public static string GetPath<T>()
+        {
+            var type = typeof(T);
+            var asm = type.Assembly;
+            var loc = asm.Location;
+            var dll = Path.GetFullPath(loc);
+            return Path.GetDirectoryName(dll)!;
+        }
     }
 }
