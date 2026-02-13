@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Extracting.API;
 using Extracting.Tools;
 using System;
-using System.Linq;
 using CliWrap;
 using CliWrap.Buffered;
 using Unasmsys;
@@ -33,11 +33,53 @@ namespace Extracting.Extractors
                 if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
                     throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
 
-                yield break;
-                throw new System.NotImplementedException(dumpCmd.StandardOutput);
+                var stdOut = dumpCmd.StandardOutput;
+                var sizes = batch.Select(b => b.Size).ToArray();
+                foreach (var step in ParseGnuOutput(stdOut, sizes))
+                    yield return step;
             }
+        }
 
-            throw new System.NotImplementedException();
+        private static IEnumerable<Decoded[]> ParseGnuOutput(string stdOut, int[] sizes)
+        {
+            var lines = TextTool.ToLines(stdOut);
+            const string sep = "00000000 <.data>:";
+            List<Decoded>? list = null;
+            var i = -1;
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line) ||
+                    (line.Contains(':') && line.Contains("file format binary")) ||
+                    line.Contains("Disassembly of section"))
+                    continue;
+                if (line.StartsWith(sep) && line.Split(sep, 2) is { Length: 2 } pt)
+                {
+                    i++;
+                    if (list != null)
+                        yield return list.ToArray();
+                    list = new List<Decoded>();
+                    continue;
+                }
+                if (ParseLine(line, ref sizes[i]) is not { } res)
+                    continue;
+                list!.Add(res);
+            }
+            if (list is { Count: >= 1 })
+                yield return list.ToArray();
+        }
+
+        private static Decoded? ParseLine(string one, ref int left)
+        {
+            var parts = one.Split((char)9)
+                .Select(p => p.Trim()).ToArray();
+            if (parts.Length != 3)
+                return null;
+            var offset = short.Parse(parts[0].TrimEnd(':'));
+            var hex = parts[1].Replace(" ", "");
+            var dis = parts[2];
+            var count = hex.Length / 2;
+            left -= count;
+            return new Decoded(offset, count, hex, dis, left);
         }
     }
 }
