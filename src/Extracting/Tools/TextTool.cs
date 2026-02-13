@@ -1,9 +1,10 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Extracting.API;
 
 namespace Extracting.Tools
 {
-    internal static class TextTool
+    public static class TextTool
     {
         public static string CleanUp(string txt)
         {
@@ -21,6 +22,11 @@ namespace Extracting.Tools
         {
             var item = one.TrimStart(clause).TrimEnd(clause);
             return item.Split(sep);
+        }
+
+        public static string GetName(this IExtractor exec)
+        {
+            return exec.GetType().Name.Replace(nameof(IExtractor).Trim('I'), "");
         }
     }
 }

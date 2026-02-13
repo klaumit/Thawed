@@ -1,47 +1,61 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Extracting.Extractors;
 using Extracting.API;
 using Extracting.Tools;
-using Generator.Tools;
-using static Extracting.Tools.IterTool;
 
 namespace Generator
 {
     internal static class Program
     {
+        private static IExtractor[] CreateExtractors()
+            => [new IcedExtractor(), new NasmExtractor(), new WinExtractor(), new GnuExtractor()];
+
         private static async Task Main(string[] args)
         {
-            IExtractor[] execs = [new IcedExtractor(), new NasmExtractor(), new WinExtractor(), new GnuExtractor()];
-            foreach (var exec in execs)
+            var execs = CreateExtractors();
+            var tasks = execs.Select(async e => await RunEx(e)).ToArray();
+            await Task.WhenAll(tasks);
+            Console.WriteLine("Done.");
+        }
+
+        private static async Task RunEx(object? obj)
+        {
+            var exec = (IExtractor)obj!;
+            var typ = exec.GetName();
+
+            var fileName = $"{typ}.csv";
+            StreamWriter file;
+            if (File.Exists(fileName))
             {
-                var typ = exec.GetType().Name.Replace(nameof(IExtractor).Trim('I'), "");
-                Console.WriteLine($" # {typ}");
-                
-                // await using var file = File.CreateText($"{typ}.csv");
-                // file.AutoFlush = true;
-                // var line = $"\"App\",\"Hex\",\"Parsed\"";
-                // await file.WriteLineAsync(line);
-
-                var bb = Go(0, 2, BitTool.AsShortB).Concat(
-                    new byte[][] { [90, 0x8B, 0xEC, 47, 63, 23, 38] }).Reverse().ToArray();
-
-                await foreach (var bx in exec.Decode(bb))
-                {
-                    Console.WriteLine(JsonTool.ToJson(bx));
-                }
-
-                //foreach (var bytes in bb)
-                //{
-                // var hex = Convert.ToHexStringLower(bytes);
-                //var txt = await exec.Decode(bytes);
-
-                // line = $"\"{typ}\",\"0x{hex}\",\"{txt}\"";
-                // await file.WriteLineAsync(line);
-                // Console.WriteLine(line);
-                //}
+                file = File.AppendText(fileName);
+                file.AutoFlush = true;
+                Console.WriteLine($" # {typ} ->> {fileName}");
             }
+            else
+            {
+                file = File.CreateText(fileName);
+                file.AutoFlush = true;
+                const string line = $"\"App\",\"Hex\",\"Parsed\"";
+                await file.WriteLineAsync(line);
+                Console.WriteLine($" # {typ} --> {fileName}");
+            }
+
+            var cands = IterTool.Go(0, 2, BitTool.AsShortB).Concat(
+                new byte[][] { [90, 0x8B, 0xEC, 47, 63, 23, 38] }).Reverse().ToArray();
+
+            await foreach (var decoded in exec.Decode(cands))
+            {
+                foreach (var one in decoded)
+                {
+                    var txt = $"\"{typ}\",\"{one}\"";
+                    await file.WriteLineAsync(txt);
+                }
+            }
+
+            await file.FlushAsync();
         }
     }
 }
