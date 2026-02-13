@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Extracting.Tools
 {
@@ -14,12 +15,17 @@ namespace Extracting.Tools
             return path;
         }
 
-        public static async Task<string> WriteNewFile(string tmpDir, byte[] bytes)
+        public static string WriteNewFile(string tmpDir, byte[] bytes)
         {
             var ticks = DateTime.Now.Ticks;
             var file = Path.Combine(tmpDir, $"a{ticks}.bin");
-            await File.WriteAllBytesAsync(file, bytes);
+            File.WriteAllBytes(file, bytes);
             return file;
+        }
+
+        public static IEnumerable<TempFile> Wrap(this IEnumerable<byte[]> arrays, string dir)
+        {
+            return arrays.Select(a => new TempFile(dir, a));
         }
     }
 }

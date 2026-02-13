@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Extracting.Extractors;
 using Extracting.API;
+using Extracting.Tools;
 using Generator.Tools;
+using static Extracting.Tools.IterTool;
 
 namespace Generator
 {
@@ -18,18 +21,21 @@ namespace Generator
                 // file.AutoFlush = true;
                 // var line = $"\"App\",\"Hex\",\"Parsed\"";
                 // await file.WriteLineAsync(line);
-                for (var i = 0; i < 2; i++)
-                {
-                    var bytes = BitConverter.GetBytes((short)i);
+
+                var bb = Go(0, 2, BitTool.AsShortB).ToArray();
+                var bx = await exec.Decode(bb);
+                
+                //foreach (var bytes in bb)
+                //{
                     // var hex = Convert.ToHexStringLower(bytes);
-                    var txt = await exec.Decode(bytes);
+                    //var txt = await exec.Decode(bytes);
 
                     // line = $"\"{typ}\",\"0x{hex}\",\"{txt}\"";
                     // await file.WriteLineAsync(line);
                     // Console.WriteLine(line);
 
-                    Console.WriteLine(JsonTool.ToJson(txt));
-                }
+                Console.WriteLine(JsonTool.ToJson(bx));
+                //}
             }
         }
     }
