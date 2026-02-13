@@ -12,8 +12,8 @@ namespace Generator
             IExtractor[] execs =
             [
                 new IcedExtractor(),
-                // new GnuExtractor(),
-                // new NdisExtractor(),
+                new GnuExtractor(),
+                new NdisExtractor(),
                 new AsmExtractor()
             ];
             foreach (var exec in execs)
@@ -23,14 +23,14 @@ namespace Generator
                 file.AutoFlush = true;
                 var line = $"\"App\",\"Hex\",\"Parsed\"";
                 await file.WriteLineAsync(line);
-                for (var i = 0; i < 150; i++)
+                for (var i = 0; i < 10; i++)
                 {
                     var bytes = BitConverter.GetBytes((short)i);
                     var hex = Convert.ToHexStringLower(bytes);
                     var txt = await exec.Decode(bytes);
                     line = $"\"{typ}\",\"0x{hex}\",\"{txt}\"";
                     await file.WriteLineAsync(line);
-                    Console.WriteLine(line);
+                    // Console.WriteLine(line);
                 }
             }
         }

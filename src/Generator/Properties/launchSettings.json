@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "od": {
+      "commandName": "Project",
+      "commandLineArgs": "-f -o tmp"
+    }
+  }
+}

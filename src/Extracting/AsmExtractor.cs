@@ -1,69 +1,40 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.IO;
+using CliWrap;
+using CliWrap.Buffered;
 
 namespace Extracting
 {
 	public sealed class AsmExtractor : IExtractor
 	{
-		public Task<string> Decode(byte[] bytes)
+		private readonly string _tmpDir;
+
+		public AsmExtractor()
 		{
-			var res = DecodeSync(bytes);
-			return Task.FromResult(res);
+			_tmpDir = FileTool.CreateOrGetDir("tmp");
 		}
 
-		private static string DecodeSync(byte[] bytes)
+		public async Task<string> Decode(byte[] bytes)
 		{
-			const short offset = 0;
-			var codePtr = Marshal.AllocHGlobal(bytes.Length);
-			Marshal.Copy(bytes, 0, codePtr, bytes.Length);
+			var tmpBin = await FileTool.WriteNewFile(_tmpDir, bytes);
+			List<string> dArgs = ["../../../../../prepared/Unasmsys.exe", tmpBin];
 
-			const int bufferSize = 256;
-			var buffer = Marshal.AllocHGlobal(bufferSize);
-			try
-			{
-				var count = Unasm1Line(buffer, offset, codePtr);
-				var dis = FromAnsi(buffer);
-				_ = ReadHex(codePtr, count);
+			const string cmd = "wine";
+			var dumpCmd = await Cli.Wrap(cmd)
+				.WithArguments(dArgs)
+				.WithWorkingDirectory(_tmpDir)
+				.WithValidation(CommandResultValidation.None)
+				.ExecuteBufferedAsync();
 
-				if (count > bytes.Length)
-					return "___";
+			File.Delete(tmpBin);
+			var error = dumpCmd.StandardError;
+			if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
+				throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
 
-				var txt = TextTool.CleanUp(dis);
-				return txt.Trim();
-			}
-			finally
-			{
-				Marshal.FreeHGlobal(buffer);
-				Marshal.FreeHGlobal(codePtr);
-			}
+			var stdOut = dumpCmd.StandardOutput;
+			throw new InvalidOperationException("'" + stdOut + "'");
 		}
-
-		private static string FromAnsi(IntPtr textBuff, int len = 128)
-		{
-			var text = Marshal.PtrToStringAnsi(textBuff, len);
-			var parts = text.Split('\0', 2);
-			return parts[0];
-		}
-
-		private static string ReadHex(IntPtr ptr, int count)
-		{
-			var array = ReadBytes(ptr, count);
-			return Convert.ToHexString(array);
-		}
-
-		private static byte[] ReadBytes(IntPtr ptr, int count)
-		{
-			var array = new byte[count];
-			for (var i = 0; i < count; i++)
-				array[i] = Marshal.ReadByte(ptr, i);
-			return array;
-		}
-
-		private const CallingConvention Cc = CallingConvention.StdCall;
-		private const CharSet A = CharSet.Ansi;
-
-		[DllImport("unasmsys", CallingConvention = Cc, CharSet = A)]
-		private static extern int Unasm1Line(IntPtr outStrBuffer, short offset, IntPtr codePtr);
 	}
 }
