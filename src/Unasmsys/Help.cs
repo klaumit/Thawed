@@ -8,6 +8,7 @@ namespace Unasmsys
 		internal static IEnumerable<Decoded> Decode(byte[] bytes)
 		{
 			short offset = 0;
+			const short mode = 0;
 			var codePtr = Marshal.AllocHGlobal(bytes.Length);
 			Marshal.Copy(bytes, 0, codePtr, bytes.Length);
 
@@ -18,7 +19,7 @@ namespace Unasmsys
 				var left = bytes.Length;
 				while (left >= 1)
 				{
-					var count = Api.Unasm1Line(buffer, offset, codePtr);
+					var count = Api.Unasm1Line(buffer, mode, codePtr + offset);
 					var dis = Tool.FromAnsi(buffer);
 					var hex = Tool.ReadHex(codePtr, count, offset);
 					left -= count;
