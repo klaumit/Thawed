@@ -17,7 +17,7 @@ namespace Extracting
             _tmpDir = FileTool.CreateOrGetDir("tmp");
         }
 
-        public async Task<string> Decode(byte[] bytes)
+        public async Task<object> Decode(byte[] bytes)
         {
             var tmpBin = await FileTool.WriteNewFile(_tmpDir, bytes);
             List<string> dArgs = ["-D", "-Mintel,i8086", "-b", "binary", "-m", "i386", "-z", tmpBin];

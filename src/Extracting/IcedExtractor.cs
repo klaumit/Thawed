@@ -5,13 +5,13 @@ namespace Extracting
 {
     public sealed class IcedExtractor : IExtractor
     {
-        public Task<string> Decode(byte[] bytes)
+        public Task<object> Decode(byte[] bytes)
         {
             var res = DecodeSync(bytes);
             return Task.FromResult(res);
         }
 
-        private static string DecodeSync(byte[] bytes)
+        private static object DecodeSync(byte[] bytes)
         {
             const int bit = 16;
             var reader = new ByteArrayCodeReader(bytes);

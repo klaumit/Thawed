@@ -26,11 +26,14 @@ namespace Generator
                 for (var i = 0; i < 10; i++)
                 {
                     var bytes = BitConverter.GetBytes((short)i);
-                    var hex = Convert.ToHexStringLower(bytes);
+                    // var hex = Convert.ToHexStringLower(bytes);
                     var txt = await exec.Decode(bytes);
-                    line = $"\"{typ}\",\"0x{hex}\",\"{txt}\"";
-                    await file.WriteLineAsync(line);
+
+                    // line = $"\"{typ}\",\"0x{hex}\",\"{txt}\"";
+                    // await file.WriteLineAsync(line);
                     // Console.WriteLine(line);
+
+                    Console.WriteLine(JsonTool.ToJson(txt));
                 }
             }
         }

@@ -4,6 +4,6 @@ namespace Extracting
 {
     public interface IExtractor
     {
-        Task<string> Decode(byte[] bytes);
+        Task<object> Decode(byte[] bytes);
     }
 }
