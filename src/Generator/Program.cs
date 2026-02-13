@@ -13,7 +13,7 @@ namespace Generator
     {
         private static async Task Main(string[] args)
         {
-            IExtractor[] execs = [ /*new GnuExtractor(), new WinExtractor(),*/ new IcedExtractor(), new NasmExtractor()];
+            IExtractor[] execs = [new IcedExtractor(), new NasmExtractor(), new WinExtractor(), new GnuExtractor()];
             foreach (var exec in execs)
             {
                 var typ = exec.GetType().Name.Replace(nameof(IExtractor).Trim('I'), "");
