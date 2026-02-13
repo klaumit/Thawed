@@ -17,11 +17,14 @@ namespace Unasmsys
 		private static void ProcessFile(string file)
 		{
 			var bytes = File.ReadAllBytes(file);
+			Console.WriteLine();
+			Console.WriteLine($"   [ {file} ]   ");
 			foreach (var o in Help.Decode(bytes))
 			{
 				var line = $"\"{o.Offset:D5}\",\"{o.Count:D2}\",\"{o.Hex}\",\"{o.Dis}\",\"{o.Left:D5}\"";
 				Console.WriteLine(line);
 			}
+			Console.WriteLine();
 		}
 	}
 }
