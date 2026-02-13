@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Compile Include="..\Unasmsys\Decoded.cs">
-      <Link>Decoded.cs</Link>
+      <Link>Models\Decoded.cs</Link>
     </Compile>
   </ItemGroup>
 

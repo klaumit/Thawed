@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Extracting
+namespace Extracting.Tools
 {
     internal static class TextTool
     {

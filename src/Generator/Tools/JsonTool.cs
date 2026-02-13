@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Generator
+namespace Generator.Tools
 {
     internal static class JsonTool
     {

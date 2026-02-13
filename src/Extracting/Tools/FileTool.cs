@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Extracting
+namespace Extracting.Tools
 {
     internal static class FileTool
     {

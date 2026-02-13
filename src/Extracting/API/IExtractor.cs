@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Extracting
+namespace Extracting.API
 {
     public interface IExtractor
     {
