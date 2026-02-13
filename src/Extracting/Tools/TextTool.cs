@@ -17,10 +17,10 @@ namespace Extracting.Tools
             return lines;
         }
 
-        public static string[] ToCol(string one)
+        public static string[] ToCol(string one, char clause = '"', string sep = "\",\"")
         {
-            var item = one.TrimStart('"').TrimEnd('"');
-            return item.Split("\",\"");
+            var item = one.TrimStart(clause).TrimEnd(clause);
+            return item.Split(sep);
         }
     }
 }

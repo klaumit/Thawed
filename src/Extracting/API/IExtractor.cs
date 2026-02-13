@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Unasmsys;
 
 namespace Extracting.API
 {
     public interface IExtractor
     {
-        Task<object> Decode(IEnumerable<byte[]> byteArrays);
+        IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays);
     }
 }

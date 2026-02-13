@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using CliWrap;
 using CliWrap.Buffered;
 using Extracting.API;
 using Extracting.Tools;
+using Unasmsys;
 
 namespace Extracting.Extractors
 {
@@ -13,7 +14,7 @@ namespace Extracting.Extractors
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_nsm");
 
-        public async Task<object> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(1))
             {
@@ -33,10 +34,27 @@ namespace Extracting.Extractors
                 if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
                     throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
 
-                throw new System.NotImplementedException(dumpCmd.StandardOutput);
+                var stdOut = dumpCmd.StandardOutput;
+                var size = batch.Single().Size;
+                yield return ParseNasmOutput(stdOut, size).ToArray();
             }
+        }
 
-            throw new System.NotImplementedException();
+        private static IEnumerable<Decoded> ParseNasmOutput(string stdOut, int size)
+        {
+            var lines = TextTool.ToLines(stdOut);
+            var left = size;
+            foreach (var line in lines)
+            {
+                var cols = TextTool.ToCol(line, ' ', "  ")
+                    .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+                var offset = int.Parse(cols[0], NumberStyles.HexNumber);
+                var hex = cols[1];
+                var count = hex.Length / 2;
+                var dis = cols[2];
+                left -= count;
+                yield return new Decoded((short)offset, count, hex, dis, left);
+            }
         }
     }
 }

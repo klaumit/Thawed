@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Extracting.API;
 using Extracting.Tools;
 using System;
 using CliWrap;
 using CliWrap.Buffered;
+using Unasmsys;
 
 namespace Extracting.Extractors
 {
@@ -13,7 +13,7 @@ namespace Extracting.Extractors
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win");
 
-        public async Task<object> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(100))
             {
@@ -33,6 +33,7 @@ namespace Extracting.Extractors
                 if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
                     throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
 
+                yield break;
                 throw new System.NotImplementedException(dumpCmd.StandardOutput);
             }
 
