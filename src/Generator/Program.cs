@@ -50,9 +50,13 @@ namespace Generator
                 foreach (var o in decoded)
                 {
                     var tp = o.Dis.Split(' ', 2);
+                    var he = o.Hex;
                     var op = tp[0].Trim();
                     var ar = tp.Length == 2 ? tp[1].Trim() : string.Empty;
-                    var fld = new[] { typ, $"{o.Offset:D5}", $"{o.Count:D2}", o.Hex, op, ar, $"{o.Left:D2}" };
+                    he = he.ToUpper();
+                    op = op.ToUpper();
+                    ar = ar.ToUpper();
+                    var fld = new[] { typ, $"{o.Offset:D5}", $"{o.Count:D2}", he, op, ar, $"{o.Left:D2}" };
                     var txt = string.Join(",", fld.Select(f => $"\"{f}\""));
                     await file.WriteLineAsync(txt);
                 }
