@@ -1,6 +1,6 @@
 ﻿namespace Unasmsys
 {
-	internal record Decoded(
+	public record Decoded(
 		short Offset,
 		int Count,
 		string Hex,
