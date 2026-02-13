@@ -15,9 +15,7 @@ namespace Generator
 
         private static async Task Main(string[] args)
         {
-            var execs = CreateExtractors();
-            var tasks = execs.Select(async e => await RunEx(e)).ToArray();
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(CreateExtractors().Select(async e => await RunEx(e)));
             Console.WriteLine("Done.");
         }
 
@@ -38,7 +36,8 @@ namespace Generator
             {
                 file = File.CreateText(fileName);
                 file.AutoFlush = true;
-                const string line = $"\"App\",\"Hex\",\"Parsed\"";
+                var head = new[] { "App", "Offset", "Count", "Hex", "Op", "Arg", "Left" };
+                var line = string.Join(",", head.Select(h => $"\"{h}\""));
                 await file.WriteLineAsync(line);
                 Console.WriteLine($" # {typ} --> {fileName}");
             }
@@ -48,9 +47,13 @@ namespace Generator
 
             await foreach (var decoded in exec.Decode(cands))
             {
-                foreach (var one in decoded)
+                foreach (var o in decoded)
                 {
-                    var txt = $"\"{typ}\",\"{one}\"";
+                    var tp = o.Dis.Split(' ', 2);
+                    var op = tp[0].Trim();
+                    var ar = tp.Length == 2 ? tp[1].Trim() : string.Empty;
+                    var fld = new[] { typ, $"{o.Offset:D5}", $"{o.Count:D2}", o.Hex, op, ar, $"{o.Left:D2}" };
+                    var txt = string.Join(",", fld.Select(f => $"\"{f}\""));
                     await file.WriteLineAsync(txt);
                 }
             }
