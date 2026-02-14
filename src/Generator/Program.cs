@@ -71,8 +71,10 @@ namespace Generator
 
         private static IEnumerable<byte[]> GetCands()
         {
-            return IterTool.Go(0, 2, BitTool.AsShortB).Concat(
-                new byte[][] { [90, 0x8B, 0xEC, 47, 63, 23, 38] }).Reverse();
+            foreach (var b in IterTool.Go(byte.MinValue, byte.MaxValue + 1, BitTool.AsByte))
+                yield return b;
+            foreach (var b in IterTool.Go(ushort.MinValue, ushort.MaxValue + 1, BitTool.AsShort))
+                yield return b;
         }
 
         private static IEnumerable<byte[]> Filter(IEnumerable<byte[]> all, ISet<string> known)

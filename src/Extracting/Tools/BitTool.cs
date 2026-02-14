@@ -4,10 +4,14 @@ namespace Extracting.Tools
 {
     public static class BitTool
     {
-        public static byte[] AsShortB(int arg)
+        public static byte[] AsByte(int arg)
         {
-            var val = (short)arg;
-            return BitConverter.GetBytes(val);
+            return [(byte)arg];
+        }
+
+        public static byte[] AsShort(int arg)
+        {
+            return BitConverter.GetBytes((short)arg);
         }
     }
 }
