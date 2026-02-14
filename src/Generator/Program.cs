@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Extracting.Extractors;
 using Extracting.API;
@@ -25,9 +27,11 @@ namespace Generator
             var typ = exec.GetName();
 
             var fileName = $"{typ}.csv";
+            var known = new SortedSet<string>();
             StreamWriter file;
             if (File.Exists(fileName))
             {
+                await FindOldHex(fileName, known);
                 file = File.AppendText(fileName);
                 file.AutoFlush = true;
                 Console.WriteLine($" # {typ} ->> {fileName}");
@@ -42,10 +46,10 @@ namespace Generator
                 Console.WriteLine($" # {typ} --> {fileName}");
             }
 
-            var cands = IterTool.Go(0, 2, BitTool.AsShortB).Concat(
-                new byte[][] { [90, 0x8B, 0xEC, 47, 63, 23, 38] }).Reverse().ToArray();
+            var cands = GetCands();
+            var maybe = Filter(cands, known);
 
-            await foreach (var decoded in exec.Decode(cands))
+            await foreach (var decoded in exec.Decode(maybe))
             {
                 foreach (var o in decoded)
                 {
@@ -63,6 +67,34 @@ namespace Generator
             }
 
             await file.FlushAsync();
+        }
+
+        private static IEnumerable<byte[]> GetCands()
+        {
+            return IterTool.Go(0, 2, BitTool.AsShortB).Concat(
+                new byte[][] { [90, 0x8B, 0xEC, 47, 63, 23, 38] }).Reverse();
+        }
+
+        private static IEnumerable<byte[]> Filter(IEnumerable<byte[]> all, ISet<string> known)
+        {
+            foreach (var array in all)
+            {
+                var hex = Convert.ToHexString(array);
+                if (known.Contains(hex))
+                    continue;
+                yield return array;
+            }
+        }
+
+        private static async Task FindOldHex(string fileName, ISet<string> set)
+        {
+            var oldLines = await File.ReadAllLinesAsync(fileName, Encoding.UTF8);
+            foreach (var oldLine in oldLines.Skip(1))
+            {
+                var cols = TextTool.ToCol(oldLine);
+                var hex = cols[3].ToUpper();
+                set.Add(hex);
+            }
         }
     }
 }
