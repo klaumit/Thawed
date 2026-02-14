@@ -6,7 +6,6 @@ using CliWrap;
 using CliWrap.Buffered;
 using Extracting.API;
 using Extracting.Tools;
-using Unasmsys;
 
 namespace Extracting.Extractors
 {
@@ -14,7 +13,7 @@ namespace Extracting.Extractors
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_nsm");
 
-        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Dekoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(1))
             {
@@ -36,11 +35,12 @@ namespace Extracting.Extractors
 
                 var stdOut = dumpCmd.StandardOutput;
                 var size = batch.Single().Size;
-                yield return ParseNasmOutput(stdOut, size).ToArray();
+                var bits = batch.Single().Bytes;
+                yield return ParseNasmOutput(stdOut, size, bits).ToArray();
             }
         }
 
-        private static IEnumerable<Decoded> ParseNasmOutput(string stdOut, int size)
+        private static IEnumerable<Dekoded> ParseNasmOutput(string stdOut, int size, byte[] bytes)
         {
             var lines = TextTool.ToLines(stdOut);
             var left = size;
@@ -53,7 +53,7 @@ namespace Extracting.Extractors
                 var count = hex.Length / 2;
                 var dis = cols[2];
                 left -= count;
-                yield return new Decoded((short)offset, count, hex, dis, left);
+                yield return new Dekoded(bytes.ToStr(), (short)offset, count, hex, dis, left);
             }
         }
     }

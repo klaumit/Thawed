@@ -13,5 +13,10 @@ namespace Extracting.Tools
         {
             return BitConverter.GetBytes((short)arg);
         }
+
+        public static string ToStr(this byte[] bytes)
+        {
+            return Convert.ToHexString(bytes);
+        }
     }
 }

@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using CliWrap;
 using CliWrap.Buffered;
-using Unasmsys;
 
 namespace Extracting.Extractors
 {
@@ -15,7 +14,7 @@ namespace Extracting.Extractors
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win");
         private readonly string _exePath = FindExe();
 
-        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Dekoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(100))
             {
@@ -36,26 +35,29 @@ namespace Extracting.Extractors
                     throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
 
                 var stdOut = dumpCmd.StandardOutput;
-                foreach (var step in ParseWinOutput(stdOut))
+                var bytes = batch.Select(b => b.Bytes).ToArray();
+                foreach (var step in ParseWinOutput(stdOut, bytes))
                     yield return step;
             }
         }
 
-        private static IEnumerable<Decoded[]> ParseWinOutput(string stdOut)
+        private static IEnumerable<Dekoded[]> ParseWinOutput(string stdOut, byte[][] bytes)
         {
             var lines = TextTool.ToLines(stdOut);
             const string sep = "[ ";
-            List<Decoded>? list = null;
+            List<Dekoded>? list = null;
+            int i = 0;
             foreach (var line in lines)
             {
                 if (line.StartsWith(sep) && line.Split(sep, 2) is { Length: 2 } pt)
                 {
+                    i++;
                     if (list != null)
                         yield return list.ToArray();
-                    list = new List<Decoded>();
+                    list = new List<Dekoded>();
                     continue;
                 }
-                if (ParseLine(line) is not { } res)
+                if (ParseLine(line, bytes[i]) is not { } res)
                     continue;
                 list!.Add(res);
             }
@@ -63,7 +65,7 @@ namespace Extracting.Extractors
                 yield return list.ToArray();
         }
 
-        private static Decoded? ParseLine(string one)
+        private static Dekoded? ParseLine(string one, byte[] bytes)
         {
             var parts = TextTool.ToCol(one);
             if (parts.Length != 5)
@@ -73,7 +75,7 @@ namespace Extracting.Extractors
             var hex = parts[2];
             var dis = parts[3];
             var left = int.Parse(parts[4]);
-            return new Decoded(offset, count, hex, dis, left);
+            return new Dekoded(bytes.ToStr(), offset, count, hex, dis, left);
         }
 
         private static string FindExe()
