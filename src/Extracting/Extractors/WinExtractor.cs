@@ -46,7 +46,7 @@ namespace Extracting.Extractors
             var lines = TextTool.ToLines(stdOut);
             const string sep = "[ ";
             List<Dekoded>? list = null;
-            int i = 0;
+            var i = -1;
             foreach (var line in lines)
             {
                 if (line.StartsWith(sep) && line.Split(sep, 2) is { Length: 2 } pt)
