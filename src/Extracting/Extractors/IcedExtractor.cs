@@ -28,7 +28,7 @@ namespace Extracting.Extractors
             var left = bytes.Length;
             while (decoder.Decode() is var instr)
             {
-                if (decoder.LastError == DecoderError.NoMoreBytes)
+                if (decoder.LastError == DecoderError.NoMoreBytes && offset > 0)
                     break;
                 var dis = instr.ToString();
                 var count = instr.Length;
