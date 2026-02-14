@@ -58,7 +58,7 @@ namespace Generator
                     var he = o.Hex;
                     var op = tp[0].Trim();
                     var ar = tp.Length == 2 ? tp[1].Trim() : string.Empty;
-                    // he = he.ToUpper();
+                    he = he.ToUpper();
                     // op = op.ToUpper();
                     // ar = ar.ToUpper();
                     var fld = new[] { typ, ih, $"{o.Offset:D5}", $"{o.Count:D2}", he, op, ar, $"{o.Left:D2}" };
