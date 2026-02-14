@@ -53,6 +53,8 @@ namespace Generator
             {
                 foreach (var o in decoded)
                 {
+                    var of = o.Offset;
+                    if (of != 0) continue;
                     var tp = o.Dis.Split(' ', 2);
                     var ih = o.Input;
                     var he = o.Hex;
@@ -61,7 +63,7 @@ namespace Generator
                     he = he.ToUpper();
                     // op = op.ToUpper();
                     // ar = ar.ToUpper();
-                    var fld = new[] { typ, ih, $"{o.Offset:D5}", $"{o.Count:D2}", he, op, ar, $"{o.Left:D2}" };
+                    var fld = new[] { typ, ih, $"{of:D5}", $"{o.Count:D2}", he, op, ar, $"{o.Left:D2}" };
                     var txt = string.Join(",", fld.Select(f => $"\"{f}\""));
                     await file.WriteLineAsync(txt);
                 }
@@ -95,7 +97,7 @@ namespace Generator
             foreach (var oldLine in oldLines.Skip(1))
             {
                 var cols = TextTool.ToCol(oldLine);
-                var hex = cols[4].ToUpper();
+                var hex = cols[1].ToUpper();
                 set.Add(hex);
             }
         }
