@@ -1,0 +1,58 @@
+﻿{
+  "000": [
+    "DS:[BX + SI]",
+    "DS:[BX + SI + disp8]",
+    "DS:[BX + SI + disp16]",
+    "AL",
+    "AX"
+  ],
+  "001": [
+    "DS:[BX + DI]",
+    "DS:[BX + DI + disp8]",
+    "DS:[BX + DI + disp16]",
+    "CL",
+    "CX"
+  ],
+  "010": [
+    "SS:[BP + SI]",
+    "SS:[BP + SI + disp8]",
+    "SS:[BP + SI + disp16]",
+    "DL",
+    "DX"
+  ],
+  "011": [
+    "SS:[BP + DI]",
+    "SS:[BP + DI + disp8]",
+    "SS:[BP + DI + disp16]",
+    "BL",
+    "BX"
+  ],
+  "100": [
+    "DS:[SI]",
+    "DS:[SI + disp8]",
+    "DS:[SI + disp16]",
+    "AH",
+    "SP"
+  ],
+  "101": [
+    "DS:[DI]",
+    "DS:[DI + disp8]",
+    "DS:[DI + disp16]",
+    "CH",
+    "BP"
+  ],
+  "110": [
+    "DS:[disp16]",
+    "SS:[BP + disp8]",
+    "SS:[BP + disp16]",
+    "DH",
+    "SI"
+  ],
+  "111": [
+    "DS:[BX]",
+    "DS:[BX + disp8]",
+    "DS:[BX + disp16]",
+    "BH",
+    "DI"
+  ]
+}
