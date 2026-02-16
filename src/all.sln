@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Gene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extracting", "Extracting\Extracting.csproj", "{72E8FBFE-5EC0-4BFB-B69F-227E1794279E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unasmsys", "Unasmsys\Unasmsys.csproj", "{E3C0CA67-11A9-4AB8-8FEE-5905502956F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unasmsys", "..\nat\Unasmsys\Unasmsys.csproj", "{E3C0CA67-11A9-4AB8-8FEE-5905502956F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
