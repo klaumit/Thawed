@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extracting", "Extracting\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unasmsys", "..\nat\Unasmsys\Unasmsys.csproj", "{E3C0CA67-11A9-4AB8-8FEE-5905502956F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nat", "nat", "{9E6D2CDA-A3CA-4202-9339-03DE779242AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D772CA71-4FF5-488A-9629-3A3F4258447E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +62,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E3C0CA67-11A9-4AB8-8FEE-5905502956F6} = {9E6D2CDA-A3CA-4202-9339-03DE779242AB}
+		{72E8FBFE-5EC0-4BFB-B69F-227E1794279E} = {D772CA71-4FF5-488A-9629-3A3F4258447E}
+		{361C297A-8932-4E0A-98A7-F6F4381A3573} = {D772CA71-4FF5-488A-9629-3A3F4258447E}
 	EndGlobalSection
 EndGlobal
