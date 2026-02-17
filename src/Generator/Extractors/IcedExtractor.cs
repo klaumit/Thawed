@@ -11,13 +11,13 @@ namespace Extracting.Extractors
 {
     public sealed class IcedExtractor : IExtractor
     {
-        public async IAsyncEnumerable<Dekoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var bytes in byteArrays)
                 yield return DecodeOne(bytes).ToArray();
         }
 
-        private static IEnumerable<Dekoded> DecodeOne(byte[] bytes)
+        private static IEnumerable<Decoded> DecodeOne(byte[] bytes)
         {
             const int bit = 16;
             var reader = new ByteArrayCodeReader(bytes);
@@ -35,7 +35,7 @@ namespace Extracting.Extractors
                 var part = bytes.Skip(offset).Take(count).ToArray();
                 var hex = Convert.ToHexString(part);
                 left -= count;
-                var res = new Dekoded(bytes.ToStr(), offset, count, hex, dis, left);
+                var res = new Decoded(bytes.ToStr(), offset, count, hex, dis, left);
                 offset = (short)(offset + count);
                 yield return res;
             }

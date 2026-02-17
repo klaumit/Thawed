@@ -14,7 +14,7 @@ namespace Extracting.Extractors
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win");
         private readonly string _exePath = FindExe();
 
-        public async IAsyncEnumerable<Dekoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(100))
             {
@@ -41,11 +41,11 @@ namespace Extracting.Extractors
             }
         }
 
-        private static IEnumerable<Dekoded[]> ParseWinOutput(string stdOut, byte[][] bytes)
+        private static IEnumerable<Decoded[]> ParseWinOutput(string stdOut, byte[][] bytes)
         {
             var lines = TextTool.ToLines(stdOut);
             const string sep = "[ ";
-            List<Dekoded>? list = null;
+            List<Decoded>? list = null;
             var i = -1;
             foreach (var line in lines)
             {
@@ -54,7 +54,7 @@ namespace Extracting.Extractors
                     i++;
                     if (list != null)
                         yield return list.ToArray();
-                    list = new List<Dekoded>();
+                    list = new List<Decoded>();
                     continue;
                 }
                 if (ParseLine(line, bytes[i]) is not { } res)
@@ -65,7 +65,7 @@ namespace Extracting.Extractors
                 yield return list.ToArray();
         }
 
-        private static Dekoded? ParseLine(string one, byte[] bytes)
+        private static Decoded? ParseLine(string one, byte[] bytes)
         {
             var parts = TextTool.ToCol(one);
             if (parts.Length != 5)
@@ -75,7 +75,7 @@ namespace Extracting.Extractors
             var hex = parts[2];
             var dis = parts[3];
             var left = int.Parse(parts[4]);
-            return new Dekoded(bytes.ToStr(), offset, count, hex, dis, left);
+            return new Decoded(bytes.ToStr(), offset, count, hex, dis, left);
         }
 
         private static string FindExe()

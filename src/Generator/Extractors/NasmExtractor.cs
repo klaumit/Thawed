@@ -13,7 +13,7 @@ namespace Extracting.Extractors
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_nsm");
 
-        public async IAsyncEnumerable<Dekoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(1))
             {
@@ -40,7 +40,7 @@ namespace Extracting.Extractors
             }
         }
 
-        private static IEnumerable<Dekoded> ParseNasmOutput(string stdOut, int size, byte[] bytes)
+        private static IEnumerable<Decoded> ParseNasmOutput(string stdOut, int size, byte[] bytes)
         {
             var lines = TextTool.ToLines(stdOut);
             var left = size;
@@ -53,7 +53,7 @@ namespace Extracting.Extractors
                 var count = hex.Length / 2;
                 var dis = cols[2];
                 left -= count;
-                yield return new Dekoded(bytes.ToStr(), (short)offset, count, hex, dis, left);
+                yield return new Decoded(bytes.ToStr(), (short)offset, count, hex, dis, left);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Extracting.Extractors
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_gnu");
 
-        public async IAsyncEnumerable<Dekoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(100))
             {
@@ -40,11 +40,11 @@ namespace Extracting.Extractors
             }
         }
 
-        private static IEnumerable<Dekoded[]> ParseGnuOutput(string stdOut, byte[][] arrays, int[] sizes)
+        private static IEnumerable<Decoded[]> ParseGnuOutput(string stdOut, byte[][] arrays, int[] sizes)
         {
             var lines = TextTool.ToLines(stdOut);
             const string sep = "00000000 <.data>:";
-            List<Dekoded>? list = null;
+            List<Decoded>? list = null;
             var i = -1;
             foreach (var line in lines)
             {
@@ -57,7 +57,7 @@ namespace Extracting.Extractors
                     i++;
                     if (list != null)
                         yield return list.ToArray();
-                    list = new List<Dekoded>();
+                    list = new List<Decoded>();
                     continue;
                 }
                 if (ParseLine(line, ref sizes[i], arrays[i]) is not { } res)
@@ -68,7 +68,7 @@ namespace Extracting.Extractors
                 yield return list.ToArray();
         }
 
-        private static Dekoded? ParseLine(string one, ref int left, byte[] bytes)
+        private static Decoded? ParseLine(string one, ref int left, byte[] bytes)
         {
             var parts = one.Split((char)9)
                 .Select(p => p.Trim()).ToArray();
@@ -79,7 +79,7 @@ namespace Extracting.Extractors
             var dis = parts[2];
             var count = hex.Length / 2;
             left -= count;
-            return new Dekoded(bytes.ToStr(), offset, count, hex, dis, left);
+            return new Decoded(bytes.ToStr(), offset, count, hex, dis, left);
         }
     }
 }
