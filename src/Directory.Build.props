@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <Copyright>Copyright (C) 2026 Thawed project and contributors</Copyright>
+    <Authors>Thawed project and contributors</Authors>
+    <InformationalVersion>$(Version)</InformationalVersion>
+
+    <LangVersion>latest</LangVersion>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+</Project>
