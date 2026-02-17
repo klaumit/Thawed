@@ -1,18 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Generator.Core;
 using static Generator.Tools.FileTool;
-using static Generator.Tools.JsonTool;
-using S = System.StringSplitOptions;
-using E = System.Linq.Enumerable;
-using N = System.Globalization.NumberStyles;
-using KV = (string key, string val);
 
-namespace Generator
+namespace Generator.Core
 {
     internal static class CodeDump
     {
