@@ -7,8 +7,10 @@ namespace Generator.Tools
 {
     internal static class FileTool
     {
-        public static string CreateOrGetDir(string name)
+        public static string? CreateOrGetDir(string? name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                return null;
             var path = Path.GetFullPath(name);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
