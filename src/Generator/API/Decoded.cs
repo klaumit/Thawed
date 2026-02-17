@@ -1,4 +1,4 @@
-namespace Extracting.API
+namespace Generator.API
 {
     public record Decoded(
         string Input,

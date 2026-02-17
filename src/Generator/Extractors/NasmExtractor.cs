@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using CliWrap;
 using CliWrap.Buffered;
-using Extracting.API;
-using Extracting.Tools;
+using Generator.API;
+using Generator.Tools;
 
-namespace Extracting.Extractors
+namespace Generator.Extractors
 {
     public sealed class NasmExtractor : IExtractor
     {

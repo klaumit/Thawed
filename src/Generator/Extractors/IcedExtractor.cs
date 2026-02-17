@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Extracting.API;
-using Extracting.Tools;
+using Generator.API;
+using Generator.Tools;
 using Iced.Intel;
 
 #pragma warning disable CS1998
 
-namespace Extracting.Extractors
+namespace Generator.Extractors
 {
     public sealed class IcedExtractor : IExtractor
     {

@@ -1,13 +1,13 @@
-using System.Collections.Generic;
-using System.Linq;
-using Extracting.API;
-using Extracting.Tools;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CliWrap;
 using CliWrap.Buffered;
+using Generator.API;
+using Generator.Tools;
 
-namespace Extracting.Extractors
+namespace Generator.Extractors
 {
     public sealed class WinExtractor : IExtractor
     {

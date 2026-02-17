@@ -1,7 +1,7 @@
 using System;
 using Fil = System.IO.File;
 
-namespace Extracting.Tools
+namespace Generator.Tools
 {
     public sealed class TempFile : IDisposable
     {

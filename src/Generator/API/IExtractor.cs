@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Extracting.API
+namespace Generator.API
 {
     public interface IExtractor
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Extracting.Tools
+namespace Generator.Tools
 {
     public static class BitTool
     {

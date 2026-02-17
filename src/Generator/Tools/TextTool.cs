@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Text.RegularExpressions;
-using Extracting.API;
+using Generator.API;
 
-namespace Extracting.Tools
+namespace Generator.Tools
 {
     public static class TextTool
     {

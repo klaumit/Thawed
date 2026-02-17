@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Extracting.Tools
+namespace Generator.Tools
 {
     public static class IterTool
     {
