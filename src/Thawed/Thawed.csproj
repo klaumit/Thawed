@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn></NoWarn>
+    <Version>0.0.1</Version>
+
+    <Description>Intel/NEC disassembler and instruction decoder</Description>
+    <Title>$(Description)</Title>
+    <AssemblyTitle>Thawed</AssemblyTitle>
+    <AssemblyName>Thawed</AssemblyName>
+
+    <Nullable>enable</Nullable>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>
