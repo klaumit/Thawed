@@ -81,8 +81,8 @@ namespace Generator.Extractors
         private static string FindExe()
         {
             var exeDir = FileTool.GetPath<WinExtractor>();
-            var srcDir = Path.Combine(exeDir, "..", "..", "..", "..");
-            return Path.GetFullPath(Path.Combine(srcDir, "prepared", "Unasmsys.exe"));
+            var srcDir = Path.Combine(exeDir, "..", "..", "..", "..", "..");
+            return Path.GetFullPath(Path.Combine(srcDir, "nat", "prepared", "Unasmsys.exe"));
         }
     }
 }
