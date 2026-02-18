@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Generator.Extractors;
 using Generator.API;
+using Iced.Intel;
 
 namespace Generator.Core
 {
@@ -131,6 +132,16 @@ namespace Generator.Core
                 yield return b;
             foreach (var b in IterTool.Go(ushort.MinValue, ushort.MaxValue + 1, BitTool.AsShort))
                 yield return b;
+        }
+
+        public static byte[] Assemble(Action<Assembler> action)
+        {
+            var asm = new Assembler(16);
+            action(asm);
+            using var mem = new MemoryStream();
+            var writer = new StreamCodeWriter(mem);
+            asm.Assemble(writer, 0);
+            return mem.ToArray();
         }
     }
 }
