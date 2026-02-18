@@ -12,8 +12,6 @@ namespace Generator.Core
 {
     internal static class ExecDump
     {
-        private static readonly string Nl = Environment.NewLine;
-
         internal static async Task Run(Options o)
         {
             if (FileTool.CreateOrGetDir(o.OutputDir) is not { } outDir)
@@ -24,12 +22,11 @@ namespace Generator.Core
 
             var numbers = IterTool.Iter16Bit();
             var cands = numbers.Select(BitTool.AsShort).ToArray();
-            const int chunkSize = 200;
             var appS = (o.Misc ?? "").Split(';');
 
             var extractors = CreateExtractors(appS);
             await Task.WhenAll(
-                extractors.Select(async e => await Run(e, chunkSize, cands, outDir))
+                extractors.Select(async e => await Run(e, cands, outDir))
             );
 
             Console.WriteLine("Done.");
@@ -54,7 +51,7 @@ namespace Generator.Core
             }
         }
 
-        private static async Task Run(IExtractor exec, int chunkLen, byte[][] cands, string outDir)
+        private static async Task Run(IExtractor exec, byte[][] cands, string outDir)
         {
             var typ = exec.GetName();
             var fileName = Path.Combine(outDir, $"{typ}.csv");

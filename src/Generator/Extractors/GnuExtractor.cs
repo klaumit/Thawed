@@ -10,11 +10,11 @@ namespace Generator.Extractors
 {
     public sealed class GnuExtractor : IExtractor
     {
-        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_gnu");
+        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_gnu")!;
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
-            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(100))
+            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(200))
             {
                 List<string> dArgs = ["-D", "-Mintel,i8086", "-b", "binary", "-m", "i386", "-z"];
                 Array.ForEach(batch, b => dArgs.Add(b.File));

@@ -11,12 +11,12 @@ namespace Generator.Extractors
 {
     public sealed class WinExtractor : IExtractor
     {
-        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win");
+        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
         private readonly string _exePath = FindExe();
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
-            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(100))
+            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(200))
             {
                 List<string> dArgs = [_exePath];
                 Array.ForEach(batch, b => dArgs.Add(b.File));
