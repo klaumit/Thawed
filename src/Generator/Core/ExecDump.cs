@@ -26,12 +26,13 @@ namespace Generator.Core
             }
 
             var numbers = IterTool.Iter16Bit();
+            var cands = numbers.Select(BitTool.AsShort).ToArray();
             const int chunkSize = 200;
             var appS = (o.Misc ?? "").Split(';');
 
             var extractors = CreateExtractors(appS);
             await Task.WhenAll(
-                extractors.Select(async e => await Run(e, chunkSize, numbers, outDir))
+                extractors.Select(async e => await Run(e, chunkSize, cands, outDir))
             );
 
             Console.WriteLine("Done.");
@@ -56,24 +57,34 @@ namespace Generator.Core
             }
         }
 
-        private static async Task Run(IExtractor exec, int chunkLen, int[] numbers, string outDir)
+        private static async Task Run(IExtractor exec, int chunkLen, byte[][] cands, string outDir)
         {
             var typ = exec.GetName();
             var fileName = Path.Combine(outDir, $"{typ}.csv");
             var known = new SortedSet<string>();
             var file = await CreateOrReadFile(typ, fileName, known);
 
-
-
-
-
-            
-            
-
-
-
-
-
+            var maybe = Filter(cands, known);
+            await foreach (var decoded in exec.Decode(maybe))
+            {
+                foreach (var o in decoded)
+                {
+                    var of = o.Offset;
+                    if (of != 0)
+                        continue;
+                    var tp = o.Dis.Split(' ', 2);
+                    var ih = o.Input;
+                    var he = o.Hex;
+                    var op = tp[0].Trim();
+                    var ar = tp.Length == 2 ? tp[1].Trim() : string.Empty;
+                    he = he.ToUpper();
+                    var fld = new[] { typ, ih, $"{of:D5}", $"{o.Count:D2}", he, op, ar, $"{o.Left:D2}" };
+                    var txt = string.Join(",", fld.Select(f => $"\"{f}\""));
+                    await file.WriteLineAsync(txt);
+                }
+                await file.FlushAsync();
+            }
+            await file.FlushAsync();
         }
 
         private static async Task<StreamWriter> CreateOrReadFile(string typ, string name, ISet<string> known)
@@ -107,6 +118,25 @@ namespace Generator.Core
                 var hex = cols[1].ToUpper();
                 set.Add(hex);
             }
+        }
+
+        private static IEnumerable<byte[]> Filter(IEnumerable<byte[]> all, ISet<string> known)
+        {
+            foreach (var array in all)
+            {
+                var hex = Convert.ToHexString(array);
+                if (known.Contains(hex))
+                    continue;
+                yield return array;
+            }
+        }
+
+        private static IEnumerable<byte[]> GetCands()
+        {
+            foreach (var b in IterTool.Go(byte.MinValue, byte.MaxValue + 1, BitTool.AsByte))
+                yield return b;
+            foreach (var b in IterTool.Go(ushort.MinValue, ushort.MaxValue + 1, BitTool.AsShort))
+                yield return b;
         }
     }
 }
