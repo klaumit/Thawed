@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -20,6 +22,13 @@ namespace Generator.Tools
         {
             var cfg = GetConfig(format);
             return JsonConvert.SerializeObject(obj, cfg);
+        }
+
+        internal static T FromFile<T>(string file, bool format = false)
+        {
+            var txt = File.ReadAllText(file, Encoding.UTF8);
+            var cfg = GetConfig(format);
+            return JsonConvert.DeserializeObject<T>(txt, cfg)!;
         }
     }
 }
