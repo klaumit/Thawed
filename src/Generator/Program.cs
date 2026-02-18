@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommandLine;
 using Generator.Core;
 
@@ -19,6 +14,10 @@ namespace Generator
 				if (o.TryCoder)
 				{
 					await CodeDump.Run(o);
+				}
+				else if (o.TryDecode)
+				{
+					await ExecDump.Run(o);
 				}
 			});
 		}

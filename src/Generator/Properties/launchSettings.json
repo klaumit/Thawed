@@ -2,7 +2,11 @@
   "profiles": {
     "od": {
       "commandName": "Project",
-      "commandLineArgs": "-f -o tmp"
+      "commandLineArgs": "-f -o tmp -m gnu;iced;nasm;win"
+    },
+    "cg": {
+      "commandName": "Project",
+      "commandLineArgs": "-g -i tmp -o ../Thawed/Auto"
     }
   }
 }

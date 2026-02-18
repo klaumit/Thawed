@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Generator.Tools
 {
@@ -9,6 +10,11 @@ namespace Generator.Tools
         {
             for (var i = offset; i < offset + count; i++)
                 yield return func(i);
+        }
+
+        internal static int[] Iter16Bit()
+        {
+            return Enumerable.Range(ushort.MinValue, ushort.MaxValue + 1).ToArray();
         }
     }
 }
