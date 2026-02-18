@@ -1,15 +1,12 @@
 using System;
 using System.Threading.Tasks;
 using Generator.Tools;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.API;
-using Generator.Tools;
 
 namespace Generator.Core
 {
