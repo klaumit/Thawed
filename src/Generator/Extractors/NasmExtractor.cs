@@ -11,7 +11,7 @@ namespace Generator.Extractors
 {
     public sealed class NasmExtractor : IExtractor
     {
-        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_nsm");
+        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_nsm")!;
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
