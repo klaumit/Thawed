@@ -27,6 +27,10 @@ namespace Generator.Core
 
 
             Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeNames()));
+            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeAliases()));
+            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeGroups()));
+            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeModes()));
+            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeDescs()));
 
             
             var bytes = ExecDump.Assemble(a =>

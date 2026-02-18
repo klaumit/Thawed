@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.JsonTool;
@@ -15,12 +16,16 @@ namespace Generator.Meta
         public static string[] GetOpCodeNames()
             => FromFile<string[]>(Path.Combine(Dir, "opCodeNames.json"));
 
-        /*
-           opCodeAliases.json
-           opCodeDescs.json
-           opCodeGroups.json
-           opRmModes.json
-         */
+        public static IDictionary<string, string> GetOpCodeAliases()
+            => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeAliases.json"));
 
+        public static IDictionary<string, string[]> GetOpCodeGroups()
+            => FromFile<SortedDictionary<string, string[]>>(Path.Combine(Dir, "opCodeGroups.json"));
+
+        public static IDictionary<string, string[]> GetOpCodeModes()
+            => FromFile<SortedDictionary<string, string[]>>(Path.Combine(Dir, "opRmModes.json"));
+
+        public static IDictionary<string, string[][]> GetOpCodeDescs()
+            => FromFile<SortedDictionary<string, string[][]>>(Path.Combine(Dir, "opCodeDescs.json"));
     }
 }
