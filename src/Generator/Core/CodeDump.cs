@@ -74,7 +74,7 @@ namespace Generator.Core
                     yield return new Instruct
                     {
                         Label = name, Group = grp, Aliases = string.Join("|", alia),
-                        Instruction = ssn[0], Hex = ssn[1], Bin = ssn[2],
+                        Format = ssn[0], Hex = ssn[1], Instruction = ssn[2],
                         Bytes = ssn[3], Cycles = ssn[4]
                     };
                 }

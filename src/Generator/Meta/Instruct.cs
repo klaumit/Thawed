@@ -11,16 +11,18 @@ namespace Generator.Meta
 
         [Index(1)] public string? Label { get; set; }
 
-        [Index(2)] public string? Instruction { get; set; }
+        [Index(2)] public string? Description { get; set; }
 
-        [Index(3)] public string? Hex { get; set; }
+        [Index(3)] public string? Format { get; set; }
 
-        [Index(4)] public string? Bin { get; set; }
+        [Index(4)] public string? Hex { get; set; }
 
-        [Index(5)] public string? Bytes { get; set; }
+        [Index(5)] public string? Instruction { get; set; }
 
-        [Index(6)] public string? Cycles { get; set; }
+        [Index(6)] public string? Bytes { get; set; }
 
-        [Index(7)] public string? Aliases { get; set; }
+        [Index(7)] public string? Cycles { get; set; }
+
+        [Index(8)] public string? Aliases { get; set; }
     }
 }
