@@ -1,7 +1,15 @@
 using System.Collections.Generic;
 using System.IO;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
+using static Generator.Tools.FileTool;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.JsonTool;
+using C = Generator.Tools.CsvTool;
 
 namespace Generator.Meta
 {
@@ -11,7 +19,8 @@ namespace Generator.Meta
             Path.Combine(GetPath<Desc>(), "..", "..", "..", "Meta")
         );
 
-        // instructs.csv
+        public static Instruct[] GetInstructs()
+            => C.FromFile<Instruct>(Path.Combine(Dir, "instructs.csv"));
 
         public static string[] GetOpCodeNames()
             => FromFile<string[]>(Path.Combine(Dir, "opCodeNames.json"));

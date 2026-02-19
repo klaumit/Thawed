@@ -26,6 +26,7 @@ namespace Generator.Core
             Console.WriteLine(" TODO "); // TODO
 
 
+            Console.WriteLine(JsonTool.ToJson(Desc.GetInstructs()));
             Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeNames()));
             Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeAliases()));
             Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeGroups()));
