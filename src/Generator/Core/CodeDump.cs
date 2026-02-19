@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Generator.Meta;
 using Iced.Intel;
 using static Generator.Tools.FileTool;
 
@@ -23,6 +25,23 @@ namespace Generator.Core
 
             Console.WriteLine(" TODO "); // TODO
 
+            
+            var type = typeof(Assembler);
+            var names = Desc.GetOpCodeNames();
+            foreach (var meth in type.GetMethods())
+            {
+                var key = meth.Name.ToUpperInvariant();
+                if (names.ContainsKey(key) && meth.GetParameters().Length == 0)
+                {
+                    Console.WriteLine(" * " + meth);
+                }
+            }
+            
+
+            
+
+
+
 
 
             var bytes = ExecDump.Assemble(a =>
@@ -31,7 +50,6 @@ namespace Generator.Core
                 a.add(new AssemblerRegister8(Register.AH), new AssemblerRegister8(Register.BL));
                 a.ret();
             });
-
             Console.WriteLine(Convert.ToHexString(bytes));
         }
     }
