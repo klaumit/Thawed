@@ -116,7 +116,7 @@ Interrupt,INTO,,INTO,CE,11001110,1,6 (13 if OF = 1),BRKV
 Interrupt,IRET,,IRET,CF,11001111,1,10,RETI
 Branch,JA,,JA rel8,77 ii,01110111 iiiiiiii,2,1 (4 if branch taken),BH
 Branch,JBE,,JBE rel8,76 ii,01110110 iiiiiiii,2,1 (4 if branch taken),BNH
-Branch,JC,,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC|BL|JB
+Branch,JC,,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC | BL | JB
 Branch,JCXZ,,JCXZ rel8,E3 ii,11100011 iiiiiiii,2,1 (4 if branch taken),BCWZ
 Branch,JG,,JG rel8,7F ii,01111111 iiiiiiii,2,1 (4 if branch taken),BGT
 Branch,JGE,,JGE rel8,7D ii,01111101 iiiiiiii,2,1 (4 if branch taken),BGE
@@ -128,15 +128,15 @@ Jump,JMP,,JMP mem16:16,FF /5,11111111 oo101mmm,2+,10,BR
 Jump,JMP,,JMP reg16,FF /4,11111111 11100mmm,2,4,BR
 Jump,JMP,,JMP rel8,EB ii,11101011 iiiiiiii,2,4,BR
 Jump,JMP,,JMP rel16,E9 ii ii,11101001 iiiiiiii iiiiiiii,3,4,BR
-Branch,JNC,,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC|BNL|JAE
+Branch,JNC,,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC | BNL | JAE
 Branch,JNO,,JNO rel8,71 ii,01110001 iiiiiiii,2,1 (4 if branch taken),BNV
 Branch,JNP,,JNP rel8,7B ii,01111011 iiiiiiii,2,1 (4 if branch taken),BPO
 Branch,JNS,,JNS rel8,79 ii,01111001 iiiiiiii,2,1 (4 if branch taken),BP
-Branch,JNZ,,JNZ rel8,75 ii,01110101 iiiiiiii,2,1 (4 if branch taken),BNE|BNZ|JNE
+Branch,JNZ,,JNZ rel8,75 ii,01110101 iiiiiiii,2,1 (4 if branch taken),BNE | BNZ | JNE
 Branch,JO,,JO rel8,70 ii,01110000 iiiiiiii,2,1 (4 if branch taken),BV
 Branch,JP,,JP rel8,7A ii,01111010 iiiiiiii,2,1 (4 if branch taken),BPE
 Branch,JS,,JS rel8,78 ii,01111000 iiiiiiii,2,1 (4 if branch taken),BN
-Branch,JZ,,JZ rel8,74 ii,01110100 iiiiiiii,2,1 (4 if branch taken),BE|BZ|JE
+Branch,JZ,,JZ rel8,74 ii,01110100 iiiiiiii,2,1 (4 if branch taken),BE | BZ | JE
 Flags,LAHF,,LAHF,9F,10011111,1,2,MOV
 Memory,LDS,,"LDS reg16, mem16",C5 /r,11000101 oorrrmmm,2+,6,MOV
 Memory,LEA,,"LEA reg16, mem16",8D /r,10001101 oorrrmmm,2+,1,LDEA
@@ -241,7 +241,7 @@ Shift,RCR,,"RCR reg8, imm8",C0 /3 ii,11000000 11011mmm iiiiiiii,3,3,RORC
 Shift,RCR,,"RCR reg16, 1",D1 /3,11010001 11011rm,2,1,RORC
 Shift,RCR,,"RCR reg16, CL",D3 /3,11010011 11011rm,2,3,RORC
 Shift,RCR,,"RCR reg16, imm8",C1 /3 ii,11000001 11011mmm iiiiiiii,3,3,RORC
-String,REP,,REP,F3 /?,11110011,2+,2,REPE|REPZ
+String,REP,,REP,F3 /?,11110011,2+,2,REPE | REPZ
 String,REPNE,,REPNE,F2 /?,11110010,2+,2,REPNZ
 Jump,RET,,RET,C3,11000011,1,6,-
 Jump,RET,,RET imm16,C2 ii ii,11000010 iiiiiiii iiiiiiii,1,6,-
