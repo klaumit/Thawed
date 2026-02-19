@@ -21,7 +21,7 @@ namespace Generator.Meta
 
         [Index(6)] public string? States { get; set; }
 
-        [Index(7)] public string? TBit { get; set; }
+        [Index(7)] public string? Aliases { get; set; }
 
         [Index(8)] public string? UsedIn { get; set; }
     }

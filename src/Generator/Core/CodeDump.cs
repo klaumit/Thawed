@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Generator.Meta;
-using Generator.Tools;
 using Iced.Intel;
 using static Generator.Tools.FileTool;
 
@@ -57,10 +56,19 @@ namespace Generator.Core
         {
             const string miss = "<?>";
             var groups = Desc.GetOpCodeGroups();
+            var aliases = Desc.GetOpCodeAliases()
+                .Select(a => (k: a.Key.Split('/'), v: a.Value.Split('/')))
+                .ToArray();
             foreach (var name in Desc.GetOpCodeNames())
             {
-                var grp = groups.TryGetValue(name, out var tmp) ? tmp.Last() : miss;
-                yield return new Instruct { Label = name, Group = grp };
+                var grp = groups.TryGetValue(name, out var tmp1) ? tmp1.Last() : miss;
+                var ali = aliases.FirstOrDefault(a => a.k.Any(t => t.Equals(name)));
+                var alia = new SortedSet<string>(ali.k.Concat(ali.v));
+                alia.Remove(name);
+                yield return new Instruct
+                {
+                    Label = name, Group = grp, Aliases = string.Join("|", alia)
+                };
             }
         }
     }
