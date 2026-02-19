@@ -1,13 +1,21 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace Thawed.UnitTests
 {
-    public class UnitTest1
+    public class DecoderTest
     {
-        [Fact]
-        public void Test1()
-        {
+        private readonly ITestOutputHelper _outta;
+        public DecoderTest(ITestOutputHelper outta) => _outta = outta;
 
+        [Theory]
+        [InlineData("x")]
+        [InlineData("y")]
+        public async Task ShouldDecode(string dialect)
+        {
+            var cpu = dialect.ToLowerInvariant();
+            _outta.WriteLine(cpu);
         }
     }
 }
