@@ -38,6 +38,7 @@
   "JA": [ "Branch" ],
   "JBE": [ "Branch" ],
   "JC": [ "Branch" ],
+  "JCXZ": [ "Branch" ],
   "JG": [ "Branch" ],
   "JGE": [ "Branch" ],
   "JL": [ "Branch" ],

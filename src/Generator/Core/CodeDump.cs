@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Generator.Meta;
 using Generator.Tools;
@@ -26,14 +28,21 @@ namespace Generator.Core
             Console.WriteLine(" TODO "); // TODO
 
 
-            Console.WriteLine(JsonTool.ToJson(Desc.GetInstructs()));
-            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeNames()));
-            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeAliases()));
-            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeGroups()));
-            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeModes()));
-            Console.WriteLine(JsonTool.ToJson(Desc.GetOpCodeDescs()));
 
-            
+
+
+            var items = BuildInstructs().ToArray();
+            Desc.SetInstructs(items);
+
+
+
+
+
+
+
+
+
+
             var bytes = ExecDump.Assemble(a =>
             {
                 a.mov(new AssemblerRegister16(Register.AX), 129);
@@ -42,6 +51,17 @@ namespace Generator.Core
             });
 
             Console.WriteLine(Convert.ToHexString(bytes));
+        }
+
+        private static IEnumerable<Instruct> BuildInstructs()
+        {
+            const string miss = "<?>";
+            var groups = Desc.GetOpCodeGroups();
+            foreach (var name in Desc.GetOpCodeNames())
+            {
+                var grp = groups.TryGetValue(name, out var tmp) ? tmp.Last() : miss;
+                yield return new Instruct { Label = name, Group = grp };
+            }
         }
     }
 }
