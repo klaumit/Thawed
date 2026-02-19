@@ -1,12 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
-using static Generator.Tools.FileTool;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.JsonTool;
 using C = Generator.Tools.CsvTool;
