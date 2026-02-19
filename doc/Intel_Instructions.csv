@@ -1,110 +1,377 @@
-Group,Label,Description,Format,Summary,Instruction,States,Aliases,UsedIn
-Numeric,AAA,,,,,,ADJBA,
-Numeric,AAD,,,,,,CVTDB,
-Numeric,AAM,,,,,,CVTBD,
-Numeric,AAS,,,,,,ADJBS,
-Arithmetic,ADC,,,,,,ADDC,
-Arithmetic,ADD,,,,,,,
-Bitwise,AND,,,,,,,
-Interrupt,BOUND,,,,,,CHKIND,
-Jump,CALL,,,,,,,
-Numeric,CBW,,,,,,CVTBW,
-Flags,CLC,,,,,,CLR1 CY,
-Flags,CLD,,,,,,CLR1 DIR,
-Flags,CLI,,,,,,DI,
-Flags,CMC,,,,,,NOT1 CY,
-Arithmetic,CMP,,,,,,,
-String,CMPSB,,,,,,CMPBKB,
-String,CMPSW,,,,,,CMPBKW,
-Prefix,CS,,,,,,PS,
-Numeric,CWD,,,,,,CVTWL,
-Numeric,DAA,,,,,,ADJ4A,
-Numeric,DAS,,,,,,ADJ4S,
-Arithmetic,DEC,,,,,,,
-Arithmetic,DIV,,,,,,DIVU,
-Prefix,DS,,,,,,DS0,
-Other,ENTER,,,,,,PREPARE,
-Prefix,ES,,,,,,DS1,
-Interrupt,HLT,,,,,,HALT,
-Arithmetic,IDIV,,,,,,DIV,
-Arithmetic,IMUL,,,,,,MUL,
-Ports,IN,,,,,,,
-Arithmetic,INC,,,,,,,
-Ports,INSB,,,,,,INMB,
-Ports,INSW,,,,,,INMW,
-Interrupt,INT,,,,,,BRK,
-Interrupt,INTO,,,,,,BRKV,
-Interrupt,IRET,,,,,,RETI,
-Branch,JA,,,,,,BH,
-Branch,JBE,,,,,,BNH,
-Branch,JC,,,,,,BC|BL|JB,
-Branch,JCXZ,,,,,,BCWZ,
-Branch,JG,,,,,,BGT,
-Branch,JGE,,,,,,BGE,
-Branch,JL,,,,,,BLT,
-Branch,JLE,,,,,,BLE,
-Jump,JMP,,,,,,BR,
-Branch,JNC,,,,,,BNC|BNL|JAE,
-Branch,JNO,,,,,,BNV,
-Branch,JNP,,,,,,BPO,
-Branch,JNS,,,,,,BP,
-Branch,JNZ,,,,,,BNE|BNZ|JNE,
-Branch,JO,,,,,,BV,
-Branch,JP,,,,,,BPE,
-Branch,JS,,,,,,BN,
-Branch,JZ,,,,,,BE|BZ|JE,
-Flags,LAHF,,,,,,MOV,
-Memory,LDS,,,,,,MOV,
-Memory,LEA,,,,,,LDEA,
-Other,LEAVE,,,,,,DISPOSE,
-Memory,LES,,,,,,MOV,
-Other,LOCK,,,,,,BUSLOCK,
-String,LODSB,,,,,,LDMB,
-String,LODSW,,,,,,LDMW,
-Loop,LOOP,,,,,,DBNZ,
-Loop,LOOPE,,,,,,DBNZE,
-Loop,LOOPNE,,,,,,DBNZNE,
-Memory,MOV,,,,,,,
-String,MOVSB,,,,,,MOVBKB,
-String,MOVSW,,,,,,MOVBKW,
-Arithmetic,MUL,,,,,,MULU,
-Arithmetic,NEG,,,,,,,
-Other,NOP,,,,,,,
-Bitwise,NOT,,,,,,,
-Bitwise,OR,,,,,,,
-Ports,OUT,,,,,,,
-Ports,OUTSB,,,,,,OUTM,
-Ports,OUTSW,,,,,,OUTM,
-Stack,POP,,,,,,,
-Stack,POPA,,,,,,POP,
-Stack,POPF,,,,,,POP,
-Stack,PUSH,,,,,,,
-Stack,PUSHA,,,,,,PUSH,
-Stack,PUSHF,,,,,,PUSH,
-Shift,RCL,,,,,,ROLC,
-Shift,RCR,,,,,,RORC,
-String,REP,,,,,,REPE|REPZ,
-String,REPNE,,,,,,REPNZ,
-Jump,RET,,,,,,,
-Jump,RETF,,,,,,RET,
-Shift,ROL,,,,,,,
-Shift,ROR,,,,,,,
-Flags,SAHF,,,,,,MOV,
-Shift,SAR,,,,,,SHRA,
-Arithmetic,SBB,,,,,,SUBC,
-String,SCASB,,,,,,CMPMB,
-String,SCASW,,,,,,CMPMW,
-Shift,SHL,,,,,,,
-Shift,SHR,,,,,,,
-Prefix,SS,,,,,,,
-Flags,STC,,,,,,SET1 CY,
-Flags,STD,,,,,,SET1 DIR,
-Flags,STI,,,,,,EI,
-String,STOSB,,,,,,STMB,
-String,STOSW,,,,,,STMW,
-Arithmetic,SUB,,,,,,,
-Bitwise,TEST,,,,,,,
-Other,WAIT,,,,,,POLL,
-Memory,XCHG,,,,,,XCH,
-Memory,XLAT,,,,,,TRANS,
-Bitwise,XOR,,,,,,,
+Group,Label,Instruction,Hex,Bin,Bytes,Cycles,Aliases
+Numeric,AAA,AAA,37,00110111,1,9,ADJBA
+Numeric,AAD,AAD imm8,B5 ii,11010100 iiiiiiii,2,6,CVTDB
+Numeric,AAM,AAM imm8,B4 ii,11010100 iiiiiiii,2,17,CVTBD
+Numeric,AAS,AAS,3F,00111111,1,9,ADJBS
+Arithmetic,ADC,"ADC AL, imm",14 ii,00010100 iiiiiiii,2,1,ADDC
+Arithmetic,ADC,"ADC AX, imm",15 ii ii,00010101 iiiiiiii iiiiiiii,3,1,ADDC
+Arithmetic,ADC,"ADC mem8, imm8",80 /2 ii,10000000 oo010mmm iiiiiiii,3+,3,ADDC
+Arithmetic,ADC,"ADC mem16, imm16",81 /2 ii ii,10000001 oo010mmm iiiiiiii iiiiiiii,4+,3,ADDC
+Arithmetic,ADC,"ADC mem16, simm8",83 /2 ii,10000011 oo010mmm iiiiiiii,3+,3,ADDC
+Arithmetic,ADC,"ADC mem8, reg8",10 /r,00010000 oorrrmmm,2+,3,ADDC
+Arithmetic,ADC,"ADC mem16, reg16",11 /r,00010001 oorrrmmm,2+,3,ADDC
+Arithmetic,ADC,"ADC reg8, imm8",80 /2 ii,10000000 11010mmm iiiiiiii,3,1,ADDC
+Arithmetic,ADC,"ADC reg16, imm16",81 /2 ii ii,10000001 11010mmm iiiiiiii iiiiiiii,4,1,ADDC
+Arithmetic,ADC,"ADC reg16, simm8",83 /2 ii,10000011 11010mmm iiiiiiii,3,1,ADDC
+Arithmetic,ADC,"ADC reg8, mem8",12 /r,00010010 oorrrmmm,2+,2,ADDC
+Arithmetic,ADC,"ADC reg16, mem16",13 /r,00010011 oorrrmmm,2+,2,ADDC
+Arithmetic,ADC,"ADC reg8, reg8",10 /r,000100.0 11rrrmmm,2,1,ADDC
+Arithmetic,ADC,"ADC reg16, reg16",11 /r,000100.1 11rrrmmm,2,1,ADDC
+Arithmetic,ADD,"ADD AL, imm",04 ii,00000100 iiiiiiii,2,1,-
+Arithmetic,ADD,"ADD AX, imm",05 ii ii,00000101 iiiiiiii iiiiiiii,3,1,-
+Arithmetic,ADD,"ADD mem8, imm8",80 /0 ii,10000000 oo000mmm iiiiiiii,3+,3,-
+Arithmetic,ADD,"ADD mem16, imm16",81 /0 ii ii,10000001 oo000mmm iiiiiiii iiiiiiii,4+,3,-
+Arithmetic,ADD,"ADD mem16, simm8",83 /0 ii,10000011 oo000mmm iiiiiiii,3+,3,-
+Arithmetic,ADD,"ADD mem8, reg8",00 /r,00000000 oorrrmmm,2+,3,-
+Arithmetic,ADD,"ADD mem16, reg16",01 /r,00000001 oorrrmmm,2+,3,-
+Arithmetic,ADD,"ADD reg8, imm8",80 /0 ii,10000000 11000mmm iiiiiiii,3,1,-
+Arithmetic,ADD,"ADD reg16, imm16",81 /0 ii ii,10000001 11000mmm iiiiiiii iiiiiiii,4,1,-
+Arithmetic,ADD,"ADD reg16, simm8",83 /0 ii,10000011 11000mmm iiiiiiii,3,1,-
+Arithmetic,ADD,"ADD reg8, mem8",02 /r,00000010 oorrrmmm,2+,2,-
+Arithmetic,ADD,"ADD reg16, mem16",03 /r,00000011 oorrrmmm,2+,2,-
+Arithmetic,ADD,"ADD reg8, reg8",00 /r,000000.0 11rrrmmm,2,1,-
+Arithmetic,ADD,"ADD reg16, reg16",01 /r,000000.1 11rrrmmm,2,1,-
+Bitwise,AND,"AND AL, imm",24 ii,00100100 iiiiiiii,2,1,-
+Bitwise,AND,"AND AX, imm",25 ii ii,00100101 iiiiiiii iiiiiiii,3,1,-
+Bitwise,AND,"AND mem8, imm8",80 /4 ii,10000000 oo100mmm iiiiiiii,3+,3,-
+Bitwise,AND,"AND mem16, imm16",81 /4 ii ii,10000001 oo100mmm iiiiiiii iiiiiiii,4+,3,-
+Bitwise,AND,"AND mem16, simm8",83 /4 ii,10000011 oo100mmm iiiiiiii,3+,3,-
+Bitwise,AND,"AND mem8, reg8",20 /r,00100000 oorrrmmm,2+,3,-
+Bitwise,AND,"AND mem16, reg16",21 /r,00100001 oorrrmmm,2+,3,-
+Bitwise,AND,"AND reg8, imm8",80 /4 ii,10000000 11100mmm iiiiiiii,3,1,-
+Bitwise,AND,"AND reg16, imm16",81 /4 ii ii,10000001 11100mmm iiiiiiii iiiiiiii,4,1,-
+Bitwise,AND,"AND reg16, simm8",83 /4 ii,10000011 11100mmm iiiiiiii,3,1,-
+Bitwise,AND,"AND reg8, mem8",22 /r,00100010 oorrrmmm,2+,2,-
+Bitwise,AND,"AND reg16, mem16",23 /r,00100011 oorrrmmm,2+,2,-
+Bitwise,AND,"AND reg8, reg8",20 /r,001000.0 11rrrmmm,2,1,-
+Bitwise,AND,"AND reg16, reg16",21 /r,001000.1 11rrrmmm,2,1,-
+Interrupt,BOUND,"BOUND reg16, mem16:16",62 /r,01100010 oorrrmmm,2+,13 (20 if condition met),CHKIND
+Jump,CALL,CALL ptr16:16,CA oo oo ss ss,10011010 oooooooo oooooooo ssssssss ssssssss,5,10,-
+Jump,CALL,CALL mem16,FF /2,11111111 oo010mmm,2+,6,-
+Jump,CALL,CALL mem16:16,FF /3,11111111 oo011mmm,2+,12,-
+Jump,CALL,CALL reg16,FF /2,11111111 11010mmm,2,5,-
+Jump,CALL,CALL rel16,E8 ii ii,11101000 iiiiiiii iiiiiiii,3,5,-
+Numeric,CBW,CBW,98,10011000,1,1,CVTBW
+Flags,CLC,CLC,F8,11111000,1,4,CLR1 CY
+Flags,CLD,CLD,FC,11111100,1,4,CLR1 DIR
+Flags,CLI,CLI,FA,11111010,1,4,DI
+Flags,CMC,CMC,F5,11110101,1,4,NOT1 CY
+Arithmetic,CMP,"CMP AL, imm",3C ii,00111100 iiiiiiii,2,1,-
+Arithmetic,CMP,"CMP AX, imm",3D ii ii,00111101 iiiiiiii iiiiiiii,3,1,-
+Arithmetic,CMP,"CMP mem8, imm8",80 /7 ii,10000000 oo111mmm iiiiiiii,3+,2,-
+Arithmetic,CMP,"CMP mem16, imm16",81 /7 ii ii,10000001 oo111mmm iiiiiiii iiiiiiii,4+,2,-
+Arithmetic,CMP,"CMP mem16, simm8",83 /7 ii,10000011 oo111mmm iiiiiiii,3+,2,-
+Arithmetic,CMP,"CMP mem8, reg8",38 /r,00111000 oorrrmmm,2+,2,-
+Arithmetic,CMP,"CMP mem16, reg16",39 /r,00111001 oorrrmmm,2+,2,-
+Arithmetic,CMP,"CMP reg8, imm8",80 /7 ii,10000000 11111mmm iiiiiiii,3,1,-
+Arithmetic,CMP,"CMP reg16, imm16",81 /7 ii ii,10000001 11111mmm iiiiiiii iiiiiiii,4,1,-
+Arithmetic,CMP,"CMP reg16, simm8",83 /7 ii,10000011 11111mmm iiiiiiii,3,1,-
+Arithmetic,CMP,"CMP reg8, mem8",3A /r,00111010 oorrrmmm,2+,2,-
+Arithmetic,CMP,"CMP reg16, mem16",3B /r,00111011 oorrrmmm,2+,2,-
+Arithmetic,CMP,"CMP reg8, reg8",38 /r,001110.0 11rrrmmm,2,1,-
+Arithmetic,CMP,"CMP reg16, reg16",39 /r,001110.1 11rrrmmm,2,1,-
+String,CMPSB,CMPSB,A6,10100110,1,6,CMPBKB
+String,CMPSW,CMPSW,A7,10100111,1,6,CMPBKW
+Prefix,CS,CS,2E,00101110,1,1,PS
+Numeric,CWD,CWD,99,10011001,1,1,CVTWL
+Numeric,DAA,DAA,27,00100111,1,10,ADJ4A
+Numeric,DAS,DAS,2F,00101111,1,10,ADJ4S
+Arithmetic,DEC,DEC mem8,FE /1,11111110 oo001mmm,2+,3,-
+Arithmetic,DEC,DEC mem16,FF /1,11111111 oo001mmm,2+,3,-
+Arithmetic,DEC,DEC reg8,FE /1,11111110 11001mmm,2+,1,-
+Arithmetic,DEC,DEC reg16,4x,01001rrr,1,1,-
+Arithmetic,DIV,DIV mem8,F6 /6,11110110 oo110mmm,2+,16,DIVU
+Arithmetic,DIV,DIV mem16,F7 /6,11111111 oo110mmm,2+,24,DIVU
+Arithmetic,DIV,DIV reg8,F6 /6,11111110 11110mmm,2,15,DIVU
+Arithmetic,DIV,DIV reg16,F7 /6,11111111 11110mmm,2,23,DIVU
+Prefix,DS,DS,3E,00111110,1,1,DS0
+Other,ENTER,"ENTER imm16, imm8",C8 ii ii jj,11001000 iiiiiiii iiiiiiii jjjjjjjj,3,8 (imm8 = 0)14 (imm8 = 1)15 + imm8 * 4 (imm8 >= 2),PREPARE
+Prefix,ES,ES,26,00100110,1,1,DS1
+Interrupt,HLT,HLT,F4,11110100,1,9,HALT
+Arithmetic,IDIV,IDIV mem8,F6 /7,11110110 oo111mmm,2+,18,DIV
+Arithmetic,IDIV,IDIV mem16,F7 /7,11111111 oo111mmm,2+,25,DIV
+Arithmetic,IDIV,IDIV reg8,F6 /7,11111110 11111mmm,2,17,DIV
+Arithmetic,IDIV,IDIV reg16,F7 /7,11111111 11111mmm,2,24,DIV
+Arithmetic,IMUL,IMUL mem8,F6 /5,11110110 oo101mmm,2+,4,MUL
+Arithmetic,IMUL,IMUL mem16,F7 /5,11111111 oo101mmm,2+,4,MUL
+Arithmetic,IMUL,IMUL reg8,F6 /5,11111110 11101mmm,2,3,MUL
+Arithmetic,IMUL,IMUL reg16,F7 /5,11111111 11101mmm,2,3,MUL
+Arithmetic,IMUL,"IMUL reg16, mem16, imm16",69 /r ii ii,11111111 oorrrmmm iiiiiiii iiiiiiii,4,4,MUL
+Arithmetic,IMUL,"IMUL reg16, mem16, simm8",6B /r ii,11111111 oorrrmmm iiiiiiii,3,4,MUL
+Arithmetic,IMUL,"IMUL reg16, reg16, imm16",69 /r ii ii,11111111 11rrrmmm iiiiiiii iiiiiiii,4,3,MUL
+Arithmetic,IMUL,"IMUL reg16, reg16, simm8",6B /r ii,11111111 11rrrmmm iiiiiiii,3,3,MUL
+Ports,IN,"IN AL, DX",EC,11101100,1,6,-
+Ports,IN,"IN AX, DX",ED,11101101,1,6,-
+Ports,IN,"IN AL, imm8",E4 ii,11100100 iiiiiiii,2,6,-
+Ports,IN,"IN AX, imm8",E5 ii,11100101 iiiiiiii,2,6,-
+Arithmetic,INC,INC mem8,FE /0,11111110 oo000mmm,2+,3,-
+Arithmetic,INC,INC mem16,FF /0,11111111 oo000mmm,2+,3,-
+Arithmetic,INC,INC reg8,FE /0,11111110 11000mmm,2+,1,-
+Arithmetic,INC,INC reg16,4x,01000rrr,1,1,-
+Ports,INSB,INSB,6C,01101100,1,6,INMB
+Ports,INSW,INSW,6D,01101101,1,6,INMW
+Interrupt,INT,INT 3,CC,11001100,1,9,BRK
+Interrupt,INT,INT imm8,CD ii,11001101 iiiiiiii,2,10,BRK
+Interrupt,INTO,INTO,CE,11001110,1,6 (13 if OF = 1),BRKV
+Interrupt,IRET,IRET,CF,11001111,1,10,RETI
+Branch,JA,JA rel8,77 ii,01110111 iiiiiiii,2,1 (4 if branch taken),BH
+Branch,JBE,JBE rel8,76 ii,01110110 iiiiiiii,2,1 (4 if branch taken),BNH
+Branch,JC,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC|BL|JB
+Branch,JCXZ,JCXZ rel8,E3 ii,11100011 iiiiiiii,2,1 (4 if branch taken),BCWZ
+Branch,JG,JG rel8,7F ii,01111111 iiiiiiii,2,1 (4 if branch taken),BGT
+Branch,JGE,JGE rel8,7D ii,01111101 iiiiiiii,2,1 (4 if branch taken),BGE
+Branch,JL,JL rel8,7C ii,01111100 iiiiiiii,2,1 (4 if branch taken),BLT
+Branch,JLE,JLE rel8,7E ii,01111110 iiiiiiii,2,1 (4 if branch taken),BLE
+Jump,JMP,JMP ptr16:16,EA oo oo ss ss,11101010 oooooooo oooooooo ssssssss ssssssss,5,7,BR
+Jump,JMP,JMP mem16,FF /4,11111111 oo100mmm,2+,5,BR
+Jump,JMP,JMP mem16:16,FF /5,11111111 oo101mmm,2+,10,BR
+Jump,JMP,JMP reg16,FF /4,11111111 11100mmm,2,4,BR
+Jump,JMP,JMP rel8,EB ii,11101011 iiiiiiii,2,4,BR
+Jump,JMP,JMP rel16,E9 ii ii,11101001 iiiiiiii iiiiiiii,3,4,BR
+Branch,JNC,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC|BNL|JAE
+Branch,JNO,JNO rel8,71 ii,01110001 iiiiiiii,2,1 (4 if branch taken),BNV
+Branch,JNP,JNP rel8,7B ii,01111011 iiiiiiii,2,1 (4 if branch taken),BPO
+Branch,JNS,JNS rel8,79 ii,01111001 iiiiiiii,2,1 (4 if branch taken),BP
+Branch,JNZ,JNZ rel8,75 ii,01110101 iiiiiiii,2,1 (4 if branch taken),BNE|BNZ|JNE
+Branch,JO,JO rel8,70 ii,01110000 iiiiiiii,2,1 (4 if branch taken),BV
+Branch,JP,JP rel8,7A ii,01111010 iiiiiiii,2,1 (4 if branch taken),BPE
+Branch,JS,JS rel8,78 ii,01111000 iiiiiiii,2,1 (4 if branch taken),BN
+Branch,JZ,JZ rel8,74 ii,01110100 iiiiiiii,2,1 (4 if branch taken),BE|BZ|JE
+Flags,LAHF,LAHF,9F,10011111,1,2,MOV
+Memory,LDS,"LDS reg16, mem16",C5 /r,11000101 oorrrmmm,2+,6,MOV
+Memory,LEA,"LEA reg16, mem16",8D /r,10001101 oorrrmmm,2+,1,LDEA
+Other,LEAVE,LEAVE,C9,11001001,1,2,DISPOSE
+Memory,LES,"LES reg16, mem16",C4 /r,11000100 oorrrmmm,2+,6,MOV
+Other,LOCK,LOCK,F0,11110000,1,1,BUSLOCK
+String,LODSB,LODSB,AC,10101100,1,3,LDMB
+String,LODSW,LODSW,AD,10101101,1,3,LDMW
+Loop,LOOP,LOOP rel8,E2 ii,11100010 iiiiiiii,2,2 (5 if branch taken),DBNZ
+Loop,LOOPE,LOOPE rel8,E1 ii,11100001 iiiiiiii,2,3 (6 if branch taken),DBNZE
+Loop,LOOPNE,LOOPNE rel8,E0 ii,11100000 iiiiiiii,2,3 (6 if branch taken),DBNZNE
+Memory,MOV,"MOV AL, ptr16",A0 ii ii,10100000 iiiiiiii iiiiiiii,3,1,-
+Memory,MOV,"MOV AX, ptr16",A1 ii ii,10100001 iiiiiiii iiiiiiii,3,1,-
+Memory,MOV,"MOV mem8, imm8",C6 /0 ii,11000110 oo000mmm iiiiiiii,3+,1,-
+Memory,MOV,"MOV mem16, imm16",C7 /0 ii ii,11000111 oo000mmm iiiiiiii iiiiiiii,4+,1,-
+Memory,MOV,"MOV mem8, reg8",88 /r,10001000 oorrrmmm,2+,1,-
+Memory,MOV,"MOV mem16, reg16",89 /r,10001001 oorrrmmm,2+,1,-
+Memory,MOV,"MOV mem16, sreg16",8C /r,10001100 oo0rrmmm,2+,3,-
+Memory,MOV,"MOV ptr16, AL",A2 ii ii,10100010 iiiiiiii iiiiiiii,3,1,-
+Memory,MOV,"MOV ptr16, AX",A3 ii ii,10100011 iiiiiiii iiiiiiii,3,1,-
+Memory,MOV,"MOV reg8, imm8",Bx ii,10110rrr iiiiiiii,2,1,-
+Memory,MOV,"MOV reg8, imm8",C6 /0 ii,11000110 11000mmm iiiiiiii,3,1,-
+Memory,MOV,"MOV reg16, imm16",Bx ii,10111rrr iiiiiiii iiiiiiii,3,1,-
+Memory,MOV,"MOV reg16, imm16",C7 /0 ii ii,11000111 11000mmm iiiiiiii iiiiiiii,4,1,-
+Memory,MOV,"MOV reg8, mem8",8A /r,10001010 oorrrmmm,2+,1,-
+Memory,MOV,"MOV reg16, mem16",8B /r,10001011 oorrrmmm,2+,1,-
+Memory,MOV,"MOV reg8, reg8",88 /r,100010.0 11rrrmmm,2,1,-
+Memory,MOV,"MOV reg16, reg16",89 /r,100010.1 11rrrmmm,2,1,-
+Memory,MOV,"MOV reg16, sreg16",8C /r,10001100 110rrmmm,2,1,-
+Memory,MOV,"MOV sreg16, mem16",8E /r,10001110 oo0rrmmm,2,3,-
+Memory,MOV,"MOV sreg16, reg16",8E /r,10001110 110rrmmm,2+,2,-
+String,MOVSB,MOVSB,A4,10100100,1,5,MOVBKB
+String,MOVSW,MOVSW,A5,10100101,1,5,MOVBKW
+Arithmetic,MUL,MUL mem8,F6 /4,11110110 oo100mmm,2+,4,MULU
+Arithmetic,MUL,MUL mem16,F7 /4,11111111 oo100mmm,2+,4,MULU
+Arithmetic,MUL,MUL reg8,F6 /4,11111110 11100mmm,2,3,MULU
+Arithmetic,MUL,MUL reg16,F7 /4,11111111 11100mmm,2,3,MULU
+Arithmetic,NEG,NEG mem8,F6 /3,11110110 oo011mmm,2+,3,-
+Arithmetic,NEG,NEG mem16,F7 /3,11111111 oo011mmm,2+,3,-
+Arithmetic,NEG,NEG reg8,F6 /3,11111110 11011mmm,2,1,-
+Arithmetic,NEG,NEG reg16,F7 /3,11111111 11011mmm,2,1,-
+Other,NOP,NOP,90,10010000,1,1,-
+Bitwise,NOT,NOT mem8,F6 /2,11110110 oo010mmm,2+,3,-
+Bitwise,NOT,NOT mem16,F7 /2,11111111 oo010mmm,2+,3,-
+Bitwise,NOT,NOT reg8,F6 /2,11111110 11010mmm,2,1,-
+Bitwise,NOT,NOT reg16,F7 /2,11111111 11010mmm,2,1,-
+Bitwise,OR,"OR AL, imm",0C ii,00001100 iiiiiiii,2,1,-
+Bitwise,OR,"OR AX, imm",0D ii ii,00001101 iiiiiiii iiiiiiii,3,1,-
+Bitwise,OR,"OR mem8, imm8",80 /6 ii,10000000 oo001mmm iiiiiiii,3+,3,-
+Bitwise,OR,"OR mem16, imm16",81 /6 ii ii,10000001 oo001mmm iiiiiiii iiiiiiii,4+,3,-
+Bitwise,OR,"OR mem16, simm8",83 /6 ii,10000011 oo001mmm iiiiiiii,3+,3,-
+Bitwise,OR,"OR mem8, reg8",08 /r,00001000 oorrrmmm,2+,3,-
+Bitwise,OR,"OR mem16, reg16",09 /r,00001001 oorrrmmm,2+,3,-
+Bitwise,OR,"OR reg8, imm8",80 /6 ii,10000000 11001mmm iiiiiiii,3,1,-
+Bitwise,OR,"OR reg16, imm16",81 /6 ii ii,10000001 11001mmm iiiiiiii iiiiiiii,4,1,-
+Bitwise,OR,"OR reg16, simm8",83 /6 ii,10000011 11001mmm iiiiiiii,3,1,-
+Bitwise,OR,"OR reg8, mem8",0A /r,00001010 oorrrmmm,2+,2,-
+Bitwise,OR,"OR reg16, mem16",0B /r,00001011 oorrrmmm,2+,2,-
+Bitwise,OR,"OR reg8, reg8",08 /r,000010.0 11rrrmmm,2,1,-
+Bitwise,OR,"OR reg16, reg16",09 /r,000010.1 11rrrmmm,2,1,-
+Ports,OUT,"OUT DX, AL",EE,11101110,1,6,-
+Ports,OUT,"OUT DX, AX",EF,11101111,1,6,-
+Ports,OUT,"OUT imm8, AL",E6 ii,11100110 iiiiiiii,2,6,-
+Ports,OUT,"OUT imm8, AX",E7 ii,11100111 iiiiiiii,2,6,-
+Ports,OUTSB,OUTSB,6E,01101110,1,6,OUTM
+Ports,OUTSW,OUTSW,6F,01101111,1,6,OUTM
+Stack,POP,POP mem16,8F /0,10001111 oo000mmm,2+,3,-
+Stack,POP,POP reg16,5x,01011xxx,1,1,-
+Stack,POP,POP reg16,8F /0,10001111 11000mmm,2,1,-
+Stack,POP,POP sreg16,xx,000xx111,1,3,-
+Stack,POPA,POPA,61,01100001,1,8,POP
+Stack,POPF,POPF,9D,10011101,1,3,POP
+Stack,PUSH,PUSH simm8,6A ii,01101010 iiiiiiii,2,1,-
+Stack,PUSH,PUSH imm16,68 ii ii,01101000 iiiiiiii iiiiiiii,3,1,-
+Stack,PUSH,PUSH mem16,FF /6,11111111 oo110mmm,2+,2,-
+Stack,PUSH,PUSH reg16,5x,01010xxx,1,1,-
+Stack,PUSH,PUSH reg16,FF /6,11111111 11110mmm,2,1,-
+Stack,PUSH,PUSH sreg16,xx,000xx110,1,2,-
+Stack,PUSHA,PUSHA,60,01100000,1,9,PUSH
+Stack,PUSHF,PUSHF,9C,10011100,1,2,PUSH
+Shift,RCL,"RCL mem8, 1",D0 /2,11010000 oo010rm,2+,3,ROLC
+Shift,RCL,"RCL mem8, CL",D2 /2,11010010 oo010rm,2+,5,ROLC
+Shift,RCL,"RCL mem8, imm8",C0 /2 ii,11000000 oo010mmm iiiiiiii,3+,5,ROLC
+Shift,RCL,"RCL mem16, 1",D1 /2,11010001 oo010rm,2+,3,ROLC
+Shift,RCL,"RCL mem16, CL",D3 /2,11010011 oo010rm,2+,5,ROLC
+Shift,RCL,"RCL mem16, imm8",C1 /2 ii,11000001 oo010mmm iiiiiiii,3+,5,ROLC
+Shift,RCL,"RCL reg8, 1",D0 /2,11010000 11010rm,2,1,ROLC
+Shift,RCL,"RCL reg8, CL",D2 /2,11010010 11010rm,2,3,ROLC
+Shift,RCL,"RCL reg8, imm8",C0 /2 ii,11000000 11010mmm iiiiiiii,3,3,ROLC
+Shift,RCL,"RCL reg16, 1",D1 /2,11010001 11010rm,2,1,ROLC
+Shift,RCL,"RCL reg16, CL",D3 /2,11010011 11010rm,2,3,ROLC
+Shift,RCL,"RCL reg16, imm8",C1 /2 ii,11000001 11010mmm iiiiiiii,3,3,ROLC
+Shift,RCR,"RCR mem8, 1",D0 /3,11010000 oo011rm,2+,3,RORC
+Shift,RCR,"RCR mem8, CL",D2 /3,11010010 oo011rm,2+,5,RORC
+Shift,RCR,"RCR mem8, imm8",C0 /3 ii,11000000 oo011mmm iiiiiiii,3+,5,RORC
+Shift,RCR,"RCR mem16, 1",D1 /3,11010001 oo011rm,2+,3,RORC
+Shift,RCR,"RCR mem16, CL",D3 /3,11010011 oo011rm,2+,5,RORC
+Shift,RCR,"RCR mem16, imm8",C1 /3 ii,11000001 oo011mmm iiiiiiii,3+,5,RORC
+Shift,RCR,"RCR reg8, 1",D0 /3,11010000 11011rm,2,1,RORC
+Shift,RCR,"RCR reg8, CL",D2 /3,11010010 11011rm,2,3,RORC
+Shift,RCR,"RCR reg8, imm8",C0 /3 ii,11000000 11011mmm iiiiiiii,3,3,RORC
+Shift,RCR,"RCR reg16, 1",D1 /3,11010001 11011rm,2,1,RORC
+Shift,RCR,"RCR reg16, CL",D3 /3,11010011 11011rm,2,3,RORC
+Shift,RCR,"RCR reg16, imm8",C1 /3 ii,11000001 11011mmm iiiiiiii,3,3,RORC
+String,REP,REP,F3 /?,11110011,2+,2,REPE|REPZ
+String,REPNE,REPNE,F2 /?,11110010,2+,2,REPNZ
+Jump,RET,RET,C3,11000011,1,6,-
+Jump,RET,RET imm16,C2 ii ii,11000010 iiiiiiii iiiiiiii,1,6,-
+Jump,RETF,RETF,CB,11001011,1,8,RET
+Jump,RETF,RETF imm16,CA ii ii,11001010 iiiiiiii iiiiiiii,1,9,RET
+Shift,ROL,"ROL mem8, 1",D0 /0,11010000 oo000rm,2+,3,-
+Shift,ROL,"ROL mem8, CL",D2 /0,11010010 oo000rm,2+,5,-
+Shift,ROL,"ROL mem8, imm8",C0 /0 ii,11000000 oo000mmm iiiiiiii,3+,5,-
+Shift,ROL,"ROL mem16, 1",D1 /0,11010001 oo000rm,2+,3,-
+Shift,ROL,"ROL mem16, CL",D3 /0,11010011 oo000rm,2+,5,-
+Shift,ROL,"ROL mem16, imm8",C1 /0 ii,11000001 oo000mmm iiiiiiii,3+,5,-
+Shift,ROL,"ROL reg8, 1",D0 /0,11010000 11000rm,2,1,-
+Shift,ROL,"ROL reg8, CL",D2 /0,11010010 11000rm,2,3,-
+Shift,ROL,"ROL reg8, imm8",C0 /0 ii,11000000 11000mmm iiiiiiii,3,3,-
+Shift,ROL,"ROL reg16, 1",D1 /0,11010001 11000rm,2,1,-
+Shift,ROL,"ROL reg16, CL",D3 /0,11010011 11000rm,2,3,-
+Shift,ROL,"ROL reg16, imm8",C1 /0 ii,11000001 11000mmm iiiiiiii,3,3,-
+Shift,ROR,"ROR mem8, 1",D0 /1,11010000 oo001rm,2+,3,-
+Shift,ROR,"ROR mem8, CL",D2 /1,11010010 oo001rm,2+,5,-
+Shift,ROR,"ROR mem8, imm8",C0 /1 ii,11000000 oo001mmm iiiiiiii,3+,5,-
+Shift,ROR,"ROR mem16, 1",D1 /1,11010001 oo001rm,2+,3,-
+Shift,ROR,"ROR mem16, CL",D3 /1,11010011 oo001rm,2+,5,-
+Shift,ROR,"ROR mem16, imm8",C1 /1 ii,11000001 oo001mmm iiiiiiii,3+,5,-
+Shift,ROR,"ROR reg8, 1",D0 /1,11010000 11001rm,2,1,-
+Shift,ROR,"ROR reg8, CL",D2 /1,11010010 11001rm,2,3,-
+Shift,ROR,"ROR reg8, imm8",C0 /1 ii,11000000 11001mmm iiiiiiii,3,3,-
+Shift,ROR,"ROR reg16, 1",D1 /1,11010001 11001rm,2,1,-
+Shift,ROR,"ROR reg16, CL",D3 /1,11010011 11001rm,2,3,-
+Shift,ROR,"ROR reg16, imm8",C1 /1 ii,11000001 11001mmm iiiiiiii,3,3,-
+Flags,SAHF,SAHF,9E,10011110,1,4,MOV
+Shift,SAR,"SAR mem8, 1",D0 /7,11010000 oo111rm,2+,3,SHRA
+Shift,SAR,"SAR mem8, CL",D2 /7,11010010 oo111rm,2+,5,SHRA
+Shift,SAR,"SAR mem8, imm8",C0 /7 ii,11000000 oo111mmm iiiiiiii,3+,5,SHRA
+Shift,SAR,"SAR mem16, 1",D1 /7,11010001 oo111rm,2+,3,SHRA
+Shift,SAR,"SAR mem16, CL",D3 /7,11010011 oo111rm,2+,5,SHRA
+Shift,SAR,"SAR mem16, imm8",C1 /7 ii,11000001 oo111mmm iiiiiiii,3+,5,SHRA
+Shift,SAR,"SAR reg8, 1",D0 /7,11010000 11111rm,2,1,SHRA
+Shift,SAR,"SAR reg8, CL",D2 /7,11010010 11111rm,2,3,SHRA
+Shift,SAR,"SAR reg8, imm8",C0 /7 ii,11000000 11111mmm iiiiiiii,3,3,SHRA
+Shift,SAR,"SAR reg16, 1",D1 /7,11010001 11111rm,2,1,SHRA
+Shift,SAR,"SAR reg16, CL",D3 /7,11010011 11111rm,2,3,SHRA
+Shift,SAR,"SAR reg16, imm8",C1 /7 ii,11000001 11111mmm iiiiiiii,3,3,SHRA
+Arithmetic,SBB,"SBB AL, imm",1C ii,00011100 iiiiiiii,2,1,SUBC
+Arithmetic,SBB,"SBB AX, imm",1D ii ii,00011101 iiiiiiii iiiiiiii,3,1,SUBC
+Arithmetic,SBB,"SBB mem8, imm8",80 /3 ii,10000000 oo011mmm iiiiiiii,3+,3,SUBC
+Arithmetic,SBB,"SBB mem16, imm16",81 /3 ii ii,10000001 oo011mmm iiiiiiii iiiiiiii,4+,3,SUBC
+Arithmetic,SBB,"SBB mem16, simm8",83 /3 ii,10000011 oo011mmm iiiiiiii,3+,3,SUBC
+Arithmetic,SBB,"SBB mem8, reg8",18 /r,00011000 oorrrmmm,2+,3,SUBC
+Arithmetic,SBB,"SBB mem16, reg16",19 /r,00011001 oorrrmmm,2+,3,SUBC
+Arithmetic,SBB,"SBB reg8, imm8",80 /3 ii,10000000 11011mmm iiiiiiii,3,1,SUBC
+Arithmetic,SBB,"SBB reg16, imm16",81 /3 ii ii,10000001 11011mmm iiiiiiii iiiiiiii,4,1,SUBC
+Arithmetic,SBB,"SBB reg16, simm8",83 /3 ii,10000011 11011mmm iiiiiiii,3,1,SUBC
+Arithmetic,SBB,"SBB reg8, mem8",1A /r,00011010 oorrrmmm,2+,2,SUBC
+Arithmetic,SBB,"SBB reg16, mem16",1B /r,00011011 oorrrmmm,2+,2,SUBC
+Arithmetic,SBB,"SBB reg8, reg8",18 /r,000110.0 11rrrmmm,2,1,SUBC
+Arithmetic,SBB,"SBB reg16, reg16",19 /r,000110.1 11rrrmmm,2,1,SUBC
+String,SCASB,SCASB,AE,10101110,1,4,CMPMB
+String,SCASW,SCASW,AF,10101111,1,4,CMPMW
+Shift,SHL,"SHL mem8, 1",D0 /4,11010000 oo100rm,2+,3,-
+Shift,SHL,"SHL mem8, CL",D2 /4,11010010 oo100rm,2+,5,-
+Shift,SHL,"SHL mem8, imm8",C0 /4 ii,11000000 oo100mmm iiiiiiii,3+,5,-
+Shift,SHL,"SHL mem16, 1",D1 /4,11010001 oo100rm,2+,3,-
+Shift,SHL,"SHL mem16, CL",D3 /4,11010011 oo100rm,2+,5,-
+Shift,SHL,"SHL mem16, imm8",C1 /4 ii,11000001 oo100mmm iiiiiiii,3+,5,-
+Shift,SHL,"SHL reg8, 1",D0 /4,11010000 11100rm,2,1,-
+Shift,SHL,"SHL reg8, CL",D2 /4,11010010 11100rm,2,3,-
+Shift,SHL,"SHL reg8, imm8",C0 /4 ii,11000000 11100mmm iiiiiiii,3,3,-
+Shift,SHL,"SHL reg16, 1",D1 /4,11010001 11100rm,2,1,-
+Shift,SHL,"SHL reg16, CL",D3 /4,11010011 11100rm,2,3,-
+Shift,SHL,"SHL reg16, imm8",C1 /4 ii,11000001 11100mmm iiiiiiii,3,3,-
+Shift,SHR,"SHR mem8, 1",D0 /5,11010000 oo101rm,2+,3,-
+Shift,SHR,"SHR mem8, CL",D2 /5,11010010 oo101rm,2+,5,-
+Shift,SHR,"SHR mem8, imm8",C0 /5 ii,11000000 oo101mmm iiiiiiii,3+,5,-
+Shift,SHR,"SHR mem16, 1",D1 /5,11010001 oo101rm,2+,3,-
+Shift,SHR,"SHR mem16, CL",D3 /5,11010011 oo101rm,2+,5,-
+Shift,SHR,"SHR mem16, imm8",C1 /5 ii,11000001 oo101mmm iiiiiiii,3+,5,-
+Shift,SHR,"SHR reg8, 1",D0 /5,11010000 11101rm,2,1,-
+Shift,SHR,"SHR reg8, CL",D2 /5,11010010 11101rm,2,3,-
+Shift,SHR,"SHR reg8, imm8",C0 /5 ii,11000000 11101mmm iiiiiiii,3,3,-
+Shift,SHR,"SHR reg16, 1",D1 /5,11010001 11101rm,2,1,-
+Shift,SHR,"SHR reg16, CL",D3 /5,11010011 11101rm,2,3,-
+Shift,SHR,"SHR reg16, imm8",C1 /5 ii,11000001 11101mmm iiiiiiii,3,3,-
+Prefix,SS,SS,36,00110110,1,1,-
+Flags,STC,STC,F9,11111001,1,4,SET1 CY
+Flags,STD,STD,FD,11111101,1,4,SET1 DIR
+Flags,STI,STI,FB,11111011,1,4,EI
+String,STOSB,STOSB,AA,10101010,1,3,STMB
+String,STOSW,STOSW,AB,10101011,1,3,STMW
+Arithmetic,SUB,"SUB AL, imm",28 ii,00101100 iiiiiiii,2,1,-
+Arithmetic,SUB,"SUB AX, imm",29 ii ii,00101101 iiiiiiii iiiiiiii,3,1,-
+Arithmetic,SUB,"SUB mem8, imm8",80 /5 ii,10000000 oo101mmm iiiiiiii,3+,3,-
+Arithmetic,SUB,"SUB mem16, imm16",81 /5 ii ii,10000001 oo101mmm iiiiiiii iiiiiiii,4+,3,-
+Arithmetic,SUB,"SUB mem16, simm8",83 /5 ii,10000011 oo101mmm iiiiiiii,3+,3,-
+Arithmetic,SUB,"SUB mem8, reg8",28 /r,00101000 oorrrmmm,2+,3,-
+Arithmetic,SUB,"SUB mem16, reg16",29 /r,00101001 oorrrmmm,2+,3,-
+Arithmetic,SUB,"SUB reg8, imm8",80 /5 ii,10000000 11101mmm iiiiiiii,3,1,-
+Arithmetic,SUB,"SUB reg16, imm16",81 /5 ii ii,10000001 11101mmm iiiiiiii iiiiiiii,4,1,-
+Arithmetic,SUB,"SUB reg16, simm8",83 /5 ii,10000011 11101mmm iiiiiiii,3,1,-
+Arithmetic,SUB,"SUB reg8, mem8",2A /r,00101010 oorrrmmm,2+,2,-
+Arithmetic,SUB,"SUB reg16, mem16",2B /r,00101011 oorrrmmm,2+,2,-
+Arithmetic,SUB,"SUB reg8, reg8",28 /r,001010.0 11rrrmmm,2,1,-
+Arithmetic,SUB,"SUB reg16, reg16",29 /r,001010.1 11rrrmmm,2,1,-
+Bitwise,TEST,"TEST AL, imm",A8 ii,10101000 iiiiiiii,2,1,-
+Bitwise,TEST,"TEST AX, imm",A9 ii ii,10101001 iiiiiiii iiiiiiii,3,1,-
+Bitwise,TEST,"TEST mem8, imm8",F6 /0 ii,11110110 oo000mmm iiiiiiii,3+,2,-
+Bitwise,TEST,"TEST mem16, imm16",F7 /0 ii ii,11110111 oo000mmm iiiiiiii iiiiiiii,4+,2,-
+Bitwise,TEST,"TEST mem8, reg8TEST reg8, mem8",84 /r,10000100 oorrrmmm,2+,2,-
+Bitwise,TEST,"TEST mem16, reg16TEST reg16, mem16",85 /r,10000101 oorrrmmm,2+,2,-
+Bitwise,TEST,"TEST reg8, imm8",F6 /0 ii,11110110 11000mmm iiiiiiii,3,1,-
+Bitwise,TEST,"TEST reg16, imm16",F7 /0 ii ii,11110111 11000mmm iiiiiiii iiiiiiii,4,1,-
+Bitwise,TEST,"TEST reg8, reg8",84 /r,10000100 11rrrmmm,2,1,-
+Bitwise,TEST,"TEST reg16, reg16",85 /r,10000101 11rrrmmm,2,1,-
+Other,WAIT,WAIT,9B,10011011,1,9[1],POLL
+Memory,XCHG,"XCHG AX, reg16XCHG reg16, AX",9x,10010rrr,1,3,XCH
+Memory,XCHG,"XCHG mem8, reg8XCHG reg8, mem8",86 /r,10000110 oorrrmmm,2+,5,XCH
+Memory,XCHG,"XCHG mem16, reg16XCHG reg16, mem16",87 /r,10000111 oorrrmmm,2+,5,XCH
+Memory,XCHG,"XCHG reg8, reg8",86 /r,10000110 11rrrmmm,2+,3,XCH
+Memory,XCHG,"XCHG reg16, reg16",87 /r,10000111 11rrrmmm,2+,3,XCH
+Memory,XLAT,XLAT,D7,11010111,1,5,TRANS
+Bitwise,XOR,"XOR AL, imm",34 ii,00110100 iiiiiiii,2,1,-
+Bitwise,XOR,"XOR AX, imm",35 ii ii,00110101 iiiiiiii iiiiiiii,3,1,-
+Bitwise,XOR,"XOR mem8, imm8",80 /6 ii,10000000 oo110mmm iiiiiiii,3+,3,-
+Bitwise,XOR,"XOR mem16, imm16",81 /6 ii ii,10000001 oo110mmm iiiiiiii iiiiiiii,4+,3,-
+Bitwise,XOR,"XOR mem16, simm8",83 /6 ii,10000011 oo110mmm iiiiiiii,3+,3,-
+Bitwise,XOR,"XOR mem8, reg8",30 /r,00110000 oorrrmmm,2+,3,-
+Bitwise,XOR,"XOR mem16, reg16",31 /r,00110001 oorrrmmm,2+,3,-
+Bitwise,XOR,"XOR reg8, imm8",80 /6 ii,10000000 11110mmm iiiiiiii,3,1,-
+Bitwise,XOR,"XOR reg16, imm16",81 /6 ii ii,10000001 11110mmm iiiiiiii iiiiiiii,4,1,-
+Bitwise,XOR,"XOR reg16, simm8",83 /6 ii,10000011 11110mmm iiiiiiii,3,1,-
+Bitwise,XOR,"XOR reg8, mem8",32 /r,00110010 oorrrmmm,2+,2,-
+Bitwise,XOR,"XOR reg16, mem16",33 /r,00110011 oorrrmmm,2+,2,-
+Bitwise,XOR,"XOR reg8, reg8",30 /r,001100.0 11rrrmmm,2,1,-
+Bitwise,XOR,"XOR reg16, reg16",31 /r,001100.1 11rrrmmm,2,1,-

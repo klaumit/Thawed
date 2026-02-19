@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Generator.Meta;
+using Generator.Tools;
 using Iced.Intel;
 using static Generator.Tools.FileTool;
 
@@ -54,21 +55,29 @@ namespace Generator.Core
 
         private static IEnumerable<Instruct> BuildInstructs()
         {
-            const string miss = "<?>";
+            const string m = "-";
+            var descs = Desc.GetOpCodeDescs();
             var groups = Desc.GetOpCodeGroups();
             var aliases = Desc.GetOpCodeAliases()
                 .Select(a => (k: a.Key.Split('/'), v: a.Value.Split('/')))
                 .ToArray();
             foreach (var name in Desc.GetOpCodeNames())
             {
-                var grp = groups.TryGetValue(name, out var tmp1) ? tmp1.Last() : miss;
+                var sun = descs.TryGetValue(name, out var sub) ? sub : [[m, m, m, m, m]];
+                var grp = groups.TryGetValue(name, out var tmp1) ? tmp1.Last() : m;
                 var ali = aliases.FirstOrDefault(a => a.k.Any(t => t.Equals(name)));
                 var alia = new SortedSet<string>(ali.k.Concat(ali.v));
                 alia.Remove(name);
-                yield return new Instruct
+                if (alia.Count == 0) alia.Add(m);
+                foreach (var ssn in sun)
                 {
-                    Label = name, Group = grp, Aliases = string.Join("|", alia)
-                };
+                    yield return new Instruct
+                    {
+                        Label = name, Group = grp, Aliases = string.Join("|", alia),
+                        Instruction = ssn[0], Hex = ssn[1], Bin = ssn[2],
+                        Bytes = ssn[3], Cycles = ssn[4]
+                    };
+                }
             }
         }
     }
