@@ -18,8 +18,8 @@ namespace Generator.Meta
         public static void SetInstructs(IEnumerable<Instruct> rows)
             => C.ToFile(Path.Combine(Dir, "instructs.csv"), rows);
 
-        public static string[] GetOpCodeNames()
-            => FromFile<string[]>(Path.Combine(Dir, "opCodeNames.json"));
+        public static IDictionary<string, string> GetOpCodeNames()
+            => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeNames.json"));
 
         public static IDictionary<string, string> GetOpCodeAliases()
             => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeAliases.json"));

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Generator.Meta;
-using Generator.Tools;
 using Iced.Intel;
 using static Generator.Tools.FileTool;
 
@@ -61,7 +60,7 @@ namespace Generator.Core
             var aliases = Desc.GetOpCodeAliases()
                 .Select(a => (k: a.Key.Split('/'), v: a.Value.Split('/')))
                 .ToArray();
-            foreach (var name in Desc.GetOpCodeNames())
+            foreach (var (name, txt) in Desc.GetOpCodeNames())
             {
                 var sun = descs.TryGetValue(name, out var sub) ? sub : [[m, m, m, m, m]];
                 var grp = groups.TryGetValue(name, out var tmp1) ? tmp1.Last() : m;
@@ -75,7 +74,7 @@ namespace Generator.Core
                     {
                         Label = name, Group = grp, Aliases = string.Join(" | ", alia),
                         Format = ssn[0], Hex = ssn[1], Instruction = ssn[2],
-                        Bytes = ssn[3], Cycles = ssn[4]
+                        Bytes = ssn[3], Cycles = ssn[4], Description = txt
                     };
                 }
             }
