@@ -72,7 +72,7 @@ Arithmetic,CMP,Compare Two Operands,"CMP reg8, reg8",38 /r,001110.0 11rrrmmm,2,1
 Arithmetic,CMP,Compare Two Operands,"CMP reg16, reg16",39 /r,001110.1 11rrrmmm,2,1,-
 String,CMPSB,Compare String Operands,CMPSB,A6,10100110,1,6,CMPBKB
 String,CMPSW,Compare String Operands,CMPSW,A7,10100111,1,6,CMPBKW
-Prefix,CS,,CS,2E,00101110,1,1,PS
+Prefix,CS,Code Segment Register,CS,2E,00101110,1,1,PS
 Numeric,CWD,Convert Word to Doubleword,CWD,99,10011001,1,1,CVTWL
 Numeric,DAA,Decimal Adjust AL After Addition,DAA,27,00100111,1,10,ADJ4A
 Numeric,DAS,Decimal Adjust AL After Subtraction,DAS,2F,00101111,1,10,ADJ4S
@@ -84,9 +84,9 @@ Arithmetic,DIV,Unsigned Divide,DIV mem8,F6 /6,11110110 oo110mmm,2+,16,DIVU
 Arithmetic,DIV,Unsigned Divide,DIV mem16,F7 /6,11111111 oo110mmm,2+,24,DIVU
 Arithmetic,DIV,Unsigned Divide,DIV reg8,F6 /6,11111110 11110mmm,2,15,DIVU
 Arithmetic,DIV,Unsigned Divide,DIV reg16,F7 /6,11111111 11110mmm,2,23,DIVU
-Prefix,DS,,DS,3E,00111110,1,1,DS0
+Prefix,DS,Data Segment Register,DS,3E,00111110,1,1,DS0
 Other,ENTER,Make Stack Frame for Params,"ENTER imm16, imm8",C8 ii ii jj,11001000 iiiiiiii iiiiiiii jjjjjjjj,3,8 (imm8 = 0)14 (imm8 = 1)15 + imm8 * 4 (imm8 >= 2),PREPARE
-Prefix,ES,,ES,26,00100110,1,1,DS1
+Prefix,ES,Extra Segment Register,ES,26,00100110,1,1,DS1
 Interrupt,HLT,Halt,HLT,F4,11110100,1,9,HALT
 Arithmetic,IDIV,Signed Divide,IDIV mem8,F6 /7,11110110 oo111mmm,2+,18,DIV
 Arithmetic,IDIV,Signed Divide,IDIV mem16,F7 /7,11111111 oo111mmm,2+,25,DIV
@@ -114,29 +114,29 @@ Interrupt,INT,Call to Interrupt,INT 3,CC,11001100,1,9,BRK
 Interrupt,INT,Call to Interrupt,INT imm8,CD ii,11001101 iiiiiiii,2,10,BRK
 Interrupt,INTO,Call to Interrupt,INTO,CE,11001110,1,6 (13 if OF = 1),BRKV
 Interrupt,IRET,Interrupt Return,IRET,CF,11001111,1,10,RETI
-Branch,JA,,JA rel8,77 ii,01110111 iiiiiiii,2,1 (4 if branch taken),BH
-Branch,JBE,,JBE rel8,76 ii,01110110 iiiiiiii,2,1 (4 if branch taken),BNH
-Branch,JC,,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC | BL | JB
-Branch,JCXZ,,JCXZ rel8,E3 ii,11100011 iiiiiiii,2,1 (4 if branch taken),BCWZ
-Branch,JG,,JG rel8,7F ii,01111111 iiiiiiii,2,1 (4 if branch taken),BGT
-Branch,JGE,,JGE rel8,7D ii,01111101 iiiiiiii,2,1 (4 if branch taken),BGE
-Branch,JL,,JL rel8,7C ii,01111100 iiiiiiii,2,1 (4 if branch taken),BLT
-Branch,JLE,,JLE rel8,7E ii,01111110 iiiiiiii,2,1 (4 if branch taken),BLE
-Jump,JMP,,JMP ptr16:16,EA oo oo ss ss,11101010 oooooooo oooooooo ssssssss ssssssss,5,7,BR
-Jump,JMP,,JMP mem16,FF /4,11111111 oo100mmm,2+,5,BR
-Jump,JMP,,JMP mem16:16,FF /5,11111111 oo101mmm,2+,10,BR
-Jump,JMP,,JMP reg16,FF /4,11111111 11100mmm,2,4,BR
-Jump,JMP,,JMP rel8,EB ii,11101011 iiiiiiii,2,4,BR
-Jump,JMP,,JMP rel16,E9 ii ii,11101001 iiiiiiii iiiiiiii,3,4,BR
-Branch,JNC,,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC | BNL | JAE
-Branch,JNO,,JNO rel8,71 ii,01110001 iiiiiiii,2,1 (4 if branch taken),BNV
-Branch,JNP,,JNP rel8,7B ii,01111011 iiiiiiii,2,1 (4 if branch taken),BPO
-Branch,JNS,,JNS rel8,79 ii,01111001 iiiiiiii,2,1 (4 if branch taken),BP
-Branch,JNZ,,JNZ rel8,75 ii,01110101 iiiiiiii,2,1 (4 if branch taken),BNE | BNZ | JNE
-Branch,JO,,JO rel8,70 ii,01110000 iiiiiiii,2,1 (4 if branch taken),BV
-Branch,JP,,JP rel8,7A ii,01111010 iiiiiiii,2,1 (4 if branch taken),BPE
-Branch,JS,,JS rel8,78 ii,01111000 iiiiiiii,2,1 (4 if branch taken),BN
-Branch,JZ,,JZ rel8,74 ii,01110100 iiiiiiii,2,1 (4 if branch taken),BE | BZ | JE
+Branch,JA,Jump If Above,JA rel8,77 ii,01110111 iiiiiiii,2,1 (4 if branch taken),BH
+Branch,JBE,Jump If Below or Equal,JBE rel8,76 ii,01110110 iiiiiiii,2,1 (4 if branch taken),BNH
+Branch,JC,Jump If Carry,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC | BL | JB
+Branch,JCXZ,Jump If CX Register is Zero,JCXZ rel8,E3 ii,11100011 iiiiiiii,2,1 (4 if branch taken),BCWZ
+Branch,JG,Jump If Greater,JG rel8,7F ii,01111111 iiiiiiii,2,1 (4 if branch taken),BGT
+Branch,JGE,Jump If Greater or Equal,JGE rel8,7D ii,01111101 iiiiiiii,2,1 (4 if branch taken),BGE
+Branch,JL,Jump If Less,JL rel8,7C ii,01111100 iiiiiiii,2,1 (4 if branch taken),BLT
+Branch,JLE,Jump If Less or Equal,JLE rel8,7E ii,01111110 iiiiiiii,2,1 (4 if branch taken),BLE
+Jump,JMP,Unconditional Jump,JMP ptr16:16,EA oo oo ss ss,11101010 oooooooo oooooooo ssssssss ssssssss,5,7,BR
+Jump,JMP,Unconditional Jump,JMP mem16,FF /4,11111111 oo100mmm,2+,5,BR
+Jump,JMP,Unconditional Jump,JMP mem16:16,FF /5,11111111 oo101mmm,2+,10,BR
+Jump,JMP,Unconditional Jump,JMP reg16,FF /4,11111111 11100mmm,2,4,BR
+Jump,JMP,Unconditional Jump,JMP rel8,EB ii,11101011 iiiiiiii,2,4,BR
+Jump,JMP,Unconditional Jump,JMP rel16,E9 ii ii,11101001 iiiiiiii iiiiiiii,3,4,BR
+Branch,JNC,Jump If Not Carry,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC | BNL | JAE
+Branch,JNO,Jump If Not Overflow,JNO rel8,71 ii,01110001 iiiiiiii,2,1 (4 if branch taken),BNV
+Branch,JNP,Jump If Not Parity,JNP rel8,7B ii,01111011 iiiiiiii,2,1 (4 if branch taken),BPO
+Branch,JNS,Jump If Not Sign,JNS rel8,79 ii,01111001 iiiiiiii,2,1 (4 if branch taken),BP
+Branch,JNZ,Jump If Not Zero,JNZ rel8,75 ii,01110101 iiiiiiii,2,1 (4 if branch taken),BNE | BNZ | JNE
+Branch,JO,Jump If Overflow,JO rel8,70 ii,01110000 iiiiiiii,2,1 (4 if branch taken),BV
+Branch,JP,Jump If Parity,JP rel8,7A ii,01111010 iiiiiiii,2,1 (4 if branch taken),BPE
+Branch,JS,Jump If Sign,JS rel8,78 ii,01111000 iiiiiiii,2,1 (4 if branch taken),BN
+Branch,JZ,Jump If Zero,JZ rel8,74 ii,01110100 iiiiiiii,2,1 (4 if branch taken),BE | BZ | JE
 Flags,LAHF,Load Status Flags Into AH Register,LAHF,9F,10011111,1,2,MOV
 Memory,LDS,Load Far Pointer,"LDS reg16, mem16",C5 /r,11000101 oorrrmmm,2+,6,MOV
 Memory,LEA,Load Effective Address,"LEA reg16, mem16",8D /r,10001101 oorrrmmm,2+,1,LDEA
@@ -146,8 +146,8 @@ Other,LOCK,Assert LOCK Signal Prefix,LOCK,F0,11110000,1,1,BUSLOCK
 String,LODSB,Load String,LODSB,AC,10101100,1,3,LDMB
 String,LODSW,Load String,LODSW,AD,10101101,1,3,LDMW
 Loop,LOOP,Loop According to ECX Counter,LOOP rel8,E2 ii,11100010 iiiiiiii,2,2 (5 if branch taken),DBNZ
-Loop,LOOPE,,LOOPE rel8,E1 ii,11100001 iiiiiiii,2,3 (6 if branch taken),DBNZE
-Loop,LOOPNE,,LOOPNE rel8,E0 ii,11100000 iiiiiiii,2,3 (6 if branch taken),DBNZNE
+Loop,LOOPE,Loop While Equal,LOOPE rel8,E1 ii,11100001 iiiiiiii,2,3 (6 if branch taken),DBNZE
+Loop,LOOPNE,Loop While Not Equal,LOOPNE rel8,E0 ii,11100000 iiiiiiii,2,3 (6 if branch taken),DBNZNE
 Memory,MOV,Move,"MOV AL, ptr16",A0 ii ii,10100000 iiiiiiii iiiiiiii,3,1,-
 Memory,MOV,Move,"MOV AX, ptr16",A1 ii ii,10100001 iiiiiiii iiiiiiii,3,1,-
 Memory,MOV,Move,"MOV mem8, imm8",C6 /0 ii,11000110 oo000mmm iiiiiiii,3+,1,-
@@ -217,73 +217,73 @@ Stack,PUSH,Push Word Onto the Stack,PUSH reg16,FF /6,11111111 11110mmm,2,1,-
 Stack,PUSH,Push Word Onto the Stack,PUSH sreg16,xx,000xx110,1,2,-
 Stack,PUSHA,Push All General Registers,PUSHA,60,01100000,1,9,PUSH
 Stack,PUSHF,Push EFLAGS Onto Stack,PUSHF,9C,10011100,1,2,PUSH
-Shift,RCL,Rotate,"RCL mem8, 1",D0 /2,11010000 oo010rm,2+,3,ROLC
-Shift,RCL,Rotate,"RCL mem8, CL",D2 /2,11010010 oo010rm,2+,5,ROLC
-Shift,RCL,Rotate,"RCL mem8, imm8",C0 /2 ii,11000000 oo010mmm iiiiiiii,3+,5,ROLC
-Shift,RCL,Rotate,"RCL mem16, 1",D1 /2,11010001 oo010rm,2+,3,ROLC
-Shift,RCL,Rotate,"RCL mem16, CL",D3 /2,11010011 oo010rm,2+,5,ROLC
-Shift,RCL,Rotate,"RCL mem16, imm8",C1 /2 ii,11000001 oo010mmm iiiiiiii,3+,5,ROLC
-Shift,RCL,Rotate,"RCL reg8, 1",D0 /2,11010000 11010rm,2,1,ROLC
-Shift,RCL,Rotate,"RCL reg8, CL",D2 /2,11010010 11010rm,2,3,ROLC
-Shift,RCL,Rotate,"RCL reg8, imm8",C0 /2 ii,11000000 11010mmm iiiiiiii,3,3,ROLC
-Shift,RCL,Rotate,"RCL reg16, 1",D1 /2,11010001 11010rm,2,1,ROLC
-Shift,RCL,Rotate,"RCL reg16, CL",D3 /2,11010011 11010rm,2,3,ROLC
-Shift,RCL,Rotate,"RCL reg16, imm8",C1 /2 ii,11000001 11010mmm iiiiiiii,3,3,ROLC
-Shift,RCR,Rotate,"RCR mem8, 1",D0 /3,11010000 oo011rm,2+,3,RORC
-Shift,RCR,Rotate,"RCR mem8, CL",D2 /3,11010010 oo011rm,2+,5,RORC
-Shift,RCR,Rotate,"RCR mem8, imm8",C0 /3 ii,11000000 oo011mmm iiiiiiii,3+,5,RORC
-Shift,RCR,Rotate,"RCR mem16, 1",D1 /3,11010001 oo011rm,2+,3,RORC
-Shift,RCR,Rotate,"RCR mem16, CL",D3 /3,11010011 oo011rm,2+,5,RORC
-Shift,RCR,Rotate,"RCR mem16, imm8",C1 /3 ii,11000001 oo011mmm iiiiiiii,3+,5,RORC
-Shift,RCR,Rotate,"RCR reg8, 1",D0 /3,11010000 11011rm,2,1,RORC
-Shift,RCR,Rotate,"RCR reg8, CL",D2 /3,11010010 11011rm,2,3,RORC
-Shift,RCR,Rotate,"RCR reg8, imm8",C0 /3 ii,11000000 11011mmm iiiiiiii,3,3,RORC
-Shift,RCR,Rotate,"RCR reg16, 1",D1 /3,11010001 11011rm,2,1,RORC
-Shift,RCR,Rotate,"RCR reg16, CL",D3 /3,11010011 11011rm,2,3,RORC
-Shift,RCR,Rotate,"RCR reg16, imm8",C1 /3 ii,11000001 11011mmm iiiiiiii,3,3,RORC
+Shift,RCL,Rotate Through Carry Left,"RCL mem8, 1",D0 /2,11010000 oo010rm,2+,3,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL mem8, CL",D2 /2,11010010 oo010rm,2+,5,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL mem8, imm8",C0 /2 ii,11000000 oo010mmm iiiiiiii,3+,5,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL mem16, 1",D1 /2,11010001 oo010rm,2+,3,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL mem16, CL",D3 /2,11010011 oo010rm,2+,5,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL mem16, imm8",C1 /2 ii,11000001 oo010mmm iiiiiiii,3+,5,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL reg8, 1",D0 /2,11010000 11010rm,2,1,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL reg8, CL",D2 /2,11010010 11010rm,2,3,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL reg8, imm8",C0 /2 ii,11000000 11010mmm iiiiiiii,3,3,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL reg16, 1",D1 /2,11010001 11010rm,2,1,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL reg16, CL",D3 /2,11010011 11010rm,2,3,ROLC
+Shift,RCL,Rotate Through Carry Left,"RCL reg16, imm8",C1 /2 ii,11000001 11010mmm iiiiiiii,3,3,ROLC
+Shift,RCR,Rotate Through Carry Right,"RCR mem8, 1",D0 /3,11010000 oo011rm,2+,3,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR mem8, CL",D2 /3,11010010 oo011rm,2+,5,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR mem8, imm8",C0 /3 ii,11000000 oo011mmm iiiiiiii,3+,5,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR mem16, 1",D1 /3,11010001 oo011rm,2+,3,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR mem16, CL",D3 /3,11010011 oo011rm,2+,5,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR mem16, imm8",C1 /3 ii,11000001 oo011mmm iiiiiiii,3+,5,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR reg8, 1",D0 /3,11010000 11011rm,2,1,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR reg8, CL",D2 /3,11010010 11011rm,2,3,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR reg8, imm8",C0 /3 ii,11000000 11011mmm iiiiiiii,3,3,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR reg16, 1",D1 /3,11010001 11011rm,2,1,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR reg16, CL",D3 /3,11010011 11011rm,2,3,RORC
+Shift,RCR,Rotate Through Carry Right,"RCR reg16, imm8",C1 /3 ii,11000001 11011mmm iiiiiiii,3,3,RORC
 String,REP,Repeat String Operation Prefix,REP,F3 /?,11110011,2+,2,REPE | REPZ
 String,REPNE,Repeat String Operation Prefix,REPNE,F2 /?,11110010,2+,2,REPNZ
 Jump,RET,Return From Procedure,RET,C3,11000011,1,6,-
 Jump,RET,Return From Procedure,RET imm16,C2 ii ii,11000010 iiiiiiii iiiiiiii,1,6,-
-Jump,RETF,,RETF,CB,11001011,1,8,RET
-Jump,RETF,,RETF imm16,CA ii ii,11001010 iiiiiiii iiiiiiii,1,9,RET
-Shift,ROL,Rotate,"ROL mem8, 1",D0 /0,11010000 oo000rm,2+,3,-
-Shift,ROL,Rotate,"ROL mem8, CL",D2 /0,11010010 oo000rm,2+,5,-
-Shift,ROL,Rotate,"ROL mem8, imm8",C0 /0 ii,11000000 oo000mmm iiiiiiii,3+,5,-
-Shift,ROL,Rotate,"ROL mem16, 1",D1 /0,11010001 oo000rm,2+,3,-
-Shift,ROL,Rotate,"ROL mem16, CL",D3 /0,11010011 oo000rm,2+,5,-
-Shift,ROL,Rotate,"ROL mem16, imm8",C1 /0 ii,11000001 oo000mmm iiiiiiii,3+,5,-
-Shift,ROL,Rotate,"ROL reg8, 1",D0 /0,11010000 11000rm,2,1,-
-Shift,ROL,Rotate,"ROL reg8, CL",D2 /0,11010010 11000rm,2,3,-
-Shift,ROL,Rotate,"ROL reg8, imm8",C0 /0 ii,11000000 11000mmm iiiiiiii,3,3,-
-Shift,ROL,Rotate,"ROL reg16, 1",D1 /0,11010001 11000rm,2,1,-
-Shift,ROL,Rotate,"ROL reg16, CL",D3 /0,11010011 11000rm,2,3,-
-Shift,ROL,Rotate,"ROL reg16, imm8",C1 /0 ii,11000001 11000mmm iiiiiiii,3,3,-
-Shift,ROR,Rotate,"ROR mem8, 1",D0 /1,11010000 oo001rm,2+,3,-
-Shift,ROR,Rotate,"ROR mem8, CL",D2 /1,11010010 oo001rm,2+,5,-
-Shift,ROR,Rotate,"ROR mem8, imm8",C0 /1 ii,11000000 oo001mmm iiiiiiii,3+,5,-
-Shift,ROR,Rotate,"ROR mem16, 1",D1 /1,11010001 oo001rm,2+,3,-
-Shift,ROR,Rotate,"ROR mem16, CL",D3 /1,11010011 oo001rm,2+,5,-
-Shift,ROR,Rotate,"ROR mem16, imm8",C1 /1 ii,11000001 oo001mmm iiiiiiii,3+,5,-
-Shift,ROR,Rotate,"ROR reg8, 1",D0 /1,11010000 11001rm,2,1,-
-Shift,ROR,Rotate,"ROR reg8, CL",D2 /1,11010010 11001rm,2,3,-
-Shift,ROR,Rotate,"ROR reg8, imm8",C0 /1 ii,11000000 11001mmm iiiiiiii,3,3,-
-Shift,ROR,Rotate,"ROR reg16, 1",D1 /1,11010001 11001rm,2,1,-
-Shift,ROR,Rotate,"ROR reg16, CL",D3 /1,11010011 11001rm,2,3,-
-Shift,ROR,Rotate,"ROR reg16, imm8",C1 /1 ii,11000001 11001mmm iiiiiiii,3,3,-
+Jump,RETF,Return From Far Procedure,RETF,CB,11001011,1,8,RET
+Jump,RETF,Return From Far Procedure,RETF imm16,CA ii ii,11001010 iiiiiiii iiiiiiii,1,9,RET
+Shift,ROL,Rotate Left,"ROL mem8, 1",D0 /0,11010000 oo000rm,2+,3,-
+Shift,ROL,Rotate Left,"ROL mem8, CL",D2 /0,11010010 oo000rm,2+,5,-
+Shift,ROL,Rotate Left,"ROL mem8, imm8",C0 /0 ii,11000000 oo000mmm iiiiiiii,3+,5,-
+Shift,ROL,Rotate Left,"ROL mem16, 1",D1 /0,11010001 oo000rm,2+,3,-
+Shift,ROL,Rotate Left,"ROL mem16, CL",D3 /0,11010011 oo000rm,2+,5,-
+Shift,ROL,Rotate Left,"ROL mem16, imm8",C1 /0 ii,11000001 oo000mmm iiiiiiii,3+,5,-
+Shift,ROL,Rotate Left,"ROL reg8, 1",D0 /0,11010000 11000rm,2,1,-
+Shift,ROL,Rotate Left,"ROL reg8, CL",D2 /0,11010010 11000rm,2,3,-
+Shift,ROL,Rotate Left,"ROL reg8, imm8",C0 /0 ii,11000000 11000mmm iiiiiiii,3,3,-
+Shift,ROL,Rotate Left,"ROL reg16, 1",D1 /0,11010001 11000rm,2,1,-
+Shift,ROL,Rotate Left,"ROL reg16, CL",D3 /0,11010011 11000rm,2,3,-
+Shift,ROL,Rotate Left,"ROL reg16, imm8",C1 /0 ii,11000001 11000mmm iiiiiiii,3,3,-
+Shift,ROR,Rotate Right,"ROR mem8, 1",D0 /1,11010000 oo001rm,2+,3,-
+Shift,ROR,Rotate Right,"ROR mem8, CL",D2 /1,11010010 oo001rm,2+,5,-
+Shift,ROR,Rotate Right,"ROR mem8, imm8",C0 /1 ii,11000000 oo001mmm iiiiiiii,3+,5,-
+Shift,ROR,Rotate Right,"ROR mem16, 1",D1 /1,11010001 oo001rm,2+,3,-
+Shift,ROR,Rotate Right,"ROR mem16, CL",D3 /1,11010011 oo001rm,2+,5,-
+Shift,ROR,Rotate Right,"ROR mem16, imm8",C1 /1 ii,11000001 oo001mmm iiiiiiii,3+,5,-
+Shift,ROR,Rotate Right,"ROR reg8, 1",D0 /1,11010000 11001rm,2,1,-
+Shift,ROR,Rotate Right,"ROR reg8, CL",D2 /1,11010010 11001rm,2,3,-
+Shift,ROR,Rotate Right,"ROR reg8, imm8",C0 /1 ii,11000000 11001mmm iiiiiiii,3,3,-
+Shift,ROR,Rotate Right,"ROR reg16, 1",D1 /1,11010001 11001rm,2,1,-
+Shift,ROR,Rotate Right,"ROR reg16, CL",D3 /1,11010011 11001rm,2,3,-
+Shift,ROR,Rotate Right,"ROR reg16, imm8",C1 /1 ii,11000001 11001mmm iiiiiiii,3,3,-
 Flags,SAHF,Store AH Into Flags,SAHF,9E,10011110,1,4,MOV
-Shift,SAR,Shift,"SAR mem8, 1",D0 /7,11010000 oo111rm,2+,3,SHRA
-Shift,SAR,Shift,"SAR mem8, CL",D2 /7,11010010 oo111rm,2+,5,SHRA
-Shift,SAR,Shift,"SAR mem8, imm8",C0 /7 ii,11000000 oo111mmm iiiiiiii,3+,5,SHRA
-Shift,SAR,Shift,"SAR mem16, 1",D1 /7,11010001 oo111rm,2+,3,SHRA
-Shift,SAR,Shift,"SAR mem16, CL",D3 /7,11010011 oo111rm,2+,5,SHRA
-Shift,SAR,Shift,"SAR mem16, imm8",C1 /7 ii,11000001 oo111mmm iiiiiiii,3+,5,SHRA
-Shift,SAR,Shift,"SAR reg8, 1",D0 /7,11010000 11111rm,2,1,SHRA
-Shift,SAR,Shift,"SAR reg8, CL",D2 /7,11010010 11111rm,2,3,SHRA
-Shift,SAR,Shift,"SAR reg8, imm8",C0 /7 ii,11000000 11111mmm iiiiiiii,3,3,SHRA
-Shift,SAR,Shift,"SAR reg16, 1",D1 /7,11010001 11111rm,2,1,SHRA
-Shift,SAR,Shift,"SAR reg16, CL",D3 /7,11010011 11111rm,2,3,SHRA
-Shift,SAR,Shift,"SAR reg16, imm8",C1 /7 ii,11000001 11111mmm iiiiiiii,3,3,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR mem8, 1",D0 /7,11010000 oo111rm,2+,3,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR mem8, CL",D2 /7,11010010 oo111rm,2+,5,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR mem8, imm8",C0 /7 ii,11000000 oo111mmm iiiiiiii,3+,5,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR mem16, 1",D1 /7,11010001 oo111rm,2+,3,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR mem16, CL",D3 /7,11010011 oo111rm,2+,5,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR mem16, imm8",C1 /7 ii,11000001 oo111mmm iiiiiiii,3+,5,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR reg8, 1",D0 /7,11010000 11111rm,2,1,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR reg8, CL",D2 /7,11010010 11111rm,2,3,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR reg8, imm8",C0 /7 ii,11000000 11111mmm iiiiiiii,3,3,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR reg16, 1",D1 /7,11010001 11111rm,2,1,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR reg16, CL",D3 /7,11010011 11111rm,2,3,SHRA
+Shift,SAR,Shift Arithmetic Right,"SAR reg16, imm8",C1 /7 ii,11000001 11111mmm iiiiiiii,3,3,SHRA
 Arithmetic,SBB,Integer Subtraction With Borrow,"SBB AL, imm",1C ii,00011100 iiiiiiii,2,1,SUBC
 Arithmetic,SBB,Integer Subtraction With Borrow,"SBB AX, imm",1D ii ii,00011101 iiiiiiii iiiiiiii,3,1,SUBC
 Arithmetic,SBB,Integer Subtraction With Borrow,"SBB mem8, imm8",80 /3 ii,10000000 oo011mmm iiiiiiii,3+,3,SUBC
@@ -300,31 +300,31 @@ Arithmetic,SBB,Integer Subtraction With Borrow,"SBB reg8, reg8",18 /r,000110.0 1
 Arithmetic,SBB,Integer Subtraction With Borrow,"SBB reg16, reg16",19 /r,000110.1 11rrrmmm,2,1,SUBC
 String,SCASB,Scan String,SCASB,AE,10101110,1,4,CMPMB
 String,SCASW,Scan String,SCASW,AF,10101111,1,4,CMPMW
-Shift,SHL,Shift,"SHL mem8, 1",D0 /4,11010000 oo100rm,2+,3,-
-Shift,SHL,Shift,"SHL mem8, CL",D2 /4,11010010 oo100rm,2+,5,-
-Shift,SHL,Shift,"SHL mem8, imm8",C0 /4 ii,11000000 oo100mmm iiiiiiii,3+,5,-
-Shift,SHL,Shift,"SHL mem16, 1",D1 /4,11010001 oo100rm,2+,3,-
-Shift,SHL,Shift,"SHL mem16, CL",D3 /4,11010011 oo100rm,2+,5,-
-Shift,SHL,Shift,"SHL mem16, imm8",C1 /4 ii,11000001 oo100mmm iiiiiiii,3+,5,-
-Shift,SHL,Shift,"SHL reg8, 1",D0 /4,11010000 11100rm,2,1,-
-Shift,SHL,Shift,"SHL reg8, CL",D2 /4,11010010 11100rm,2,3,-
-Shift,SHL,Shift,"SHL reg8, imm8",C0 /4 ii,11000000 11100mmm iiiiiiii,3,3,-
-Shift,SHL,Shift,"SHL reg16, 1",D1 /4,11010001 11100rm,2,1,-
-Shift,SHL,Shift,"SHL reg16, CL",D3 /4,11010011 11100rm,2,3,-
-Shift,SHL,Shift,"SHL reg16, imm8",C1 /4 ii,11000001 11100mmm iiiiiiii,3,3,-
-Shift,SHR,Shift,"SHR mem8, 1",D0 /5,11010000 oo101rm,2+,3,-
-Shift,SHR,Shift,"SHR mem8, CL",D2 /5,11010010 oo101rm,2+,5,-
-Shift,SHR,Shift,"SHR mem8, imm8",C0 /5 ii,11000000 oo101mmm iiiiiiii,3+,5,-
-Shift,SHR,Shift,"SHR mem16, 1",D1 /5,11010001 oo101rm,2+,3,-
-Shift,SHR,Shift,"SHR mem16, CL",D3 /5,11010011 oo101rm,2+,5,-
-Shift,SHR,Shift,"SHR mem16, imm8",C1 /5 ii,11000001 oo101mmm iiiiiiii,3+,5,-
-Shift,SHR,Shift,"SHR reg8, 1",D0 /5,11010000 11101rm,2,1,-
-Shift,SHR,Shift,"SHR reg8, CL",D2 /5,11010010 11101rm,2,3,-
-Shift,SHR,Shift,"SHR reg8, imm8",C0 /5 ii,11000000 11101mmm iiiiiiii,3,3,-
-Shift,SHR,Shift,"SHR reg16, 1",D1 /5,11010001 11101rm,2,1,-
-Shift,SHR,Shift,"SHR reg16, CL",D3 /5,11010011 11101rm,2,3,-
-Shift,SHR,Shift,"SHR reg16, imm8",C1 /5 ii,11000001 11101mmm iiiiiiii,3,3,-
-Prefix,SS,,SS,36,00110110,1,1,-
+Shift,SHL,Shift Logical Left,"SHL mem8, 1",D0 /4,11010000 oo100rm,2+,3,-
+Shift,SHL,Shift Logical Left,"SHL mem8, CL",D2 /4,11010010 oo100rm,2+,5,-
+Shift,SHL,Shift Logical Left,"SHL mem8, imm8",C0 /4 ii,11000000 oo100mmm iiiiiiii,3+,5,-
+Shift,SHL,Shift Logical Left,"SHL mem16, 1",D1 /4,11010001 oo100rm,2+,3,-
+Shift,SHL,Shift Logical Left,"SHL mem16, CL",D3 /4,11010011 oo100rm,2+,5,-
+Shift,SHL,Shift Logical Left,"SHL mem16, imm8",C1 /4 ii,11000001 oo100mmm iiiiiiii,3+,5,-
+Shift,SHL,Shift Logical Left,"SHL reg8, 1",D0 /4,11010000 11100rm,2,1,-
+Shift,SHL,Shift Logical Left,"SHL reg8, CL",D2 /4,11010010 11100rm,2,3,-
+Shift,SHL,Shift Logical Left,"SHL reg8, imm8",C0 /4 ii,11000000 11100mmm iiiiiiii,3,3,-
+Shift,SHL,Shift Logical Left,"SHL reg16, 1",D1 /4,11010001 11100rm,2,1,-
+Shift,SHL,Shift Logical Left,"SHL reg16, CL",D3 /4,11010011 11100rm,2,3,-
+Shift,SHL,Shift Logical Left,"SHL reg16, imm8",C1 /4 ii,11000001 11100mmm iiiiiiii,3,3,-
+Shift,SHR,Shift Logical Right,"SHR mem8, 1",D0 /5,11010000 oo101rm,2+,3,-
+Shift,SHR,Shift Logical Right,"SHR mem8, CL",D2 /5,11010010 oo101rm,2+,5,-
+Shift,SHR,Shift Logical Right,"SHR mem8, imm8",C0 /5 ii,11000000 oo101mmm iiiiiiii,3+,5,-
+Shift,SHR,Shift Logical Right,"SHR mem16, 1",D1 /5,11010001 oo101rm,2+,3,-
+Shift,SHR,Shift Logical Right,"SHR mem16, CL",D3 /5,11010011 oo101rm,2+,5,-
+Shift,SHR,Shift Logical Right,"SHR mem16, imm8",C1 /5 ii,11000001 oo101mmm iiiiiiii,3+,5,-
+Shift,SHR,Shift Logical Right,"SHR reg8, 1",D0 /5,11010000 11101rm,2,1,-
+Shift,SHR,Shift Logical Right,"SHR reg8, CL",D2 /5,11010010 11101rm,2,3,-
+Shift,SHR,Shift Logical Right,"SHR reg8, imm8",C0 /5 ii,11000000 11101mmm iiiiiiii,3,3,-
+Shift,SHR,Shift Logical Right,"SHR reg16, 1",D1 /5,11010001 11101rm,2,1,-
+Shift,SHR,Shift Logical Right,"SHR reg16, CL",D3 /5,11010011 11101rm,2,3,-
+Shift,SHR,Shift Logical Right,"SHR reg16, imm8",C1 /5 ii,11000001 11101mmm iiiiiiii,3,3,-
+Prefix,SS,Stack Segment Register,SS,36,00110110,1,1,-
 Flags,STC,Set Carry Flag,STC,F9,11111001,1,4,SET1 CY
 Flags,STD,Set Direction Flag,STD,FD,11111101,1,4,SET1 DIR
 Flags,STI,Set Interrupt Flag,STI,FB,11111011,1,4,EI
