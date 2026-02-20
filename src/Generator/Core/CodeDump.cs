@@ -1,9 +1,6 @@
 using System;
-using System.CodeDom.Compiler;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +30,22 @@ namespace Generator.Core
 
             Console.WriteLine(" TODO "); // TODO
 
+            await GenerateFuzzer(outDir);
 
+
+            // TODO
+
+            var bytes = ExecDump.Assemble(a =>
+            {
+                a.mov(new AssemblerRegister16(Register.AX), 129);
+                a.add(new AssemblerRegister8(Register.AH), new AssemblerRegister8(Register.BL));
+                a.ret();
+            });
+            Console.WriteLine(Convert.ToHexString(bytes));
+        }
+
+        private static async Task GenerateFuzzer(string outDir)
+        {
             var w = new CodeWriter();
             await w.WriteLineAsync("using System;");
             await w.WriteLineAsync("using Iced.Intel;");
@@ -93,17 +105,6 @@ namespace Generator.Core
 
             var fuzF = Path.Combine(outDir, "Fuzzer.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
-
-
-            // TODO
-
-            var bytes = ExecDump.Assemble(a =>
-            {
-                a.mov(new AssemblerRegister16(Register.AX), 129);
-                a.add(new AssemblerRegister8(Register.AH), new AssemblerRegister8(Register.BL));
-                a.ret();
-            });
-            Console.WriteLine(Convert.ToHexString(bytes));
         }
 
         private static string FuzzArgs(MethodInfo meth)
