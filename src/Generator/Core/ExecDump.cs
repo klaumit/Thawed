@@ -35,14 +35,14 @@ namespace Generator.Core
 
         private static IEnumerable<byte[]> AddFuzzy(this IEnumerable<byte[]> bytes)
         {
-            var list = new List<byte[]>();
+            var dict = new SortedDictionary<string, byte[]>();
             Fuzzer.DoAll(a =>
             {
                 if (Assemble(a) is not { } bits)
                     return;
-                list.Add(bits);
+                dict[Convert.ToHexString(bits)] = bits;
             });
-            return bytes.Concat(list);
+            return bytes.Concat(dict.Values);
         }
 
         private static IEnumerable<IExtractor> CreateExtractors(string[] apps)
