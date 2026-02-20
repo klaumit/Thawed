@@ -1,4 +1,4 @@
 #!/bin/sh
 
-dotnet run --project Generator -- -c -i Generator/seed -o ./Thawed/Auto
+dotnet run --project Generator -- -g -i Generator/tmp -o ./Thawed/Auto
 

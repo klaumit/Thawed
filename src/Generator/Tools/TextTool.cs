@@ -28,5 +28,10 @@ namespace Generator.Tools
         {
             return exec.GetType().Name.Replace(nameof(IExtractor).Trim('I'), "");
         }
+
+        public static string Title(this string name)
+        {
+            return name[..1].ToUpperInvariant() + name[1..].ToLowerInvariant();
+        }
     }
 }

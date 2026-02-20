@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Generator.Common;
 
 namespace Generator.Tools
 {

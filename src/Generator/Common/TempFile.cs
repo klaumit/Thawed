@@ -1,7 +1,8 @@
 using System;
+using Generator.Tools;
 using Fil = System.IO.File;
 
-namespace Generator.Tools
+namespace Generator.Common
 {
     public sealed class TempFile : IDisposable
     {
