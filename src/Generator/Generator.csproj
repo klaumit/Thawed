@@ -31,4 +31,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Thawed\Thawed.csproj" />
+  </ItemGroup>
+
 </Project>

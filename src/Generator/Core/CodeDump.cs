@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Generator.Meta;
 using Generator.Tools;
 using Iced.Intel;
+using Thawed.Auto;
 using static Generator.Tools.FileTool;
 using CodeWriter = Generator.Common.CodeWriter;
 
@@ -31,6 +32,11 @@ namespace Generator.Core
             Console.WriteLine(" TODO "); // TODO
 
             await GenerateFuzzer(outDir);
+
+            var a = new Assembler(16);
+            Fuzzer.DoAll(a);
+            
+            
 
 
             // TODO
@@ -134,10 +140,10 @@ namespace Generator.Core
                     "System.UInt16" => "(ushort)9",
                     "System.UInt32" => "(uint)9",
                     "System.UInt64" => "(ulong)9",
-                    "Iced.Intel.AssemblerRegister8" => "new AR8(R.AX)",
+                    "Iced.Intel.AssemblerRegister8" => "new AR8(R.AH)",
                     "Iced.Intel.AssemblerRegister16" => "new AR16(R.BX)",
-                    "Iced.Intel.AssemblerRegister32" => "new AR32(R.CX)",
-                    "Iced.Intel.AssemblerRegister64" => "new AR64(R.DX)",
+                    "Iced.Intel.AssemblerRegister32" => "new AR32(R.ECX)",
+                    "Iced.Intel.AssemblerRegister64" => "new AR64(R.RDX)",
                     "Iced.Intel.AssemblerRegisterCR" => "new ARCR()",
                     "Iced.Intel.AssemblerRegisterDR" => "new ARDR()",
                     "Iced.Intel.AssemblerRegisterTR" => "new ARTR()",
