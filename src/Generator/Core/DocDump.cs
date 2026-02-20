@@ -63,7 +63,6 @@ namespace Generator.Core
             var w = new CodeWriter();
             await w.WriteLineAsync("using System;");
             await w.WriteLineAsync("using R = Iced.Intel.Register;");
-            await w.WriteLineAsync("using L = Iced.Intel.Label;");
             await w.WriteLineAsync("using A = Iced.Intel.Assembler;");
             await w.WriteLineAsync("using AR8 = Iced.Intel.AssemblerRegister8;");
             await w.WriteLineAsync("using AR16 = Iced.Intel.AssemblerRegister16;");
@@ -155,13 +154,8 @@ namespace Generator.Core
                     "Iced.Intel.AssemblerRegisterCR" => "new ARCR(R.CR0)",
                     "Iced.Intel.AssemblerRegisterDR" => "new ARDR(R.DR0)",
                     "Iced.Intel.AssemblerRegisterTR" => "new ARTR(R.TR0)",
-                    "Iced.Intel.AssemblerMemoryOperand" => "Y.__word_ptr[Y.ax]",
-                    
-                    
-                    
-                    
-                    "Iced.Intel.AssemblerRegisterSegment" => "new ARS()",
-                    
+                    "Iced.Intel.AssemblerMemoryOperand" => "(AMO)Y.__word_ptr[Y.ax]",
+                    "Iced.Intel.AssemblerRegisterSegment" => "(ARS)Y.ds",
                     "Iced.Intel.Label" => "a.CreateLabel()",
                     _ => pt.FullName!
                 };
