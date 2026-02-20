@@ -46,6 +46,8 @@ namespace Generator.Extractors
             var left = size;
             foreach (var line in lines)
             {
+                if (line.StartsWith("-"))
+                    continue;
                 var cols = TextTool.ToCol(line, ' ', "  ")
                     .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
                 var offset = int.Parse(cols[0], NumberStyles.HexNumber);
