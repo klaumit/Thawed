@@ -74,6 +74,7 @@ namespace Generator.Core
             await w.WriteLineAsync("using ARTR = Iced.Intel.AssemblerRegisterTR;");
             await w.WriteLineAsync("using AMO = Iced.Intel.AssemblerMemoryOperand;");
             await w.WriteLineAsync("using ARS = Iced.Intel.AssemblerRegisterSegment;");
+            await w.WriteLineAsync("using Y = Iced.Intel.AssemblerRegisters;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable RedundantCast");
             await w.WriteLineAsync();
@@ -151,12 +152,17 @@ namespace Generator.Core
                     "Iced.Intel.AssemblerRegister16" => "new AR16(R.BX)",
                     "Iced.Intel.AssemblerRegister32" => "new AR32(R.ECX)",
                     "Iced.Intel.AssemblerRegister64" => "new AR64(R.RDX)",
-                    "Iced.Intel.AssemblerRegisterCR" => "new ARCR()",
-                    "Iced.Intel.AssemblerRegisterDR" => "new ARDR()",
-                    "Iced.Intel.AssemblerRegisterTR" => "new ARTR()",
-                    "Iced.Intel.AssemblerMemoryOperand" => "new AMO()",
+                    "Iced.Intel.AssemblerRegisterCR" => "new ARCR(R.CR0)",
+                    "Iced.Intel.AssemblerRegisterDR" => "new ARDR(R.DR0)",
+                    "Iced.Intel.AssemblerRegisterTR" => "new ARTR(R.TR0)",
+                    "Iced.Intel.AssemblerMemoryOperand" => "Y.__word_ptr[Y.ax]",
+                    
+                    
+                    
+                    
                     "Iced.Intel.AssemblerRegisterSegment" => "new ARS()",
-                    "Iced.Intel.Label" => "new L()",
+                    
+                    "Iced.Intel.Label" => "a.CreateLabel()",
                     _ => pt.FullName!
                 };
                 list.Add(arg);

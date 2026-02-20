@@ -11,6 +11,7 @@ using ARDR = Iced.Intel.AssemblerRegisterDR;
 using ARTR = Iced.Intel.AssemblerRegisterTR;
 using AMO = Iced.Intel.AssemblerMemoryOperand;
 using ARS = Iced.Intel.AssemblerRegisterSegment;
+using Y = Iced.Intel.AssemblerRegisters;
 
 // ReSharper disable RedundantCast
 
@@ -58,26 +59,26 @@ namespace Generator.Extractors
         public static void DoAdc(Action<Action<A>> f)
         {
             f(a => a.adc(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.adc(new AMO(), new AR8(R.AH)));
+            f(a => a.adc(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.adc(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.adc(new AMO(), new AR16(R.BX)));
+            f(a => a.adc(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.adc(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.adc(new AMO(), new AR32(R.ECX)));
+            f(a => a.adc(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.adc(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.adc(new AMO(), new AR64(R.RDX)));
-            f(a => a.adc(new AR8(R.AH), new AMO()));
-            f(a => a.adc(new AR16(R.BX), new AMO()));
-            f(a => a.adc(new AR32(R.ECX), new AMO()));
-            f(a => a.adc(new AR64(R.RDX), new AMO()));
+            f(a => a.adc(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.adc(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.adc(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.adc(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.adc(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.adc(new AR8(R.AH), (sbyte)9));
             f(a => a.adc(new AR16(R.BX), (short)9));
             f(a => a.adc(new AR32(R.ECX), (int)9));
             f(a => a.adc(new AR64(R.RDX), (int)9));
-            f(a => a.adc(new AMO(), (int)9));
+            f(a => a.adc(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.adc(new AR8(R.AH), (byte)9));
             f(a => a.adc(new AR16(R.BX), (ushort)9));
             f(a => a.adc(new AR32(R.ECX), (uint)9));
-            f(a => a.adc(new AMO(), (uint)9));
+            f(a => a.adc(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -86,26 +87,26 @@ namespace Generator.Extractors
         public static void DoAdd(Action<Action<A>> f)
         {
             f(a => a.add(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.add(new AMO(), new AR8(R.AH)));
+            f(a => a.add(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.add(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.add(new AMO(), new AR16(R.BX)));
+            f(a => a.add(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.add(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.add(new AMO(), new AR32(R.ECX)));
+            f(a => a.add(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.add(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.add(new AMO(), new AR64(R.RDX)));
-            f(a => a.add(new AR8(R.AH), new AMO()));
-            f(a => a.add(new AR16(R.BX), new AMO()));
-            f(a => a.add(new AR32(R.ECX), new AMO()));
-            f(a => a.add(new AR64(R.RDX), new AMO()));
+            f(a => a.add(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.add(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.add(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.add(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.add(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.add(new AR8(R.AH), (sbyte)9));
             f(a => a.add(new AR16(R.BX), (short)9));
             f(a => a.add(new AR32(R.ECX), (int)9));
             f(a => a.add(new AR64(R.RDX), (int)9));
-            f(a => a.add(new AMO(), (int)9));
+            f(a => a.add(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.add(new AR8(R.AH), (byte)9));
             f(a => a.add(new AR16(R.BX), (ushort)9));
             f(a => a.add(new AR32(R.ECX), (uint)9));
-            f(a => a.add(new AMO(), (uint)9));
+            f(a => a.add(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -114,26 +115,26 @@ namespace Generator.Extractors
         public static void DoAnd(Action<Action<A>> f)
         {
             f(a => a.and(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.and(new AMO(), new AR8(R.AH)));
+            f(a => a.and(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.and(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.and(new AMO(), new AR16(R.BX)));
+            f(a => a.and(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.and(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.and(new AMO(), new AR32(R.ECX)));
+            f(a => a.and(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.and(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.and(new AMO(), new AR64(R.RDX)));
-            f(a => a.and(new AR8(R.AH), new AMO()));
-            f(a => a.and(new AR16(R.BX), new AMO()));
-            f(a => a.and(new AR32(R.ECX), new AMO()));
-            f(a => a.and(new AR64(R.RDX), new AMO()));
+            f(a => a.and(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.and(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.and(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.and(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.and(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.and(new AR8(R.AH), (sbyte)9));
             f(a => a.and(new AR16(R.BX), (short)9));
             f(a => a.and(new AR32(R.ECX), (int)9));
             f(a => a.and(new AR64(R.RDX), (int)9));
-            f(a => a.and(new AMO(), (int)9));
+            f(a => a.and(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.and(new AR8(R.AH), (byte)9));
             f(a => a.and(new AR16(R.BX), (ushort)9));
             f(a => a.and(new AR32(R.ECX), (uint)9));
-            f(a => a.and(new AMO(), (uint)9));
+            f(a => a.and(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -141,8 +142,8 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoBound(Action<Action<A>> f)
         {
-            f(a => a.bound(new AR16(R.BX), new AMO()));
-            f(a => a.bound(new AR32(R.ECX), new AMO()));
+            f(a => a.bound(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.bound(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -154,8 +155,8 @@ namespace Generator.Extractors
             f(a => a.call(new AR16(R.BX)));
             f(a => a.call(new AR32(R.ECX)));
             f(a => a.call(new AR64(R.RDX)));
-            f(a => a.call(new AMO()));
-            f(a => a.call(new L()));
+            f(a => a.call(Y.__word_ptr[Y.ax]));
+            f(a => a.call(a.CreateLabel()));
             f(a => a.call((ulong)9));
         }
         
@@ -205,26 +206,26 @@ namespace Generator.Extractors
         public static void DoCmp(Action<Action<A>> f)
         {
             f(a => a.cmp(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.cmp(new AMO(), new AR8(R.AH)));
+            f(a => a.cmp(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.cmp(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.cmp(new AMO(), new AR16(R.BX)));
+            f(a => a.cmp(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.cmp(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.cmp(new AMO(), new AR32(R.ECX)));
+            f(a => a.cmp(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.cmp(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.cmp(new AMO(), new AR64(R.RDX)));
-            f(a => a.cmp(new AR8(R.AH), new AMO()));
-            f(a => a.cmp(new AR16(R.BX), new AMO()));
-            f(a => a.cmp(new AR32(R.ECX), new AMO()));
-            f(a => a.cmp(new AR64(R.RDX), new AMO()));
+            f(a => a.cmp(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.cmp(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.cmp(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.cmp(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.cmp(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.cmp(new AR8(R.AH), (sbyte)9));
             f(a => a.cmp(new AR16(R.BX), (short)9));
             f(a => a.cmp(new AR32(R.ECX), (int)9));
             f(a => a.cmp(new AR64(R.RDX), (int)9));
-            f(a => a.cmp(new AMO(), (int)9));
+            f(a => a.cmp(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.cmp(new AR8(R.AH), (byte)9));
             f(a => a.cmp(new AR16(R.BX), (ushort)9));
             f(a => a.cmp(new AR32(R.ECX), (uint)9));
-            f(a => a.cmp(new AMO(), (uint)9));
+            f(a => a.cmp(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -276,7 +277,7 @@ namespace Generator.Extractors
             f(a => a.dec(new AR16(R.BX)));
             f(a => a.dec(new AR32(R.ECX)));
             f(a => a.dec(new AR64(R.RDX)));
-            f(a => a.dec(new AMO()));
+            f(a => a.dec(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -288,7 +289,7 @@ namespace Generator.Extractors
             f(a => a.div(new AR16(R.BX)));
             f(a => a.div(new AR32(R.ECX)));
             f(a => a.div(new AR64(R.RDX)));
-            f(a => a.div(new AMO()));
+            f(a => a.div(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -317,7 +318,7 @@ namespace Generator.Extractors
             f(a => a.idiv(new AR16(R.BX)));
             f(a => a.idiv(new AR32(R.ECX)));
             f(a => a.idiv(new AR64(R.RDX)));
-            f(a => a.idiv(new AMO()));
+            f(a => a.idiv(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -329,23 +330,23 @@ namespace Generator.Extractors
             f(a => a.imul(new AR16(R.BX)));
             f(a => a.imul(new AR32(R.ECX)));
             f(a => a.imul(new AR64(R.RDX)));
-            f(a => a.imul(new AMO()));
+            f(a => a.imul(Y.__word_ptr[Y.ax]));
             f(a => a.imul(new AR16(R.BX), new AR16(R.BX)));
             f(a => a.imul(new AR32(R.ECX), new AR32(R.ECX)));
             f(a => a.imul(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.imul(new AR16(R.BX), new AMO()));
-            f(a => a.imul(new AR32(R.ECX), new AMO()));
-            f(a => a.imul(new AR64(R.RDX), new AMO()));
+            f(a => a.imul(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.imul(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.imul(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.imul(new AR16(R.BX), new AR16(R.BX), (short)9));
             f(a => a.imul(new AR32(R.ECX), new AR32(R.ECX), (int)9));
             f(a => a.imul(new AR64(R.RDX), new AR64(R.RDX), (int)9));
-            f(a => a.imul(new AR16(R.BX), new AMO(), (short)9));
-            f(a => a.imul(new AR32(R.ECX), new AMO(), (int)9));
-            f(a => a.imul(new AR64(R.RDX), new AMO(), (int)9));
+            f(a => a.imul(new AR16(R.BX), Y.__word_ptr[Y.ax], (short)9));
+            f(a => a.imul(new AR32(R.ECX), Y.__word_ptr[Y.ax], (int)9));
+            f(a => a.imul(new AR64(R.RDX), Y.__word_ptr[Y.ax], (int)9));
             f(a => a.imul(new AR16(R.BX), new AR16(R.BX), (ushort)9));
             f(a => a.imul(new AR32(R.ECX), new AR32(R.ECX), (uint)9));
-            f(a => a.imul(new AR16(R.BX), new AMO(), (ushort)9));
-            f(a => a.imul(new AR32(R.ECX), new AMO(), (uint)9));
+            f(a => a.imul(new AR16(R.BX), Y.__word_ptr[Y.ax], (ushort)9));
+            f(a => a.imul(new AR32(R.ECX), Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -373,7 +374,7 @@ namespace Generator.Extractors
             f(a => a.inc(new AR16(R.BX)));
             f(a => a.inc(new AR32(R.ECX)));
             f(a => a.inc(new AR64(R.RDX)));
-            f(a => a.inc(new AMO()));
+            f(a => a.inc(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -422,7 +423,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJa(Action<Action<A>> f)
         {
-            f(a => a.ja(new L()));
+            f(a => a.ja(a.CreateLabel()));
             f(a => a.ja((ulong)9));
         }
         
@@ -431,7 +432,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJbe(Action<Action<A>> f)
         {
-            f(a => a.jbe(new L()));
+            f(a => a.jbe(a.CreateLabel()));
             f(a => a.jbe((ulong)9));
         }
         
@@ -440,7 +441,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJc(Action<Action<A>> f)
         {
-            f(a => a.jc(new L()));
+            f(a => a.jc(a.CreateLabel()));
             f(a => a.jc((ulong)9));
         }
         
@@ -449,7 +450,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJcxz(Action<Action<A>> f)
         {
-            f(a => a.jcxz(new L()));
+            f(a => a.jcxz(a.CreateLabel()));
             f(a => a.jcxz((ulong)9));
         }
         
@@ -458,7 +459,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJg(Action<Action<A>> f)
         {
-            f(a => a.jg(new L()));
+            f(a => a.jg(a.CreateLabel()));
             f(a => a.jg((ulong)9));
         }
         
@@ -467,7 +468,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJge(Action<Action<A>> f)
         {
-            f(a => a.jge(new L()));
+            f(a => a.jge(a.CreateLabel()));
             f(a => a.jge((ulong)9));
         }
         
@@ -476,7 +477,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJl(Action<Action<A>> f)
         {
-            f(a => a.jl(new L()));
+            f(a => a.jl(a.CreateLabel()));
             f(a => a.jl((ulong)9));
         }
         
@@ -485,7 +486,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJle(Action<Action<A>> f)
         {
-            f(a => a.jle(new L()));
+            f(a => a.jle(a.CreateLabel()));
             f(a => a.jle((ulong)9));
         }
         
@@ -498,8 +499,8 @@ namespace Generator.Extractors
             f(a => a.jmp(new AR16(R.BX)));
             f(a => a.jmp(new AR32(R.ECX)));
             f(a => a.jmp(new AR64(R.RDX)));
-            f(a => a.jmp(new AMO()));
-            f(a => a.jmp(new L()));
+            f(a => a.jmp(Y.__word_ptr[Y.ax]));
+            f(a => a.jmp(a.CreateLabel()));
             f(a => a.jmp((ulong)9));
         }
         
@@ -508,7 +509,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJnc(Action<Action<A>> f)
         {
-            f(a => a.jnc(new L()));
+            f(a => a.jnc(a.CreateLabel()));
             f(a => a.jnc((ulong)9));
         }
         
@@ -517,7 +518,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJno(Action<Action<A>> f)
         {
-            f(a => a.jno(new L()));
+            f(a => a.jno(a.CreateLabel()));
             f(a => a.jno((ulong)9));
         }
         
@@ -526,7 +527,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJnp(Action<Action<A>> f)
         {
-            f(a => a.jnp(new L()));
+            f(a => a.jnp(a.CreateLabel()));
             f(a => a.jnp((ulong)9));
         }
         
@@ -535,7 +536,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJns(Action<Action<A>> f)
         {
-            f(a => a.jns(new L()));
+            f(a => a.jns(a.CreateLabel()));
             f(a => a.jns((ulong)9));
         }
         
@@ -544,7 +545,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJnz(Action<Action<A>> f)
         {
-            f(a => a.jnz(new L()));
+            f(a => a.jnz(a.CreateLabel()));
             f(a => a.jnz((ulong)9));
         }
         
@@ -553,7 +554,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJo(Action<Action<A>> f)
         {
-            f(a => a.jo(new L()));
+            f(a => a.jo(a.CreateLabel()));
             f(a => a.jo((ulong)9));
         }
         
@@ -562,7 +563,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJp(Action<Action<A>> f)
         {
-            f(a => a.jp(new L()));
+            f(a => a.jp(a.CreateLabel()));
             f(a => a.jp((ulong)9));
         }
         
@@ -571,7 +572,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJs(Action<Action<A>> f)
         {
-            f(a => a.js(new L()));
+            f(a => a.js(a.CreateLabel()));
             f(a => a.js((ulong)9));
         }
         
@@ -580,7 +581,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoJz(Action<Action<A>> f)
         {
-            f(a => a.jz(new L()));
+            f(a => a.jz(a.CreateLabel()));
             f(a => a.jz((ulong)9));
         }
         
@@ -597,8 +598,8 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoLds(Action<Action<A>> f)
         {
-            f(a => a.lds(new AR16(R.BX), new AMO()));
-            f(a => a.lds(new AR32(R.ECX), new AMO()));
+            f(a => a.lds(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.lds(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -606,9 +607,9 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoLea(Action<Action<A>> f)
         {
-            f(a => a.lea(new AR16(R.BX), new AMO()));
-            f(a => a.lea(new AR32(R.ECX), new AMO()));
-            f(a => a.lea(new AR64(R.RDX), new AMO()));
+            f(a => a.lea(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.lea(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.lea(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -624,8 +625,8 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoLes(Action<Action<A>> f)
         {
-            f(a => a.les(new AR16(R.BX), new AMO()));
-            f(a => a.les(new AR32(R.ECX), new AMO()));
+            f(a => a.les(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.les(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -649,7 +650,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoLoop(Action<Action<A>> f)
         {
-            f(a => a.loop(new L()));
+            f(a => a.loop(a.CreateLabel()));
             f(a => a.loop((ulong)9));
         }
         
@@ -658,7 +659,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoLoope(Action<Action<A>> f)
         {
-            f(a => a.loope(new L()));
+            f(a => a.loope(a.CreateLabel()));
             f(a => a.loope((ulong)9));
         }
         
@@ -667,7 +668,7 @@ namespace Generator.Extractors
         /// </summary>
         public static void DoLoopne(Action<Action<A>> f)
         {
-            f(a => a.loopne(new L()));
+            f(a => a.loopne(a.CreateLabel()));
             f(a => a.loopne((ulong)9));
         }
         
@@ -677,45 +678,45 @@ namespace Generator.Extractors
         public static void DoMov(Action<Action<A>> f)
         {
             f(a => a.mov(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.mov(new AMO(), new AR8(R.AH)));
+            f(a => a.mov(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.mov(new AR16(R.BX), new AR16(R.BX)));
             f(a => a.mov(new ARS(), new AR16(R.BX)));
-            f(a => a.mov(new AMO(), new AR16(R.BX)));
+            f(a => a.mov(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.mov(new AR32(R.ECX), new AR32(R.ECX)));
             f(a => a.mov(new ARS(), new AR32(R.ECX)));
-            f(a => a.mov(new ARCR(), new AR32(R.ECX)));
-            f(a => a.mov(new ARDR(), new AR32(R.ECX)));
-            f(a => a.mov(new ARTR(), new AR32(R.ECX)));
-            f(a => a.mov(new AMO(), new AR32(R.ECX)));
+            f(a => a.mov(new ARCR(R.CR0), new AR32(R.ECX)));
+            f(a => a.mov(new ARDR(R.DR0), new AR32(R.ECX)));
+            f(a => a.mov(new ARTR(R.TR0), new AR32(R.ECX)));
+            f(a => a.mov(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.mov(new AR64(R.RDX), new AR64(R.RDX)));
             f(a => a.mov(new ARS(), new AR64(R.RDX)));
-            f(a => a.mov(new ARCR(), new AR64(R.RDX)));
-            f(a => a.mov(new ARDR(), new AR64(R.RDX)));
-            f(a => a.mov(new AMO(), new AR64(R.RDX)));
+            f(a => a.mov(new ARCR(R.CR0), new AR64(R.RDX)));
+            f(a => a.mov(new ARDR(R.DR0), new AR64(R.RDX)));
+            f(a => a.mov(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
             f(a => a.mov(new AR16(R.BX), new ARS()));
             f(a => a.mov(new AR32(R.ECX), new ARS()));
             f(a => a.mov(new AR64(R.RDX), new ARS()));
-            f(a => a.mov(new AMO(), new ARS()));
-            f(a => a.mov(new AR32(R.ECX), new ARCR()));
-            f(a => a.mov(new AR64(R.RDX), new ARCR()));
-            f(a => a.mov(new AR32(R.ECX), new ARDR()));
-            f(a => a.mov(new AR64(R.RDX), new ARDR()));
-            f(a => a.mov(new AR32(R.ECX), new ARTR()));
-            f(a => a.mov(new AR8(R.AH), new AMO()));
-            f(a => a.mov(new AR16(R.BX), new AMO()));
-            f(a => a.mov(new AR32(R.ECX), new AMO()));
-            f(a => a.mov(new AR64(R.RDX), new AMO()));
-            f(a => a.mov(new ARS(), new AMO()));
+            f(a => a.mov(Y.__word_ptr[Y.ax], new ARS()));
+            f(a => a.mov(new AR32(R.ECX), new ARCR(R.CR0)));
+            f(a => a.mov(new AR64(R.RDX), new ARCR(R.CR0)));
+            f(a => a.mov(new AR32(R.ECX), new ARDR(R.DR0)));
+            f(a => a.mov(new AR64(R.RDX), new ARDR(R.DR0)));
+            f(a => a.mov(new AR32(R.ECX), new ARTR(R.TR0)));
+            f(a => a.mov(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.mov(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.mov(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.mov(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
+            f(a => a.mov(new ARS(), Y.__word_ptr[Y.ax]));
             f(a => a.mov(new AR8(R.AH), (sbyte)9));
             f(a => a.mov(new AR16(R.BX), (short)9));
             f(a => a.mov(new AR32(R.ECX), (int)9));
             f(a => a.mov(new AR64(R.RDX), (long)9));
-            f(a => a.mov(new AMO(), (int)9));
+            f(a => a.mov(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.mov(new AR8(R.AH), (byte)9));
             f(a => a.mov(new AR16(R.BX), (ushort)9));
             f(a => a.mov(new AR32(R.ECX), (uint)9));
             f(a => a.mov(new AR64(R.RDX), (ulong)9));
-            f(a => a.mov(new AMO(), (uint)9));
+            f(a => a.mov(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -743,7 +744,7 @@ namespace Generator.Extractors
             f(a => a.mul(new AR16(R.BX)));
             f(a => a.mul(new AR32(R.ECX)));
             f(a => a.mul(new AR64(R.RDX)));
-            f(a => a.mul(new AMO()));
+            f(a => a.mul(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -755,7 +756,7 @@ namespace Generator.Extractors
             f(a => a.neg(new AR16(R.BX)));
             f(a => a.neg(new AR32(R.ECX)));
             f(a => a.neg(new AR64(R.RDX)));
-            f(a => a.neg(new AMO()));
+            f(a => a.neg(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -768,7 +769,7 @@ namespace Generator.Extractors
             f(a => a.nop(new AR16(R.BX)));
             f(a => a.nop(new AR32(R.ECX)));
             f(a => a.nop(new AR64(R.RDX)));
-            f(a => a.nop(new AMO()));
+            f(a => a.nop(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -780,7 +781,7 @@ namespace Generator.Extractors
             f(a => a.not(new AR16(R.BX)));
             f(a => a.not(new AR32(R.ECX)));
             f(a => a.not(new AR64(R.RDX)));
-            f(a => a.not(new AMO()));
+            f(a => a.not(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -789,26 +790,26 @@ namespace Generator.Extractors
         public static void DoOr(Action<Action<A>> f)
         {
             f(a => a.or(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.or(new AMO(), new AR8(R.AH)));
+            f(a => a.or(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.or(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.or(new AMO(), new AR16(R.BX)));
+            f(a => a.or(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.or(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.or(new AMO(), new AR32(R.ECX)));
+            f(a => a.or(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.or(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.or(new AMO(), new AR64(R.RDX)));
-            f(a => a.or(new AR8(R.AH), new AMO()));
-            f(a => a.or(new AR16(R.BX), new AMO()));
-            f(a => a.or(new AR32(R.ECX), new AMO()));
-            f(a => a.or(new AR64(R.RDX), new AMO()));
+            f(a => a.or(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.or(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.or(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.or(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.or(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.or(new AR8(R.AH), (sbyte)9));
             f(a => a.or(new AR16(R.BX), (short)9));
             f(a => a.or(new AR32(R.ECX), (int)9));
             f(a => a.or(new AR64(R.RDX), (int)9));
-            f(a => a.or(new AMO(), (int)9));
+            f(a => a.or(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.or(new AR8(R.AH), (byte)9));
             f(a => a.or(new AR16(R.BX), (ushort)9));
             f(a => a.or(new AR32(R.ECX), (uint)9));
-            f(a => a.or(new AMO(), (uint)9));
+            f(a => a.or(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -852,7 +853,7 @@ namespace Generator.Extractors
             f(a => a.pop(new AR32(R.ECX)));
             f(a => a.pop(new AR64(R.RDX)));
             f(a => a.pop(new ARS()));
-            f(a => a.pop(new AMO()));
+            f(a => a.pop(Y.__word_ptr[Y.ax]));
         }
         
         /// <summary>
@@ -880,7 +881,7 @@ namespace Generator.Extractors
             f(a => a.push(new AR32(R.ECX)));
             f(a => a.push(new AR64(R.RDX)));
             f(a => a.push(new ARS()));
-            f(a => a.push(new AMO()));
+            f(a => a.push(Y.__word_ptr[Y.ax]));
             f(a => a.push((int)9));
             f(a => a.push((uint)9));
         }
@@ -910,17 +911,17 @@ namespace Generator.Extractors
             f(a => a.rcl(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.rcl(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.rcl(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.rcl(new AMO(), new AR8(R.AH)));
+            f(a => a.rcl(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.rcl(new AR8(R.AH), (sbyte)9));
             f(a => a.rcl(new AR16(R.BX), (sbyte)9));
             f(a => a.rcl(new AR32(R.ECX), (sbyte)9));
             f(a => a.rcl(new AR64(R.RDX), (sbyte)9));
-            f(a => a.rcl(new AMO(), (sbyte)9));
+            f(a => a.rcl(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.rcl(new AR8(R.AH), (byte)9));
             f(a => a.rcl(new AR16(R.BX), (byte)9));
             f(a => a.rcl(new AR32(R.ECX), (byte)9));
             f(a => a.rcl(new AR64(R.RDX), (byte)9));
-            f(a => a.rcl(new AMO(), (byte)9));
+            f(a => a.rcl(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -932,17 +933,17 @@ namespace Generator.Extractors
             f(a => a.rcr(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.rcr(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.rcr(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.rcr(new AMO(), new AR8(R.AH)));
+            f(a => a.rcr(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.rcr(new AR8(R.AH), (sbyte)9));
             f(a => a.rcr(new AR16(R.BX), (sbyte)9));
             f(a => a.rcr(new AR32(R.ECX), (sbyte)9));
             f(a => a.rcr(new AR64(R.RDX), (sbyte)9));
-            f(a => a.rcr(new AMO(), (sbyte)9));
+            f(a => a.rcr(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.rcr(new AR8(R.AH), (byte)9));
             f(a => a.rcr(new AR16(R.BX), (byte)9));
             f(a => a.rcr(new AR32(R.ECX), (byte)9));
             f(a => a.rcr(new AR64(R.RDX), (byte)9));
-            f(a => a.rcr(new AMO(), (byte)9));
+            f(a => a.rcr(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -974,17 +975,17 @@ namespace Generator.Extractors
             f(a => a.rol(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.rol(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.rol(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.rol(new AMO(), new AR8(R.AH)));
+            f(a => a.rol(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.rol(new AR8(R.AH), (sbyte)9));
             f(a => a.rol(new AR16(R.BX), (sbyte)9));
             f(a => a.rol(new AR32(R.ECX), (sbyte)9));
             f(a => a.rol(new AR64(R.RDX), (sbyte)9));
-            f(a => a.rol(new AMO(), (sbyte)9));
+            f(a => a.rol(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.rol(new AR8(R.AH), (byte)9));
             f(a => a.rol(new AR16(R.BX), (byte)9));
             f(a => a.rol(new AR32(R.ECX), (byte)9));
             f(a => a.rol(new AR64(R.RDX), (byte)9));
-            f(a => a.rol(new AMO(), (byte)9));
+            f(a => a.rol(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -996,17 +997,17 @@ namespace Generator.Extractors
             f(a => a.ror(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.ror(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.ror(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.ror(new AMO(), new AR8(R.AH)));
+            f(a => a.ror(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.ror(new AR8(R.AH), (sbyte)9));
             f(a => a.ror(new AR16(R.BX), (sbyte)9));
             f(a => a.ror(new AR32(R.ECX), (sbyte)9));
             f(a => a.ror(new AR64(R.RDX), (sbyte)9));
-            f(a => a.ror(new AMO(), (sbyte)9));
+            f(a => a.ror(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.ror(new AR8(R.AH), (byte)9));
             f(a => a.ror(new AR16(R.BX), (byte)9));
             f(a => a.ror(new AR32(R.ECX), (byte)9));
             f(a => a.ror(new AR64(R.RDX), (byte)9));
-            f(a => a.ror(new AMO(), (byte)9));
+            f(a => a.ror(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -1026,17 +1027,17 @@ namespace Generator.Extractors
             f(a => a.sar(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.sar(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.sar(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.sar(new AMO(), new AR8(R.AH)));
+            f(a => a.sar(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.sar(new AR8(R.AH), (sbyte)9));
             f(a => a.sar(new AR16(R.BX), (sbyte)9));
             f(a => a.sar(new AR32(R.ECX), (sbyte)9));
             f(a => a.sar(new AR64(R.RDX), (sbyte)9));
-            f(a => a.sar(new AMO(), (sbyte)9));
+            f(a => a.sar(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.sar(new AR8(R.AH), (byte)9));
             f(a => a.sar(new AR16(R.BX), (byte)9));
             f(a => a.sar(new AR32(R.ECX), (byte)9));
             f(a => a.sar(new AR64(R.RDX), (byte)9));
-            f(a => a.sar(new AMO(), (byte)9));
+            f(a => a.sar(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -1045,26 +1046,26 @@ namespace Generator.Extractors
         public static void DoSbb(Action<Action<A>> f)
         {
             f(a => a.sbb(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.sbb(new AMO(), new AR8(R.AH)));
+            f(a => a.sbb(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.sbb(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.sbb(new AMO(), new AR16(R.BX)));
+            f(a => a.sbb(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.sbb(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.sbb(new AMO(), new AR32(R.ECX)));
+            f(a => a.sbb(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.sbb(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.sbb(new AMO(), new AR64(R.RDX)));
-            f(a => a.sbb(new AR8(R.AH), new AMO()));
-            f(a => a.sbb(new AR16(R.BX), new AMO()));
-            f(a => a.sbb(new AR32(R.ECX), new AMO()));
-            f(a => a.sbb(new AR64(R.RDX), new AMO()));
+            f(a => a.sbb(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.sbb(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.sbb(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.sbb(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.sbb(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.sbb(new AR8(R.AH), (sbyte)9));
             f(a => a.sbb(new AR16(R.BX), (short)9));
             f(a => a.sbb(new AR32(R.ECX), (int)9));
             f(a => a.sbb(new AR64(R.RDX), (int)9));
-            f(a => a.sbb(new AMO(), (int)9));
+            f(a => a.sbb(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.sbb(new AR8(R.AH), (byte)9));
             f(a => a.sbb(new AR16(R.BX), (ushort)9));
             f(a => a.sbb(new AR32(R.ECX), (uint)9));
-            f(a => a.sbb(new AMO(), (uint)9));
+            f(a => a.sbb(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -1092,17 +1093,17 @@ namespace Generator.Extractors
             f(a => a.shl(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.shl(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.shl(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.shl(new AMO(), new AR8(R.AH)));
+            f(a => a.shl(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.shl(new AR8(R.AH), (sbyte)9));
             f(a => a.shl(new AR16(R.BX), (sbyte)9));
             f(a => a.shl(new AR32(R.ECX), (sbyte)9));
             f(a => a.shl(new AR64(R.RDX), (sbyte)9));
-            f(a => a.shl(new AMO(), (sbyte)9));
+            f(a => a.shl(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.shl(new AR8(R.AH), (byte)9));
             f(a => a.shl(new AR16(R.BX), (byte)9));
             f(a => a.shl(new AR32(R.ECX), (byte)9));
             f(a => a.shl(new AR64(R.RDX), (byte)9));
-            f(a => a.shl(new AMO(), (byte)9));
+            f(a => a.shl(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -1114,17 +1115,17 @@ namespace Generator.Extractors
             f(a => a.shr(new AR16(R.BX), new AR8(R.AH)));
             f(a => a.shr(new AR32(R.ECX), new AR8(R.AH)));
             f(a => a.shr(new AR64(R.RDX), new AR8(R.AH)));
-            f(a => a.shr(new AMO(), new AR8(R.AH)));
+            f(a => a.shr(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.shr(new AR8(R.AH), (sbyte)9));
             f(a => a.shr(new AR16(R.BX), (sbyte)9));
             f(a => a.shr(new AR32(R.ECX), (sbyte)9));
             f(a => a.shr(new AR64(R.RDX), (sbyte)9));
-            f(a => a.shr(new AMO(), (sbyte)9));
+            f(a => a.shr(Y.__word_ptr[Y.ax], (sbyte)9));
             f(a => a.shr(new AR8(R.AH), (byte)9));
             f(a => a.shr(new AR16(R.BX), (byte)9));
             f(a => a.shr(new AR32(R.ECX), (byte)9));
             f(a => a.shr(new AR64(R.RDX), (byte)9));
-            f(a => a.shr(new AMO(), (byte)9));
+            f(a => a.shr(Y.__word_ptr[Y.ax], (byte)9));
         }
         
         /// <summary>
@@ -1173,26 +1174,26 @@ namespace Generator.Extractors
         public static void DoSub(Action<Action<A>> f)
         {
             f(a => a.sub(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.sub(new AMO(), new AR8(R.AH)));
+            f(a => a.sub(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.sub(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.sub(new AMO(), new AR16(R.BX)));
+            f(a => a.sub(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.sub(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.sub(new AMO(), new AR32(R.ECX)));
+            f(a => a.sub(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.sub(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.sub(new AMO(), new AR64(R.RDX)));
-            f(a => a.sub(new AR8(R.AH), new AMO()));
-            f(a => a.sub(new AR16(R.BX), new AMO()));
-            f(a => a.sub(new AR32(R.ECX), new AMO()));
-            f(a => a.sub(new AR64(R.RDX), new AMO()));
+            f(a => a.sub(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.sub(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.sub(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.sub(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.sub(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.sub(new AR8(R.AH), (sbyte)9));
             f(a => a.sub(new AR16(R.BX), (short)9));
             f(a => a.sub(new AR32(R.ECX), (int)9));
             f(a => a.sub(new AR64(R.RDX), (int)9));
-            f(a => a.sub(new AMO(), (int)9));
+            f(a => a.sub(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.sub(new AR8(R.AH), (byte)9));
             f(a => a.sub(new AR16(R.BX), (ushort)9));
             f(a => a.sub(new AR32(R.ECX), (uint)9));
-            f(a => a.sub(new AMO(), (uint)9));
+            f(a => a.sub(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -1201,22 +1202,22 @@ namespace Generator.Extractors
         public static void DoTest(Action<Action<A>> f)
         {
             f(a => a.test(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.test(new AMO(), new AR8(R.AH)));
+            f(a => a.test(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.test(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.test(new AMO(), new AR16(R.BX)));
+            f(a => a.test(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.test(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.test(new AMO(), new AR32(R.ECX)));
+            f(a => a.test(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.test(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.test(new AMO(), new AR64(R.RDX)));
+            f(a => a.test(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
             f(a => a.test(new AR8(R.AH), (sbyte)9));
             f(a => a.test(new AR16(R.BX), (short)9));
             f(a => a.test(new AR32(R.ECX), (int)9));
             f(a => a.test(new AR64(R.RDX), (int)9));
-            f(a => a.test(new AMO(), (int)9));
+            f(a => a.test(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.test(new AR8(R.AH), (byte)9));
             f(a => a.test(new AR16(R.BX), (ushort)9));
             f(a => a.test(new AR32(R.ECX), (uint)9));
-            f(a => a.test(new AMO(), (uint)9));
+            f(a => a.test(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         /// <summary>
@@ -1233,13 +1234,13 @@ namespace Generator.Extractors
         public static void DoXchg(Action<Action<A>> f)
         {
             f(a => a.xchg(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.xchg(new AMO(), new AR8(R.AH)));
+            f(a => a.xchg(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.xchg(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.xchg(new AMO(), new AR16(R.BX)));
+            f(a => a.xchg(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.xchg(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.xchg(new AMO(), new AR32(R.ECX)));
+            f(a => a.xchg(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.xchg(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.xchg(new AMO(), new AR64(R.RDX)));
+            f(a => a.xchg(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
         }
         
         /// <summary>
@@ -1256,26 +1257,26 @@ namespace Generator.Extractors
         public static void DoXor(Action<Action<A>> f)
         {
             f(a => a.xor(new AR8(R.AH), new AR8(R.AH)));
-            f(a => a.xor(new AMO(), new AR8(R.AH)));
+            f(a => a.xor(Y.__word_ptr[Y.ax], new AR8(R.AH)));
             f(a => a.xor(new AR16(R.BX), new AR16(R.BX)));
-            f(a => a.xor(new AMO(), new AR16(R.BX)));
+            f(a => a.xor(Y.__word_ptr[Y.ax], new AR16(R.BX)));
             f(a => a.xor(new AR32(R.ECX), new AR32(R.ECX)));
-            f(a => a.xor(new AMO(), new AR32(R.ECX)));
+            f(a => a.xor(Y.__word_ptr[Y.ax], new AR32(R.ECX)));
             f(a => a.xor(new AR64(R.RDX), new AR64(R.RDX)));
-            f(a => a.xor(new AMO(), new AR64(R.RDX)));
-            f(a => a.xor(new AR8(R.AH), new AMO()));
-            f(a => a.xor(new AR16(R.BX), new AMO()));
-            f(a => a.xor(new AR32(R.ECX), new AMO()));
-            f(a => a.xor(new AR64(R.RDX), new AMO()));
+            f(a => a.xor(Y.__word_ptr[Y.ax], new AR64(R.RDX)));
+            f(a => a.xor(new AR8(R.AH), Y.__word_ptr[Y.ax]));
+            f(a => a.xor(new AR16(R.BX), Y.__word_ptr[Y.ax]));
+            f(a => a.xor(new AR32(R.ECX), Y.__word_ptr[Y.ax]));
+            f(a => a.xor(new AR64(R.RDX), Y.__word_ptr[Y.ax]));
             f(a => a.xor(new AR8(R.AH), (sbyte)9));
             f(a => a.xor(new AR16(R.BX), (short)9));
             f(a => a.xor(new AR32(R.ECX), (int)9));
             f(a => a.xor(new AR64(R.RDX), (int)9));
-            f(a => a.xor(new AMO(), (int)9));
+            f(a => a.xor(Y.__word_ptr[Y.ax], (int)9));
             f(a => a.xor(new AR8(R.AH), (byte)9));
             f(a => a.xor(new AR16(R.BX), (ushort)9));
             f(a => a.xor(new AR32(R.ECX), (uint)9));
-            f(a => a.xor(new AMO(), (uint)9));
+            f(a => a.xor(Y.__word_ptr[Y.ax], (uint)9));
         }
         
         public static void DoAll(Action<Action<A>> a)
