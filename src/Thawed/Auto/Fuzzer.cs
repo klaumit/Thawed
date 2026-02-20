@@ -1,6 +1,19 @@
 ﻿using System;
 using Iced.Intel;
+using R = Iced.Intel.Register;
+using L = Iced.Intel.Label;
 using A = Iced.Intel.Assembler;
+using AR8 = Iced.Intel.AssemblerRegister8;
+using AR16 = Iced.Intel.AssemblerRegister16;
+using AR32 = Iced.Intel.AssemblerRegister32;
+using AR64 = Iced.Intel.AssemblerRegister64;
+using ARCR = Iced.Intel.AssemblerRegisterCR;
+using ARDR = Iced.Intel.AssemblerRegisterDR;
+using ARTR = Iced.Intel.AssemblerRegisterTR;
+using AMO = Iced.Intel.AssemblerMemoryOperand;
+using ARS = Iced.Intel.AssemblerRegisterSegment;
+
+// ReSharper disable RedundantCast
 
 namespace Thawed.Auto
 {
@@ -19,6 +32,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoAad(A a)
         {
+            a.aad((sbyte)9);
+            a.aad((byte)9);
         }
         
         /// <summary>
@@ -26,6 +41,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoAam(A a)
         {
+            a.aam((sbyte)9);
+            a.aam((byte)9);
         }
         
         /// <summary>
@@ -41,6 +58,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoAdc(A a)
         {
+            a.adc(new AR8(R.AX), new AR8(R.AX));
+            a.adc(new AMO(), new AR8(R.AX));
+            a.adc(new AR16(R.BX), new AR16(R.BX));
+            a.adc(new AMO(), new AR16(R.BX));
+            a.adc(new AR32(R.CX), new AR32(R.CX));
+            a.adc(new AMO(), new AR32(R.CX));
+            a.adc(new AR64(R.DX), new AR64(R.DX));
+            a.adc(new AMO(), new AR64(R.DX));
+            a.adc(new AR8(R.AX), new AMO());
+            a.adc(new AR16(R.BX), new AMO());
+            a.adc(new AR32(R.CX), new AMO());
+            a.adc(new AR64(R.DX), new AMO());
+            a.adc(new AR8(R.AX), (sbyte)9);
+            a.adc(new AR16(R.BX), (short)9);
+            a.adc(new AR32(R.CX), (int)9);
+            a.adc(new AR64(R.DX), (int)9);
+            a.adc(new AMO(), (int)9);
+            a.adc(new AR8(R.AX), (byte)9);
+            a.adc(new AR16(R.BX), (ushort)9);
+            a.adc(new AR32(R.CX), (uint)9);
+            a.adc(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -48,6 +86,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoAdd(A a)
         {
+            a.add(new AR8(R.AX), new AR8(R.AX));
+            a.add(new AMO(), new AR8(R.AX));
+            a.add(new AR16(R.BX), new AR16(R.BX));
+            a.add(new AMO(), new AR16(R.BX));
+            a.add(new AR32(R.CX), new AR32(R.CX));
+            a.add(new AMO(), new AR32(R.CX));
+            a.add(new AR64(R.DX), new AR64(R.DX));
+            a.add(new AMO(), new AR64(R.DX));
+            a.add(new AR8(R.AX), new AMO());
+            a.add(new AR16(R.BX), new AMO());
+            a.add(new AR32(R.CX), new AMO());
+            a.add(new AR64(R.DX), new AMO());
+            a.add(new AR8(R.AX), (sbyte)9);
+            a.add(new AR16(R.BX), (short)9);
+            a.add(new AR32(R.CX), (int)9);
+            a.add(new AR64(R.DX), (int)9);
+            a.add(new AMO(), (int)9);
+            a.add(new AR8(R.AX), (byte)9);
+            a.add(new AR16(R.BX), (ushort)9);
+            a.add(new AR32(R.CX), (uint)9);
+            a.add(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -55,6 +114,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoAnd(A a)
         {
+            a.and(new AR8(R.AX), new AR8(R.AX));
+            a.and(new AMO(), new AR8(R.AX));
+            a.and(new AR16(R.BX), new AR16(R.BX));
+            a.and(new AMO(), new AR16(R.BX));
+            a.and(new AR32(R.CX), new AR32(R.CX));
+            a.and(new AMO(), new AR32(R.CX));
+            a.and(new AR64(R.DX), new AR64(R.DX));
+            a.and(new AMO(), new AR64(R.DX));
+            a.and(new AR8(R.AX), new AMO());
+            a.and(new AR16(R.BX), new AMO());
+            a.and(new AR32(R.CX), new AMO());
+            a.and(new AR64(R.DX), new AMO());
+            a.and(new AR8(R.AX), (sbyte)9);
+            a.and(new AR16(R.BX), (short)9);
+            a.and(new AR32(R.CX), (int)9);
+            a.and(new AR64(R.DX), (int)9);
+            a.and(new AMO(), (int)9);
+            a.and(new AR8(R.AX), (byte)9);
+            a.and(new AR16(R.BX), (ushort)9);
+            a.and(new AR32(R.CX), (uint)9);
+            a.and(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -62,6 +142,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoBound(A a)
         {
+            a.bound(new AR16(R.BX), new AMO());
+            a.bound(new AR32(R.CX), new AMO());
         }
         
         /// <summary>
@@ -69,6 +151,13 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoCall(A a)
         {
+            a.call((ushort)9, (uint)9);
+            a.call(new AR16(R.BX));
+            a.call(new AR32(R.CX));
+            a.call(new AR64(R.DX));
+            a.call(new AMO());
+            a.call(new L());
+            a.call((ulong)9);
         }
         
         /// <summary>
@@ -116,6 +205,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoCmp(A a)
         {
+            a.cmp(new AR8(R.AX), new AR8(R.AX));
+            a.cmp(new AMO(), new AR8(R.AX));
+            a.cmp(new AR16(R.BX), new AR16(R.BX));
+            a.cmp(new AMO(), new AR16(R.BX));
+            a.cmp(new AR32(R.CX), new AR32(R.CX));
+            a.cmp(new AMO(), new AR32(R.CX));
+            a.cmp(new AR64(R.DX), new AR64(R.DX));
+            a.cmp(new AMO(), new AR64(R.DX));
+            a.cmp(new AR8(R.AX), new AMO());
+            a.cmp(new AR16(R.BX), new AMO());
+            a.cmp(new AR32(R.CX), new AMO());
+            a.cmp(new AR64(R.DX), new AMO());
+            a.cmp(new AR8(R.AX), (sbyte)9);
+            a.cmp(new AR16(R.BX), (short)9);
+            a.cmp(new AR32(R.CX), (int)9);
+            a.cmp(new AR64(R.DX), (int)9);
+            a.cmp(new AMO(), (int)9);
+            a.cmp(new AR8(R.AX), (byte)9);
+            a.cmp(new AR16(R.BX), (ushort)9);
+            a.cmp(new AR32(R.CX), (uint)9);
+            a.cmp(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -132,13 +242,6 @@ namespace Thawed.Auto
         public static void DoCmpsw(A a)
         {
             a.cmpsw();
-        }
-        
-        /// <summary>
-        /// Code Segment Register
-        /// </summary>
-        public static void DoCs(A a)
-        {
         }
         
         /// <summary>
@@ -170,6 +273,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoDec(A a)
         {
+            a.dec(new AR8(R.AX));
+            a.dec(new AR16(R.BX));
+            a.dec(new AR32(R.CX));
+            a.dec(new AR64(R.DX));
+            a.dec(new AMO());
         }
         
         /// <summary>
@@ -177,13 +285,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoDiv(A a)
         {
-        }
-        
-        /// <summary>
-        /// Data Segment Register
-        /// </summary>
-        public static void DoDs(A a)
-        {
+            a.div(new AR8(R.AX));
+            a.div(new AR16(R.BX));
+            a.div(new AR32(R.CX));
+            a.div(new AR64(R.DX));
+            a.div(new AMO());
         }
         
         /// <summary>
@@ -191,13 +297,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoEnter(A a)
         {
-        }
-        
-        /// <summary>
-        /// Extra Segment Register
-        /// </summary>
-        public static void DoEs(A a)
-        {
+            a.enter((short)9, (sbyte)9);
+            a.enter((ushort)9, (byte)9);
         }
         
         /// <summary>
@@ -213,6 +314,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoIdiv(A a)
         {
+            a.idiv(new AR8(R.AX));
+            a.idiv(new AR16(R.BX));
+            a.idiv(new AR32(R.CX));
+            a.idiv(new AR64(R.DX));
+            a.idiv(new AMO());
         }
         
         /// <summary>
@@ -220,6 +326,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoImul(A a)
         {
+            a.imul(new AR8(R.AX));
+            a.imul(new AR16(R.BX));
+            a.imul(new AR32(R.CX));
+            a.imul(new AR64(R.DX));
+            a.imul(new AMO());
+            a.imul(new AR16(R.BX), new AR16(R.BX));
+            a.imul(new AR32(R.CX), new AR32(R.CX));
+            a.imul(new AR64(R.DX), new AR64(R.DX));
+            a.imul(new AR16(R.BX), new AMO());
+            a.imul(new AR32(R.CX), new AMO());
+            a.imul(new AR64(R.DX), new AMO());
+            a.imul(new AR16(R.BX), new AR16(R.BX), (short)9);
+            a.imul(new AR32(R.CX), new AR32(R.CX), (int)9);
+            a.imul(new AR64(R.DX), new AR64(R.DX), (int)9);
+            a.imul(new AR16(R.BX), new AMO(), (short)9);
+            a.imul(new AR32(R.CX), new AMO(), (int)9);
+            a.imul(new AR64(R.DX), new AMO(), (int)9);
+            a.imul(new AR16(R.BX), new AR16(R.BX), (ushort)9);
+            a.imul(new AR32(R.CX), new AR32(R.CX), (uint)9);
+            a.imul(new AR16(R.BX), new AMO(), (ushort)9);
+            a.imul(new AR32(R.CX), new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -227,6 +354,15 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoIn(A a)
         {
+            a.@in(new AR8(R.AX), new AR16(R.BX));
+            a.@in(new AR16(R.BX), new AR16(R.BX));
+            a.@in(new AR32(R.CX), new AR16(R.BX));
+            a.@in(new AR8(R.AX), (sbyte)9);
+            a.@in(new AR16(R.BX), (sbyte)9);
+            a.@in(new AR32(R.CX), (sbyte)9);
+            a.@in(new AR8(R.AX), (byte)9);
+            a.@in(new AR16(R.BX), (byte)9);
+            a.@in(new AR32(R.CX), (byte)9);
         }
         
         /// <summary>
@@ -234,6 +370,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoInc(A a)
         {
+            a.inc(new AR8(R.AX));
+            a.inc(new AR16(R.BX));
+            a.inc(new AR32(R.CX));
+            a.inc(new AR64(R.DX));
+            a.inc(new AMO());
         }
         
         /// <summary>
@@ -257,6 +398,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoInt(A a)
         {
+            a.@int((sbyte)9);
+            a.@int((byte)9);
         }
         
         /// <summary>
@@ -280,6 +423,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJa(A a)
         {
+            a.ja(new L());
+            a.ja((ulong)9);
         }
         
         /// <summary>
@@ -287,6 +432,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJbe(A a)
         {
+            a.jbe(new L());
+            a.jbe((ulong)9);
         }
         
         /// <summary>
@@ -294,6 +441,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJc(A a)
         {
+            a.jc(new L());
+            a.jc((ulong)9);
         }
         
         /// <summary>
@@ -301,6 +450,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJcxz(A a)
         {
+            a.jcxz(new L());
+            a.jcxz((ulong)9);
         }
         
         /// <summary>
@@ -308,6 +459,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJg(A a)
         {
+            a.jg(new L());
+            a.jg((ulong)9);
         }
         
         /// <summary>
@@ -315,6 +468,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJge(A a)
         {
+            a.jge(new L());
+            a.jge((ulong)9);
         }
         
         /// <summary>
@@ -322,6 +477,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJl(A a)
         {
+            a.jl(new L());
+            a.jl((ulong)9);
         }
         
         /// <summary>
@@ -329,6 +486,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJle(A a)
         {
+            a.jle(new L());
+            a.jle((ulong)9);
         }
         
         /// <summary>
@@ -336,6 +495,13 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJmp(A a)
         {
+            a.jmp((ushort)9, (uint)9);
+            a.jmp(new AR16(R.BX));
+            a.jmp(new AR32(R.CX));
+            a.jmp(new AR64(R.DX));
+            a.jmp(new AMO());
+            a.jmp(new L());
+            a.jmp((ulong)9);
         }
         
         /// <summary>
@@ -343,6 +509,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJnc(A a)
         {
+            a.jnc(new L());
+            a.jnc((ulong)9);
         }
         
         /// <summary>
@@ -350,6 +518,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJno(A a)
         {
+            a.jno(new L());
+            a.jno((ulong)9);
         }
         
         /// <summary>
@@ -357,6 +527,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJnp(A a)
         {
+            a.jnp(new L());
+            a.jnp((ulong)9);
         }
         
         /// <summary>
@@ -364,6 +536,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJns(A a)
         {
+            a.jns(new L());
+            a.jns((ulong)9);
         }
         
         /// <summary>
@@ -371,6 +545,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJnz(A a)
         {
+            a.jnz(new L());
+            a.jnz((ulong)9);
         }
         
         /// <summary>
@@ -378,6 +554,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJo(A a)
         {
+            a.jo(new L());
+            a.jo((ulong)9);
         }
         
         /// <summary>
@@ -385,6 +563,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJp(A a)
         {
+            a.jp(new L());
+            a.jp((ulong)9);
         }
         
         /// <summary>
@@ -392,6 +572,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJs(A a)
         {
+            a.js(new L());
+            a.js((ulong)9);
         }
         
         /// <summary>
@@ -399,6 +581,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoJz(A a)
         {
+            a.jz(new L());
+            a.jz((ulong)9);
         }
         
         /// <summary>
@@ -414,6 +598,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoLds(A a)
         {
+            a.lds(new AR16(R.BX), new AMO());
+            a.lds(new AR32(R.CX), new AMO());
         }
         
         /// <summary>
@@ -421,6 +607,9 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoLea(A a)
         {
+            a.lea(new AR16(R.BX), new AMO());
+            a.lea(new AR32(R.CX), new AMO());
+            a.lea(new AR64(R.DX), new AMO());
         }
         
         /// <summary>
@@ -436,13 +625,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoLes(A a)
         {
-        }
-        
-        /// <summary>
-        /// Assert LOCK Signal Prefix
-        /// </summary>
-        public static void DoLock(A a)
-        {
+            a.les(new AR16(R.BX), new AMO());
+            a.les(new AR32(R.CX), new AMO());
         }
         
         /// <summary>
@@ -466,6 +650,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoLoop(A a)
         {
+            a.loop(new L());
+            a.loop((ulong)9);
         }
         
         /// <summary>
@@ -473,6 +659,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoLoope(A a)
         {
+            a.loope(new L());
+            a.loope((ulong)9);
         }
         
         /// <summary>
@@ -480,6 +668,8 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoLoopne(A a)
         {
+            a.loopne(new L());
+            a.loopne((ulong)9);
         }
         
         /// <summary>
@@ -487,6 +677,46 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoMov(A a)
         {
+            a.mov(new AR8(R.AX), new AR8(R.AX));
+            a.mov(new AMO(), new AR8(R.AX));
+            a.mov(new AR16(R.BX), new AR16(R.BX));
+            a.mov(new ARS(), new AR16(R.BX));
+            a.mov(new AMO(), new AR16(R.BX));
+            a.mov(new AR32(R.CX), new AR32(R.CX));
+            a.mov(new ARS(), new AR32(R.CX));
+            a.mov(new ARCR(), new AR32(R.CX));
+            a.mov(new ARDR(), new AR32(R.CX));
+            a.mov(new ARTR(), new AR32(R.CX));
+            a.mov(new AMO(), new AR32(R.CX));
+            a.mov(new AR64(R.DX), new AR64(R.DX));
+            a.mov(new ARS(), new AR64(R.DX));
+            a.mov(new ARCR(), new AR64(R.DX));
+            a.mov(new ARDR(), new AR64(R.DX));
+            a.mov(new AMO(), new AR64(R.DX));
+            a.mov(new AR16(R.BX), new ARS());
+            a.mov(new AR32(R.CX), new ARS());
+            a.mov(new AR64(R.DX), new ARS());
+            a.mov(new AMO(), new ARS());
+            a.mov(new AR32(R.CX), new ARCR());
+            a.mov(new AR64(R.DX), new ARCR());
+            a.mov(new AR32(R.CX), new ARDR());
+            a.mov(new AR64(R.DX), new ARDR());
+            a.mov(new AR32(R.CX), new ARTR());
+            a.mov(new AR8(R.AX), new AMO());
+            a.mov(new AR16(R.BX), new AMO());
+            a.mov(new AR32(R.CX), new AMO());
+            a.mov(new AR64(R.DX), new AMO());
+            a.mov(new ARS(), new AMO());
+            a.mov(new AR8(R.AX), (sbyte)9);
+            a.mov(new AR16(R.BX), (short)9);
+            a.mov(new AR32(R.CX), (int)9);
+            a.mov(new AR64(R.DX), (long)9);
+            a.mov(new AMO(), (int)9);
+            a.mov(new AR8(R.AX), (byte)9);
+            a.mov(new AR16(R.BX), (ushort)9);
+            a.mov(new AR32(R.CX), (uint)9);
+            a.mov(new AR64(R.DX), (ulong)9);
+            a.mov(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -510,6 +740,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoMul(A a)
         {
+            a.mul(new AR8(R.AX));
+            a.mul(new AR16(R.BX));
+            a.mul(new AR32(R.CX));
+            a.mul(new AR64(R.DX));
+            a.mul(new AMO());
         }
         
         /// <summary>
@@ -517,6 +752,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoNeg(A a)
         {
+            a.neg(new AR8(R.AX));
+            a.neg(new AR16(R.BX));
+            a.neg(new AR32(R.CX));
+            a.neg(new AR64(R.DX));
+            a.neg(new AMO());
         }
         
         /// <summary>
@@ -524,7 +764,12 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoNop(A a)
         {
+            a.nop((int)9);
             a.nop();
+            a.nop(new AR16(R.BX));
+            a.nop(new AR32(R.CX));
+            a.nop(new AR64(R.DX));
+            a.nop(new AMO());
         }
         
         /// <summary>
@@ -532,6 +777,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoNot(A a)
         {
+            a.not(new AR8(R.AX));
+            a.not(new AR16(R.BX));
+            a.not(new AR32(R.CX));
+            a.not(new AR64(R.DX));
+            a.not(new AMO());
         }
         
         /// <summary>
@@ -539,6 +789,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoOr(A a)
         {
+            a.or(new AR8(R.AX), new AR8(R.AX));
+            a.or(new AMO(), new AR8(R.AX));
+            a.or(new AR16(R.BX), new AR16(R.BX));
+            a.or(new AMO(), new AR16(R.BX));
+            a.or(new AR32(R.CX), new AR32(R.CX));
+            a.or(new AMO(), new AR32(R.CX));
+            a.or(new AR64(R.DX), new AR64(R.DX));
+            a.or(new AMO(), new AR64(R.DX));
+            a.or(new AR8(R.AX), new AMO());
+            a.or(new AR16(R.BX), new AMO());
+            a.or(new AR32(R.CX), new AMO());
+            a.or(new AR64(R.DX), new AMO());
+            a.or(new AR8(R.AX), (sbyte)9);
+            a.or(new AR16(R.BX), (short)9);
+            a.or(new AR32(R.CX), (int)9);
+            a.or(new AR64(R.DX), (int)9);
+            a.or(new AMO(), (int)9);
+            a.or(new AR8(R.AX), (byte)9);
+            a.or(new AR16(R.BX), (ushort)9);
+            a.or(new AR32(R.CX), (uint)9);
+            a.or(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -546,6 +817,15 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoOut(A a)
         {
+            a.@out(new AR16(R.BX), new AR8(R.AX));
+            a.@out((sbyte)9, new AR8(R.AX));
+            a.@out((byte)9, new AR8(R.AX));
+            a.@out(new AR16(R.BX), new AR16(R.BX));
+            a.@out((sbyte)9, new AR16(R.BX));
+            a.@out((byte)9, new AR16(R.BX));
+            a.@out(new AR16(R.BX), new AR32(R.CX));
+            a.@out((sbyte)9, new AR32(R.CX));
+            a.@out((byte)9, new AR32(R.CX));
         }
         
         /// <summary>
@@ -569,6 +849,11 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoPop(A a)
         {
+            a.pop(new AR16(R.BX));
+            a.pop(new AR32(R.CX));
+            a.pop(new AR64(R.DX));
+            a.pop(new ARS());
+            a.pop(new AMO());
         }
         
         /// <summary>
@@ -592,6 +877,13 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoPush(A a)
         {
+            a.push(new AR16(R.BX));
+            a.push(new AR32(R.CX));
+            a.push(new AR64(R.DX));
+            a.push(new ARS());
+            a.push(new AMO());
+            a.push((int)9);
+            a.push((uint)9);
         }
         
         /// <summary>
@@ -615,6 +907,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoRcl(A a)
         {
+            a.rcl(new AR8(R.AX), new AR8(R.AX));
+            a.rcl(new AR16(R.BX), new AR8(R.AX));
+            a.rcl(new AR32(R.CX), new AR8(R.AX));
+            a.rcl(new AR64(R.DX), new AR8(R.AX));
+            a.rcl(new AMO(), new AR8(R.AX));
+            a.rcl(new AR8(R.AX), (sbyte)9);
+            a.rcl(new AR16(R.BX), (sbyte)9);
+            a.rcl(new AR32(R.CX), (sbyte)9);
+            a.rcl(new AR64(R.DX), (sbyte)9);
+            a.rcl(new AMO(), (sbyte)9);
+            a.rcl(new AR8(R.AX), (byte)9);
+            a.rcl(new AR16(R.BX), (byte)9);
+            a.rcl(new AR32(R.CX), (byte)9);
+            a.rcl(new AR64(R.DX), (byte)9);
+            a.rcl(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -622,20 +929,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoRcr(A a)
         {
-        }
-        
-        /// <summary>
-        /// Repeat String Operation Prefix
-        /// </summary>
-        public static void DoRep(A a)
-        {
-        }
-        
-        /// <summary>
-        /// Repeat String Operation Prefix
-        /// </summary>
-        public static void DoRepne(A a)
-        {
+            a.rcr(new AR8(R.AX), new AR8(R.AX));
+            a.rcr(new AR16(R.BX), new AR8(R.AX));
+            a.rcr(new AR32(R.CX), new AR8(R.AX));
+            a.rcr(new AR64(R.DX), new AR8(R.AX));
+            a.rcr(new AMO(), new AR8(R.AX));
+            a.rcr(new AR8(R.AX), (sbyte)9);
+            a.rcr(new AR16(R.BX), (sbyte)9);
+            a.rcr(new AR32(R.CX), (sbyte)9);
+            a.rcr(new AR64(R.DX), (sbyte)9);
+            a.rcr(new AMO(), (sbyte)9);
+            a.rcr(new AR8(R.AX), (byte)9);
+            a.rcr(new AR16(R.BX), (byte)9);
+            a.rcr(new AR32(R.CX), (byte)9);
+            a.rcr(new AR64(R.DX), (byte)9);
+            a.rcr(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -644,6 +952,8 @@ namespace Thawed.Auto
         public static void DoRet(A a)
         {
             a.ret();
+            a.ret((short)9);
+            a.ret((ushort)9);
         }
         
         /// <summary>
@@ -652,6 +962,8 @@ namespace Thawed.Auto
         public static void DoRetf(A a)
         {
             a.retf();
+            a.retf((short)9);
+            a.retf((ushort)9);
         }
         
         /// <summary>
@@ -659,6 +971,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoRol(A a)
         {
+            a.rol(new AR8(R.AX), new AR8(R.AX));
+            a.rol(new AR16(R.BX), new AR8(R.AX));
+            a.rol(new AR32(R.CX), new AR8(R.AX));
+            a.rol(new AR64(R.DX), new AR8(R.AX));
+            a.rol(new AMO(), new AR8(R.AX));
+            a.rol(new AR8(R.AX), (sbyte)9);
+            a.rol(new AR16(R.BX), (sbyte)9);
+            a.rol(new AR32(R.CX), (sbyte)9);
+            a.rol(new AR64(R.DX), (sbyte)9);
+            a.rol(new AMO(), (sbyte)9);
+            a.rol(new AR8(R.AX), (byte)9);
+            a.rol(new AR16(R.BX), (byte)9);
+            a.rol(new AR32(R.CX), (byte)9);
+            a.rol(new AR64(R.DX), (byte)9);
+            a.rol(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -666,6 +993,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoRor(A a)
         {
+            a.ror(new AR8(R.AX), new AR8(R.AX));
+            a.ror(new AR16(R.BX), new AR8(R.AX));
+            a.ror(new AR32(R.CX), new AR8(R.AX));
+            a.ror(new AR64(R.DX), new AR8(R.AX));
+            a.ror(new AMO(), new AR8(R.AX));
+            a.ror(new AR8(R.AX), (sbyte)9);
+            a.ror(new AR16(R.BX), (sbyte)9);
+            a.ror(new AR32(R.CX), (sbyte)9);
+            a.ror(new AR64(R.DX), (sbyte)9);
+            a.ror(new AMO(), (sbyte)9);
+            a.ror(new AR8(R.AX), (byte)9);
+            a.ror(new AR16(R.BX), (byte)9);
+            a.ror(new AR32(R.CX), (byte)9);
+            a.ror(new AR64(R.DX), (byte)9);
+            a.ror(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -681,6 +1023,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoSar(A a)
         {
+            a.sar(new AR8(R.AX), new AR8(R.AX));
+            a.sar(new AR16(R.BX), new AR8(R.AX));
+            a.sar(new AR32(R.CX), new AR8(R.AX));
+            a.sar(new AR64(R.DX), new AR8(R.AX));
+            a.sar(new AMO(), new AR8(R.AX));
+            a.sar(new AR8(R.AX), (sbyte)9);
+            a.sar(new AR16(R.BX), (sbyte)9);
+            a.sar(new AR32(R.CX), (sbyte)9);
+            a.sar(new AR64(R.DX), (sbyte)9);
+            a.sar(new AMO(), (sbyte)9);
+            a.sar(new AR8(R.AX), (byte)9);
+            a.sar(new AR16(R.BX), (byte)9);
+            a.sar(new AR32(R.CX), (byte)9);
+            a.sar(new AR64(R.DX), (byte)9);
+            a.sar(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -688,6 +1045,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoSbb(A a)
         {
+            a.sbb(new AR8(R.AX), new AR8(R.AX));
+            a.sbb(new AMO(), new AR8(R.AX));
+            a.sbb(new AR16(R.BX), new AR16(R.BX));
+            a.sbb(new AMO(), new AR16(R.BX));
+            a.sbb(new AR32(R.CX), new AR32(R.CX));
+            a.sbb(new AMO(), new AR32(R.CX));
+            a.sbb(new AR64(R.DX), new AR64(R.DX));
+            a.sbb(new AMO(), new AR64(R.DX));
+            a.sbb(new AR8(R.AX), new AMO());
+            a.sbb(new AR16(R.BX), new AMO());
+            a.sbb(new AR32(R.CX), new AMO());
+            a.sbb(new AR64(R.DX), new AMO());
+            a.sbb(new AR8(R.AX), (sbyte)9);
+            a.sbb(new AR16(R.BX), (short)9);
+            a.sbb(new AR32(R.CX), (int)9);
+            a.sbb(new AR64(R.DX), (int)9);
+            a.sbb(new AMO(), (int)9);
+            a.sbb(new AR8(R.AX), (byte)9);
+            a.sbb(new AR16(R.BX), (ushort)9);
+            a.sbb(new AR32(R.CX), (uint)9);
+            a.sbb(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -711,6 +1089,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoShl(A a)
         {
+            a.shl(new AR8(R.AX), new AR8(R.AX));
+            a.shl(new AR16(R.BX), new AR8(R.AX));
+            a.shl(new AR32(R.CX), new AR8(R.AX));
+            a.shl(new AR64(R.DX), new AR8(R.AX));
+            a.shl(new AMO(), new AR8(R.AX));
+            a.shl(new AR8(R.AX), (sbyte)9);
+            a.shl(new AR16(R.BX), (sbyte)9);
+            a.shl(new AR32(R.CX), (sbyte)9);
+            a.shl(new AR64(R.DX), (sbyte)9);
+            a.shl(new AMO(), (sbyte)9);
+            a.shl(new AR8(R.AX), (byte)9);
+            a.shl(new AR16(R.BX), (byte)9);
+            a.shl(new AR32(R.CX), (byte)9);
+            a.shl(new AR64(R.DX), (byte)9);
+            a.shl(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -718,13 +1111,21 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoShr(A a)
         {
-        }
-        
-        /// <summary>
-        /// Stack Segment Register
-        /// </summary>
-        public static void DoSs(A a)
-        {
+            a.shr(new AR8(R.AX), new AR8(R.AX));
+            a.shr(new AR16(R.BX), new AR8(R.AX));
+            a.shr(new AR32(R.CX), new AR8(R.AX));
+            a.shr(new AR64(R.DX), new AR8(R.AX));
+            a.shr(new AMO(), new AR8(R.AX));
+            a.shr(new AR8(R.AX), (sbyte)9);
+            a.shr(new AR16(R.BX), (sbyte)9);
+            a.shr(new AR32(R.CX), (sbyte)9);
+            a.shr(new AR64(R.DX), (sbyte)9);
+            a.shr(new AMO(), (sbyte)9);
+            a.shr(new AR8(R.AX), (byte)9);
+            a.shr(new AR16(R.BX), (byte)9);
+            a.shr(new AR32(R.CX), (byte)9);
+            a.shr(new AR64(R.DX), (byte)9);
+            a.shr(new AMO(), (byte)9);
         }
         
         /// <summary>
@@ -772,6 +1173,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoSub(A a)
         {
+            a.sub(new AR8(R.AX), new AR8(R.AX));
+            a.sub(new AMO(), new AR8(R.AX));
+            a.sub(new AR16(R.BX), new AR16(R.BX));
+            a.sub(new AMO(), new AR16(R.BX));
+            a.sub(new AR32(R.CX), new AR32(R.CX));
+            a.sub(new AMO(), new AR32(R.CX));
+            a.sub(new AR64(R.DX), new AR64(R.DX));
+            a.sub(new AMO(), new AR64(R.DX));
+            a.sub(new AR8(R.AX), new AMO());
+            a.sub(new AR16(R.BX), new AMO());
+            a.sub(new AR32(R.CX), new AMO());
+            a.sub(new AR64(R.DX), new AMO());
+            a.sub(new AR8(R.AX), (sbyte)9);
+            a.sub(new AR16(R.BX), (short)9);
+            a.sub(new AR32(R.CX), (int)9);
+            a.sub(new AR64(R.DX), (int)9);
+            a.sub(new AMO(), (int)9);
+            a.sub(new AR8(R.AX), (byte)9);
+            a.sub(new AR16(R.BX), (ushort)9);
+            a.sub(new AR32(R.CX), (uint)9);
+            a.sub(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -779,6 +1201,23 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoTest(A a)
         {
+            a.test(new AR8(R.AX), new AR8(R.AX));
+            a.test(new AMO(), new AR8(R.AX));
+            a.test(new AR16(R.BX), new AR16(R.BX));
+            a.test(new AMO(), new AR16(R.BX));
+            a.test(new AR32(R.CX), new AR32(R.CX));
+            a.test(new AMO(), new AR32(R.CX));
+            a.test(new AR64(R.DX), new AR64(R.DX));
+            a.test(new AMO(), new AR64(R.DX));
+            a.test(new AR8(R.AX), (sbyte)9);
+            a.test(new AR16(R.BX), (short)9);
+            a.test(new AR32(R.CX), (int)9);
+            a.test(new AR64(R.DX), (int)9);
+            a.test(new AMO(), (int)9);
+            a.test(new AR8(R.AX), (byte)9);
+            a.test(new AR16(R.BX), (ushort)9);
+            a.test(new AR32(R.CX), (uint)9);
+            a.test(new AMO(), (uint)9);
         }
         
         /// <summary>
@@ -794,13 +1233,22 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoXchg(A a)
         {
+            a.xchg(new AR8(R.AX), new AR8(R.AX));
+            a.xchg(new AMO(), new AR8(R.AX));
+            a.xchg(new AR16(R.BX), new AR16(R.BX));
+            a.xchg(new AMO(), new AR16(R.BX));
+            a.xchg(new AR32(R.CX), new AR32(R.CX));
+            a.xchg(new AMO(), new AR32(R.CX));
+            a.xchg(new AR64(R.DX), new AR64(R.DX));
+            a.xchg(new AMO(), new AR64(R.DX));
         }
         
         /// <summary>
         /// Table Lookup Translation
         /// </summary>
-        public static void DoXlat(A a)
+        public static void DoXlatb(A a)
         {
+            a.xlatb();
         }
         
         /// <summary>
@@ -808,6 +1256,27 @@ namespace Thawed.Auto
         /// </summary>
         public static void DoXor(A a)
         {
+            a.xor(new AR8(R.AX), new AR8(R.AX));
+            a.xor(new AMO(), new AR8(R.AX));
+            a.xor(new AR16(R.BX), new AR16(R.BX));
+            a.xor(new AMO(), new AR16(R.BX));
+            a.xor(new AR32(R.CX), new AR32(R.CX));
+            a.xor(new AMO(), new AR32(R.CX));
+            a.xor(new AR64(R.DX), new AR64(R.DX));
+            a.xor(new AMO(), new AR64(R.DX));
+            a.xor(new AR8(R.AX), new AMO());
+            a.xor(new AR16(R.BX), new AMO());
+            a.xor(new AR32(R.CX), new AMO());
+            a.xor(new AR64(R.DX), new AMO());
+            a.xor(new AR8(R.AX), (sbyte)9);
+            a.xor(new AR16(R.BX), (short)9);
+            a.xor(new AR32(R.CX), (int)9);
+            a.xor(new AR64(R.DX), (int)9);
+            a.xor(new AMO(), (int)9);
+            a.xor(new AR8(R.AX), (byte)9);
+            a.xor(new AR16(R.BX), (ushort)9);
+            a.xor(new AR32(R.CX), (uint)9);
+            a.xor(new AMO(), (uint)9);
         }
     }
 }
