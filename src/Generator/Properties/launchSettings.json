@@ -4,6 +4,10 @@
       "commandName": "Project",
       "commandLineArgs": "-f -o tmp -m gnu;iced;nasm;win"
     },
+    "cd": {
+      "commandName": "Project",
+      "commandLineArgs": "-d -o ../Thawed/Auto"
+    },
     "cg": {
       "commandName": "Project",
       "commandLineArgs": "-g -i tmp -o ../Thawed/Auto"
