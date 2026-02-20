@@ -62,7 +62,6 @@ namespace Generator.Core
         {
             var w = new CodeWriter();
             await w.WriteLineAsync("using System;");
-            await w.WriteLineAsync("using Iced.Intel;");
             await w.WriteLineAsync("using R = Iced.Intel.Register;");
             await w.WriteLineAsync("using L = Iced.Intel.Label;");
             await w.WriteLineAsync("using A = Iced.Intel.Assembler;");
@@ -78,7 +77,7 @@ namespace Generator.Core
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable RedundantCast");
             await w.WriteLineAsync();
-            await w.WriteLineAsync("namespace Thawed.Auto");
+            await w.WriteLineAsync("namespace Generator.Extractors");
             await w.WriteLineAsync("{");
             await w.WriteLineAsync("public static class Fuzzer");
             await w.WriteLineAsync("{");

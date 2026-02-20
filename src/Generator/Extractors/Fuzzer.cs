@@ -1,5 +1,4 @@
 ﻿using System;
-using Iced.Intel;
 using R = Iced.Intel.Register;
 using L = Iced.Intel.Label;
 using A = Iced.Intel.Assembler;
@@ -15,7 +14,7 @@ using ARS = Iced.Intel.AssemblerRegisterSegment;
 
 // ReSharper disable RedundantCast
 
-namespace Thawed.Auto
+namespace Generator.Extractors
 {
     public static class Fuzzer
     {
