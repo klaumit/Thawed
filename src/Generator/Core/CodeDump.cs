@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Generator.Extractors;
 using static Generator.Tools.FileTool;
 
 namespace Generator.Core
@@ -24,14 +23,6 @@ namespace Generator.Core
             Console.WriteLine(" TODO "); // TODO
 
             // TODO
-
-            Fuzzer.DoAll(a =>
-            {
-                var bytes = ExecDump.Assemble(a);
-                if (bytes == null)
-                    return;
-                Console.WriteLine(Convert.ToHexString(bytes));
-            });
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Generator.Core
             }
 
             var numbers = IterTool.Iter16Bit();
-            var cands = numbers.Select(BitTool.AsShort).ToArray();
+            var cands = numbers.Select(BitTool.AsShort).AddFuzzy().ToArray();
             var appS = (o.Misc ?? "").Split(';');
 
             var extractors = CreateExtractors(appS);
@@ -31,6 +31,18 @@ namespace Generator.Core
             );
 
             Console.WriteLine("Done.");
+        }
+
+        private static IEnumerable<byte[]> AddFuzzy(this IEnumerable<byte[]> bytes)
+        {
+            var list = new List<byte[]>();
+            Fuzzer.DoAll(a =>
+            {
+                if (Assemble(a) is not { } bits)
+                    return;
+                list.Add(bits);
+            });
+            return bytes.Concat(list);
         }
 
         private static IEnumerable<IExtractor> CreateExtractors(string[] apps)
