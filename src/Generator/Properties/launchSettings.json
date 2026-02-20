@@ -6,7 +6,7 @@
     },
     "cd": {
       "commandName": "Project",
-      "commandLineArgs": "-d -o ../Thawed/Auto"
+      "commandLineArgs": "-d -o ./Extractors"
     },
     "cg": {
       "commandName": "Project",
