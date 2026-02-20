@@ -68,6 +68,7 @@ namespace Generator.Core
             await w.WriteLineAsync("{");
             await w.WriteLineAsync("public static class Fuzzer");
             await w.WriteLineAsync("{");
+            var gen = new List<string>();
             var methods = typeof(Assembler).GetMethods();
             var isFirst = true;
             foreach (var (nam, desc) in Desc.GetOpCodeNames())
@@ -84,8 +85,9 @@ namespace Generator.Core
                 await w.WriteLineAsync("/// <summary>");
                 await w.WriteLineAsync($"/// {desc}");
                 await w.WriteLineAsync("/// </summary>");
-                var mName = name.Title();
-                await w.WriteLineAsync($"public static void Do{mName}(A a)");
+                var mName = $"Do{name.Title()}";
+                await w.WriteLineAsync($"public static void {mName}(A a)");
+                gen.Add(mName);
                 await w.WriteLineAsync("{");
                 foreach (var meth in methods)
                 {
@@ -100,6 +102,14 @@ namespace Generator.Core
                 }
                 await w.WriteLineAsync("}");
             }
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("public static void DoAll(A a)");
+            await w.WriteLineAsync("{");
+            foreach (var ggg in gen)
+            {
+                await w.WriteLineAsync($"{ggg}(a);");
+            }
+            await w.WriteLineAsync("}");
             await w.WriteLineAsync("}");
             await w.WriteLineAsync("}");
 
