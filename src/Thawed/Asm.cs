@@ -1,7 +1,6 @@
 ﻿namespace Thawed
 {
-    public class Class1
+    public static class Asm
     {
-
     }
 }
