@@ -134,13 +134,20 @@ namespace Generator.Core
                 yield return b;
         }
 
-        public static byte[] Assemble(Action<Assembler> action)
+        public static byte[]? Assemble(Action<Assembler> action)
         {
             var asm = new Assembler(16);
             action(asm);
             using var mem = new MemoryStream();
             var writer = new StreamCodeWriter(mem);
-            asm.Assemble(writer, 0);
+            try
+            {
+                asm.Assemble(writer, 0);
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
             return mem.ToArray();
         }
     }
