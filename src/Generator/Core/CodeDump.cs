@@ -35,6 +35,7 @@ namespace Generator.Core
         {
             var w = new CodeWriter();
             await w.WriteLineAsync("using System.Collections.Generic;");
+            await w.WriteLineAsync("using O = Thawed.OpMeta;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
             await w.WriteLineAsync("// ReSharper disable IdentifierTypo");
@@ -58,6 +59,12 @@ namespace Generator.Core
                 await w.WriteLineAsync($"/// {instruct.Description}");
                 await w.WriteLineAsync($"/// <remarks>{instruct.Group}</remarks>");
                 await w.WriteLineAsync("/// </summary>");
+                foreach (var i in ig.OrderBy(i => i.Instruction?.Length)
+                             .ThenBy(i => i.Instruction))
+                {
+                    var t = $"[O(\"{i.Format}\", \"{i.Hex}\", \"{i.Instruction}\")]";
+                    await w.WriteLineAsync(t);
+                }
                 await w.WriteLineAsync($"{etk}{suf}");
             }
             await w.WriteLineAsync("}");
@@ -82,18 +89,6 @@ namespace Generator.Core
 
             var fuzF = Path.Combine(outDir, "Opcode.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
-
-
-
-
-
-            /*
-               using D = SuperHot.Dialect;
-               using O = SuperHot.OpMeta;
-                    
-                    [O([D.Sh,D.Sh2,D.Sh2a,D.Sh2e,D.Sh3,D.Sh3e,D.Sh4,D.Sh4a], 2, "#0,r0", "#-100,r10")]
-                    Add,
-               */
         }
     }
 }
