@@ -8,7 +8,28 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Iced.Intel;
+using System;
+using Generator.Tools;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Generator.Extractors;
+using Generator.API;
+using Iced.Intel;
+using System;
+using System.Threading.Tasks;
+using Generator.Tools;
+using System.Collections.Generic;
+using System.Linq;
+using Generator.Meta;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using Iced.Intel;
+using System.Threading.Tasks;
 using CodeWriter = Generator.Common.CodeWriter;
+using static Generator.Tools.FileTool;
 
 namespace Generator.Core
 {
@@ -16,7 +37,7 @@ namespace Generator.Core
     {
         internal static async Task Run(Options o)
         {
-            if (FileTool.CreateOrGetDir(o.OutputDir) is not { } outDir)
+            if (CreateOrGetDir(o.OutputDir) is not { } outDir)
             {
                 await Console.Error.WriteLineAsync("No output dir given!");
                 return;
