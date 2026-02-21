@@ -34,7 +34,6 @@ namespace Generator.Core
         private static async Task GenerateEnum(string outDir)
         {
             var w = new CodeWriter();
-            await w.WriteLineAsync("using System;");
             await w.WriteLineAsync("using System.Collections.Generic;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
@@ -55,6 +54,10 @@ namespace Generator.Core
                 var suf = ig.Key == instrGroups.Last().Key ? "" : ",";
                 var instruct = ig.First();
                 var etk = instruct.Label?.Title();
+                await w.WriteLineAsync("/// <summary>");
+                await w.WriteLineAsync($"/// {instruct.Description}");
+                await w.WriteLineAsync($"/// <remarks>{instruct.Group}</remarks>");
+                await w.WriteLineAsync("/// </summary>");
                 await w.WriteLineAsync($"{etk}{suf}");
             }
             await w.WriteLineAsync("}");
@@ -87,11 +90,7 @@ namespace Generator.Core
             /*
                using D = SuperHot.Dialect;
                using O = SuperHot.OpMeta;
-
-                    /// <summary>
-                    /// Add binary
-                    /// <remarks>Arithmetic</remarks>
-                    /// </summary>
+                    
                     [O([D.Sh,D.Sh2,D.Sh2a,D.Sh2e,D.Sh3,D.Sh3e,D.Sh4,D.Sh4a], 2, "#0,r0", "#-100,r10")]
                     Add,
                */
