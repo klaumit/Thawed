@@ -19,10 +19,10 @@ namespace Generator.Common
         public async Task WriteLineAsync(string? line = null)
         {
             var txt = line ?? string.Empty;
-            if (txt.Equals("}"))
+            if (txt.StartsWith('}'))
                 _w.Indent--;
             await _w.WriteLineAsync(txt);
-            if (txt.Equals("{"))
+            if (txt.StartsWith('{') && !txt.Contains('}'))
                 _w.Indent++;
         }
 
