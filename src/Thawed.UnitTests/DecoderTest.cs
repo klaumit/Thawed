@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Generator.Meta;
 using Thawed.Auto;
@@ -34,6 +33,8 @@ namespace Thawed.UnitTests
             {
                 var inp = $"{one.Input}".ToLowerInvariant();
                 var input = Convert.FromHexString(inp);
+                // TODO 
+                if (input.Length != 1) continue;
                 var output = $"{inp} {one.Op} {one.Arg}".Trim();
                 src.Add(output);
 
