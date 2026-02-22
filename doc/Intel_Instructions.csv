@@ -110,7 +110,7 @@ Arithmetic,INC,Increment by 1,INC reg8,FE /0,11111110 11000mmm,2+,1,-
 Arithmetic,INC,Increment by 1,INC reg16,4x,01000rrr,1,1,-
 Ports,INSB,Input from Port to String,INSB,6C,01101100,1,6,INMB
 Ports,INSW,Input from Port to String,INSW,6D,01101101,1,6,INMW
-Interrupt,INT,Call to Interrupt,INT 3,CC,11001100,1,9,BRK
+Interrupt,INT3,Call to Interrupt,INT 3,CC,11001100,1,9,BRK
 Interrupt,INT,Call to Interrupt,INT imm8,CD ii,11001101 iiiiiiii,2,10,BRK
 Interrupt,INTO,Call to Interrupt,INTO,CE,11001110,1,6 (13 if OF = 1),BRKV
 Interrupt,IRET,Interrupt Return,IRET,CF,11001111,1,10,RETI
@@ -241,7 +241,7 @@ Shift,RCR,Rotate Through Carry Right,"RCR reg8, imm8",C0 /3 ii,11000000 11011mmm
 Shift,RCR,Rotate Through Carry Right,"RCR reg16, 1",D1 /3,11010001 11011rm,2,1,RORC
 Shift,RCR,Rotate Through Carry Right,"RCR reg16, CL",D3 /3,11010011 11011rm,2,3,RORC
 Shift,RCR,Rotate Through Carry Right,"RCR reg16, imm8",C1 /3 ii,11000001 11011mmm iiiiiiii,3,3,RORC
-String,REP,Repeat String Operation Prefix,REP,F3 /?,11110011,2+,2,REPE | REPZ
+String,REPE,Repeat String Operation Prefix,REP,F3 /?,11110011,2+,2,REP | REPZ
 String,REPNE,Repeat String Operation Prefix,REPNE,F2 /?,11110010,2+,2,REPNZ
 Jump,RET,Return From Procedure,RET,C3,11000011,1,6,-
 Jump,RET,Return From Procedure,RET imm16,C2 ii ii,11000010 iiiiiiii iiiiiiii,1,6,-

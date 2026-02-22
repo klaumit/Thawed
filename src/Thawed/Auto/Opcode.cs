@@ -323,9 +323,15 @@ namespace Thawed.Auto
         /// Call to Interrupt
         /// <remarks>Interrupt</remarks>
         /// </summary>
-        [O("INT 3", "CC", "11001100")]
         [O("INT imm8", "CD ii", "11001101 iiiiiiii")]
         Int,
+        
+        /// <summary>
+        /// Call to Interrupt
+        /// <remarks>Interrupt</remarks>
+        /// </summary>
+        [O("INT 3", "CC", "11001100")]
+        Int3,
         
         /// <summary>
         /// Call to Interrupt
@@ -761,7 +767,7 @@ namespace Thawed.Auto
         /// <remarks>String</remarks>
         /// </summary>
         [O("REP", "F3 /?", "11110011")]
-        Rep,
+        Repe,
         
         /// <summary>
         /// Repeat String Operation Prefix
@@ -1081,6 +1087,7 @@ namespace Thawed.Auto
             { Opcode.Insb, "INSB" },
             { Opcode.Insw, "INSW" },
             { Opcode.Int, "INT" },
+            { Opcode.Int3, "INT3" },
             { Opcode.Into, "INTO" },
             { Opcode.Iret, "IRET" },
             { Opcode.Ja, "JA" },
@@ -1131,7 +1138,7 @@ namespace Thawed.Auto
             { Opcode.Pushf, "PUSHF" },
             { Opcode.Rcl, "RCL" },
             { Opcode.Rcr, "RCR" },
-            { Opcode.Rep, "REP" },
+            { Opcode.Repe, "REPE" },
             { Opcode.Repne, "REPNE" },
             { Opcode.Ret, "RET" },
             { Opcode.Retf, "RETF" },

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Generator.Meta;
 using Generator.Tools;
+using static Generator.Tools.CsvTool;
 using CodeWriter = Generator.Common.CodeWriter;
 using static Generator.Tools.FileTool;
 
@@ -42,6 +44,7 @@ namespace Generator.Core
             await w.WriteLineAsync("using I = Thawed.Instruction;");
             await w.WriteLineAsync("using H = Thawed.InstructH;");
             await w.WriteLineAsync("using O = Thawed.Auto.Opcode;");
+            await w.WriteLineAsync("using A = Thawed.Args.Arg;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable RedundantAssignment");
             await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
@@ -51,7 +54,7 @@ namespace Generator.Core
             await w.WriteLineAsync("internal static class Instruct");
             await w.WriteLineAsync("{");
             var items = GetInstrDict();
-            bool first = true;
+            var first = true;
             foreach (var pair in items)
             {
                 if (first)
@@ -59,12 +62,9 @@ namespace Generator.Core
                 else
                     await w.WriteLineAsync();
                 var lbl = pair.Key.Title();
-                var cnt = pair.Value.Length;
-                await w.WriteLineAsync($"internal static I {lbl}()");
+                await w.WriteLineAsync($"internal static I {lbl}(params A[] args)");
                 await w.WriteLineAsync("{");
-                if (cnt != 1)
-                    await w.WriteLineAsync($" // {pair.Value.Length}");
-                await w.WriteLineAsync($"return new I(O.{lbl});");
+                await w.WriteLineAsync($"return new I(O.{lbl}, args);");
                 await w.WriteLineAsync("}");
             }
             await w.WriteLineAsync("}");
@@ -80,6 +80,7 @@ namespace Generator.Core
             await w.WriteLineAsync("using System;");
             await w.WriteLineAsync("using Thawed.Auto;");
             await w.WriteLineAsync("using I = Thawed.Auto.Instruct;");
+            await w.WriteLineAsync("using R = Thawed.Register;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable RedundantAssignment");
             await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
@@ -97,15 +98,24 @@ namespace Generator.Core
             await w.WriteLineAsync();
             await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
-            foreach (var one in Desc.GetInstructs())
+
+            const string defect = "???";
+            var extracted = LoadCsv("Win.csv");
+            foreach (var pair in extracted)
             {
-                var hex = one.Hex ?? string.Empty;
-                if (one.Bytes == "1" && hex.Length / 2 == 1 && !hex.Contains("x"))
-                {
-                    var lbl = one.Label ?? string.Empty;
-                    await w.WriteLineAsync($"0x{hex} => I.{lbl.Title()}(),");
-                }
+                var extr = pair.Value.MaxBy(x => x.Input?.Length ?? 0)!;
+                if (extr.Left!.StartsWith('-'))
+                    continue;
+                if (extr.Count != "01")
+                    continue;
+                var op = extr.Op ?? "";
+                if (op == defect || op.EndsWith(':'))
+                    continue;
+                var meth = $"I.{extr.Op?.Title()}";
+                var mArgs = string.Join(", ", ParseArgs(extr.Arg));
+                await w.WriteLineAsync($"0x{extr.Hex} => {meth}({mArgs}),");
             }
+
             await w.WriteLineAsync("_ => null");
             await w.WriteLineAsync("};");
             await w.WriteLineAsync();
@@ -116,6 +126,32 @@ namespace Generator.Core
 
             var fuzF = Path.Combine(outDir, "IntelDecoder.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
+        }
+
+        private static IEnumerable<string?> ParseArgs(string? args)
+        {
+            foreach (var arg in (args ?? "").Split(','))
+            {
+                var ia = arg switch
+                {
+                    "AX" => "R.ax",
+                    "BX" => "R.bx",
+                    "CX" => "R.cx",
+                    "DX" => "R.dx",
+                    "AL" => "R.al",
+                    "CS" => "R.cs",
+                    "DS" => "R.ds",
+                    "ES" => "R.es",
+                    "SS" => "R.ss",
+                    "BP" => "R.bp",
+                    "SP" => "R.sp",
+                    "DI" => "R.di",
+                    "SI" => "R.si",
+                    "" => null,
+                    _ => $"? /* {arg} */"
+                };
+                yield return ia;
+            }
         }
 
         private static async Task GenerateEnum(string outDir)
@@ -183,6 +219,14 @@ namespace Generator.Core
             return Desc.GetInstructs()
                 .OrderBy(x => x.Label)
                 .GroupBy(x => x.Label)
+                .ToDictionary(k => k.Key!, v => v.ToArray());
+        }
+
+        private static Dictionary<string, Extracted[]> LoadCsv(string name)
+        {
+            return FromFile<Extracted>(Path.Combine(GetPath<Options>(), "tmp", name))
+                .OrderBy(x => x.Hex)
+                .GroupBy(x => x.Hex)
                 .ToDictionary(k => k.Key!, v => v.ToArray());
         }
     }

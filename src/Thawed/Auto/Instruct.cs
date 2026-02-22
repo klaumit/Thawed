@@ -3,6 +3,7 @@ using Thawed.Auto;
 using I = Thawed.Instruction;
 using H = Thawed.InstructH;
 using O = Thawed.Auto.Opcode;
+using A = Thawed.Args.Arg;
 
 // ReSharper disable RedundantAssignment
 // ReSharper disable InconsistentNaming
@@ -11,584 +12,554 @@ namespace Thawed.Auto
 {
     internal static class Instruct
     {
-        internal static I Aaa()
+        internal static I Aaa(params A[] args)
         {
-            return new I(O.Aaa);
+            return new I(O.Aaa, args);
         }
         
-        internal static I Aad()
+        internal static I Aad(params A[] args)
         {
-            return new I(O.Aad);
+            return new I(O.Aad, args);
         }
         
-        internal static I Aam()
+        internal static I Aam(params A[] args)
         {
-            return new I(O.Aam);
+            return new I(O.Aam, args);
         }
         
-        internal static I Aas()
+        internal static I Aas(params A[] args)
         {
-            return new I(O.Aas);
+            return new I(O.Aas, args);
         }
         
-        internal static I Adc()
+        internal static I Adc(params A[] args)
         {
-             // 14
-            return new I(O.Adc);
+            return new I(O.Adc, args);
         }
         
-        internal static I Add()
+        internal static I Add(params A[] args)
         {
-             // 14
-            return new I(O.Add);
+            return new I(O.Add, args);
         }
         
-        internal static I And()
+        internal static I And(params A[] args)
         {
-             // 14
-            return new I(O.And);
+            return new I(O.And, args);
         }
         
-        internal static I Bound()
+        internal static I Bound(params A[] args)
         {
-            return new I(O.Bound);
+            return new I(O.Bound, args);
         }
         
-        internal static I Call()
+        internal static I Call(params A[] args)
         {
-             // 5
-            return new I(O.Call);
+            return new I(O.Call, args);
         }
         
-        internal static I Cbw()
+        internal static I Cbw(params A[] args)
         {
-            return new I(O.Cbw);
+            return new I(O.Cbw, args);
         }
         
-        internal static I Clc()
+        internal static I Clc(params A[] args)
         {
-            return new I(O.Clc);
+            return new I(O.Clc, args);
         }
         
-        internal static I Cld()
+        internal static I Cld(params A[] args)
         {
-            return new I(O.Cld);
+            return new I(O.Cld, args);
         }
         
-        internal static I Cli()
+        internal static I Cli(params A[] args)
         {
-            return new I(O.Cli);
+            return new I(O.Cli, args);
         }
         
-        internal static I Cmc()
+        internal static I Cmc(params A[] args)
         {
-            return new I(O.Cmc);
+            return new I(O.Cmc, args);
         }
         
-        internal static I Cmp()
+        internal static I Cmp(params A[] args)
         {
-             // 14
-            return new I(O.Cmp);
+            return new I(O.Cmp, args);
         }
         
-        internal static I Cmpsb()
+        internal static I Cmpsb(params A[] args)
         {
-            return new I(O.Cmpsb);
+            return new I(O.Cmpsb, args);
         }
         
-        internal static I Cmpsw()
+        internal static I Cmpsw(params A[] args)
         {
-            return new I(O.Cmpsw);
+            return new I(O.Cmpsw, args);
         }
         
-        internal static I Cs()
+        internal static I Cs(params A[] args)
         {
-            return new I(O.Cs);
+            return new I(O.Cs, args);
         }
         
-        internal static I Cwd()
+        internal static I Cwd(params A[] args)
         {
-            return new I(O.Cwd);
+            return new I(O.Cwd, args);
         }
         
-        internal static I Daa()
+        internal static I Daa(params A[] args)
         {
-            return new I(O.Daa);
+            return new I(O.Daa, args);
         }
         
-        internal static I Das()
+        internal static I Das(params A[] args)
         {
-            return new I(O.Das);
+            return new I(O.Das, args);
         }
         
-        internal static I Dec()
+        internal static I Dec(params A[] args)
         {
-             // 4
-            return new I(O.Dec);
+            return new I(O.Dec, args);
         }
         
-        internal static I Div()
+        internal static I Div(params A[] args)
         {
-             // 4
-            return new I(O.Div);
+            return new I(O.Div, args);
         }
         
-        internal static I Ds()
+        internal static I Ds(params A[] args)
         {
-            return new I(O.Ds);
+            return new I(O.Ds, args);
         }
         
-        internal static I Enter()
+        internal static I Enter(params A[] args)
         {
-            return new I(O.Enter);
+            return new I(O.Enter, args);
         }
         
-        internal static I Es()
+        internal static I Es(params A[] args)
         {
-            return new I(O.Es);
+            return new I(O.Es, args);
         }
         
-        internal static I Hlt()
+        internal static I Hlt(params A[] args)
         {
-            return new I(O.Hlt);
+            return new I(O.Hlt, args);
         }
         
-        internal static I Idiv()
+        internal static I Idiv(params A[] args)
         {
-             // 4
-            return new I(O.Idiv);
+            return new I(O.Idiv, args);
         }
         
-        internal static I Imul()
+        internal static I Imul(params A[] args)
         {
-             // 8
-            return new I(O.Imul);
+            return new I(O.Imul, args);
         }
         
-        internal static I In()
+        internal static I In(params A[] args)
         {
-             // 4
-            return new I(O.In);
+            return new I(O.In, args);
         }
         
-        internal static I Inc()
+        internal static I Inc(params A[] args)
         {
-             // 4
-            return new I(O.Inc);
+            return new I(O.Inc, args);
         }
         
-        internal static I Insb()
+        internal static I Insb(params A[] args)
         {
-            return new I(O.Insb);
+            return new I(O.Insb, args);
         }
         
-        internal static I Insw()
+        internal static I Insw(params A[] args)
         {
-            return new I(O.Insw);
+            return new I(O.Insw, args);
         }
         
-        internal static I Int()
+        internal static I Int(params A[] args)
         {
-             // 2
-            return new I(O.Int);
+            return new I(O.Int, args);
         }
         
-        internal static I Into()
+        internal static I Int3(params A[] args)
         {
-            return new I(O.Into);
+            return new I(O.Int3, args);
         }
         
-        internal static I Iret()
+        internal static I Into(params A[] args)
         {
-            return new I(O.Iret);
+            return new I(O.Into, args);
         }
         
-        internal static I Ja()
+        internal static I Iret(params A[] args)
         {
-            return new I(O.Ja);
+            return new I(O.Iret, args);
         }
         
-        internal static I Jbe()
+        internal static I Ja(params A[] args)
         {
-            return new I(O.Jbe);
+            return new I(O.Ja, args);
         }
         
-        internal static I Jc()
+        internal static I Jbe(params A[] args)
         {
-            return new I(O.Jc);
+            return new I(O.Jbe, args);
         }
         
-        internal static I Jcxz()
+        internal static I Jc(params A[] args)
         {
-            return new I(O.Jcxz);
+            return new I(O.Jc, args);
         }
         
-        internal static I Jg()
+        internal static I Jcxz(params A[] args)
         {
-            return new I(O.Jg);
+            return new I(O.Jcxz, args);
         }
         
-        internal static I Jge()
+        internal static I Jg(params A[] args)
         {
-            return new I(O.Jge);
+            return new I(O.Jg, args);
         }
         
-        internal static I Jl()
+        internal static I Jge(params A[] args)
         {
-            return new I(O.Jl);
+            return new I(O.Jge, args);
         }
         
-        internal static I Jle()
+        internal static I Jl(params A[] args)
         {
-            return new I(O.Jle);
+            return new I(O.Jl, args);
         }
         
-        internal static I Jmp()
+        internal static I Jle(params A[] args)
         {
-             // 6
-            return new I(O.Jmp);
+            return new I(O.Jle, args);
         }
         
-        internal static I Jnc()
+        internal static I Jmp(params A[] args)
         {
-            return new I(O.Jnc);
+            return new I(O.Jmp, args);
         }
         
-        internal static I Jno()
+        internal static I Jnc(params A[] args)
         {
-            return new I(O.Jno);
+            return new I(O.Jnc, args);
         }
         
-        internal static I Jnp()
+        internal static I Jno(params A[] args)
         {
-            return new I(O.Jnp);
+            return new I(O.Jno, args);
         }
         
-        internal static I Jns()
+        internal static I Jnp(params A[] args)
         {
-            return new I(O.Jns);
+            return new I(O.Jnp, args);
         }
         
-        internal static I Jnz()
+        internal static I Jns(params A[] args)
         {
-            return new I(O.Jnz);
+            return new I(O.Jns, args);
         }
         
-        internal static I Jo()
+        internal static I Jnz(params A[] args)
         {
-            return new I(O.Jo);
+            return new I(O.Jnz, args);
         }
         
-        internal static I Jp()
+        internal static I Jo(params A[] args)
         {
-            return new I(O.Jp);
+            return new I(O.Jo, args);
         }
         
-        internal static I Js()
+        internal static I Jp(params A[] args)
         {
-            return new I(O.Js);
+            return new I(O.Jp, args);
         }
         
-        internal static I Jz()
+        internal static I Js(params A[] args)
         {
-            return new I(O.Jz);
+            return new I(O.Js, args);
         }
         
-        internal static I Lahf()
+        internal static I Jz(params A[] args)
         {
-            return new I(O.Lahf);
+            return new I(O.Jz, args);
         }
         
-        internal static I Lds()
+        internal static I Lahf(params A[] args)
         {
-            return new I(O.Lds);
+            return new I(O.Lahf, args);
         }
         
-        internal static I Lea()
+        internal static I Lds(params A[] args)
         {
-            return new I(O.Lea);
+            return new I(O.Lds, args);
         }
         
-        internal static I Leave()
+        internal static I Lea(params A[] args)
         {
-            return new I(O.Leave);
+            return new I(O.Lea, args);
         }
         
-        internal static I Les()
+        internal static I Leave(params A[] args)
         {
-            return new I(O.Les);
+            return new I(O.Leave, args);
         }
         
-        internal static I Lock()
+        internal static I Les(params A[] args)
         {
-            return new I(O.Lock);
+            return new I(O.Les, args);
         }
         
-        internal static I Lodsb()
+        internal static I Lock(params A[] args)
         {
-            return new I(O.Lodsb);
+            return new I(O.Lock, args);
         }
         
-        internal static I Lodsw()
+        internal static I Lodsb(params A[] args)
         {
-            return new I(O.Lodsw);
+            return new I(O.Lodsb, args);
         }
         
-        internal static I Loop()
+        internal static I Lodsw(params A[] args)
         {
-            return new I(O.Loop);
+            return new I(O.Lodsw, args);
         }
         
-        internal static I Loope()
+        internal static I Loop(params A[] args)
         {
-            return new I(O.Loope);
+            return new I(O.Loop, args);
         }
         
-        internal static I Loopne()
+        internal static I Loope(params A[] args)
         {
-            return new I(O.Loopne);
+            return new I(O.Loope, args);
         }
         
-        internal static I Mov()
+        internal static I Loopne(params A[] args)
         {
-             // 20
-            return new I(O.Mov);
+            return new I(O.Loopne, args);
         }
         
-        internal static I Movsb()
+        internal static I Mov(params A[] args)
         {
-            return new I(O.Movsb);
+            return new I(O.Mov, args);
         }
         
-        internal static I Movsw()
+        internal static I Movsb(params A[] args)
         {
-            return new I(O.Movsw);
+            return new I(O.Movsb, args);
         }
         
-        internal static I Mul()
+        internal static I Movsw(params A[] args)
         {
-             // 4
-            return new I(O.Mul);
+            return new I(O.Movsw, args);
         }
         
-        internal static I Neg()
+        internal static I Mul(params A[] args)
         {
-             // 4
-            return new I(O.Neg);
+            return new I(O.Mul, args);
         }
         
-        internal static I Nop()
+        internal static I Neg(params A[] args)
         {
-            return new I(O.Nop);
+            return new I(O.Neg, args);
         }
         
-        internal static I Not()
+        internal static I Nop(params A[] args)
         {
-             // 4
-            return new I(O.Not);
+            return new I(O.Nop, args);
         }
         
-        internal static I Or()
+        internal static I Not(params A[] args)
         {
-             // 14
-            return new I(O.Or);
+            return new I(O.Not, args);
         }
         
-        internal static I Out()
+        internal static I Or(params A[] args)
         {
-             // 4
-            return new I(O.Out);
+            return new I(O.Or, args);
         }
         
-        internal static I Outsb()
+        internal static I Out(params A[] args)
         {
-            return new I(O.Outsb);
+            return new I(O.Out, args);
         }
         
-        internal static I Outsw()
+        internal static I Outsb(params A[] args)
         {
-            return new I(O.Outsw);
+            return new I(O.Outsb, args);
         }
         
-        internal static I Pop()
+        internal static I Outsw(params A[] args)
         {
-             // 4
-            return new I(O.Pop);
+            return new I(O.Outsw, args);
         }
         
-        internal static I Popa()
+        internal static I Pop(params A[] args)
         {
-            return new I(O.Popa);
+            return new I(O.Pop, args);
         }
         
-        internal static I Popf()
+        internal static I Popa(params A[] args)
         {
-            return new I(O.Popf);
+            return new I(O.Popa, args);
         }
         
-        internal static I Push()
+        internal static I Popf(params A[] args)
         {
-             // 6
-            return new I(O.Push);
+            return new I(O.Popf, args);
         }
         
-        internal static I Pusha()
+        internal static I Push(params A[] args)
         {
-            return new I(O.Pusha);
+            return new I(O.Push, args);
         }
         
-        internal static I Pushf()
+        internal static I Pusha(params A[] args)
         {
-            return new I(O.Pushf);
+            return new I(O.Pusha, args);
         }
         
-        internal static I Rcl()
+        internal static I Pushf(params A[] args)
         {
-             // 12
-            return new I(O.Rcl);
+            return new I(O.Pushf, args);
         }
         
-        internal static I Rcr()
+        internal static I Rcl(params A[] args)
         {
-             // 12
-            return new I(O.Rcr);
+            return new I(O.Rcl, args);
         }
         
-        internal static I Rep()
+        internal static I Rcr(params A[] args)
         {
-            return new I(O.Rep);
+            return new I(O.Rcr, args);
         }
         
-        internal static I Repne()
+        internal static I Repe(params A[] args)
         {
-            return new I(O.Repne);
+            return new I(O.Repe, args);
         }
         
-        internal static I Ret()
+        internal static I Repne(params A[] args)
         {
-             // 2
-            return new I(O.Ret);
+            return new I(O.Repne, args);
         }
         
-        internal static I Retf()
+        internal static I Ret(params A[] args)
         {
-             // 2
-            return new I(O.Retf);
+            return new I(O.Ret, args);
         }
         
-        internal static I Rol()
+        internal static I Retf(params A[] args)
         {
-             // 12
-            return new I(O.Rol);
+            return new I(O.Retf, args);
         }
         
-        internal static I Ror()
+        internal static I Rol(params A[] args)
         {
-             // 12
-            return new I(O.Ror);
+            return new I(O.Rol, args);
         }
         
-        internal static I Sahf()
+        internal static I Ror(params A[] args)
         {
-            return new I(O.Sahf);
+            return new I(O.Ror, args);
         }
         
-        internal static I Sar()
+        internal static I Sahf(params A[] args)
         {
-             // 12
-            return new I(O.Sar);
+            return new I(O.Sahf, args);
         }
         
-        internal static I Sbb()
+        internal static I Sar(params A[] args)
         {
-             // 14
-            return new I(O.Sbb);
+            return new I(O.Sar, args);
         }
         
-        internal static I Scasb()
+        internal static I Sbb(params A[] args)
         {
-            return new I(O.Scasb);
+            return new I(O.Sbb, args);
         }
         
-        internal static I Scasw()
+        internal static I Scasb(params A[] args)
         {
-            return new I(O.Scasw);
+            return new I(O.Scasb, args);
         }
         
-        internal static I Shl()
+        internal static I Scasw(params A[] args)
         {
-             // 12
-            return new I(O.Shl);
+            return new I(O.Scasw, args);
         }
         
-        internal static I Shr()
+        internal static I Shl(params A[] args)
         {
-             // 12
-            return new I(O.Shr);
+            return new I(O.Shl, args);
         }
         
-        internal static I Ss()
+        internal static I Shr(params A[] args)
         {
-            return new I(O.Ss);
+            return new I(O.Shr, args);
         }
         
-        internal static I Stc()
+        internal static I Ss(params A[] args)
         {
-            return new I(O.Stc);
+            return new I(O.Ss, args);
         }
         
-        internal static I Std()
+        internal static I Stc(params A[] args)
         {
-            return new I(O.Std);
+            return new I(O.Stc, args);
         }
         
-        internal static I Sti()
+        internal static I Std(params A[] args)
         {
-            return new I(O.Sti);
+            return new I(O.Std, args);
         }
         
-        internal static I Stosb()
+        internal static I Sti(params A[] args)
         {
-            return new I(O.Stosb);
+            return new I(O.Sti, args);
         }
         
-        internal static I Stosw()
+        internal static I Stosb(params A[] args)
         {
-            return new I(O.Stosw);
+            return new I(O.Stosb, args);
         }
         
-        internal static I Sub()
+        internal static I Stosw(params A[] args)
         {
-             // 14
-            return new I(O.Sub);
+            return new I(O.Stosw, args);
         }
         
-        internal static I Test()
+        internal static I Sub(params A[] args)
         {
-             // 10
-            return new I(O.Test);
+            return new I(O.Sub, args);
         }
         
-        internal static I Wait()
+        internal static I Test(params A[] args)
         {
-            return new I(O.Wait);
+            return new I(O.Test, args);
         }
         
-        internal static I Xchg()
+        internal static I Wait(params A[] args)
         {
-             // 5
-            return new I(O.Xchg);
+            return new I(O.Wait, args);
         }
         
-        internal static I Xlat()
+        internal static I Xchg(params A[] args)
         {
-            return new I(O.Xlat);
+            return new I(O.Xchg, args);
         }
         
-        internal static I Xor()
+        internal static I Xlat(params A[] args)
         {
-             // 14
-            return new I(O.Xor);
+            return new I(O.Xlat, args);
+        }
+        
+        internal static I Xor(params A[] args)
+        {
+            return new I(O.Xor, args);
         }
     }
 }
