@@ -1,7 +1,4 @@
-﻿using System;
-using Thawed.Auto;
-using I = Thawed.Instruction;
-using H = Thawed.InstructH;
+﻿using I = Thawed.Instruction;
 using O = Thawed.Auto.Opcode;
 using A = Thawed.Args.Arg;
 
