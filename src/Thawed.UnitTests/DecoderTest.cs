@@ -5,16 +5,9 @@ using System.Threading.Tasks;
 using Generator.Meta;
 using Thawed.Auto;
 using Xunit;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Generator;
-using Xunit;
 using T = Thawed.UnitTests.TestTool;
-using static Generator.Tools.FileTool;
 
 namespace Thawed.UnitTests
 {
@@ -31,13 +24,31 @@ namespace Thawed.UnitTests
             var ones = ExW[opT];
             Assert.True(ones.Length >= 1, $"{ones.Length} ?!");
 
+            var src = new SortedSet<string>();
+            var got = new SortedSet<string>();
+
+            var decoder = Decoders.GetDecoder();
+            var reader = new ArrayReader([]);
+
             foreach (var one in ones)
             {
                 var input = Convert.FromHexString(one.Input!);
-                var output = $"{one.Op} {one.Arg}".Trim();
+                var output = $"{one.Input} {one.Op} {one.Arg}".Trim();
+                src.Add(output);
 
-                throw new InvalidOperationException($"{Convert.ToHexString(input)} => {output}");
+                reader.Reset(input);
+                var text = decoder.Decode(reader, fail: false)?.ToString();
+                var hex = reader.ToString().ToLower();
+                got.Add($"{hex}\t{text?.Trim()}");
             }
+
+            var t1F = $"win_{op}_orig.txt";
+            await File.WriteAllLinesAsync(t1F, src, Encoding.UTF8);
+
+            var t2F = $"win_{op}_mine.txt";
+            await File.WriteAllLinesAsync(t2F, got, Encoding.UTF8);
+
+            await TestTool.Compare(t1F, t2F);
         }
     }
 }

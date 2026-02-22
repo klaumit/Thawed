@@ -13,10 +13,6 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Iced" Version="1.21.0" />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
