@@ -120,24 +120,6 @@ namespace Generator.Core
                 }
             }
 
-            /*
-            foreach (var pair in extracted)
-            {
-                var extr = pair.Value.MaxBy(x => x.Input?.Length ?? 0)!;
-                if (extr.Left!.StartsWith('-'))
-                    continue;
-                if (extr.Count != "01")
-                    continue;
-                var op = extr.Op ?? "";
-                if (op == defect || op.EndsWith(':'))
-                    continue;
-                var meth = $"I.{extr.Op?.Title()}";
-                var mArgs = string.Join(", ", ParseArgs(extr.Arg));
-                await w.WriteLineAsync($"0x{extr.Hex} => {meth}({mArgs}),");
-            }
-            */
-
-            // await w.WriteLineAsync("_ => null");
             await w.WriteLineAsync("};");
             await w.WriteLineAsync();
             await w.WriteLineAsync("return fail ? throw new DecodeException(b0) : i;");
