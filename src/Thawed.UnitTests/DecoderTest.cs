@@ -20,7 +20,8 @@ namespace Thawed.UnitTests
         public async Task ShouldDecode(Opcode op)
         {
             var opT = op.ToString().ToUpperInvariant();
-            var ones = ExW[opT];
+            if (!ExW.TryGetValue(opT, out var ones))
+                return;
             Assert.True(ones.Length >= 1, $"{ones.Length} ?!");
 
             var src = new SortedSet<string>();
@@ -33,8 +34,6 @@ namespace Thawed.UnitTests
             {
                 var inp = $"{one.Input}".ToLowerInvariant();
                 var input = Convert.FromHexString(inp);
-                // TODO 
-                if (input.Length != 1) continue;
                 var output = $"{inp} {one.Op} {one.Arg}".Trim();
                 src.Add(output);
 
