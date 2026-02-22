@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -147,7 +148,20 @@ namespace Generator.Core
         {
             await w.WriteLineAsync($"0x{node.Hex} => (b1 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
-            var lc = 0;
+            foreach (var t in GenerateLevels(node))
+            {
+                var anc = string.Join(" or ", t.Select(x => x?.h));
+                await w.WriteLineAsync($"{anc} => {t.Key},");
+            }
+            await w.WriteLineAsync("},");
+        }
+
+        private static IEnumerable<IGrouping<string?, (string h, string m)?>> GenerateLevels(HashNode n)
+            => GenerateLevel(n, 2)
+                .OrderBy(v => v?.m).GroupBy(v => v?.m);
+
+        private static IEnumerable<(string h, string m)?> GenerateLevel(HashNode node, int o)
+        {
             foreach (var fN in node.Nodes ?? [])
             {
                 var fRg = fN.Raw?.GroupBy(x => x.Hex);
@@ -157,14 +171,14 @@ namespace Generator.Core
                 {
                     var meth = $"I.{op.Title()}";
                     var mArgs = string.Join(", ", ParseArgs(fR.Arg));
-                    var hex = fR.Hex![2..];
-                    await w.WriteLineAsync($"0x{hex} => {meth}({mArgs}),");
-                    lc++;
+                    var hex = fR.Hex![o..];
+                    yield return ($"0x{hex}", $"{meth}({mArgs})");
+                }
+                else
+                {
+                    yield return ($"0x{fN.Hex}", "null");
                 }
             }
-            if (lc == 0)
-                await w.WriteLineAsync("_ => null");
-            await w.WriteLineAsync("},");
         }
 
         private static string[] ToParts(string hex)
