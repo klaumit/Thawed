@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Generator.Common;
 using Generator.Meta;
 using Generator.Tools;
 using static Generator.Tools.CsvTool;
@@ -101,6 +102,24 @@ namespace Generator.Core
 
             const string defect = "???";
             var extracted = LoadCsv("Win.csv");
+            var tree = BuildTree(extracted);
+            if (tree.Nodes != null)
+                foreach (var fN in tree.Nodes)
+                {
+                    if (fN.Raw != null)
+                        foreach (var fRg in fN.Raw.GroupBy(x => x.Hex))
+                        {
+                            var fR = fRg.First();
+                            var op = fR.Op ?? "";
+                            if (op == defect || op.EndsWith(':'))
+                                continue;
+                            var meth = $"I.{op.Title()}";
+                            var mArgs = string.Join(", ", ParseArgs(fR.Arg));
+                            await w.WriteLineAsync($"0x{fR.Hex} => {meth}({mArgs}),");
+                        }
+                }
+
+            /*
             foreach (var pair in extracted)
             {
                 var extr = pair.Value.MaxBy(x => x.Input?.Length ?? 0)!;
@@ -115,6 +134,7 @@ namespace Generator.Core
                 var mArgs = string.Join(", ", ParseArgs(extr.Arg));
                 await w.WriteLineAsync($"0x{extr.Hex} => {meth}({mArgs}),");
             }
+            */
 
             await w.WriteLineAsync("_ => null");
             await w.WriteLineAsync("};");
@@ -126,6 +146,11 @@ namespace Generator.Core
 
             var fuzF = Path.Combine(outDir, "IntelDecoder.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
+        }
+
+        private static string[] ToParts(string hex)
+        {
+            return hex.Chunk(2).Select(h => $"{h[0]}{h[1]}").ToArray();
         }
 
         private static IEnumerable<string?> ParseArgs(string? args)
@@ -228,6 +253,31 @@ namespace Generator.Core
                 .OrderBy(x => x.Hex)
                 .GroupBy(x => x.Hex)
                 .ToDictionary(k => k.Key!, v => v.ToArray());
+        }
+
+        private static HashNode BuildTree(Dictionary<string, Extracted[]> extracted)
+        {
+            var tree = new HashNode();
+            foreach (var (hex, value) in extracted)
+            {
+                var parts = ToParts(hex);
+                var curr = string.Empty;
+                var cuIt = tree;
+                foreach (var part in parts)
+                {
+                    curr += part;
+                    var exist = (cuIt.Nodes ??= [])
+                        .FirstOrDefault(n => n.Hex != null && n.Hex.Equals(part));
+                    if (exist == null)
+                        cuIt.Nodes.Add(cuIt = new HashNode { Path = curr, Hex = part });
+                    else
+                        cuIt = exist;
+                    var set = cuIt.Raw ??= [];
+                    foreach (var one in value.Where(v => v.Hex!.Equals(curr)))
+                        set.Add(one);
+                }
+            }
+            return tree;
         }
     }
 }
