@@ -32,8 +32,9 @@ namespace Thawed.UnitTests
 
             foreach (var one in ones)
             {
-                var input = Convert.FromHexString(one.Input!);
-                var output = $"{one.Input} {one.Op} {one.Arg}".Trim();
+                var inp = $"{one.Input}".ToLowerInvariant();
+                var input = Convert.FromHexString(inp);
+                var output = $"{inp} {one.Op} {one.Arg}".Trim();
                 src.Add(output);
 
                 reader.Reset(input);

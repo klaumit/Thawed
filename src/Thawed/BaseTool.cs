@@ -11,7 +11,7 @@ namespace Thawed
 
 		internal static string ToHexString(this byte[] bytes)
 		{
-			return string.Join(" ", bytes.Select(ToHexString));
+			return string.Join("", bytes.Select(ToHexString));
 		}
 	}
 }

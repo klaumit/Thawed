@@ -30,8 +30,8 @@ namespace Thawed.UnitTests
 
         private static string GetBinaryStr(string first)
         {
-            var txt = first.Split(' ', 3).Take(2).ToArray();
-            var num = ushort.Parse($"{txt[0]}{txt[1]}", NumberStyles.HexNumber);
+            var txt = first.Split(' ', 2).Take(1).ToArray();
+            var num = ushort.Parse($"{txt[0]}", NumberStyles.HexNumber);
             return $"{num:b16}";
         }
 

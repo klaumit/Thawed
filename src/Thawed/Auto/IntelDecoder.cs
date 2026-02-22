@@ -2,6 +2,7 @@ using System;
 using Thawed.Auto;
 using I = Thawed.InstructH;
 
+#pragma warning disable CS8509 
 // ReSharper disable RedundantAssignment
 // ReSharper disable InconsistentNaming
 
@@ -18,11 +19,12 @@ namespace Thawed.Auto
 
             var i = (b0 = r.ReadOne()) switch
             {
-                0x99 => 1,
-                _ => throw new InvalidOperationException()
+                0xD4 => I.Aam(),
+                0xD5 => I.Aad(),
+                0x37 => I.Aaa(),
             };
 
-            return fail ? throw new DecodeException(b0) : I.Bad(b0);
+            return fail ? throw new DecodeException(b0) : i;
         }
     }
 }
