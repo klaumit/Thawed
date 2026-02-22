@@ -2,7 +2,6 @@ using System;
 using Thawed.Auto;
 using I = Thawed.InstructH;
 
-#pragma warning disable CS8509 
 // ReSharper disable RedundantAssignment
 // ReSharper disable InconsistentNaming
 
@@ -22,6 +21,8 @@ namespace Thawed.Auto
                 0xD4 => I.Aam(),
                 0xD5 => I.Aad(),
                 0x37 => I.Aaa(),
+                0x61 => I.Popa(),
+                _ => null
             };
 
             return fail ? throw new DecodeException(b0) : i;

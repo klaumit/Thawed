@@ -25,5 +25,10 @@ namespace Thawed
         {
             return new I(Opcode.Aaa);
         }
+
+        public static I? Popa()
+        {
+            return new I(Opcode.Popa);
+        }
     }
 }
