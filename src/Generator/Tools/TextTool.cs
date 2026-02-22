@@ -31,6 +31,7 @@ namespace Generator.Tools
 
         public static string Title(this string name)
         {
+            if (string.IsNullOrWhiteSpace(name)) return string.Empty;
             return name[..1].ToUpperInvariant() + name[1..].ToLowerInvariant();
         }
     }

@@ -103,21 +103,22 @@ namespace Generator.Core
             const string defect = "???";
             var extracted = LoadCsv("Win.csv");
             var tree = BuildTree(extracted);
-            if (tree.Nodes != null)
-                foreach (var fN in tree.Nodes)
+            foreach (var fN in tree.Nodes ?? [])
+            {
+                var fRg = fN.Raw?.GroupBy(x => x.Hex);
+                var fR = fRg?.FirstOrDefault()?.FirstOrDefault();
+                var op = fR?.Op ?? "";
+                if (fR != null && op != defect && !op.EndsWith(':'))
                 {
-                    if (fN.Raw != null)
-                        foreach (var fRg in fN.Raw.GroupBy(x => x.Hex))
-                        {
-                            var fR = fRg.First();
-                            var op = fR.Op ?? "";
-                            if (op == defect || op.EndsWith(':'))
-                                continue;
-                            var meth = $"I.{op.Title()}";
-                            var mArgs = string.Join(", ", ParseArgs(fR.Arg));
-                            await w.WriteLineAsync($"0x{fR.Hex} => {meth}({mArgs}),");
-                        }
+                    var meth = $"I.{op.Title()}";
+                    var mArgs = string.Join(", ", ParseArgs(fR.Arg));
+                    await w.WriteLineAsync($"0x{fR.Hex} => {meth}({mArgs}),");
                 }
+                else
+                {
+                    await w.WriteLineAsync($"0x{fN.Hex} => null,");
+                }
+            }
 
             /*
             foreach (var pair in extracted)
@@ -136,7 +137,7 @@ namespace Generator.Core
             }
             */
 
-            await w.WriteLineAsync("_ => null");
+            // await w.WriteLineAsync("_ => null");
             await w.WriteLineAsync("};");
             await w.WriteLineAsync();
             await w.WriteLineAsync("return fail ? throw new DecodeException(b0) : i;");
