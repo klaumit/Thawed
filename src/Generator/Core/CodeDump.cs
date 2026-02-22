@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,47 @@ namespace Generator.Core
 
             await GenerateEnum(outDir);
             await GenerateDecoder(outDir);
+            await GenerateInstruct(outDir);
 
             Console.WriteLine("Done.");
+        }
+
+        private static async Task GenerateInstruct(string outDir)
+        {
+            var w = new CodeWriter();
+            await w.WriteLineAsync("using System;");
+            await w.WriteLineAsync("using Thawed.Auto;");
+            await w.WriteLineAsync("using I = Thawed.Instruction;");
+            await w.WriteLineAsync("using H = Thawed.InstructH;");
+            await w.WriteLineAsync("using O = Thawed.Auto.Opcode;");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("// ReSharper disable RedundantAssignment");
+            await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("namespace Thawed.Auto");
+            await w.WriteLineAsync("{");
+            await w.WriteLineAsync("internal static class Instruct");
+            await w.WriteLineAsync("{");
+            var items = GetInstrDict();
+            bool first = true;
+            foreach (var pair in items)
+            {
+                if (first)
+                    first = false;
+                else
+                    await w.WriteLineAsync();
+                var lbl = pair.Key.Title();
+                await w.WriteLineAsync($"internal static Instruction {lbl}()");
+                await w.WriteLineAsync("{");
+                await w.WriteLineAsync($" // {pair.Value.Length}");
+                await w.WriteLineAsync($"return new I(O.{lbl});");
+                await w.WriteLineAsync("}");
+            }
+            await w.WriteLineAsync("}");
+            await w.WriteLineAsync("}");
+
+            var fuzF = Path.Combine(outDir, "Instruct.cs");
+            await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
         }
 
         private static async Task GenerateDecoder(string outDir)
@@ -37,7 +77,7 @@ namespace Generator.Core
             var w = new CodeWriter();
             await w.WriteLineAsync("using System;");
             await w.WriteLineAsync("using Thawed.Auto;");
-            await w.WriteLineAsync("using I = Thawed.InstructH;");
+            await w.WriteLineAsync("using I = Thawed.Auto.Instruct;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable RedundantAssignment");
             await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
@@ -47,7 +87,7 @@ namespace Generator.Core
             await w.WriteLineAsync("/// <summary>");
             await w.WriteLineAsync("/// Decoder for Intel");
             await w.WriteLineAsync("/// </summary>");
-            await w.WriteLineAsync("internal sealed class IntelDecoder2 : IDecoder");
+            await w.WriteLineAsync("internal sealed class IntelDecoder : IDecoder");
             await w.WriteLineAsync("{");
             await w.WriteLineAsync("public Instruction? Decode(IByteReader r, bool fail)");
             await w.WriteLineAsync("{");
@@ -55,6 +95,15 @@ namespace Generator.Core
             await w.WriteLineAsync();
             await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
+            foreach (var one in Desc.GetInstructs())
+            {
+                var hex = one.Hex ?? string.Empty;
+                if (one.Bytes == "1" && hex.Length / 2 == 1 && !hex.Contains("x"))
+                {
+                    var lbl = one.Label ?? string.Empty;
+                    await w.WriteLineAsync($"0x{hex} => I.{lbl.Title()}(),");
+                }
+            }
             await w.WriteLineAsync("_ => null");
             await w.WriteLineAsync("};");
             await w.WriteLineAsync();
@@ -63,7 +112,7 @@ namespace Generator.Core
             await w.WriteLineAsync("}");
             await w.WriteLineAsync("}");
 
-            var fuzF = Path.Combine(outDir, "IntelDecoder2.cs");
+            var fuzF = Path.Combine(outDir, "IntelDecoder.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
         }
 
@@ -125,6 +174,14 @@ namespace Generator.Core
 
             var fuzF = Path.Combine(outDir, "Opcode.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
+        }
+
+        private static Dictionary<string, Instruct[]> GetInstrDict()
+        {
+            return Desc.GetInstructs()
+                .OrderBy(x => x.Label)
+                .GroupBy(x => x.Label)
+                .ToDictionary(k => k.Key!, v => v.ToArray());
         }
     }
 }
