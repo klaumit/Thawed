@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -74,6 +73,8 @@ namespace Generator.Core
             var fuzF = Path.Combine(outDir, "Instruct.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
         }
+        
+        private const string Defect = "???";
 
         private static async Task GenerateDecoder(string outDir)
         {
@@ -99,47 +100,10 @@ namespace Generator.Core
             await w.WriteLineAsync("byte b0 = 0;");
             await w.WriteLineAsync("byte b1 = 0;");
             await w.WriteLineAsync();
-            await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
-            await w.WriteLineAsync("{");
 
-            const string defect = "???";
             var extracted = LoadCsv("Win.csv");
             var tree = BuildTree(extracted);
-            foreach (var fN in tree.Nodes ?? [])
-            {
-                var fRg1 = fN.Raw?.GroupBy(x => x.Hex);
-                var fR1 = fRg1?.FirstOrDefault()?.FirstOrDefault();
-                var op1 = fR1?.Op ?? "";
-                if (fR1 != null && op1 != defect && !op1.EndsWith(':'))
-                {
-                    var meth = $"I.{op1.Title()}";
-                    var mArgs = string.Join(", ", ParseArgs(fR1.Arg));
-                    await w.WriteLineAsync($"0x{fR1.Hex} => {meth}({mArgs}),");
-                }
-                else
-                {
-                    await w.WriteLineAsync($"0x{fN.Hex} => (b1 = r.ReadOne()) switch");
-                    await w.WriteLineAsync("{");
-                    int lc = 0;
-                    foreach (var fNn in fN.Nodes ?? [])
-                    {
-                        var fRg2 = fNn.Raw?.GroupBy(x => x.Hex);
-                        var fR2 = fRg2?.FirstOrDefault()?.FirstOrDefault();
-                        var op2 = fR2?.Op ?? "";
-                        if (fR2 != null && op2 != defect && !op2.EndsWith(':'))
-                        {
-                            var meth = $"I.{op2.Title()}";
-                            var mArgs = string.Join(", ", ParseArgs(fR2.Arg));
-                            var hex2 = fR2.Hex![2..];
-                            await w.WriteLineAsync($"0x{hex2} => {meth}({mArgs}),");
-                            lc++;
-                        }
-                    }
-                    if (lc == 0)
-                        await w.WriteLineAsync("_ => null");
-                    await w.WriteLineAsync("},");
-                }
-            }
+            await WriteLevel0(w, tree);
 
             await w.WriteLineAsync("};");
             await w.WriteLineAsync();
@@ -150,6 +114,58 @@ namespace Generator.Core
 
             var fuzF = Path.Combine(outDir, "IntelDecoder.cs");
             await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
+        }
+
+        private static async Task WriteLevel0(CodeWriter w, HashNode node)
+        {
+            await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
+            await w.WriteLineAsync("{");
+            int lc = 0;
+            foreach (var fN in node.Nodes ?? [])
+            {
+                var fRg = fN.Raw?.GroupBy(x => x.Hex);
+                var fR = fRg?.FirstOrDefault()?.FirstOrDefault();
+                var op = fR?.Op ?? "";
+                if (fR != null && op != Defect && !op.EndsWith(':'))
+                {
+                    var meth = $"I.{op.Title()}";
+                    var mArgs = string.Join(", ", ParseArgs(fR.Arg));
+                    var hex = fR.Hex!;
+                    await w.WriteLineAsync($"0x{hex} => {meth}({mArgs}),");
+                    lc++;
+                }
+                else
+                {
+                    await WriteLevel1(w, fN);
+                }
+            }
+            if (lc == 0)
+                await w.WriteLineAsync("_ => null");
+            await w.WriteLineAsync("},");
+        }
+
+        private static async Task WriteLevel1(CodeWriter w, HashNode node)
+        {
+            await w.WriteLineAsync($"0x{node.Hex} => (b1 = r.ReadOne()) switch");
+            await w.WriteLineAsync("{");
+            int lc = 0;
+            foreach (var fN in node.Nodes ?? [])
+            {
+                var fRg = fN.Raw?.GroupBy(x => x.Hex);
+                var fR = fRg?.FirstOrDefault()?.FirstOrDefault();
+                var op = fR?.Op ?? "";
+                if (fR != null && op != Defect && !op.EndsWith(':'))
+                {
+                    var meth = $"I.{op.Title()}";
+                    var mArgs = string.Join(", ", ParseArgs(fR.Arg));
+                    var hex = fR.Hex![2..];
+                    await w.WriteLineAsync($"0x{hex} => {meth}({mArgs}),");
+                    lc++;
+                }
+            }
+            if (lc == 0)
+                await w.WriteLineAsync("_ => null");
+            await w.WriteLineAsync("},");
         }
 
         private static string[] ToParts(string hex)
@@ -227,7 +243,7 @@ namespace Generator.Core
             if (arg.Contains(tmp = "SI"))
                 arg = arg.Replace(tmp, "R.si");
             if (arg.Length is 2 or 4 && BitTool.ParseHex(arg) is { Length: 1 or 2 })
-                arg = $"0x{arg}";
+                arg = "b0"; /* $"0x{arg}" */;
             return arg;
         }
 
