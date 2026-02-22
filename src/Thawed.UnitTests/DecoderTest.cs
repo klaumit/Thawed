@@ -13,7 +13,7 @@ namespace Thawed.UnitTests
 {
     public class DecoderTest
     {
-        public static IEnumerable<object[]> AllOpcodes => T.AllOpcodes.Take(3);
+        public static IEnumerable<object[]> AllOpcodes => T.AllOpcodes;
         private static readonly Dictionary<string, Extracted[]> ExW = T.ReadCsv("Win.csv");
 
         [Theory]
