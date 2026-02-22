@@ -27,8 +27,44 @@ namespace Generator.Core
             }
 
             await GenerateEnum(outDir);
+            await GenerateDecoder(outDir);
 
             Console.WriteLine("Done.");
+        }
+
+        private static async Task GenerateDecoder(string outDir)
+        {
+            var w = new CodeWriter();
+            await w.WriteLineAsync("using System;");
+            await w.WriteLineAsync("using Thawed.Auto;");
+            await w.WriteLineAsync("using I = Thawed.InstructH;");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("// ReSharper disable RedundantAssignment");
+            await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("namespace Thawed.Auto");
+            await w.WriteLineAsync("{");
+            await w.WriteLineAsync("/// <summary>");
+            await w.WriteLineAsync("/// Decoder for Intel");
+            await w.WriteLineAsync("/// </summary>");
+            await w.WriteLineAsync("internal sealed class IntelDecoder2 : IDecoder");
+            await w.WriteLineAsync("{");
+            await w.WriteLineAsync("public Instruction? Decode(IByteReader r, bool fail)");
+            await w.WriteLineAsync("{");
+            await w.WriteLineAsync("byte b0 = 0;");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
+            await w.WriteLineAsync("{");
+            await w.WriteLineAsync("_ => null");
+            await w.WriteLineAsync("};");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("return fail ? throw new DecodeException(b0) : i;");
+            await w.WriteLineAsync("}");
+            await w.WriteLineAsync("}");
+            await w.WriteLineAsync("}");
+
+            var fuzF = Path.Combine(outDir, "IntelDecoder2.cs");
+            await File.WriteAllTextAsync(fuzF, w.ToString(), Encoding.UTF8);
         }
 
         private static async Task GenerateEnum(string outDir)
