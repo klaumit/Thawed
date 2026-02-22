@@ -82,6 +82,7 @@ namespace Generator.Core
             await w.WriteLineAsync("using Thawed.Auto;");
             await w.WriteLineAsync("using I = Thawed.Auto.Instruct;");
             await w.WriteLineAsync("using R = Thawed.Register;");
+            await w.WriteLineAsync("using static Thawed.InstructH;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("// ReSharper disable RedundantAssignment");
             await w.WriteLineAsync("// ReSharper disable InconsistentNaming");
@@ -96,6 +97,7 @@ namespace Generator.Core
             await w.WriteLineAsync("public Instruction? Decode(IByteReader r, bool fail)");
             await w.WriteLineAsync("{");
             await w.WriteLineAsync("byte b0 = 0;");
+            await w.WriteLineAsync("byte b1 = 0;");
             await w.WriteLineAsync();
             await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
@@ -105,18 +107,33 @@ namespace Generator.Core
             var tree = BuildTree(extracted);
             foreach (var fN in tree.Nodes ?? [])
             {
-                var fRg = fN.Raw?.GroupBy(x => x.Hex);
-                var fR = fRg?.FirstOrDefault()?.FirstOrDefault();
-                var op = fR?.Op ?? "";
-                if (fR != null && op != defect && !op.EndsWith(':'))
+                var fRg1 = fN.Raw?.GroupBy(x => x.Hex);
+                var fR1 = fRg1?.FirstOrDefault()?.FirstOrDefault();
+                var op1 = fR1?.Op ?? "";
+                if (fR1 != null && op1 != defect && !op1.EndsWith(':'))
                 {
-                    var meth = $"I.{op.Title()}";
-                    var mArgs = string.Join(", ", ParseArgs(fR.Arg));
-                    await w.WriteLineAsync($"0x{fR.Hex} => {meth}({mArgs}),");
+                    var meth = $"I.{op1.Title()}";
+                    var mArgs = string.Join(", ", ParseArgs(fR1.Arg));
+                    await w.WriteLineAsync($"0x{fR1.Hex} => {meth}({mArgs}),");
                 }
                 else
                 {
-                    await w.WriteLineAsync($"0x{fN.Hex} => null,");
+                    await w.WriteLineAsync($"0x{fN.Hex} => (b1 = r.ReadOne()) switch");
+                    await w.WriteLineAsync("{");
+                    foreach (var fNn in fN.Nodes ?? [])
+                    {
+                        var fRg2 = fNn.Raw?.GroupBy(x => x.Hex);
+                        var fR2 = fRg2?.FirstOrDefault()?.FirstOrDefault();
+                        var op2 = fR2?.Op ?? "";
+                        if (fR2 != null && op2 != defect && !op2.EndsWith(':'))
+                        {
+                            var meth = $"I.{op2.Title()}";
+                            var mArgs = string.Join(", ", ParseArgs(fR2.Arg));
+                            await w.WriteLineAsync($"0x{fR2.Hex} => {meth}({mArgs}),");
+                        }
+                    }
+                    await w.WriteLineAsync("_ => null");
+                    await w.WriteLineAsync("},");
                 }
             }
 
@@ -142,11 +159,26 @@ namespace Generator.Core
             {
                 var ia = arg switch
                 {
+                    "FAR AX" => "far(R.ax)",
+                    "FAR BX" => "far(R.bx)",
+                    "FAR CX" => "far(R.cx)",
+                    "FAR DX" => "far(R.dx)",
+                    "FAR SP" => "far(R.sp)",
+                    "FAR BP" => "far(R.bp)",
+                    "FAR SI" => "far(R.si)",
+                    "FAR DI" => "far(R.di)",
                     "AX" => "R.ax",
                     "BX" => "R.bx",
                     "CX" => "R.cx",
                     "DX" => "R.dx",
                     "AL" => "R.al",
+                    "BL" => "R.bl",
+                    "CL" => "R.cl",
+                    "DL" => "R.dl",
+                    "AH" => "R.ah",
+                    "BH" => "R.bh",
+                    "CH" => "R.ch",
+                    "DH" => "R.dh",
                     "CS" => "R.cs",
                     "DS" => "R.ds",
                     "ES" => "R.es",

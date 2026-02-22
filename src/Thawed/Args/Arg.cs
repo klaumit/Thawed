@@ -5,4 +5,3 @@ namespace Thawed.Args
         public static implicit operator Arg(Register reg) => new RegArg(reg);
     }
 }
-        
