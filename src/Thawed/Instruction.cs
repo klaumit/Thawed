@@ -2,7 +2,7 @@ using System.Linq;
 using Thawed.Args;
 using Thawed.Auto;
 
-// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
+// ReSharper disable NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
 
 namespace Thawed
 {
@@ -19,7 +19,7 @@ namespace Thawed
 
         public override string ToString()
         {
-            var argT = string.Join(", ", Args.Select(a => a.ToString()));
+            var argT = string.Join(", ", (Args ?? []).Select(a => a?.ToString()));
             var txt = $"{Code.ToName()} {argT}".Trim();
             return txt;
         }

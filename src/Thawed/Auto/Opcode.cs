@@ -355,18 +355,18 @@ namespace Thawed.Auto
         Ja,
         
         /// <summary>
+        /// Jump If Carry
+        /// <remarks>Branch</remarks>
+        /// </summary>
+        [O("JC rel8", "72 ii", "01110010 iiiiiiii")]
+        Jb,
+        
+        /// <summary>
         /// Jump If Below or Equal
         /// <remarks>Branch</remarks>
         /// </summary>
         [O("JBE rel8", "76 ii", "01110110 iiiiiiii")]
         Jbe,
-        
-        /// <summary>
-        /// Jump If Carry
-        /// <remarks>Branch</remarks>
-        /// </summary>
-        [O("JC rel8", "72 ii", "01110010 iiiiiiii")]
-        Jc,
         
         /// <summary>
         /// Jump If CX Register is Zero
@@ -420,7 +420,7 @@ namespace Thawed.Auto
         /// <remarks>Branch</remarks>
         /// </summary>
         [O("JNC rel8", "73 ii", "01110011 iiiiiiii")]
-        Jnc,
+        Jnb,
         
         /// <summary>
         /// Jump If Not Overflow
@@ -428,13 +428,6 @@ namespace Thawed.Auto
         /// </summary>
         [O("JNO rel8", "71 ii", "01110001 iiiiiiii")]
         Jno,
-        
-        /// <summary>
-        /// Jump If Not Parity
-        /// <remarks>Branch</remarks>
-        /// </summary>
-        [O("JNP rel8", "7B ii", "01111011 iiiiiiii")]
-        Jnp,
         
         /// <summary>
         /// Jump If Not Sign
@@ -462,7 +455,14 @@ namespace Thawed.Auto
         /// <remarks>Branch</remarks>
         /// </summary>
         [O("JP rel8", "7A ii", "01111010 iiiiiiii")]
-        Jp,
+        Jpe,
+        
+        /// <summary>
+        /// Jump If Not Parity
+        /// <remarks>Branch</remarks>
+        /// </summary>
+        [O("JNP rel8", "7B ii", "01111011 iiiiiiii")]
+        Jpo,
         
         /// <summary>
         /// Jump If Sign
@@ -542,18 +542,18 @@ namespace Thawed.Auto
         Loop,
         
         /// <summary>
-        /// Loop While Equal
-        /// <remarks>Loop</remarks>
-        /// </summary>
-        [O("LOOPE rel8", "E1 ii", "11100001 iiiiiiii")]
-        Loope,
-        
-        /// <summary>
         /// Loop While Not Equal
         /// <remarks>Loop</remarks>
         /// </summary>
         [O("LOOPNE rel8", "E0 ii", "11100000 iiiiiiii")]
-        Loopne,
+        Loopnz,
+        
+        /// <summary>
+        /// Loop While Equal
+        /// <remarks>Loop</remarks>
+        /// </summary>
+        [O("LOOPE rel8", "E1 ii", "11100001 iiiiiiii")]
+        Loopz,
         
         /// <summary>
         /// Move
@@ -1091,21 +1091,21 @@ namespace Thawed.Auto
             { Opcode.Into, "INTO" },
             { Opcode.Iret, "IRET" },
             { Opcode.Ja, "JA" },
+            { Opcode.Jb, "JB" },
             { Opcode.Jbe, "JBE" },
-            { Opcode.Jc, "JC" },
             { Opcode.Jcxz, "JCXZ" },
             { Opcode.Jg, "JG" },
             { Opcode.Jge, "JGE" },
             { Opcode.Jl, "JL" },
             { Opcode.Jle, "JLE" },
             { Opcode.Jmp, "JMP" },
-            { Opcode.Jnc, "JNC" },
+            { Opcode.Jnb, "JNB" },
             { Opcode.Jno, "JNO" },
-            { Opcode.Jnp, "JNP" },
             { Opcode.Jns, "JNS" },
             { Opcode.Jnz, "JNZ" },
             { Opcode.Jo, "JO" },
-            { Opcode.Jp, "JP" },
+            { Opcode.Jpe, "JPE" },
+            { Opcode.Jpo, "JPO" },
             { Opcode.Js, "JS" },
             { Opcode.Jz, "JZ" },
             { Opcode.Lahf, "LAHF" },
@@ -1117,8 +1117,8 @@ namespace Thawed.Auto
             { Opcode.Lodsb, "LODSB" },
             { Opcode.Lodsw, "LODSW" },
             { Opcode.Loop, "LOOP" },
-            { Opcode.Loope, "LOOPE" },
-            { Opcode.Loopne, "LOOPNE" },
+            { Opcode.Loopnz, "LOOPNZ" },
+            { Opcode.Loopz, "LOOPZ" },
             { Opcode.Mov, "MOV" },
             { Opcode.Movsb, "MOVSB" },
             { Opcode.Movsw, "MOVSW" },

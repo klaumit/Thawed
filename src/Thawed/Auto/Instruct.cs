@@ -202,14 +202,14 @@ namespace Thawed.Auto
             return new I(O.Ja, args);
         }
         
+        internal static I Jb(params A[] args)
+        {
+            return new I(O.Jb, args);
+        }
+        
         internal static I Jbe(params A[] args)
         {
             return new I(O.Jbe, args);
-        }
-        
-        internal static I Jc(params A[] args)
-        {
-            return new I(O.Jc, args);
         }
         
         internal static I Jcxz(params A[] args)
@@ -242,19 +242,14 @@ namespace Thawed.Auto
             return new I(O.Jmp, args);
         }
         
-        internal static I Jnc(params A[] args)
+        internal static I Jnb(params A[] args)
         {
-            return new I(O.Jnc, args);
+            return new I(O.Jnb, args);
         }
         
         internal static I Jno(params A[] args)
         {
             return new I(O.Jno, args);
-        }
-        
-        internal static I Jnp(params A[] args)
-        {
-            return new I(O.Jnp, args);
         }
         
         internal static I Jns(params A[] args)
@@ -272,9 +267,14 @@ namespace Thawed.Auto
             return new I(O.Jo, args);
         }
         
-        internal static I Jp(params A[] args)
+        internal static I Jpe(params A[] args)
         {
-            return new I(O.Jp, args);
+            return new I(O.Jpe, args);
+        }
+        
+        internal static I Jpo(params A[] args)
+        {
+            return new I(O.Jpo, args);
         }
         
         internal static I Js(params A[] args)
@@ -332,14 +332,14 @@ namespace Thawed.Auto
             return new I(O.Loop, args);
         }
         
-        internal static I Loope(params A[] args)
+        internal static I Loopnz(params A[] args)
         {
-            return new I(O.Loope, args);
+            return new I(O.Loopnz, args);
         }
         
-        internal static I Loopne(params A[] args)
+        internal static I Loopz(params A[] args)
         {
-            return new I(O.Loopne, args);
+            return new I(O.Loopz, args);
         }
         
         internal static I Mov(params A[] args)

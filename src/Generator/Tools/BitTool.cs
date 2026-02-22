@@ -18,5 +18,17 @@ namespace Generator.Tools
         {
             return Convert.ToHexString(bytes);
         }
+
+        public static byte[]? ParseHex(string txt)
+        {
+            try
+            {
+                return Convert.FromHexString(txt);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

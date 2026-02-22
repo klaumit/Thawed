@@ -9,7 +9,15 @@ namespace Thawed
         es,
         ss,
 
+        ah,
+        bh,
+        ch,
+        dh,
+
         al,
+        bl,
+        cl,
+        dl,
 
         ax,
         bx,

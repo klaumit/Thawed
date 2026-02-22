@@ -120,6 +120,7 @@ namespace Generator.Core
                 {
                     await w.WriteLineAsync($"0x{fN.Hex} => (b1 = r.ReadOne()) switch");
                     await w.WriteLineAsync("{");
+                    int lc = 0;
                     foreach (var fNn in fN.Nodes ?? [])
                     {
                         var fRg2 = fNn.Raw?.GroupBy(x => x.Hex);
@@ -129,10 +130,13 @@ namespace Generator.Core
                         {
                             var meth = $"I.{op2.Title()}";
                             var mArgs = string.Join(", ", ParseArgs(fR2.Arg));
-                            await w.WriteLineAsync($"0x{fR2.Hex} => {meth}({mArgs}),");
+                            var hex2 = fR2.Hex![2..];
+                            await w.WriteLineAsync($"0x{hex2} => {meth}({mArgs}),");
+                            lc++;
                         }
                     }
-                    await w.WriteLineAsync("_ => null");
+                    if (lc == 0)
+                        await w.WriteLineAsync("_ => null");
                     await w.WriteLineAsync("},");
                 }
             }
@@ -157,41 +161,74 @@ namespace Generator.Core
         {
             foreach (var arg in (args ?? "").Split(','))
             {
-                var ia = arg switch
-                {
-                    "FAR AX" => "far(R.ax)",
-                    "FAR BX" => "far(R.bx)",
-                    "FAR CX" => "far(R.cx)",
-                    "FAR DX" => "far(R.dx)",
-                    "FAR SP" => "far(R.sp)",
-                    "FAR BP" => "far(R.bp)",
-                    "FAR SI" => "far(R.si)",
-                    "FAR DI" => "far(R.di)",
-                    "AX" => "R.ax",
-                    "BX" => "R.bx",
-                    "CX" => "R.cx",
-                    "DX" => "R.dx",
-                    "AL" => "R.al",
-                    "BL" => "R.bl",
-                    "CL" => "R.cl",
-                    "DL" => "R.dl",
-                    "AH" => "R.ah",
-                    "BH" => "R.bh",
-                    "CH" => "R.ch",
-                    "DH" => "R.dh",
-                    "CS" => "R.cs",
-                    "DS" => "R.ds",
-                    "ES" => "R.es",
-                    "SS" => "R.ss",
-                    "BP" => "R.bp",
-                    "SP" => "R.sp",
-                    "DI" => "R.di",
-                    "SI" => "R.si",
-                    "" => null,
-                    _ => $"? /* {arg} */"
-                };
-                yield return ia;
+                var txt = ParseArg(arg);
+                yield return txt;
             }
+        }
+
+        private static string ParseArg(string raw)
+        {
+            var arg = raw;
+            string tmp;
+            if (arg.StartsWith('D') && arg.TrimEnd(':').Length == 3)
+                arg = $"d({ParseArg(arg[1..])})";
+            if (arg.Contains(tmp = ":"))
+                arg = arg.Replace(tmp, "");
+            if (arg.Contains(tmp = "[") && arg[arg.IndexOf('[') + 3] == '+')
+                arg = $"{arg.Replace(tmp, "br_plus(").Replace("+", ", ").Replace("]", ")")}";
+            if (arg.Contains(tmp = "["))
+                arg = $"{arg.Replace(tmp, "br(").Replace("]", ")")}";
+            if (arg.Contains(tmp = "FAR "))
+                arg = $"{arg.Replace(tmp, "far(")})";
+            if (arg.Contains(tmp = "DWord Ptr "))
+                arg = $"{arg.Replace(tmp, "dword_ptr(")})";
+            if (arg.Contains(tmp = "Word Ptr "))
+                arg = $"{arg.Replace(tmp, "word_ptr(")})";
+            if (arg.Contains(tmp = "Byte Ptr "))
+                arg = $"{arg.Replace(tmp, "byte_ptr(")})";
+            if (arg.Contains(tmp = "AX"))
+                arg = arg.Replace(tmp, "R.ax");
+            if (arg.Contains(tmp = "BX"))
+                arg = arg.Replace(tmp, "R.bx");
+            if (arg.Contains(tmp = "CX"))
+                arg = arg.Replace(tmp, "R.cx");
+            if (arg.Contains(tmp = "DX"))
+                arg = arg.Replace(tmp, "R.dx");
+            if (arg.Contains(tmp = "AL"))
+                arg = arg.Replace(tmp, "R.al");
+            if (arg.Contains(tmp = "BL"))
+                arg = arg.Replace(tmp, "R.bl");
+            if (arg.Contains(tmp = "CL"))
+                arg = arg.Replace(tmp, "R.cl");
+            if (arg.Contains(tmp = "DL"))
+                arg = arg.Replace(tmp, "R.dl");
+            if (arg.Contains(tmp = "AH"))
+                arg = arg.Replace(tmp, "R.ah");
+            if (arg.Contains(tmp = "BH"))
+                arg = arg.Replace(tmp, "R.bh");
+            if (arg.Contains(tmp = "CH"))
+                arg = arg.Replace(tmp, "R.ch");
+            if (arg.Contains(tmp = "DH"))
+                arg = arg.Replace(tmp, "R.dh");
+            if (arg.Contains(tmp = "CS"))
+                arg = arg.Replace(tmp, "R.cs");
+            if (arg.Contains(tmp = "DS"))
+                arg = arg.Replace(tmp, "R.ds");
+            if (arg.Contains(tmp = "ES"))
+                arg = arg.Replace(tmp, "R.es");
+            if (arg.Contains(tmp = "SS"))
+                arg = arg.Replace(tmp, "R.ss");
+            if (arg.Contains(tmp = "BP"))
+                arg = arg.Replace(tmp, "R.bp");
+            if (arg.Contains(tmp = "SP"))
+                arg = arg.Replace(tmp, "R.sp");
+            if (arg.Contains(tmp = "DI"))
+                arg = arg.Replace(tmp, "R.di");
+            if (arg.Contains(tmp = "SI"))
+                arg = arg.Replace(tmp, "R.si");
+            if (arg.Length is 2 or 4 && BitTool.ParseHex(arg) is { Length: 1 or 2 })
+                arg = $"0x{arg}";
+            return arg;
         }
 
         private static async Task GenerateEnum(string outDir)

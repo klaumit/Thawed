@@ -116,7 +116,7 @@ Interrupt,INTO,Call to Interrupt,INTO,CE,11001110,1,6 (13 if OF = 1),BRKV
 Interrupt,IRET,Interrupt Return,IRET,CF,11001111,1,10,RETI
 Branch,JA,Jump If Above,JA rel8,77 ii,01110111 iiiiiiii,2,1 (4 if branch taken),BH
 Branch,JBE,Jump If Below or Equal,JBE rel8,76 ii,01110110 iiiiiiii,2,1 (4 if branch taken),BNH
-Branch,JC,Jump If Carry,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC | BL | JB
+Branch,JB,Jump If Carry,JC rel8,72 ii,01110010 iiiiiiii,2,1 (4 if branch taken),BC | BL | JC
 Branch,JCXZ,Jump If CX Register is Zero,JCXZ rel8,E3 ii,11100011 iiiiiiii,2,1 (4 if branch taken),BCWZ
 Branch,JG,Jump If Greater,JG rel8,7F ii,01111111 iiiiiiii,2,1 (4 if branch taken),BGT
 Branch,JGE,Jump If Greater or Equal,JGE rel8,7D ii,01111101 iiiiiiii,2,1 (4 if branch taken),BGE
@@ -128,13 +128,13 @@ Jump,JMP,Unconditional Jump,JMP mem16:16,FF /5,11111111 oo101mmm,2+,10,BR
 Jump,JMP,Unconditional Jump,JMP reg16,FF /4,11111111 11100mmm,2,4,BR
 Jump,JMP,Unconditional Jump,JMP rel8,EB ii,11101011 iiiiiiii,2,4,BR
 Jump,JMP,Unconditional Jump,JMP rel16,E9 ii ii,11101001 iiiiiiii iiiiiiii,3,4,BR
-Branch,JNC,Jump If Not Carry,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC | BNL | JAE
+Branch,JNB,Jump If Not Carry,JNC rel8,73 ii,01110011 iiiiiiii,2,1 (4 if branch taken),BNC | BNL | JAE | JNC
 Branch,JNO,Jump If Not Overflow,JNO rel8,71 ii,01110001 iiiiiiii,2,1 (4 if branch taken),BNV
-Branch,JNP,Jump If Not Parity,JNP rel8,7B ii,01111011 iiiiiiii,2,1 (4 if branch taken),BPO
+Branch,JPO,Jump If Not Parity,JNP rel8,7B ii,01111011 iiiiiiii,2,1 (4 if branch taken),BPO | JNP
 Branch,JNS,Jump If Not Sign,JNS rel8,79 ii,01111001 iiiiiiii,2,1 (4 if branch taken),BP
 Branch,JNZ,Jump If Not Zero,JNZ rel8,75 ii,01110101 iiiiiiii,2,1 (4 if branch taken),BNE | BNZ | JNE
 Branch,JO,Jump If Overflow,JO rel8,70 ii,01110000 iiiiiiii,2,1 (4 if branch taken),BV
-Branch,JP,Jump If Parity,JP rel8,7A ii,01111010 iiiiiiii,2,1 (4 if branch taken),BPE
+Branch,JPE,Jump If Parity,JP rel8,7A ii,01111010 iiiiiiii,2,1 (4 if branch taken),BPE | JP
 Branch,JS,Jump If Sign,JS rel8,78 ii,01111000 iiiiiiii,2,1 (4 if branch taken),BN
 Branch,JZ,Jump If Zero,JZ rel8,74 ii,01110100 iiiiiiii,2,1 (4 if branch taken),BE | BZ | JE
 Flags,LAHF,Load Status Flags Into AH Register,LAHF,9F,10011111,1,2,MOV
@@ -146,8 +146,8 @@ Other,LOCK,Assert LOCK Signal Prefix,LOCK,F0,11110000,1,1,BUSLOCK
 String,LODSB,Load String,LODSB,AC,10101100,1,3,LDMB
 String,LODSW,Load String,LODSW,AD,10101101,1,3,LDMW
 Loop,LOOP,Loop According to ECX Counter,LOOP rel8,E2 ii,11100010 iiiiiiii,2,2 (5 if branch taken),DBNZ
-Loop,LOOPE,Loop While Equal,LOOPE rel8,E1 ii,11100001 iiiiiiii,2,3 (6 if branch taken),DBNZE
-Loop,LOOPNE,Loop While Not Equal,LOOPNE rel8,E0 ii,11100000 iiiiiiii,2,3 (6 if branch taken),DBNZNE
+Loop,LOOPZ,Loop While Equal,LOOPE rel8,E1 ii,11100001 iiiiiiii,2,3 (6 if branch taken),DBNZE | LOOPE
+Loop,LOOPNZ,Loop While Not Equal,LOOPNE rel8,E0 ii,11100000 iiiiiiii,2,3 (6 if branch taken),DBNZNE | LOOPNE
 Memory,MOV,Move,"MOV AL, ptr16",A0 ii ii,10100000 iiiiiiii iiiiiiii,3,1,-
 Memory,MOV,Move,"MOV AX, ptr16",A1 ii ii,10100001 iiiiiiii iiiiiiii,3,1,-
 Memory,MOV,Move,"MOV mem8, imm8",C6 /0 ii,11000110 oo000mmm iiiiiiii,3+,1,-
