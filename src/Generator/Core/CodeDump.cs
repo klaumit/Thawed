@@ -119,7 +119,7 @@ namespace Generator.Core
         {
             await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
-            int lc = 0;
+            var lc = 0;
             foreach (var fN in node.Nodes ?? [])
             {
                 var fRg = fN.Raw?.GroupBy(x => x.Hex);
@@ -147,7 +147,7 @@ namespace Generator.Core
         {
             await w.WriteLineAsync($"0x{node.Hex} => (b1 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
-            int lc = 0;
+            var lc = 0;
             foreach (var fN in node.Nodes ?? [])
             {
                 var fRg = fN.Raw?.GroupBy(x => x.Hex);
