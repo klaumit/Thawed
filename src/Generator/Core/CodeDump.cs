@@ -105,7 +105,6 @@ namespace Generator.Core
             var tree = BuildTree(extracted);
             await WriteLevel0(w, tree);
 
-            await w.WriteLineAsync("};");
             await w.WriteLineAsync();
             await w.WriteLineAsync("return fail ? throw new DecodeException(b0) : i;");
             await w.WriteLineAsync("}");
@@ -141,7 +140,7 @@ namespace Generator.Core
             }
             if (lc == 0)
                 await w.WriteLineAsync("_ => null");
-            await w.WriteLineAsync("},");
+            await w.WriteLineAsync("};");
         }
 
         private static async Task WriteLevel1(CodeWriter w, HashNode node)
