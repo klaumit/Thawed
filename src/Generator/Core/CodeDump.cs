@@ -100,6 +100,8 @@ namespace Generator.Core
             await w.WriteLineAsync("{");
             await w.WriteLineAsync("byte b0 = 0;");
             await w.WriteLineAsync("byte b1 = 0;");
+            await w.WriteLineAsync("byte b2 = 0;");
+            await w.WriteLineAsync("byte b3 = 0;");
             await w.WriteLineAsync();
 
             var extracted = LoadCsv("Win.csv");
@@ -120,47 +122,67 @@ namespace Generator.Core
         {
             await w.WriteLineAsync("var i = (b0 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
-            var lc = 0;
-            foreach (var fN in node.Nodes ?? [])
+            foreach (var t in GenerateLevels(node, 0))
             {
-                var fRg = fN.Raw?.GroupBy(x => x.Hex);
-                var fR = fRg?.FirstOrDefault()?.FirstOrDefault();
-                var op = fR?.Op ?? "";
-                if (fR != null && op != Defect && !op.EndsWith(':'))
-                {
-                    var meth = $"I.{op.Title()}";
-                    var mArgs = string.Join(", ", ParseArgs(fR.Arg));
-                    var hex = fR.Hex!;
-                    await w.WriteLineAsync($"0x{hex} => {meth}({mArgs}),");
-                    lc++;
-                }
+                var anc = string.Join(" or ", t.Select(x => x?.h));
+                if (t.FirstOrDefault()?.m is HashNode hn)
+                    await WriteLevel1(w, hn, anc);
                 else
-                {
-                    await WriteLevel1(w, fN);
-                }
+                    await w.WriteLineAsync($"{anc} => {t.Key},");
             }
-            if (lc == 0)
-                await w.WriteLineAsync("_ => null");
             await w.WriteLineAsync("};");
         }
 
-        private static async Task WriteLevel1(CodeWriter w, HashNode node)
+        private static async Task WriteLevel1(CodeWriter w, HashNode node, string pre)
         {
-            await w.WriteLineAsync($"0x{node.Hex} => (b1 = r.ReadOne()) switch");
+            await w.WriteLineAsync($"{pre} => (b1 = r.ReadOne()) switch");
             await w.WriteLineAsync("{");
-            foreach (var t in GenerateLevels(node))
+            foreach (var t in GenerateLevels(node, 2))
             {
                 var anc = string.Join(" or ", t.Select(x => x?.h));
-                await w.WriteLineAsync($"{anc} => {t.Key},");
+                if (t.FirstOrDefault()?.m is HashNode hn)
+                    await WriteLevel2(w, hn, anc);
+                else
+                    await w.WriteLineAsync($"{anc} => {t.Key},");
             }
             await w.WriteLineAsync("},");
         }
 
-        private static IEnumerable<IGrouping<string?, (string h, string m)?>> GenerateLevels(HashNode n)
-            => GenerateLevel(n, 2)
-                .OrderBy(v => v?.m).GroupBy(v => v?.m);
+        private static async Task WriteLevel2(CodeWriter w, HashNode node, string pre)
+        {
+            await w.WriteLineAsync($"{pre} => (b2 = r.ReadOne()) switch");
+            await w.WriteLineAsync("{");
+            foreach (var t in GenerateLevels(node, 4))
+            {
+                var anc = string.Join(" or ", t.Select(x => x?.h));
+                if (t.FirstOrDefault()?.m is HashNode hn)
+                    await WriteLevel3(w, hn, anc);
+                else
+                    await w.WriteLineAsync($"{anc} => {t.Key},");
+            }
+            await w.WriteLineAsync("},");
+        }
+        
+        private static async Task WriteLevel3(CodeWriter w, HashNode node, string pre)
+        {
+            await w.WriteLineAsync($"{pre} => (b3 = r.ReadOne()) switch");
+            await w.WriteLineAsync("{");
+            foreach (var t in GenerateLevels(node, 6))
+            {
+                var anc = string.Join(" or ", t.Select(x => x?.h));
+                if (t.FirstOrDefault()?.m is HashNode hn)
+                    ; // TODO
+                else
+                    await w.WriteLineAsync($"{anc} => {t.Key},");
+            }
+            await w.WriteLineAsync("},");
+        }
+        
+        private static IEnumerable<IGrouping<string?, (string h, object m)?>> GenerateLevels(HashNode n, int o)
+            => GenerateLevel(n, o)
+                .OrderBy(v => v?.m.ToString()).GroupBy(v => v?.m.ToString());
 
-        private static IEnumerable<(string h, string m)?> GenerateLevel(HashNode node, int o)
+        private static IEnumerable<(string h, object m)?> GenerateLevel(HashNode node, int o)
         {
             foreach (var fN in node.Nodes ?? [])
             {
@@ -176,7 +198,7 @@ namespace Generator.Core
                 }
                 else
                 {
-                    yield return ($"0x{fN.Hex}", "null");
+                    yield return ($"0x{fN.Hex}", fN);
                 }
             }
         }
