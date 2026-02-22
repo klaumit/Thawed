@@ -11,655 +11,581 @@ namespace Thawed.Auto
 {
     internal static class Instruct
     {
-        internal static Instruction Aaa()
+        internal static I Aaa()
         {
-             // 1
             return new I(O.Aaa);
         }
         
-        internal static Instruction Aad()
+        internal static I Aad()
         {
-             // 1
             return new I(O.Aad);
         }
         
-        internal static Instruction Aam()
+        internal static I Aam()
         {
-             // 1
             return new I(O.Aam);
         }
         
-        internal static Instruction Aas()
+        internal static I Aas()
         {
-             // 1
             return new I(O.Aas);
         }
         
-        internal static Instruction Adc()
+        internal static I Adc()
         {
              // 14
             return new I(O.Adc);
         }
         
-        internal static Instruction Add()
+        internal static I Add()
         {
              // 14
             return new I(O.Add);
         }
         
-        internal static Instruction And()
+        internal static I And()
         {
              // 14
             return new I(O.And);
         }
         
-        internal static Instruction Bound()
+        internal static I Bound()
         {
-             // 1
             return new I(O.Bound);
         }
         
-        internal static Instruction Call()
+        internal static I Call()
         {
              // 5
             return new I(O.Call);
         }
         
-        internal static Instruction Cbw()
+        internal static I Cbw()
         {
-             // 1
             return new I(O.Cbw);
         }
         
-        internal static Instruction Clc()
+        internal static I Clc()
         {
-             // 1
             return new I(O.Clc);
         }
         
-        internal static Instruction Cld()
+        internal static I Cld()
         {
-             // 1
             return new I(O.Cld);
         }
         
-        internal static Instruction Cli()
+        internal static I Cli()
         {
-             // 1
             return new I(O.Cli);
         }
         
-        internal static Instruction Cmc()
+        internal static I Cmc()
         {
-             // 1
             return new I(O.Cmc);
         }
         
-        internal static Instruction Cmp()
+        internal static I Cmp()
         {
              // 14
             return new I(O.Cmp);
         }
         
-        internal static Instruction Cmpsb()
+        internal static I Cmpsb()
         {
-             // 1
             return new I(O.Cmpsb);
         }
         
-        internal static Instruction Cmpsw()
+        internal static I Cmpsw()
         {
-             // 1
             return new I(O.Cmpsw);
         }
         
-        internal static Instruction Cs()
+        internal static I Cs()
         {
-             // 1
             return new I(O.Cs);
         }
         
-        internal static Instruction Cwd()
+        internal static I Cwd()
         {
-             // 1
             return new I(O.Cwd);
         }
         
-        internal static Instruction Daa()
+        internal static I Daa()
         {
-             // 1
             return new I(O.Daa);
         }
         
-        internal static Instruction Das()
+        internal static I Das()
         {
-             // 1
             return new I(O.Das);
         }
         
-        internal static Instruction Dec()
+        internal static I Dec()
         {
              // 4
             return new I(O.Dec);
         }
         
-        internal static Instruction Div()
+        internal static I Div()
         {
              // 4
             return new I(O.Div);
         }
         
-        internal static Instruction Ds()
+        internal static I Ds()
         {
-             // 1
             return new I(O.Ds);
         }
         
-        internal static Instruction Enter()
+        internal static I Enter()
         {
-             // 1
             return new I(O.Enter);
         }
         
-        internal static Instruction Es()
+        internal static I Es()
         {
-             // 1
             return new I(O.Es);
         }
         
-        internal static Instruction Hlt()
+        internal static I Hlt()
         {
-             // 1
             return new I(O.Hlt);
         }
         
-        internal static Instruction Idiv()
+        internal static I Idiv()
         {
              // 4
             return new I(O.Idiv);
         }
         
-        internal static Instruction Imul()
+        internal static I Imul()
         {
              // 8
             return new I(O.Imul);
         }
         
-        internal static Instruction In()
+        internal static I In()
         {
              // 4
             return new I(O.In);
         }
         
-        internal static Instruction Inc()
+        internal static I Inc()
         {
              // 4
             return new I(O.Inc);
         }
         
-        internal static Instruction Insb()
+        internal static I Insb()
         {
-             // 1
             return new I(O.Insb);
         }
         
-        internal static Instruction Insw()
+        internal static I Insw()
         {
-             // 1
             return new I(O.Insw);
         }
         
-        internal static Instruction Int()
+        internal static I Int()
         {
              // 2
             return new I(O.Int);
         }
         
-        internal static Instruction Into()
+        internal static I Into()
         {
-             // 1
             return new I(O.Into);
         }
         
-        internal static Instruction Iret()
+        internal static I Iret()
         {
-             // 1
             return new I(O.Iret);
         }
         
-        internal static Instruction Ja()
+        internal static I Ja()
         {
-             // 1
             return new I(O.Ja);
         }
         
-        internal static Instruction Jbe()
+        internal static I Jbe()
         {
-             // 1
             return new I(O.Jbe);
         }
         
-        internal static Instruction Jc()
+        internal static I Jc()
         {
-             // 1
             return new I(O.Jc);
         }
         
-        internal static Instruction Jcxz()
+        internal static I Jcxz()
         {
-             // 1
             return new I(O.Jcxz);
         }
         
-        internal static Instruction Jg()
+        internal static I Jg()
         {
-             // 1
             return new I(O.Jg);
         }
         
-        internal static Instruction Jge()
+        internal static I Jge()
         {
-             // 1
             return new I(O.Jge);
         }
         
-        internal static Instruction Jl()
+        internal static I Jl()
         {
-             // 1
             return new I(O.Jl);
         }
         
-        internal static Instruction Jle()
+        internal static I Jle()
         {
-             // 1
             return new I(O.Jle);
         }
         
-        internal static Instruction Jmp()
+        internal static I Jmp()
         {
              // 6
             return new I(O.Jmp);
         }
         
-        internal static Instruction Jnc()
+        internal static I Jnc()
         {
-             // 1
             return new I(O.Jnc);
         }
         
-        internal static Instruction Jno()
+        internal static I Jno()
         {
-             // 1
             return new I(O.Jno);
         }
         
-        internal static Instruction Jnp()
+        internal static I Jnp()
         {
-             // 1
             return new I(O.Jnp);
         }
         
-        internal static Instruction Jns()
+        internal static I Jns()
         {
-             // 1
             return new I(O.Jns);
         }
         
-        internal static Instruction Jnz()
+        internal static I Jnz()
         {
-             // 1
             return new I(O.Jnz);
         }
         
-        internal static Instruction Jo()
+        internal static I Jo()
         {
-             // 1
             return new I(O.Jo);
         }
         
-        internal static Instruction Jp()
+        internal static I Jp()
         {
-             // 1
             return new I(O.Jp);
         }
         
-        internal static Instruction Js()
+        internal static I Js()
         {
-             // 1
             return new I(O.Js);
         }
         
-        internal static Instruction Jz()
+        internal static I Jz()
         {
-             // 1
             return new I(O.Jz);
         }
         
-        internal static Instruction Lahf()
+        internal static I Lahf()
         {
-             // 1
             return new I(O.Lahf);
         }
         
-        internal static Instruction Lds()
+        internal static I Lds()
         {
-             // 1
             return new I(O.Lds);
         }
         
-        internal static Instruction Lea()
+        internal static I Lea()
         {
-             // 1
             return new I(O.Lea);
         }
         
-        internal static Instruction Leave()
+        internal static I Leave()
         {
-             // 1
             return new I(O.Leave);
         }
         
-        internal static Instruction Les()
+        internal static I Les()
         {
-             // 1
             return new I(O.Les);
         }
         
-        internal static Instruction Lock()
+        internal static I Lock()
         {
-             // 1
             return new I(O.Lock);
         }
         
-        internal static Instruction Lodsb()
+        internal static I Lodsb()
         {
-             // 1
             return new I(O.Lodsb);
         }
         
-        internal static Instruction Lodsw()
+        internal static I Lodsw()
         {
-             // 1
             return new I(O.Lodsw);
         }
         
-        internal static Instruction Loop()
+        internal static I Loop()
         {
-             // 1
             return new I(O.Loop);
         }
         
-        internal static Instruction Loope()
+        internal static I Loope()
         {
-             // 1
             return new I(O.Loope);
         }
         
-        internal static Instruction Loopne()
+        internal static I Loopne()
         {
-             // 1
             return new I(O.Loopne);
         }
         
-        internal static Instruction Mov()
+        internal static I Mov()
         {
              // 20
             return new I(O.Mov);
         }
         
-        internal static Instruction Movsb()
+        internal static I Movsb()
         {
-             // 1
             return new I(O.Movsb);
         }
         
-        internal static Instruction Movsw()
+        internal static I Movsw()
         {
-             // 1
             return new I(O.Movsw);
         }
         
-        internal static Instruction Mul()
+        internal static I Mul()
         {
              // 4
             return new I(O.Mul);
         }
         
-        internal static Instruction Neg()
+        internal static I Neg()
         {
              // 4
             return new I(O.Neg);
         }
         
-        internal static Instruction Nop()
+        internal static I Nop()
         {
-             // 1
             return new I(O.Nop);
         }
         
-        internal static Instruction Not()
+        internal static I Not()
         {
              // 4
             return new I(O.Not);
         }
         
-        internal static Instruction Or()
+        internal static I Or()
         {
              // 14
             return new I(O.Or);
         }
         
-        internal static Instruction Out()
+        internal static I Out()
         {
              // 4
             return new I(O.Out);
         }
         
-        internal static Instruction Outsb()
+        internal static I Outsb()
         {
-             // 1
             return new I(O.Outsb);
         }
         
-        internal static Instruction Outsw()
+        internal static I Outsw()
         {
-             // 1
             return new I(O.Outsw);
         }
         
-        internal static Instruction Pop()
+        internal static I Pop()
         {
              // 4
             return new I(O.Pop);
         }
         
-        internal static Instruction Popa()
+        internal static I Popa()
         {
-             // 1
             return new I(O.Popa);
         }
         
-        internal static Instruction Popf()
+        internal static I Popf()
         {
-             // 1
             return new I(O.Popf);
         }
         
-        internal static Instruction Push()
+        internal static I Push()
         {
              // 6
             return new I(O.Push);
         }
         
-        internal static Instruction Pusha()
+        internal static I Pusha()
         {
-             // 1
             return new I(O.Pusha);
         }
         
-        internal static Instruction Pushf()
+        internal static I Pushf()
         {
-             // 1
             return new I(O.Pushf);
         }
         
-        internal static Instruction Rcl()
+        internal static I Rcl()
         {
              // 12
             return new I(O.Rcl);
         }
         
-        internal static Instruction Rcr()
+        internal static I Rcr()
         {
              // 12
             return new I(O.Rcr);
         }
         
-        internal static Instruction Rep()
+        internal static I Rep()
         {
-             // 1
             return new I(O.Rep);
         }
         
-        internal static Instruction Repne()
+        internal static I Repne()
         {
-             // 1
             return new I(O.Repne);
         }
         
-        internal static Instruction Ret()
+        internal static I Ret()
         {
              // 2
             return new I(O.Ret);
         }
         
-        internal static Instruction Retf()
+        internal static I Retf()
         {
              // 2
             return new I(O.Retf);
         }
         
-        internal static Instruction Rol()
+        internal static I Rol()
         {
              // 12
             return new I(O.Rol);
         }
         
-        internal static Instruction Ror()
+        internal static I Ror()
         {
              // 12
             return new I(O.Ror);
         }
         
-        internal static Instruction Sahf()
+        internal static I Sahf()
         {
-             // 1
             return new I(O.Sahf);
         }
         
-        internal static Instruction Sar()
+        internal static I Sar()
         {
              // 12
             return new I(O.Sar);
         }
         
-        internal static Instruction Sbb()
+        internal static I Sbb()
         {
              // 14
             return new I(O.Sbb);
         }
         
-        internal static Instruction Scasb()
+        internal static I Scasb()
         {
-             // 1
             return new I(O.Scasb);
         }
         
-        internal static Instruction Scasw()
+        internal static I Scasw()
         {
-             // 1
             return new I(O.Scasw);
         }
         
-        internal static Instruction Shl()
+        internal static I Shl()
         {
              // 12
             return new I(O.Shl);
         }
         
-        internal static Instruction Shr()
+        internal static I Shr()
         {
              // 12
             return new I(O.Shr);
         }
         
-        internal static Instruction Ss()
+        internal static I Ss()
         {
-             // 1
             return new I(O.Ss);
         }
         
-        internal static Instruction Stc()
+        internal static I Stc()
         {
-             // 1
             return new I(O.Stc);
         }
         
-        internal static Instruction Std()
+        internal static I Std()
         {
-             // 1
             return new I(O.Std);
         }
         
-        internal static Instruction Sti()
+        internal static I Sti()
         {
-             // 1
             return new I(O.Sti);
         }
         
-        internal static Instruction Stosb()
+        internal static I Stosb()
         {
-             // 1
             return new I(O.Stosb);
         }
         
-        internal static Instruction Stosw()
+        internal static I Stosw()
         {
-             // 1
             return new I(O.Stosw);
         }
         
-        internal static Instruction Sub()
+        internal static I Sub()
         {
              // 14
             return new I(O.Sub);
         }
         
-        internal static Instruction Test()
+        internal static I Test()
         {
              // 10
             return new I(O.Test);
         }
         
-        internal static Instruction Wait()
+        internal static I Wait()
         {
-             // 1
             return new I(O.Wait);
         }
         
-        internal static Instruction Xchg()
+        internal static I Xchg()
         {
              // 5
             return new I(O.Xchg);
         }
         
-        internal static Instruction Xlat()
+        internal static I Xlat()
         {
-             // 1
             return new I(O.Xlat);
         }
         
-        internal static Instruction Xor()
+        internal static I Xor()
         {
              // 14
             return new I(O.Xor);

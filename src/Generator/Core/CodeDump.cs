@@ -59,9 +59,11 @@ namespace Generator.Core
                 else
                     await w.WriteLineAsync();
                 var lbl = pair.Key.Title();
-                await w.WriteLineAsync($"internal static Instruction {lbl}()");
+                var cnt = pair.Value.Length;
+                await w.WriteLineAsync($"internal static I {lbl}()");
                 await w.WriteLineAsync("{");
-                await w.WriteLineAsync($" // {pair.Value.Length}");
+                if (cnt != 1)
+                    await w.WriteLineAsync($" // {pair.Value.Length}");
                 await w.WriteLineAsync($"return new I(O.{lbl});");
                 await w.WriteLineAsync("}");
             }
