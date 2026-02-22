@@ -13,5 +13,20 @@ namespace Thawed
 		{
 			return string.Join("", bytes.Select(ToHexString));
 		}
+
+		public static string ToSymbol(this Register val)
+		{
+			var txt = val.ToString().ToUpperInvariant();
+			switch (val)
+			{
+				case Register.cs:
+				case Register.ds:
+				case Register.es:
+				case Register.ss:
+					txt += ":";
+					break;
+			}
+			return txt;
+		}
 	}
 }

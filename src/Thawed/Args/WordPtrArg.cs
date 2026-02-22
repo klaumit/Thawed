@@ -1,17 +1,17 @@
 namespace Thawed.Args
 {
-    public sealed class RegArg : Arg
+    public sealed class WordPtrArg : Arg
     {
-        public Register Val { get; }
+        public Arg Val { get; }
 
-        public RegArg(Register val)
+        public WordPtrArg(Arg val)
         {
             Val = val;
         }
 
         public override string ToString()
         {
-            var txt = Val.ToSymbol();
+            var txt = $"Word Ptr {Val}";
             return txt;
         }
     }

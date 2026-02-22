@@ -1,17 +1,17 @@
 namespace Thawed.Args
 {
-    public sealed class RegArg : Arg
+    public sealed class BytePtrArg : Arg
     {
-        public Register Val { get; }
+        public Arg Val { get; }
 
-        public RegArg(Register val)
+        public BytePtrArg(Arg val)
         {
             Val = val;
         }
 
         public override string ToString()
         {
-            var txt = Val.ToSymbol();
+            var txt = $"Byte Ptr {Val}";
             return txt;
         }
     }

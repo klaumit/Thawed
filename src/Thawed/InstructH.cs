@@ -11,14 +11,14 @@ namespace Thawed
 
         internal static Arg d(Arg a) => a;
 
-        internal static Arg br(Arg a) => a;
+        internal static BracketArg br(Arg a) => new(a);
 
-        internal static Arg br_plus(Arg a, Arg b) => a;
+        internal static BracketPlusArg br_plus(Arg a, Arg b) => new(a, b);
 
-        internal static Arg byte_ptr(Arg a) => a;
+        internal static BytePtrArg byte_ptr(Arg a) => new(a);
 
-        internal static Arg word_ptr(Arg a) => a;
+        internal static WordPtrArg word_ptr(Arg a) => new(a);
 
-        internal static Arg dword_ptr(Arg a) => a;
+        internal static DwordPtrArg dword_ptr(Arg a) => new(a);
     }
 }
