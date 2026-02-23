@@ -1,18 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Generator.Tools;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Generator.Extractors;
-using Generator.API;
-using Iced.Intel;
-using System;
-using System.Linq;
 using System.Threading.Channels;
-using System.Threading.Tasks;
-using Generator.Extractors;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.JsonTool;
 using D = System.Collections.Concurrent.ConcurrentDictionary<string, string>;
