@@ -19,6 +19,10 @@ namespace Generator
 				{
 					await DocDump.Run(o);
 				}
+				else if (o.TryRandom)
+				{
+					await RndDump.Run(o);
+				}
 				else if (o.TryDecode)
 				{
 					await ExecDump.Run(o);

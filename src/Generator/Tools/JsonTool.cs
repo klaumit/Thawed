@@ -24,9 +24,18 @@ namespace Generator.Tools
             return JsonConvert.SerializeObject(obj, cfg);
         }
 
-        internal static T FromFile<T>(string file, bool format = false)
+        public static void ToFile<T>(string file, T obj, bool format = false)
         {
+            var cfg = GetConfig(format);
+            var txt = JsonConvert.SerializeObject(obj, cfg);
+            File.WriteAllText(file, txt, Encoding.UTF8);
+        }
+
+        public static T? FromFile<T>(string file, bool format = false)
+        {
+            if (!File.Exists(file)) return default;
             var txt = File.ReadAllText(file, Encoding.UTF8);
+            if (string.IsNullOrWhiteSpace(txt)) return default;
             var cfg = GetConfig(format);
             return JsonConvert.DeserializeObject<T>(txt, cfg)!;
         }

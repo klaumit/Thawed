@@ -8,6 +8,10 @@
       "commandName": "Project",
       "commandLineArgs": "-d -o ./Extractors"
     },
+    "cf": {
+      "commandName": "Project",
+      "commandLineArgs": "-r -o ./tmp2"
+    },
     "cg": {
       "commandName": "Project",
       "commandLineArgs": "-g -i tmp -o ../Thawed/Auto"
