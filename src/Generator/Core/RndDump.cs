@@ -78,6 +78,11 @@ namespace Generator.Core
 
             async Task Produce()
             {
+                foreach (var item in ExecDump.GetAllCandidates())
+                {
+                    var array = GetRandomArray(item);
+                    await writer.WriteAsync(array);
+                }
                 for (var i = 0; i < 200; i++)
                 {
                     var array = GetRandomArray();
