@@ -1,0 +1,523 @@
+"Op","Mnemonic","Opcode","Size","Latency","C","P","A","Z","S","T","I","D","O"
+"AAA","aaa AX ",37,1,2,"M",,"M",,,,,,
+"AAD","aad AX,immediate8 "," d5 Ib ",2,5,,"M",,"M","M",,,,
+"AAM","aam immediate8 (ex: 0x1) "," d4 Ib ",2,18,,"M",,"M","M",,,,
+"AAS","aas AX "," 3f ",1,2,"M",,"M",,,,,,
+"ADC","adc register8,register8 "," 10 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADC","adc memory8,register8 "," 10 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"ADC","adc register16,register16 "," 11 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADC","adc memory16,register16 "," 11 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"ADC","adc register8,register8 "," 12 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADC","adc register8,memory8 ","12 /r"," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"ADC","adc register16,register16  ","13 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADC","adc register16,memory16  ","13 /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"ADC","adc AL,immediate8 "," 14 Ib ",2,2,"M","M","M","M","M",,,,"M"
+"ADC","adc AX,immediate16 "," 15 Iw ",3,2,"M","M","M","M","M",,,,"M"
+"ADC","adc register8,immediate8 "," 80 /2 Ib "," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"ADC","adc memory8,immediate8 "," 80 /2 Ib "," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"ADC","adc register16,immediate16 "," 81 /2 Iw "," 4-6 ",3,"M","M","M","M","M",,,,"M"
+"ADC","adc memory16,immediate16 ","81 /2 Iw "," 4-6 ",9,"M","M","M","M","M",,,,"M"
+"ADC","adc register8,immediate8 ","82 /2 Ib"," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"ADC","adc memory8,immediate8 ","82 /2 Ib"," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"ADC","adc register16,immediate8 ","83 /2 Ib "," 3-5 ",4,"M","M","M","M","M",,,,"M"
+"ADC","adc memory16,immediate8 ","83 /2 Ib "," 3-5 ",11,"M","M","M","M","M",,,,"M"
+"ADD","add register8,register8 "," 00 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADD","add memory8,register8 "," 00 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"ADD","add register16,register16 "," 01 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADD","add memory16,register16 "," 01 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"ADD","add register8,register8 "," 02 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADD","add register8,memory8 ","02 /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"ADD","add register16,register16 ","03 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"ADD","add register16,memory16 ","03 /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"ADD","add AL,immediate8 "," 04 Ib ",2,2,"M","M","M","M","M",,,,"M"
+"ADD","add AX,immediate16 "," 05 Iw ",3,2,"M","M","M","M","M",,,,"M"
+"ADD","add register8,immediate8 "," 80 /0 Ib "," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"ADD","add memory8,immediate8 "," 80 /0 Ib "," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"ADD","add register16,immediate16 "," 81 /0 Iw "," 4-6 ",3,"M","M","M","M","M",,,,"M"
+"ADD","add memory16,immediate16 ","81 /0 Iw "," 4-6 ",9,"M","M","M","M","M",,,,"M"
+"ADD","add register8,immediate8 ","82 /0 Ib"," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"ADD","add memory8,immediate8 ","82 /0 Ib "," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"ADD","add register16,immediate8 ","83 /0 Ib"," 3-5 ",4,"M","M","M","M","M",,,,"M"
+"ADD","add memory16,immediate8 "," 83 /0 Ib "," 3-5 ",11,"M","M","M","M","M",,,,"M"
+"AND","and register8,register8 "," 20 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"AND","and memory8,register8 "," 20 /r "," 2-4 ",8,"M","M",,"M","M",,,,"M"
+"AND","and register16,register16 "," 21 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"AND","and memory16,register16 "," 21 /r "," 2-4 ",8,"M","M",,"M","M",,,,"M"
+"AND","and register8,register8 "," 22 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"AND","and register8,memory8 ","22 /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"AND","and register16,register16 ","23 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"AND","and register16,memory16 ","23 /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"AND","and AL,immediate8 "," 24 Ib ",2,2,"M","M",,"M","M",,,,"M"
+"AND","and AX,immediate16 "," 25 Iw ",3,2,"M","M",,"M","M",,,,"M"
+"AND","and register8,immediate8 "," 80 /4 Ib "," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"AND","and memory8,immediate8 "," 80 /4 Ib "," 3-5 ",9,"M","M",,"M","M",,,,"M"
+"AND","and register16,immediate16 "," 81 /4 Iw "," 4-6 ",3,"M","M",,"M","M",,,,"M"
+"AND","and memory16,immediate16  ","81 /4 Iw "," 4-6 ",9,"M","M",,"M","M",,,,"M"
+"AND","and register8,immediate8 ","82 /4 Ib "," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"AND","and memory8,immediate8 ","82 /4 Ib "," 3-5 ",9,"M","M",,"M","M",,,,"M"
+"AND","and register16,immediate8 ","83 /4 Ib"," 3-5 ",4,"M","M",,"M","M",,,,"M"
+"AND","and memory16,immediate8 "," 83 /4 Ib "," 3-5 ",11,"M","M",,"M","M",,,,"M"
+"BOUND","bound memory(seg:offset) ",62,2,41,,,,,,,,,
+"CALL","call immediate16 "," e8 Iw ",3,6,,,,,,,,,
+"CALL","call displacement(seg:offset) "," 9a ",5,12,,,,,,,,,
+"CALL","call register16 "," ff /2 "," 2-4 ",8,,,,,,,,,
+"CALL","call memory16 "," ff /2 "," 2-4 ",12,,,,,,,,,
+"CALL","call memory(seg:offset) "," ff /3 ",2,22,,,,,,,,,
+"CBW","cbw AL ",98,1,2,,,,,,,,,
+"CLC","clc "," f8 ",1,1,0,,,,,,,,
+"CLD","cld "," fc ",1,1,,,,,,,,0,
+"CLI","cli "," fa ",1,1,,,,,,,0,,
+"CMC","cmc "," f5 ",1,1,"M",,,,,,,,
+"CMP","cmp register8,register8 "," 38 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"CMP","cmp memory8,register8 "," 38 /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"CMP","cmp register16,register16 "," 39 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"CMP","cmp memory16,register16 "," 39 /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"CMP","cmp register8,register8 "," 3a /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"CMP","cmp  register8,memory8 "," 3a /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"CMP","cmp  register16,register16 "," 3b /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"CMP","cmp  register16,memory16 "," 3b /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"CMP","cmp AL,immediate8 "," 3c Ib ",2,2,"M","M","M","M","M",,,,"M"
+"CMP","cmp AX,immediate16 "," 3d Iw ",3,2,"M","M","M","M","M",,,,"M"
+"CMP","cmp register8,immediate8 "," 80 /7 Ib "," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"CMP","cmp memory8,immediate8 "," 80 /7 Ib "," 3-5 ",6,"M","M","M","M","M",,,,"M"
+"CMP","cmp register16,immediate16 "," 81 /7 Iw "," 4-6 ",3,"M","M","M","M","M",,,,"M"
+"CMP","cmp memory16,immediate16 ","81 /7 Iw"," 4-6 ",6,"M","M","M","M","M",,,,"M"
+"CMP","cmp register8,immediate8 ","82 /7 Ib"," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"CMP","cmp memory8,immediate8 ","82 /7 Ib"," 3-5 ",6,"M","M","M","M","M",,,,"M"
+"CMP","cmp register16,immediate8 ","83 /7 Ib"," 3-5 ",4,"M","M","M","M","M",,,,"M"
+"CMP","cmp memory16,immediate8 "," 83 /7 Ib "," 3-5 ",8,"M","M","M","M","M",,,,"M"
+"CMPS","cmps "," a6 ",1," 18 + (n-1)*14","M","M","M","M","M",,,,"M"
+"CMPS","cmps "," a7 ",1," 17 + (n-1)*13","M","M","M","M","M",,,,"M"
+"CWD","cwd AX ",99,1,2,,,,,,,,,
+"DAA","daa AL ",27,1,2,"M","M","M","M","M",,,,
+"DAS","das AX "," 2f ",1,2,"M","M","M","M","M",,,,
+"DEC","dec register8 "," fe /1 "," 2-4 ",3,,"M","M","M","M",,,,"M"
+"DEC","dec memory8 "," fe /1 "," 2-4 ",9,,"M","M","M","M",,,,"M"
+"DEC","dec register16 "," ff /1 "," 2-4 ",3,,"M","M","M","M",,,,"M"
+"DEC","dec memory16 "," ff /1 "," 2-4 ",13,,"M","M","M","M",,,,"M"
+"DEC","dec AX ",48,1,2,,"M","M","M","M",,,,"M"
+"DEC","dec CX ",49,1,2,,"M","M","M","M",,,,"M"
+"DEC","dec DX "," 4a ",1,2,,"M","M","M","M",,,,"M"
+"DEC","dec BX "," 4b ",1,2,,"M","M","M","M",,,,"M"
+"DEC","dec SP "," 4c ",1,2,,"M","M","M","M",,,,"M"
+"DEC","dec BP "," 4d ",1,2,,"M","M","M","M",,,,"M"
+"DEC","dec SI "," 4e ",1,2,,"M","M","M","M",,,,"M"
+"DEC","dec DI "," 4f ",1,2,,"M","M","M","M",,,,"M"
+"DIV","div register8 (ex: 0xa) "," f6 /6 "," 2-4 ",18,,,,,,,,,
+"DIV","div memory8 (ex: 0xa) "," f6 /6 "," 2-4 ",20,,,,,,,,,
+"DIV","div register16 (ex: 0xa) "," f7 /6 "," 2-4 ",25,,,,,,,,,
+"DIV","div memory16 (ex: 0xa) "," f7 /6 "," 2-4 ",27,,,,,,,,,
+"ENTER","enter immediate16,immediate8 (ex: 0x0 0x0)"," c8 Iw, Ib ",4,9,,,,,,,,,
+"ENTER","enter immediate16,immediate8 (ex: 0x20 0x0)"," c8 Iw, Ib ",4,9,,,,,,,,,
+"ENTER","enter immediate16,immediate8 (ex: 0x0 0x1)"," c8 Iw, Ib ",4,20,,,,,,,,,
+"ENTER","enter immediate16,immediate8 (ex: 0x0 0x2)"," c8 Iw, Ib ",4,30,,,,,,,,,
+"ESC","esc register8 "," d8 /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory8 "," d8 /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register16 "," d9 /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory16 "," d9 /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register8"," da /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory8"," da /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register16"," db /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory16 "," db /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register8 "," dc /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory8 "," dc /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register16 "," dd /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory16 "," dd /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register8 "," de /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory8"," de /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc register16"," df /r "," 2-4 ",2,,,,,,,,,
+"ESC","esc memory16"," df /r "," 2-4 ",2,,,,,,,,,
+"HLT","hlt "," f4 ",1,"-",,,,,,,,,
+"IDIV","idiv register8 (ex: 0xa) "," f6 /7 "," 2-4 ",19,,,,,,,,,
+"IDIV","idiv memory8 (ex: 0xa) "," f6 /7 "," 2-4 ",21,,,,,,,,,
+"IDIV","idiv register16 (ex: 0xa) "," f7 /7 "," 2-4 ",26,,,,,,,,,
+"IDIV","idiv memory16 (ex: 0xa) "," f7 /7 "," 2-4 ",28,,,,,,,,,
+"IMUL","imul register8 "," f6 /5 "," 2-4 ",6,"M",,,"M",,,,,"M"
+"IMUL","imul memory8 "," f6 /5 "," 2-4 ",8,"M",,,"M",,,,,"M"
+"IMUL","imul register16 "," f7 /5 "," 2-4 ",6,"M",,,"M",,,,,"M"
+"IMUL","imul memory16 "," f7 /5 "," 2-4 ",8,"M",,,"M",,,,,"M"
+"IMUL","imul register16,immediate16 "," 69 /r Iw ","4-6 ",2,"M",,,"M",,,,,"M"
+"IMUL","imul memory16,immediate16 ","69 /r Iw"," 4-6 ",5,"M",,,"M",,,,,"M"
+"IMUL","imul register16,immediate8 "," 6b /r Ib"," 3-5 ",2,"M",,,"M",,,,,"M"
+"IMUL","imul memory16,immediate8 "," 6b /r Ib"," 3-5 ",5,"M",,,"M",,,,,"M"
+"INB","inb immediate8 "," e4 Ib ",2,6,,,,,,,,,
+"INB","inb DX "," ec ",1,6,,,,,,,,,
+"INC","inc register8 "," fe /0 "," 2-4 ",3,,"M","M","M","M",,,,"M"
+"INC","inc memory8 "," fe /0 "," 2-4 ",9,,"M","M","M","M",,,,"M"
+"INC","inc register16 "," ff /0 "," 2-4 ",3,,"M","M","M","M",,,,"M"
+"INC","inc memory16 "," ff /0 "," 2-4 ",13,,"M","M","M","M",,,,"M"
+"INC","inc AX  ",40,1,2,,"M","M","M","M",,,,"M"
+"INC","inc CX",41,1,2,,"M","M","M","M",,,,"M"
+"INC","inc DX",42,1,2,,"M","M","M","M",,,,"M"
+"INC","inc BX",43,1,2,,"M","M","M","M",,,,"M"
+"INC","inc SP ",44,1,2,,"M","M","M","M",,,,"M"
+"INC","inc BP ",45,1,2,,"M","M","M","M",,,,"M"
+"INC","inc SI ",46,1,2,,"M","M","M","M",,,,"M"
+"INC","inc DI ",47,1,2,,"M","M","M","M",,,,"M"
+"INS","ins "," 6c ",1," 19 + (n-1)*14",,,,,,,,,
+"INS","ins "," 6d ",1," 19 + (n-1)*14",,,,,,,,,
+"INT","int immediate8 "," cd Ib ",2,31,,,,,,,,,
+"INT3","int3 "," cc ",1,29,,,,,,,,,
+"INTO","into "," ce ",1,3,,,,,,,,,
+"INW","inw immediate8 "," e5 Ib ",2,6,,,,,,,,,
+"INW","inw DX "," ed ",1,6,,,,,,,,,
+"IRET","iret "," cf ",1,15,"M","M","M","M","M","M","M","M","M"
+"JB","jb immediate8 "," 72 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JBE","jbe immediate8 "," 76 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JCXZ","jcxz immediate8 "," e3 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JE","je immediate8 "," 74 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JL","jl immediate8 "," 7c Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JLE","jle immediate8 "," 7e Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JMP","jmp immediate16 "," e9 Iw ",3,1,,,,,,,,,
+"JMP","jmp immediate16,immediate16 "," ea Iw, Iw ",5,2,,,,,,,,,
+"JMP","jmp immediate8 "," eb Ib ",2,1,,,,,,,,,
+"JMP","jmp register16 "," ff /4 "," 2-4 ",3,,,,,,,,,
+"JMP","jmp memory16"," ff /4 "," 2-4 ",6,,,,,,,,,
+"JMP","jmp memory(seg:offset) "," ff /5 ",2,11,,,,,,,,,
+"JNB","jnb immediate8 "," 73 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNBE","jnbe immediate8 "," 77 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNE","jne immediate8 "," 75 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNL","jnl immediate8 "," 7d Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNLE","jnle immediate8 "," 7f Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNO","jno immediate8 "," 71 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNP","jnp immediate8 "," 7b Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JNS","jns immediate8 "," 79 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JO","jo immediate8 "," 70 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JP","jp immediate8 "," 7a Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"JS","js immediate8 "," 78 Ib ",2," 3 (taken) / 3 (not)",,,,,,,,,
+"LAHF","lahf AH "," 9f ",1,1,,,,,,,,,
+"LDS","lds memory16,memory(seg:offset) "," c5 /r "," 2-4 ",10,,,,,,,,,
+"LEA","lea memory16,memory16 "," 8d /r "," 2-4 ",2,,,,,,,,,
+"LEAVE","leave "," c9 ",1,7,,,,,,,,,
+"LES","les memory16,memory(seg:offset) "," c4 /r "," 2-4 ",10,,,,,,,,,
+"LODS","lods   ","ac",1," 13 + (n-1)*8",,,,,,,,,
+"LODS","lods   ","ad",1," 13 + (n-1)*8",,,,,,,,,
+"LOOP","loop immediate8 "," e2 Ib ",2," 4 (taken) / 4 (not)",,,,,,,,,
+"LOOPE","loope immediate8 "," e1 Ib ",2," 4 (taken) / 4 (not)",,,,,,,,,
+"LOOPNE","loopne immediate8 "," e0 Ib ",2," 4 (taken) / 3 (not)",,,,,,,,,
+"MOV","mov register8,register8 "," 88 /r "," 2-4 ",2,,,,,,,,,
+"MOV","mov memory8,register8 "," 88 /r "," 2-4 ",5,,,,,,,,,
+"MOV","mov register16,register16 "," 89 /r "," 2-4 ",2,,,,,,,,,
+"MOV","mov memory16,register16 "," 89 /r "," 2-4 ",5,,,,,,,,,
+"MOV","mov register8,register8 "," 8a /r "," 2-4 ",2,,,,,,,,,
+"MOV","mov register8,memory8 "," 8a /r "," 2-4 ",5,,,,,,,,,
+"MOV","mov register16,register16 "," 8b /r "," 2-4 ",2,,,,,,,,,
+"MOV","mov register16,memory16 "," 8b /r "," 2-4 ",5,,,,,,,,,
+"MOV","mov register8,immediate8 "," c6 /0 Ib "," 3-5 ",3,,,,,,,,,
+"MOV","mov memory8,immediate8 "," c6 /0 Ib "," 3-5 ",7,,,,,,,,,
+"MOV","mov register16,immediate16 "," c7 /0 Iw "," 4-6 ",3,,,,,,,,,
+"MOV","mov memory16,immediate16 "," c7 /0 Iw "," 4-6 ",7,,,,,,,,,
+"MOV","mov AL,immediate8  "," b0 Ib","2",1,,,,,,,,,
+"MOV","mov CL,immediate8 "," b1 Ib",2,1,,,,,,,,,
+"MOV","mov DL,immediate8 "," b2 Ib",2,1,,,,,,,,,
+"MOV","mov BL,immediate8 "," b3 Ib",2,1,,,,,,,,,
+"MOV","mov AH,immediate8 "," b4 Ib ",2,1,,,,,,,,,
+"MOV","mov CH,immediate8 "," b5 Ib ",2,1,,,,,,,,,
+"MOV","mov DH,immediate8 "," b6 Ib ",2,1,,,,,,,,,
+"MOV","mov BH,immediate8 "," b7 Ib ",2,1,,,,,,,,,
+"MOV","mov AX,immediate16 "," b8 Iw ",3,1,,,,,,,,,
+"MOV","mov CX,immediate16 "," b9 Iw ",3,1,,,,,,,,,
+"MOV","mov DX,immediate16 "," ba Iw",3,1,,,,,,,,,
+"MOV","mov BX,immediate16 "," bb Iw",3,1,,,,,,,,,
+"MOV","mov SP,immediate16 "," bc Iw",3,1,,,,,,,,,
+"MOV","mov BP,immediate16 "," bd Iw ",3,1,,,,,,,,,
+"MOV","mov SI,immediate16 "," be Iw ",3,1,,,,,,,,,
+"MOV","mov DI,immediate16 "," bf Iw ",3,1,,,,,,,,,
+"MOV","mov ES,register16 "," 8e /0 "," 2-4 ",2,,,,,,,,,
+"MOV","mov ES,memory16  "," 8e /0 "," 2-4","5 ",,,,,,,,,
+"MOV","mov CS,register16 "," 8e /1 "," 2-4 ",2,,,,,,,,,
+"MOV","mov CS,memory16 "," 8e /1 "," 2-4 ",5,,,,,,,,,
+"MOV","mov SS,register16 "," 8e /2 "," 2-4 ",2,,,,,,,,,
+"MOV","mov SS,memory16 "," 8e /2 "," 2-4 ",5,,,,,,,,,
+"MOV","mov DS,register16 "," 8e /3 "," 2-4 ",2,,,,,,,,,
+"MOV","mov DS,memory16 "," 8e /3 "," 2-4 ",5,,,,,,,,,
+"MOV","mov ES,register16 "," 8e /4 "," 2-4 ",2,,,,,,,,,
+"MOV","mov ES,memory16 "," 8e /4 "," 2-4 ",5,,,,,,,,,
+"MOV","mov CS,register16  ","8e /5"," 2-4 ",2,,,,,,,,,
+"MOV","mov CS,memory16 "," 8e /5 "," 2-4 ",5,,,,,,,,,
+"MOV","mov SS,register16 "," 8e /6 "," 2-4 ",2,,,,,,,,,
+"MOV","mov SS,memory16 "," 8e /6 "," 2-4 ",5,,,,,,,,,
+"MOV","mov DS,register16 "," 8e /7 "," 2-4 ",2,,,,,,,,,
+"MOV","mov DS,memory16 "," 8e /7 "," 2-4 ",5,,,,,,,,,
+"MOV","mov register16,ES "," 8c /0 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,ES "," 8c /0 "," 2-4 ",7,,,,,,,,,
+"MOV","mov register16,CS "," 8c /1 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,CS "," 8c /1 "," 2-4 ",9,,,,,,,,,
+"MOV","mov register16,SS "," 8c /2 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,SS "," 8c /2 "," 2-4 ",7,,,,,,,,,
+"MOV","mov register16,DS "," 8c /3 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,DS "," 8c /3 "," 2-4 ",7,,,,,,,,,
+"MOV","mov register16,ES "," 8c /4 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,ES "," 8c /4 "," 2-4 ",7,,,,,,,,,
+"MOV","mov register16,CS "," 8c /5 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,CS "," 8c /5 "," 2-4 ",9,,,,,,,,,
+"MOV","mov register16,SS "," 8c /6 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,SS "," 8c /6 "," 2-4 ",7,,,,,,,,,
+"MOV","mov register16,DS "," 8c /7 "," 2-4 ",3,,,,,,,,,
+"MOV","mov memory16,DS "," 8c /7 "," 2-4 ",7,,,,,,,,,
+"MOV","mov AL,moffset8 "," a0 ",1,5,,,,,,,,,
+"MOV","mov AX,moffset16 "," a1 ",1,5,,,,,,,,,
+"MOV","mov moffset16,AL "," a2 ",1,5,,,,,,,,,
+"MOV","mov moffset16,AX ","a3",1,5,,,,,,,,,
+"MOVS","movs "," a4 ",1," 16 + (n-1)*12",,,,,,,,,
+"MOVS","movs "," a5 ",1," 17 + (n-1)*12",,,,,,,,,
+"MUL","mul register8 "," f6 /4 "," 2-4 ",6,"M",,,"M",,,,,"M"
+"MUL","mul memory8 "," f6 /4 "," 2-4 ",8,"M",,,"M",,,,,"M"
+"MUL","mul register16 "," f7 /4 "," 2-4 ",6,"M",,,"M",,,,,"M"
+"MUL","mul memory16 "," f7 /4 "," 2-4 ",8,"M",,,"M",,,,,"M"
+"NEG","neg register8 "," f6 /3 "," 2-4 ",3,"M","M","M","M","M",,,,"M"
+"NEG","neg memory8 "," f6 /3 "," 2-4 ",9,"M","M","M","M","M",,,,"M"
+"NEG","neg register16 "," f7 /3 "," 2-4 ",3,"M","M","M","M","M",,,,"M"
+"NEG","neg memory16 "," f7 /3 "," 2-4 ",9,"M","M","M","M","M",,,,"M"
+"NOP","nop ",90,1,1,,,,,,,,,
+"NOT","not register8 "," f6 /2 "," 2-4 ",3,"M","M","M","M","M",,,,"M"
+"NOT","not memory8 "," f6 /2 "," 2-4 ",9,"M","M","M","M","M",,,,"M"
+"NOT","not register16 "," f7 /2 "," 2-4 ",3,"M","M","M","M","M",,,,"M"
+"NOT","not memory16 "," f7 /2 "," 2-4 ",13,"M","M","M","M","M",,,,"M"
+"OR","or register8,register8 "," 08 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"OR","or memory8,register8 "," 08 /r "," 2-4 ",8,"M","M",,"M","M",,,,"M"
+"OR","or register16,register16 "," 09 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"OR","or memory16,register16 "," 09 /r "," 2-4 ",8,"M","M",,"M","M",,,,"M"
+"OR","or register8,register8 "," 0a /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"OR","or register8,memory8 "," 0a /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"OR","or register16,register16 "," 0b /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"OR","or register16,memory16 "," 0b /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"OR","or AL,immediate8 "," 0c Ib ",2,2,"M","M",,"M","M",,,,"M"
+"OR","or AX,immediate16 "," 0d Iw ",3,2,"M","M",,"M","M",,,,"M"
+"OR","or register8,immediate8 "," 80 /1 Ib "," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"OR","or memory8,immediate8 "," 80 /1 Ib "," 3-5 ",9,"M","M",,"M","M",,,,"M"
+"OR","or register16,immediate16 "," 81 /1 Iw "," 4-6 ",3,"M","M",,"M","M",,,,"M"
+"OR","or memory16,immediate16","81 /1 Iw "," 4-6 ",9,"M","M",,"M","M",,,,"M"
+"OR","or register8,immediate8 ","82 /1 Ib"," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"OR","or memory8,immediate8 ","82 /1 Ib"," 3-5 ",9,"M","M",,"M","M",,,,"M"
+"OR","or register16,immediate8 ","83 /1 Ib"," 3-5 ",4,"M","M",,"M","M",,,,"M"
+"OR","or memory16,immediate8 "," 83 /1 Ib "," 3-5 ",11,"M","M",,"M","M",,,,"M"
+"OUTB","outb immediate8 "," e6 Ib ",2,6,,,,,,,,,
+"OUTB","outb DX "," ee ",1,6,,,,,,,,,
+"OUTS","outs "," 6e ",1," 18 + (n-1)*13",,,,,,,,,
+"OUTS","outs "," 6f ",1," 18 + (n-1)*13",,,,,,,,,
+"OUTW","outw immediate8 "," e7 Ib ",2,6,,,,,,,,,
+"OUTW","outw DX "," ef ",1,6,,,,,,,,,
+"POP","pop AX ",58,1,6,,,,,,,,,
+"POP","pop CX ",59,1,6,,,,,,,,,
+"POP","pop DX "," 5a ",1,6,,,,,,,,,
+"POP","pop BX","  5b ",1,6,,,,,,,,,
+"POP","pop SP"," 5c ",1,6,,,,,,,,,
+"POP","pop BP"," 5d ",1,6,,,,,,,,,
+"POP","pop SI"," 5e ",1,6,,,,,,,,,
+"POP","pop DI "," 5f ",1,6,,,,,,,,,
+"POP","pop ES ","07",1,6,,,,,,,,,
+"POP","pop SS ",17,1,6,,,,,,,,,
+"POP","pop DS "," 1f ",1,6,,,,,,,,,
+"POP","pop register16 "," 8f /r "," 2-4 ",9,,,,,,,,,
+"POP","pop memory16"," 8f /r"," 2-4 ",12,,,,,,,,,
+"POPA","popa ",61,1,30,,,,,,,,,
+"POPF","popf "," 9d ",1,6,"M","M","M","M","M","M","M","M","M"
+"PUSH","push register16 "," ff /6 "," 2-4 ",7,,,,,,,,,
+"PUSH","push memory16 "," ff /6 "," 2-4 ",9,,,,,,,,,
+"PUSH","push ES ","06",1,6,,,,,,,,,
+"PUSH","push CS","0e",1,6,,,,,,,,,
+"PUSH","push SS",16,1,6,,,,,,,,,
+"PUSH","push DS"," 1e ",1,6,,,,,,,,,
+"PUSH","push AX",50,1,6,,,,,,,,,
+"PUSH","push CX ",51,1,6,,,,,,,,,
+"PUSH","push DX ",52,1,6,,,,,,,,,
+"PUSH","push BX ",53,1,6,,,,,,,,,
+"PUSH","push SP ",54,1,5,,,,,,,,,
+"PUSH","push BP ",55,1,6,,,,,,,,,
+"PUSH","push  SI ",56,1,6,,,,,,,,,
+"PUSH","push DI",57,1,6,,,,,,,,,
+"PUSH","push immediate16","68 Iw",3,6,,,,,,,,,
+"PUSH","push immediate8"," 6a Ib",2,7,,,,,,,,,
+"PUSHA","pusha ",60,1,34,,,,,,,,,
+"PUSHF","pushf "," 9c ",1,5,,,,,,,,,
+"RCL","rcl register8 "," d0 /2 "," 2-4 ",3,"M",,,,,,,,"M"
+"RCL","rcl memory8 "," d0 /2 "," 2-4 ",9,"M",,,,,,,,"M"
+"RCL","rcl register16 "," d1 /2 "," 2-4 ",3,"M",,,,,,,,"M"
+"RCL","rcl memory16 "," d1 /2 "," 2-4 ",9,"M",,,,,,,,"M"
+"RCL","rcl register8,immediate8 "," c0 /2 Ib "," 3-5 ","3  (n-1)","M",,,,,,,,"M"
+"RCL","rcl memory8,immediate8 "," c0 /2 Ib"," 3-5 ","9 +  (n-1)","M",,,,,,,,"M"
+"RCL","rcl register16,immediate8 "," c1 /2 Ib"," 3-5 ","4 +  (n-1)","M",,,,,,,,"M"
+"RCL","rcl memory16,immediate8 "," c1 /2 Ib"," 3-5 "," 11 + (n-1)","M",,,,,,,,"M"
+"RCL","rcl register8,CL "," d2 /2 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"RCL","rcl memory8,CL "," d2 /2 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"RCL","rcl register16,CL "," d3 /2 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"RCL","rcl memory16,CL "," d3 /2 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"RCR","rcr register8 "," d0 /3 "," 2-4 ",3,"M",,,,,,,,"M"
+"RCR","rcr memory8 "," d0 /3 "," 2-4 ",9,"M",,,,,,,,"M"
+"RCR","rcr register16 "," d1 /3 "," 2-4 ",3,"M",,,,,,,,"M"
+"RCR","rcr memory16 "," d1 /3 "," 2-4 ",9,"M",,,,,,,,"M"
+"RCR","rcr register8,immediate8"," c0 /3 Ib "," 3-5 ","3 + (n-1)","M",,,,,,,,"M"
+"RCR","rcr memory8,immediate8 "," c0 /3 Ib "," 3-5 ","9 +  (n-1)","M",,,,,,,,"M"
+"RCR","rcr register16,immediate8 "," c1 /3 Ib "," 3-5 ","4 +  (n-1)","M",,,,,,,,"M"
+"RCR","rcr memory16,immediate8 "," c1 /3 Ib "," 3-5 "," 11 + (n-1)","M",,,,,,,,"M"
+"RCR","rcr register8,CL "," d2 /3 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"RCR","rcr memory8,CL "," d2 /3 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"RCR","rcr register16,CL "," d3 /3 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"RCR","rcr memory16,CL "," d3 /3 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"RET","ret "," c3 ",1,6,,,,,,,,,
+"RET","ret immediate16 "," c2 Iw ",3,7,,,,,,,,,
+"RET","ret "," cb ",1,10,,,,,,,,,
+"RET","ret immediate16"," ca Iw",3,11,,,,,,,,,
+"ROL","rol register8 "," d0 /0 "," 2-4 ",3,"M",,,,,,,,"M"
+"ROL","rol memory8 "," d0 /0 "," 2-4 ",9,"M",,,,,,,,"M"
+"ROL","rol register16 "," d1 /0 "," 2-4 ",3,"M",,,,,,,,"M"
+"ROL","rol memory16 "," d1 /0 "," 2-4 ",9,"M",,,,,,,,"M"
+"ROL","rol register8,immediate8 "," c0 /0 Ib "," 3-5 ","3 + (n-1)","M",,,,,,,,"M"
+"ROL","rol memory8,immediate8 "," c0 /0 Ib"," 3-5 ","9 +  (n-1)","M",,,,,,,,"M"
+"ROL","rol register16,immediate8 "," c1 /0 Ib"," 3-5 ","4 +  (n-1)","M",,,,,,,,"M"
+"ROL","rol memory16,immediate8 "," c1 /0 Ib"," 3-5 "," 11 + (n-1)","M",,,,,,,,"M"
+"ROL","rol register8,CL "," d2 /0 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"ROL","rol memory8,CL "," d2 /0 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"ROL","rol register16,CL "," d3 /0 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"ROL","rol memory16,CL "," d3 /0 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"ROR","ror register8 "," d0 /1 "," 2-4 ",3,"M",,,,,,,,"M"
+"ROR","ror memory8 "," d0 /1 "," 2-4 ",9,"M",,,,,,,,"M"
+"ROR","ror register16 "," d1 /1 "," 2-4 ",3,"M",,,,,,,,"M"
+"ROR","ror memory16 "," d1 /1 "," 2-4 ",9,"M",,,,,,,,"M"
+"ROR","ror register8,immediate8 "," c0 /1 Ib "," 3-5 ","3 + (n-1)","M",,,,,,,,"M"
+"ROR","ror memory8,immediate8 "," c0 /1 Ib"," 3-5 ","9 +  (n-1)","M",,,,,,,,"M"
+"ROR","ror register16,immediate8 "," c1 /1 Ib"," 3-5 ","4 +  (n-1)","M",,,,,,,,"M"
+"ROR","ror memory16,immediate8 "," c1 /1 Ib"," 3-5 "," 11 + (n-1)","M",,,,,,,,"M"
+"ROR","ror register8,CL "," d2 /1 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"ROR","ror memory8,CL "," d2 /1 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"ROR","ror register16,CL "," d3 /1 "," 2-4 "," 4 + (n-1)","M",,,,,,,,"M"
+"ROR","ror memory16,CL "," d3 /1 "," 2-4 "," 11 + (n-1)","M",,,,,,,,"M"
+"SAHF","sahf AH "," 9e ",1,2,"M","M","M","M","M",,,,
+"SAL","sal register8 "," d0 /6 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SAL","sal memory8 "," d0 /6 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SAL","sal register16 "," d1 /6 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SAL","sal memory16 "," d1 /6 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SAL","sal register8,immediate8 "," c0 /6 Ib "," 3-5 ","3 + (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal memory8,immediate8 "," c0 /6 Ib"," 3-5 ","9 +  (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal register16,immediate8 "," c1 /6 Ib"," 3-5 ","4 +  (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal memory16,immediate8 "," c1 /6 Ib"," 3-5 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal register8,CL "," d2 /6 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal memory8,CL "," d2 /6 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal register16,CL "," d3 /6 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SAL","sal memory16,CL "," d3 /6 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar register8 "," d0 /7 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SAR","sar memory8 "," d0 /7 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SAR","sar register16 "," d1 /7 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SAR","sar memory16 "," d1 /7 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SAR","sar  register8,immediate8 "," c0 /7 Ib "," 3-5 ","3 +  (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar  memory8,immediate8 "," c0 /7 Ib"," 3-5 ","9 +  (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar  register16,immediate8 "," c1 /7 Ib "," 3-5 ","4 +  (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar  memory16,immediate8 "," c1 /7 Ib"," 3-5 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar register8,CL "," d2 /7 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar memory8,CL "," d2 /7 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar register16,CL "," d3 /7 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SAR","sar memory16,CL "," d3 /7 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SBB","sbb register8,register8 "," 18 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SBB","sbb memory8,register8 "," 18 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"SBB","sbb register16,register16 "," 19 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SBB","sbb memory16,register16 "," 19 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"SBB","sbb register8,register8 "," 1a /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SBB","sbb register8,memory8 "," 1a /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"SBB","sbb register16,register16 "," 1b /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SBB","sbb register16,memory16 "," 1b /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"SBB","sbb AL,immediate8 "," 1c Ib ",2,2,"M","M","M","M","M",,,,"M"
+"SBB","sbb AX,immediate16 "," 1d Iw ",3,2,"M","M","M","M","M",,,,"M"
+"SBB","sbb register8,immediate8 "," 80 /3 Ib "," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"SBB","sbb memory8,immediate8 "," 80 /3 Ib "," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"SBB","sbb register16,immediate16 "," 81 /3 Iw "," 4-6 ",3,"M","M","M","M","M",,,,"M"
+"SBB","sbb memory16,immediate16","81 /3 Iw"," 4-6 ",9,"M","M","M","M","M",,,,"M"
+"SBB","sbb register8,immediate8 ","82 /3 Ib"," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"SBB","sbb memory8,immediate8 ","82 /3 Ib"," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"SBB","sbb register16,immediate8 ","83 /3 Ib"," 3-5 ",4,"M","M","M","M","M",,,,"M"
+"SBB","sbb memory16,immediate8 "," 83 /3 Ib "," 3-5 ",11,"M","M","M","M","M",,,,"M"
+"SCAS","scas "," ae ",1," 11 + (n-1)*7","M","M","M","M","M",,,,"M"
+"SCAS","scas "," af ",1," 11 + (n-1)*7","M","M","M","M","M",,,,"M"
+"SETALC","setalc AL "," d6 ",1,2,"M",,,,,,,,
+"SHL","shl register8 "," d0 /4 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SHL","shl memory8 "," d0 /4 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SHL","shl register16 "," d1 /4 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SHL","shl memory16 "," d1 /4 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SHL","shl register8,immediate8 "," c0 /4 Ib "," 3-5 ","3 +  (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl  memory8,immediate8 "," c0 /4 Ib"," 3-5 ","9 +  (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl  register16,immediate8 "," c1 /4 Ib"," 3-5 ","4 +  (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl  memory16,immediate8 "," c1 /4 Ib"," 3-5 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl register8,CL "," d2 /4 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl memory8,CL "," d2 /4 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl register16,CL "," d3 /4 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SHL","shl memory16,CL "," d3 /4 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr register8 "," d0 /5 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SHR","shr memory8 "," d0 /5 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SHR","shr register16 "," d1 /5 "," 2-4 ",3,"M","M",,"M","M",,,,"M"
+"SHR","shr memory16 "," d1 /5 "," 2-4 ",9,"M","M",,"M","M",,,,"M"
+"SHR","shr register8,immediate8 "," c0 /5 Ib "," 3-5 ","3+ (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr  memory8,immediate8 "," c0 /5 Ib"," 3-5 ","9 +  (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr  register16,immediate8 "," c1 /5 Ib"," 3-5 ","4 +  (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr  memory16,immediate8 "," c1 /5 Ib"," 3-5 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr register8,CL "," d2 /5 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr memory8,CL "," d2 /5 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr register16,CL "," d3 /5 "," 2-4 "," 4 + (n-1)","M","M",,"M","M",,,,"M"
+"SHR","shr memory16,CL "," d3 /5 "," 2-4 "," 11 + (n-1)","M","M",,"M","M",,,,"M"
+"STC","stc "," f9 ",1,1,1,,,,,,,,
+"STD","std "," fd ",1,1,,,,,,,,1,
+"STI","sti "," fb ",1,1,,,,,,,1,,
+"STOS","stos AL "," aa ",1,12,,,,,,,,,
+"STOS","stos AX "," ab ",1,9,,,,,,,,,
+"SUB","sub register8,register8 "," 28 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SUB","sub memory8,register8 "," 28 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"SUB","sub register16,register16 "," 29 /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SUB","sub memory16,register16 "," 29 /r "," 2-4 ",8,"M","M","M","M","M",,,,"M"
+"SUB","sub register8,register8 "," 2a /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SUB","sub register8,memory8 "," 2a /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"SUB","sub register16,register16 "," 2b /r "," 2-4 ",2,"M","M","M","M","M",,,,"M"
+"SUB","sub register16,memory16 "," 2b /r "," 2-4 ",5,"M","M","M","M","M",,,,"M"
+"SUB","sub AL,immediate8 "," 2c Ib ",2,2,"M","M","M","M","M",,,,"M"
+"SUB","sub AX,immediate16 "," 2d Iw ",3,2,"M","M","M","M","M",,,,"M"
+"SUB","sub register8,immediate8 "," 80 /5 Ib "," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"SUB","sub memory8,immediate8 "," 80 /5 Ib "," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"SUB","sub register16,immediate16 "," 81 /5 Iw "," 4-6 ",3,"M","M","M","M","M",,,,"M"
+"SUB","sub memory16, immediate16","81 /5 Iw"," 4-6 ",9,"M","M","M","M","M",,,,"M"
+"SUB","sub register8,immediate8 ","82 /5 Ib"," 3-5 ",3,"M","M","M","M","M",,,,"M"
+"SUB","sub memory8,immediate8 ","82 /5  Ib "," 3-5 ",9,"M","M","M","M","M",,,,"M"
+"SUB","sub register16,immediate8 ","83 /5 Ib"," 3-5 ",4,"M","M","M","M","M",,,,"M"
+"SUB","sub memory16,immediate8 "," 83 /5 Ib "," 3-5 ",11,"M","M","M","M","M",,,,"M"
+"TEST","test register8,register8 "," 84 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"TEST","test register8,memory8 "," 84 /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"TEST","test register16,register16 "," 85 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"TEST","test register16,memory16 "," 85 /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"TEST","test AL,immediate8"," a8 Ib ",2,2,"M","M",,"M","M",,,,"M"
+"TEST","test AX,immediate16 "," a9 Iw",3,2,"M","M",,"M","M",,,,"M"
+"TEST","test register8,immediate8 "," f6 /0 Ib"," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"TEST","test memory8,immediate8 "," f6 /0 Ib"," 3-5 ",6,"M","M",,"M","M",,,,"M"
+"TEST","test register8,immediate8 "," f6 /1 Ib "," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"TEST","test memory8,immediate8 "," f6 /1 Ib "," 3-5 ",6,"M","M",,"M","M",,,,"M"
+"TEST","test register16,immediate16 "," f7 /0 Iw "," 4-6 ",3,"M","M",,"M","M",,,,"M"
+"TEST","test memory16,immediate16 "," f7 /0 Iw "," 4-6 ",6,"M","M",,"M","M",,,,"M"
+"TEST","test register16,immediate16 "," f7 /1 Iw "," 4-6 ",3,"M","M",,"M","M",,,,"M"
+"TEST","test memory16,immediate16"," f7 /1 Iw"," 4-6 ",6,"M","M",,"M","M",,,,"M"
+"WAIT","wait "," 9b ",1,"-",,,,,,,,,
+"XCHG","xchg register8,register8 "," 86 /r "," 2-4 ",4,,,,,,,,,
+"XCHG","xchg register8,memory8 "," 86 /r "," 2-4 ",11,,,,,,,,,
+"XCHG","xchg register16,register16 "," 87 /r "," 2-4 ",4,,,,,,,,,
+"XCHG","xchg register16,memory16 "," 87 /r "," 2-4 ",11,,,,,,,,,
+"XCHG","xchg CX,AX ",91,1,4,,,,,,,,,
+"XCHG","xchg DX,AX ",92,1,4,,,,,,,,,
+"XCHG","xchg BX,AX ",93,1,4,,,,,,,,,
+"XCHG","xchg SP,AX ",94,1,4,,,,,,,,,
+"XCHG","xchg BP,AX ",95,1,4,,,,,,,,,
+"XCHG","xchg SI,AX ",96,1,4,,,,,,,,,
+"XCHG","xchg DI,AX ",97,1,4,,,,,,,,,
+"XLAT","xlat AL,BX "," d7 ",1,8,,,,,,,,,
+"XOR","xor register8,register8 "," 30 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"XOR","xor memory8,register8 "," 30 /r "," 2-4 ",8,"M","M",,"M","M",,,,"M"
+"XOR","xor register16,register16 "," 31 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"XOR","xor memory16,register16 "," 31 /r "," 2-4 ",8,"M","M",,"M","M",,,,"M"
+"XOR","xor register8,register8 "," 32 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"XOR","xor register8,memory8 ","32 /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"XOR","xor register16,register16 ","33 /r "," 2-4 ",2,"M","M",,"M","M",,,,"M"
+"XOR","xor register16,memory16 ","33 /r "," 2-4 ",5,"M","M",,"M","M",,,,"M"
+"XOR","xor AL,immediate8 "," 34 Ib ",2,2,"M","M",,"M","M",,,,"M"
+"XOR","xor AX,immediate16 "," 35 Iw ",3,2,"M","M",,"M","M",,,,"M"
+"XOR","xor register8,immediate8 "," 80 /6 Ib "," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"XOR","xor memory8,immediate8 "," 80 /6 Ib "," 3-5 ",9,"M","M",,"M","M",,,,"M"
+"XOR","xor register16,immediate16 "," 81 /6 Iw "," 4-6 ",3,"M","M",,"M","M",,,,"M"
+"XOR","xor memory16,immediate16","81 /6 Iw"," 4-6 ",9,"M","M",,"M","M",,,,"M"
+"XOR","xor register8,immediate8 ","82 /6 Ib"," 3-5 ",3,"M","M",,"M","M",,,,"M"
+"XOR","xor memory8,immediate8 ","82 /6 Ib"," 3-5 ",9,"M","M",,"M","M",,,,"M"
+"XOR","xor register16,immediate8 ","83 /6 Ib"," 3-5 ",4,"M","M",,"M","M",,,,"M"
+"XOR","xor memory16,immediate8 "," 83 /6 Ib "," 3-5 ",11,"M","M",,"M","M",,,,"M"
