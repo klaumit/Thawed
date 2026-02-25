@@ -1,21 +1,29 @@
 using System;
-using System.Collections.Generic;
-using Generator.API;
+using System.IO;
+using Iced.Intel;
 
 namespace Generator.Tools
 {
     public static class ExtTool
     {
-        public static IAsyncEnumerable<Decoded[]>? TryDecode(this IExtractor e, byte[][] arrays)
+        private const BlockEncoderOptions Beo = BlockEncoderOptions.DontFixBranches;
+
+        public static byte[]? GetBytes(this Action<Assembler> func)
         {
+            var asm = new Assembler(16);
+            func(asm);
+            const ulong rip = 0;
+            using var stream = new MemoryStream();
+            var writer = new StreamCodeWriter(stream);
             try
             {
-                return e.Decode(arrays);
+                asm.Assemble(writer, rip, Beo);
             }
             catch (InvalidOperationException)
             {
                 return null;
             }
+            return stream.ToArray();
         }
     }
 }

@@ -32,7 +32,10 @@ namespace Generator.Extractors
 
                 var error = dumpCmd.StandardError;
                 if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
-                    throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
+                {
+                    // throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
+                    yield return [];
+                }
 
                 var stdOut = dumpCmd.StandardOutput;
                 var bytes = batch.Select(b => b.Bytes).ToArray();
