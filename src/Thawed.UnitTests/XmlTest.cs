@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Generator.Meta;
-using Thawed.Auto;
 using Xunit;
-using System.IO;
-using System.Text;
 using Generator.Tools;
 using RefX86Asm;
-using T = Thawed.UnitTests.TestTool;
 
 namespace Thawed.UnitTests
 {
@@ -17,7 +9,7 @@ namespace Thawed.UnitTests
         [Fact]
         public void ShouldSerialize()
         {
-            const string origFile = "data/x86reference.xml";
+            const string origFile = "Resources/x86reference.xml";
             var origObj = RefX86.LoadFile(origFile);
             JsonTool.ToFile($"{origFile}.json", origObj, format: true);
             Assert.NotNull(origObj);
