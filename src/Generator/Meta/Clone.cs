@@ -3,7 +3,7 @@ using CsvHelper.Configuration.Attributes;
 // ReSharper disable InconsistentNaming
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace PdfMan
+namespace Generator.Meta
 {
     public sealed record Clone
     {

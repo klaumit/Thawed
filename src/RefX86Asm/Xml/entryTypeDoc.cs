@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace x86refLib.Xml
+namespace RefX86Asm.Xml
 {
     [Serializable]
     [XmlType(AnonymousType = true)]

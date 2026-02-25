@@ -2,7 +2,7 @@ using System;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace x86refLib.Xml
+namespace RefX86Asm.Xml
 {
     [Serializable]
     public class priopcdType
@@ -36,7 +36,7 @@ namespace x86refLib.Xml
             set { this.entryField = value; }
         }
 
-        [XmlAttributeAttribute(DataType = "hexBinary")]
+        [XmlAttribute(DataType = "hexBinary")]
         public byte[] value
         {
             get { return this.valueField; }

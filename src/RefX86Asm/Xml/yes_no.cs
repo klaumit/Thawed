@@ -1,6 +1,6 @@
 using System;
 
-namespace x86refLib.Xml
+namespace RefX86Asm.Xml
 {
     [Serializable]
     public enum yes_no

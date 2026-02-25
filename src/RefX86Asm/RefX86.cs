@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using x86refLib.Xml;
+using RefX86Asm.Xml;
 
-namespace x86refLib
+namespace RefX86Asm
 {
     public static class RefX86
     {

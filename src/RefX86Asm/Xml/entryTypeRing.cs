@@ -1,13 +1,13 @@
 using System;
 using System.Xml.Serialization;
 
-namespace x86refLib.Xml
+namespace RefX86Asm.Xml
 {
     [Serializable]
     [XmlType(AnonymousType = true)]
     public enum entryTypeRing
     {
-        [XmlEnumAttribute("0")] Item0,
+        [XmlEnum("0")] Item0,
 
         f
     }

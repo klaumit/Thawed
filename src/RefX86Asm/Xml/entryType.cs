@@ -2,7 +2,7 @@ using System;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace x86refLib.Xml
+namespace RefX86Asm.Xml
 {
     [Serializable]
     public class entryType
@@ -360,7 +360,7 @@ namespace x86refLib.Xml
             set { this.tttnField = value; }
         }
 
-        [XmlAttributeAttribute("sign-ext")]
+        [XmlAttribute("sign-ext")]
         public string signext
         {
             get { return this.signextField; }
