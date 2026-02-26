@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using Generator.Extractors;
 using Generator.API;
-using Iced.Intel;
 using static Generator.Tools.FileTool;
 
 namespace Generator.Core

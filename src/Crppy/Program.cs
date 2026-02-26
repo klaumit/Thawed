@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.Tools;
-using Iced.Intel;
-using E = Generator.Tools.ExtTool;
-using static Iced.Intel.AssemblerRegisters;
-using A = Iced.Intel.Assembler;
-using AR8 = Iced.Intel.AssemblerRegister8;
-using AR16 = Iced.Intel.AssemblerRegister16;
-using AMO = Iced.Intel.AssemblerMemoryOperand;
 
 namespace Crppy
 {

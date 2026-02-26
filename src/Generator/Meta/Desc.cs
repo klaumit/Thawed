@@ -19,18 +19,18 @@ namespace Generator.Meta
             => C.ToFile(Path.Combine(Dir, "instructs.csv"), rows);
 
         public static IDictionary<string, string> GetOpCodeNames()
-            => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeNames.json"));
+            => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeNames.json"))!;
 
         public static IDictionary<string, string> GetOpCodeAliases()
-            => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeAliases.json"));
+            => FromFile<SortedDictionary<string, string>>(Path.Combine(Dir, "opCodeAliases.json"))!;
 
         public static IDictionary<string, string[]> GetOpCodeGroups()
-            => FromFile<SortedDictionary<string, string[]>>(Path.Combine(Dir, "opCodeGroups.json"));
+            => FromFile<SortedDictionary<string, string[]>>(Path.Combine(Dir, "opCodeGroups.json"))!;
 
         public static IDictionary<string, string[]> GetOpCodeModes()
-            => FromFile<SortedDictionary<string, string[]>>(Path.Combine(Dir, "opRmModes.json"));
+            => FromFile<SortedDictionary<string, string[]>>(Path.Combine(Dir, "opRmModes.json"))!;
 
         public static IDictionary<string, string[][]> GetOpCodeDescs()
-            => FromFile<SortedDictionary<string, string[][]>>(Path.Combine(Dir, "opCodeDescs.json"));
+            => FromFile<SortedDictionary<string, string[][]>>(Path.Combine(Dir, "opCodeDescs.json"))!;
     }
 }

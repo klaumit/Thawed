@@ -1,11 +1,7 @@
 using System;
-using R = Iced.Intel.Register;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Generator.Extractors;
 using Generator.Tools;
 using Iced.Intel;
 using E = Generator.Tools.ExtTool;
@@ -13,14 +9,7 @@ using static Iced.Intel.AssemblerRegisters;
 using A = Iced.Intel.Assembler;
 using AR8 = Iced.Intel.AssemblerRegister8;
 using AR16 = Iced.Intel.AssemblerRegister16;
-using AR32 = Iced.Intel.AssemblerRegister32;
-using AR64 = Iced.Intel.AssemblerRegister64;
 using AMO = Iced.Intel.AssemblerMemoryOperand;
-using ARCR = Iced.Intel.AssemblerRegisterCR;
-using ARDR = Iced.Intel.AssemblerRegisterDR;
-using ARTR = Iced.Intel.AssemblerRegisterTR;
-using ARS = Iced.Intel.AssemblerRegisterSegment;
-using Y = Iced.Intel.AssemblerRegisters;
 
 // ReSharper disable RedundantCast
 
