@@ -1,3 +1,4 @@
+using System;
 using I = Thawed.Auto.Instruct;
 using R = Thawed.Register;
 using static Thawed.InstructH;
@@ -19,6 +20,7 @@ namespace Thawed.Auto
 
             switch (b0 = r.ReadByte())
             {
+                // No arguments
                 case 0b00100111: i = I.Daa(); break;
                 case 0b00101111: i = I.Das(); break;
                 case 0b00110111: i = I.Aaa(); break;
@@ -62,7 +64,21 @@ namespace Thawed.Auto
                 case 0b11111011: i = I.Sti(); break;
                 case 0b11111100: i = I.Cld(); break;
                 case 0b11111101: i = I.Std(); break;
-                default: i = null; break;
+                // Special one
+                case 0b00011110: i = I.Push(R.ds); break;
+                case 0b00011111: i = I.Pop(R.ds); break;
+                case 0b01000011: i = I.Inc(R.bx); break;
+                // More?
+                default:
+                    int? i0 = null;
+                    switch (i0 = b0 & 0b11111_000)
+                    {
+                        case 0b01001000: i = I.Dec(); break;
+                        case 0b01010000: i = I.Push(); break;
+                        case 0b01011000: i = I.Pop(); break;
+                        default: Console.WriteLine($" {i0:b8} "); break;
+                    }
+                    break;
             }
 
             return fail ? throw new DecodeException(b0) : i;
