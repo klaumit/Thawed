@@ -109,10 +109,10 @@ namespace Crppy
             foreach (var items in new[]
                      {
                          IterNone(a => a.aaa()),
-                         // IterSb((a, b) => a.aad(b)),
-                         // IterUb((a, b) => a.aad(b))
-                         // IterSb((a, b) => a.aam(b)),
-                         // IterUb((a, b) => a.aam(b)),
+                         IterNone((a) => a.aad(0x0A)),
+                         IterNone((a) => a.aad(0x0A)),
+                         IterNone((a) => a.aam(0x0A)),
+                         IterNone((a) => a.aam(0x0A)),
                          IterNone(a => a.aas()),
                          Iter1616((a, b, c) => a.adc(b, c)),
                          Iter1616((a, b, c) => a.add(b, c)),
