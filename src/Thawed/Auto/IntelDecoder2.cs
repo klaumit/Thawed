@@ -71,13 +71,26 @@ namespace Thawed.Auto
                 // More?
                 default:
                     int? i0 = null;
-                    switch (i0 = b0 & 0b11111_000)
-                    {
-                        case 0b01001000: i = I.Dec(MaskReg(b0)); break;
-                        case 0b01010000: i = I.Push(MaskReg(b0)); break;
-                        case 0b01011000: i = I.Pop(MaskReg(b0)); break;
-                        default: Console.WriteLine($" {i0:b8} "); break;
-                    }
+                    if (i == null)
+                        switch (i0 = b0 & 0b1111111_0)
+                        {
+                            case 0b00000000: i = I.Add(); break;
+                            case 0b00001000: i = I.Or(); break;
+                            case 0b00010000: i = I.Adc(); break;
+                            case 0b00011000: i = I.Sbb(); break;
+                            case 0b00100000: i = I.And(); break;
+                            case 0b00110000: i = I.Xor(); break;
+                            case 0b00111000: i = I.Cmp(); break;
+                        }
+                    if (i == null)
+                        switch (i0 = b0 & 0b11111_000)
+                        {
+                            case 0b01001000: i = I.Dec(MaskReg(b0)); break;
+                            case 0b01010000: i = I.Push(MaskReg(b0)); break;
+                            case 0b01011000: i = I.Pop(MaskReg(b0)); break;
+                        }
+                    if (i == null)
+                        Console.WriteLine($" {i0:b8} ");
                     break;
             }
 

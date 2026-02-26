@@ -22,7 +22,7 @@ namespace Crppy
                 {
                     if (line.Offset != 0) continue;
                     var bytes = Convert.FromHexString(line.Hex);
-                    if (bytes.Length != 1) continue;
+                    if (bytes.Length != 2) continue;
                     if (line.Dis.Contains("???")) continue;
                     var parts = line.Dis.Split("  ", 2);
                     var op = parts[0].Trim();
@@ -38,7 +38,7 @@ namespace Crppy
                     var sx = $"{op,-5} | {ag}";
                     var tx = $"{pp,-5} | {pg}";
                     if (sx.Equals(tx)) continue;
-                    var dbg = $" \t=>\t {tx}";
+                    var dbg = $" \t=> {tx}";
                     Console.WriteLine($" {bin} | {oct} | {hex} | {sx} {dbg}");
                 }
             }
