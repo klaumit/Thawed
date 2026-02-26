@@ -73,9 +73,9 @@ namespace Thawed.Auto
                     int? i0 = null;
                     switch (i0 = b0 & 0b11111_000)
                     {
-                        case 0b01001000: i = I.Dec(); break;
-                        case 0b01010000: i = I.Push(); break;
-                        case 0b01011000: i = I.Pop(); break;
+                        case 0b01001000: i = I.Dec(MaskReg(b0)); break;
+                        case 0b01010000: i = I.Push(MaskReg(b0)); break;
+                        case 0b01011000: i = I.Pop(MaskReg(b0)); break;
                         default: Console.WriteLine($" {i0:b8} "); break;
                     }
                     break;

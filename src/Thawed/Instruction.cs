@@ -21,6 +21,7 @@ namespace Thawed
         {
             var argT = string.Join(",", (Args ?? []).Select(a => a?.ToString()));
             var txt = $"{Code.ToName()} {argT}".Trim();
+            if (Args is { Length: 1 } && txt.EndsWith(":")) txt = txt.TrimEnd(':');
             return txt;
         }
     }
