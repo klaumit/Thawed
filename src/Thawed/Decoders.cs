@@ -6,7 +6,7 @@ namespace Thawed
 	{
 		public static IDecoder GetDecoder()
 		{
-			return new IntelDecoder();
+			return new IntelDecoder2();
 		}
 	}
 }

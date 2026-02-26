@@ -11,7 +11,11 @@ namespace Thawed
             _bytes ??= [];
         }
 
-        public byte ReadOne() => _bytes[_index++];
+        public int ReadOne()
+        {
+            if (_index >= _bytes.Length) return -1;
+            return _bytes[_index++];
+        }
 
         public override string ToString() => _bytes.ToHexString();
 

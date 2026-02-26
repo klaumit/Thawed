@@ -28,5 +28,11 @@ namespace Thawed
 			}
 			return txt;
 		}
+
+		public static byte? ReadByte(this IByteReader reader)
+		{
+			var res = reader.ReadOne();
+			return res == -1 ? null : (byte)res;
+		}
 	}
 }
