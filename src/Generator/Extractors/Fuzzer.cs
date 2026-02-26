@@ -16,7 +16,7 @@ using Y = Iced.Intel.AssemblerRegisters;
 
 namespace Generator.Extractors
 {
-    public static class Fuzzer
+    internal static class Fuzzer
     {
         /// <summary>
         /// ASCII Adjust After Addition

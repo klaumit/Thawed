@@ -40,18 +40,6 @@ namespace Generator.Core
             return cands;
         }
 
-        private static IEnumerable<byte[]> AddFuzzy(this IEnumerable<byte[]> bytes)
-        {
-            var dict = new SortedDictionary<string, byte[]>();
-            Fuzzer.DoAll(a =>
-            {
-                if (Assemble(a) is not { } bits)
-                    return;
-                dict[Convert.ToHexString(bits)] = bits;
-            });
-            return bytes.Concat(dict.Values);
-        }
-
         private static IEnumerable<IExtractor> CreateExtractors(string[] apps)
         {
             foreach (var app in apps)
@@ -151,23 +139,6 @@ namespace Generator.Core
                 yield return b;
             foreach (var b in IterTool.Go(ushort.MinValue, ushort.MaxValue + 1, BitTool.AsShort))
                 yield return b;
-        }
-
-        public static byte[]? Assemble(Action<Assembler> action)
-        {
-            var asm = new Assembler(16);
-            action(asm);
-            using var mem = new MemoryStream();
-            var writer = new StreamCodeWriter(mem);
-            try
-            {
-                asm.Assemble(writer, 0);
-            }
-            catch (InvalidOperationException)
-            {
-                return null;
-            }
-            return mem.ToArray();
         }
     }
 }
