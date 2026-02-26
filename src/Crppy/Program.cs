@@ -32,8 +32,14 @@ namespace Crppy
                     var hex = bytes.Format('h');
                     reader.Reset(bytes);
                     var ins = decoder.Decode(reader, false);
-                    var dbg = $" \t=>\t {ins}";
-                    Console.WriteLine($" {bin} | {oct} | {hex} | {op,-5} | {ag} {dbg}");
+                    var iPt = $"{ins}".Split(" ", 2);
+                    var pp = iPt[0];
+                    var pg = iPt.Length == 2 ? iPt[1] : "";
+                    var sx = $"{op,-5} | {ag}";
+                    var tx = $"{pp,-5} | {pg}";
+                    if (sx.Equals(tx)) continue;
+                    var dbg = $" \t=>\t {tx}";
+                    Console.WriteLine($" {bin} | {oct} | {hex} | {sx} {dbg}");
                 }
             }
         }

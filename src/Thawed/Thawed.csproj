@@ -12,7 +12,7 @@
     <Nullable>enable</Nullable>
     <Deterministic>true</Deterministic>
     
-    <NoWarn>CS8509</NoWarn>
+    <NoWarn>CS8509,CS8655</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
