@@ -22,6 +22,24 @@ namespace Thawed
 
         internal static DwordPtrArg dword_ptr(Arg a) => new(a);
 
+        public static Arg[] MaskRegs(byte? b0, byte? b1)
+        {
+            var w = b0 & 0b0000000_1;
+            var r = b1;
+            switch (w, r)
+            {
+                case (0b0, 0b11000000): return [R.al, R.al];
+                case (0b0, 0b11011011): return [R.bl, R.bl];
+                case (0b0, 0b11001001): return [R.cl, R.cl];
+                case (0b0, 0b11010010): return [R.dl, R.dl];
+                case (0b1, 0b11000000): return [R.ah, R.ah];
+                case (0b1, 0b11011011): return [R.bh, R.bh];
+                case (0b1, 0b11001001): return [R.ch, R.ch];
+                case (0b1, 0b11010010): return [R.dh, R.dh];
+                default: return null!;
+            }
+        }
+
         public static Arg MaskReg(byte? b)
         {
             var end = b & 0b00000_111;

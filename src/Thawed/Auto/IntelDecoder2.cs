@@ -16,6 +16,7 @@ namespace Thawed.Auto
         public Instruction? Decode(IByteReader r, bool fail)
         {
             byte? b0 = 0;
+            byte? b1 = 0;
             Instruction? i = null;
 
             switch (b0 = r.ReadByte())
@@ -74,13 +75,13 @@ namespace Thawed.Auto
                     if (i == null)
                         switch (i0 = b0 & 0b1111111_0)
                         {
-                            case 0b00000000: i = I.Add(); break;
-                            case 0b00001000: i = I.Or(); break;
-                            case 0b00010000: i = I.Adc(); break;
-                            case 0b00011000: i = I.Sbb(); break;
-                            case 0b00100000: i = I.And(); break;
-                            case 0b00110000: i = I.Xor(); break;
-                            case 0b00111000: i = I.Cmp(); break;
+                            case 0b00000000: i = I.Add(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00001000: i = I.Or(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00010000: i = I.Adc(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00011000: i = I.Sbb(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00100000: i = I.And(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00110000: i = I.Xor(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00111000: i = I.Cmp(MaskRegs(b0, b1 = r.ReadByte())); break;
                         }
                     if (i == null)
                         switch (i0 = b0 & 0b11111_000)
@@ -94,7 +95,7 @@ namespace Thawed.Auto
                     break;
             }
 
-            return fail ? throw new DecodeException(b0) : i;
+            return fail ? throw new DecodeException(b0, b1) : i;
         }
     }
 }
