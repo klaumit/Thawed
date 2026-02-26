@@ -110,8 +110,6 @@ namespace Crppy
                      {
                          IterNone(a => a.aaa()),
                          IterNone((a) => a.aad(0x0A)),
-                         IterNone((a) => a.aad(0x0A)),
-                         IterNone((a) => a.aam(0x0A)),
                          IterNone((a) => a.aam(0x0A)),
                          IterNone(a => a.aas()),
                          Iter1616((a, b, c) => a.adc(b, c)),
