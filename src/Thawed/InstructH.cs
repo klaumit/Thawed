@@ -42,13 +42,30 @@ namespace Thawed
 
         public static Arg GetSegmentRegister(byte? b)
         {
-            var end = b & 0b000000_11;
+            var end = b & 0b_000000_11;
             switch (end)
             {
                 case 0b00: return R.es;
                 case 0b01: return R.cs;
                 case 0b10: return R.ss;
                 case 0b11: return R.ds;
+                default: return null!;
+            }
+        }
+
+        public static Arg GetEffectiveAddress(byte? b)
+        {
+            var end = b & 0b_00000_111;
+            switch (end)
+            {
+                case 0b000: return R.bx; // (BX) + (SI) + DISP  
+                case 0b001: return R.bx; // (BX) + (DI) + DISP
+                case 0b010: return R.bp; // (BP) + (SI) + DISP
+                case 0b011: return R.bp; // (BP) + (DI) + DISP
+                case 0b100: return R.si; // (SI) + DISP
+                case 0b101: return R.di; // (DI) + DISP
+                case 0b110: return R.bp; // (BP) + DISP
+                case 0b111: return R.bx; // (BX) + DISP
                 default: return null!;
             }
         }
