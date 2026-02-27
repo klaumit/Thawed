@@ -9,24 +9,40 @@ namespace Thawed.Auto
 {
     internal static class Instruct
     {
-        internal static I Aaa(params A[] args)
+        /// <summary>
+        /// ASCII adjust for add
+        /// <remarks>AAA</remarks>
+        /// </summary>
+        internal static I Aaa()
         {
-            return new I(O.Aaa, args);
+            return new I(O.Aaa);
         }
         
-        internal static I Aad(params A[] args)
+        /// <summary>
+        /// ASCII adjust for divide
+        /// <remarks>AAD</remarks> 
+        /// </summary>
+        internal static I? Aad(byte? v)
         {
-            return new I(O.Aad, args);
+            return v is 0b00001010 ? new I(O.Aad, v) : null;
         }
         
-        internal static I Aam(params A[] args)
+        /// <summary>
+        /// ASCII adjust for multiply
+        /// <remarks>AAM</remarks>
+        /// </summary>
+        internal static I? Aam(byte? v)
         {
-            return new I(O.Aam, args);
+            return v is 0b00001010 ? new I(O.Aam, v) : null;
         }
         
-        internal static I Aas(params A[] args)
+        /// <summary>
+        /// ASCII adjust for subtract
+        /// <remarks>AAS</remarks>
+        /// </summary>
+        internal static I Aas()
         {
-            return new I(O.Aas, args);
+            return new I(O.Aas);
         }
         
         internal static I Adc(params A[] args)
@@ -49,34 +65,54 @@ namespace Thawed.Auto
             return new I(O.Bound, args);
         }
         
-        internal static I Call(params A[] args)
+        /// <summary>
+        /// Call direct within segment
+        /// <remarks>CALL</remarks>
+        /// </summary>
+        internal static I? Call(byte? low, byte? high)
         {
-            return new I(O.Call, args);
+            return low is { } l && high is { } h ? new I(O.Call, l, h) : null;
         }
         
-        internal static I Cbw(params A[] args)
+        /// <summary>
+        /// Convert byte to word
+        /// <remarks>CBW</remarks>
+        /// </summary>
+        internal static I Cbw()
         {
-            return new I(O.Cbw, args);
+            return new I(O.Cbw);
         }
         
-        internal static I Clc(params A[] args)
+        /// <summary>
+        /// Clear carry
+        /// </summary>
+        internal static I Clc()
         {
-            return new I(O.Clc, args);
+            return new I(O.Clc);
         }
         
-        internal static I Cld(params A[] args)
+        /// <summary>
+        /// Clear direction
+        /// </summary>
+        internal static I Cld()
         {
-            return new I(O.Cld, args);
+            return new I(O.Cld);
         }
         
-        internal static I Cli(params A[] args)
+        /// <summary>
+        /// Clear interrupt
+        /// </summary>
+        internal static I Cli()
         {
-            return new I(O.Cli, args);
+            return new I(O.Cli);
         }
         
-        internal static I Cmc(params A[] args)
+        /// <summary>
+        /// Complement carry
+        /// </summary>
+        internal static I Cmc()
         {
-            return new I(O.Cmc, args);
+            return new I(O.Cmc);
         }
         
         internal static I Cmp(params A[] args)
@@ -94,24 +130,40 @@ namespace Thawed.Auto
             return new I(O.Cmpsw, args);
         }
         
-        internal static I Cs(params A[] args)
+        /// <summary>
+        /// CS: override
+        /// <remarks>CS</remarks>
+        /// </summary>
+        internal static I Cs()
         {
-            return new I(O.Cs, args);
+            return new I(O.Cs);
         }
         
-        internal static I Cwd(params A[] args)
+        /// <summary>
+        /// Convert word to double word
+        /// <remarks>CWD</remarks>
+        /// </summary>
+        internal static I Cwd()
         {
-            return new I(O.Cwd, args);
+            return new I(O.Cwd);
         }
         
-        internal static I Daa(params A[] args)
+        /// <summary>
+        /// Decimal adjust for add
+        /// <remarks>DAA</remarks>
+        /// </summary>
+        internal static I Daa()
         {
-            return new I(O.Daa, args);
+            return new I(O.Daa);
         }
         
-        internal static I Das(params A[] args)
+        /// <summary>
+        /// Decimal adjust for subtract
+        /// <remarks>DAS</remarks>
+        /// </summary>
+        internal static I Das()
         {
-            return new I(O.Das, args);
+            return new I(O.Das);
         }
         
         internal static I Dec(params A[] args)
@@ -124,24 +176,41 @@ namespace Thawed.Auto
             return new I(O.Div, args);
         }
         
-        internal static I Ds(params A[] args)
+        /// <summary>
+        /// DS: override
+        /// <remarks>DS</remarks>
+        /// </summary>
+        internal static I Ds()
         {
-            return new I(O.Ds, args);
+            return new I(O.Ds);
         }
         
-        internal static I Enter(params A[] args)
+        /// <summary>
+        /// Enter procedure
+        /// <remarks>ENTER</remarks>
+        /// </summary>
+        internal static I? Enter(byte? low, byte? high, byte? ext)
         {
-            return new I(O.Enter, args);
+            return low is { } l && high is { } h && ext is { } e
+                ? new I(O.Enter, l, h, e)
+                : null;
         }
         
-        internal static I Es(params A[] args)
+        /// <summary>
+        /// ES: override
+        /// <remarks>ES</remarks>
+        /// </summary>
+        internal static I Es()
         {
-            return new I(O.Es, args);
+            return new I(O.Es);
         }
         
-        internal static I Hlt(params A[] args)
+        /// <summary>
+        /// Halt
+        /// </summary>
+        internal static I Hlt()
         {
-            return new I(O.Hlt, args);
+            return new I(O.Hlt);
         }
         
         internal static I Idiv(params A[] args)
@@ -174,119 +243,220 @@ namespace Thawed.Auto
             return new I(O.Insw, args);
         }
         
-        internal static I Int(params A[] args)
+        /// <summary>
+        /// Interrupt with type specified
+        /// <remarks>INT</remarks>
+        /// </summary>
+        internal static I? Int(byte? v)
         {
-            return new I(O.Int, args);
+            return v is {} b ? new I(O.Int, b) : null;
         }
         
-        internal static I Int3(params A[] args)
+        /// <summary>
+        /// Interrupt type 3
+        /// <remarks>INT3</remarks>
+        /// </summary>
+        internal static I Int3()
         {
-            return new I(O.Int3, args);
+            return new I(O.Int3);
         }
         
-        internal static I Into(params A[] args)
+        /// <summary>
+        /// Interrupt on overflow
+        /// <remarks>INTO</remarks>
+        /// </summary>
+        internal static I Into()
         {
-            return new I(O.Into, args);
+            return new I(O.Into);
         }
         
-        internal static I Iret(params A[] args)
+        /// <summary>
+        /// Interrupt return
+        /// <remarks>IRET</remarks>
+        /// </summary>
+        internal static I Iret()
         {
-            return new I(O.Iret, args);
+            return new I(O.Iret);
         }
         
-        internal static I Ja(params A[] args)
+        /// <summary>
+        /// Jump on not below or equal/above
+        /// <remarks>JNBE/JA</remarks> 
+        /// </summary>
+        internal static I? Ja(byte? v)
         {
-            return new I(O.Ja, args);
+            return v is {} b? new I(O.Ja, b) : null;
         }
         
-        internal static I Jb(params A[] args)
+        /// <summary>
+        /// Jump on below/not above or equal
+        /// <remarks>JB/JNAE</remarks>
+        /// </summary>
+        internal static I? Jb(byte? v)
         {
-            return new I(O.Jb, args);
+            return v is {} b? new I(O.Jb, b) : null;
         }
         
-        internal static I Jbe(params A[] args)
+        /// <summary>
+        /// Jump on below or equal/not above
+        /// <remarks>JBE/JNA</remarks>
+        /// </summary>
+        internal static I? Jbe(byte? v)
         {
-            return new I(O.Jbe, args);
+            return v is {} b? new I(O.Jbe, b) : null;
         }
         
-        internal static I Jcxz(params A[] args)
+        /// <summary>
+        /// Jump on CX zero
+        /// <remarks>JCXZ</remarks>
+        /// </summary>
+        internal static I? Jcxz(byte? v)
         {
-            return new I(O.Jcxz, args);
+            return v is {} b? new I(O.Jcxz, b) : null;
         }
         
-        internal static I Jg(params A[] args)
+        /// <summary>
+        /// Jump on not less or equal/greater
+        /// <remarks>JNLE/JG</remarks>
+        /// </summary>
+        internal static I? Jg(byte? v)
         {
-            return new I(O.Jg, args);
+            return v is {} b ? new I(O.Jg, b) : null;
         }
         
-        internal static I Jge(params A[] args)
+        /// <summary>
+        /// Jump on not less/greater or equal
+        /// <remarks>JNL/JGE</remarks>
+        /// </summary>
+        internal static I? Jge(byte? v)
         {
-            return new I(O.Jge, args);
+            return v is {} b ? new I(O.Jge, b) : null;
         }
         
-        internal static I Jl(params A[] args)
+        /// <summary>
+        /// Jump on less/not greater or equal
+        /// </summary>
+        /// <remarks>JL/JNGE</remarks>
+        internal static I? Jl(byte? v)
         {
-            return new I(O.Jl, args);
+            return v is {} b ? new I(O.Jl, b) : null;
         }
         
-        internal static I Jle(params A[] args)
+        /// <summary>
+        /// Jump on less or equal/not greater
+        /// <remarks>JLE/JNG</remarks>
+        /// </summary>
+        internal static I? Jle(byte? v)
         {
-            return new I(O.Jle, args);
+            return v is { } b ? new I(O.Jle, b) : null;
+        }
+
+        /// <summary>
+        /// Unconditional jump short/long
+        /// <remarks>JMP</remarks>
+        /// </summary>
+        internal static I? Jmp(byte? low)
+        {
+            return low is { } l ? new I(O.Jmp, l) : null;
+        }
+
+        /// <summary>
+        /// Unconditional jump direct within segment
+        /// <remarks>JMP</remarks>
+        /// </summary>
+        internal static I? Jmp(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Jmp, l, h) : null;
         }
         
-        internal static I Jmp(params A[] args)
+        /// <summary>
+        /// Jump on not below/above or equal
+        /// <remarks>JNB/JAE</remarks>
+        /// </summary>
+        internal static I? Jnb(byte? v)
         {
-            return new I(O.Jmp, args);
+            return v is { } b ? new I(O.Jnb, b) : null;
         }
         
-        internal static I Jnb(params A[] args)
+        /// <summary>
+        /// Jump on not overflow
+        /// <remarks>JNO</remarks>
+        /// </summary>
+        internal static I? Jno(byte? v)
         {
-            return new I(O.Jnb, args);
+            return v is { } b ? new I(O.Jno, b) : null;
         }
         
-        internal static I Jno(params A[] args)
+        /// <summary>
+        /// Jump on not sign
+        /// <remarks>JNS</remarks>
+        /// </summary>
+        internal static I? Jns(byte? v)
         {
-            return new I(O.Jno, args);
+            return v is { } b ? new I(O.Jns, b) : null;
         }
         
-        internal static I Jns(params A[] args)
+        /// <summary>
+        /// Jump on not equal/not zero
+        /// <remarks>JNE/JNZ</remarks>
+        /// </summary>
+        internal static I? Jnz(byte? v)
         {
-            return new I(O.Jns, args);
+            return v is { } b ? new I(O.Jnz, b) : null;
         }
         
-        internal static I Jnz(params A[] args)
+        /// <summary>
+        /// Jump on overflow
+        /// <remarks>JO</remarks>
+        /// </summary>
+        internal static I? Jo(byte? v)
         {
-            return new I(O.Jnz, args);
+            return v is { } b ? new I(O.Jo, b) : null;
         }
         
-        internal static I Jo(params A[] args)
+        /// <summary>
+        /// Jump on parity/parity even
+        /// <remarks>JP/JPE</remarks>
+        /// </summary>
+        internal static I? Jpe(byte? v)
         {
-            return new I(O.Jo, args);
+            return v is { } b ? new I(O.Jpe, b) : null;
         }
         
-        internal static I Jpe(params A[] args)
+        /// <summary>
+        /// Jump on not par/par odd
+        /// <remarks>JNP/JPO</remarks>
+        /// </summary>
+        internal static I? Jpo(byte? v)
         {
-            return new I(O.Jpe, args);
+            return v is { } b ? new I(O.Jpo, b) : null;
         }
         
-        internal static I Jpo(params A[] args)
+        /// <summary>
+        /// Jump on sign
+        /// <remarks>JS</remarks>
+        /// </summary>
+        internal static I? Js(byte? v)
         {
-            return new I(O.Jpo, args);
+            return v is { } b ? new I(O.Js, b) : null;
         }
         
-        internal static I Js(params A[] args)
+        /// <summary>
+        /// Jump on equal/zero
+        /// <remarks>JE/JZ</remarks>
+        /// </summary>
+        internal static I? Jz(byte? v)
         {
-            return new I(O.Js, args);
+            return v is { } b ? new I(O.Jz, b) : null;
         }
         
-        internal static I Jz(params A[] args)
+        /// <summary>
+        /// Load AH with flags
+        /// <remarks>LAHF</remarks>
+        /// </summary>
+        internal static I Lahf()
         {
-            return new I(O.Jz, args);
-        }
-        
-        internal static I Lahf(params A[] args)
-        {
-            return new I(O.Lahf, args);
+            return new I(O.Lahf);
         }
         
         internal static I Lds(params A[] args)
@@ -299,9 +469,13 @@ namespace Thawed.Auto
             return new I(O.Lea, args);
         }
         
-        internal static I Leave(params A[] args)
+        /// <summary>
+        /// Leave procedure
+        /// <remarks>LEAVE</remarks>
+        /// </summary>
+        internal static I Leave()
         {
-            return new I(O.Leave, args);
+            return new I(O.Leave);
         }
         
         internal static I Les(params A[] args)
@@ -309,9 +483,13 @@ namespace Thawed.Auto
             return new I(O.Les, args);
         }
         
-        internal static I Lock(params A[] args)
+        /// <summary>
+        /// Bus lock prefix
+        /// <remarks>LOCK</remarks>
+        /// </summary>
+        internal static I Lock()
         {
-            return new I(O.Lock, args);
+            return new I(O.Lock);
         }
         
         internal static I Lodsb(params A[] args)
@@ -324,19 +502,31 @@ namespace Thawed.Auto
             return new I(O.Lodsw, args);
         }
         
-        internal static I Loop(params A[] args)
+        /// <summary>
+        /// Loop CX times
+        /// <remarks>LOOP</remarks>
+        /// </summary>
+        internal static I? Loop(byte? v)
         {
-            return new I(O.Loop, args);
+            return v is {} b ? new I(O.Loop, b) : null;
         }
         
-        internal static I Loopnz(params A[] args)
+        /// <summary>
+        /// Loop while not zero/equal
+        /// <remarks>LOOPNZ/LOOPNE</remarks>
+        /// </summary>
+        internal static I? Loopnz(byte? v)
         {
-            return new I(O.Loopnz, args);
+            return v is {} b ? new I(O.Loopnz, b) : null;
         }
         
-        internal static I Loopz(params A[] args)
+        /// <summary>
+        /// Loop while zero/equal
+        /// <remarks>LOOPZ/LOOPE</remarks>
+        /// </summary>
+        internal static I? Loopz(byte? v)
         {
-            return new I(O.Loopz, args);
+            return v is {} b? new I(O.Loopz, b) : null;
         }
         
         internal static I Mov(params A[] args)
@@ -364,9 +554,12 @@ namespace Thawed.Auto
             return new I(O.Neg, args);
         }
         
-        internal static I Nop(params A[] args)
+        /// <summary>
+        /// No operation
+        /// </summary>
+        internal static I Nop()
         {
-            return new I(O.Nop, args);
+            return new I(O.Nop);
         }
         
         internal static I Not(params A[] args)
@@ -399,14 +592,22 @@ namespace Thawed.Auto
             return new I(O.Pop, args);
         }
         
-        internal static I Popa(params A[] args)
+        /// <summary>
+        /// Pop all
+        /// <remarks>POPA</remarks>
+        /// </summary>
+        internal static I Popa()
         {
-            return new I(O.Popa, args);
+            return new I(O.Popa);
         }
         
-        internal static I Popf(params A[] args)
+        /// <summary>
+        /// Pop flags
+        /// <remarks>POPF</remarks>
+        /// </summary>
+        internal static I Popf()
         {
-            return new I(O.Popf, args);
+            return new I(O.Popf);
         }
         
         internal static I Push(params A[] args)
@@ -414,14 +615,22 @@ namespace Thawed.Auto
             return new I(O.Push, args);
         }
         
-        internal static I Pusha(params A[] args)
+        /// <summary>
+        /// Push all
+        /// <remarks>PUSHA</remarks>
+        /// </summary>
+        internal static I Pusha()
         {
-            return new I(O.Pusha, args);
+            return new I(O.Pusha);
         }
         
-        internal static I Pushf(params A[] args)
+        /// <summary>
+        /// Push flags
+        /// <remarks>PUSHF</remarks>
+        /// </summary>
+        internal static I Pushf()
         {
-            return new I(O.Pushf, args);
+            return new I(O.Pushf);
         }
         
         internal static I Rcl(params A[] args)
@@ -444,14 +653,36 @@ namespace Thawed.Auto
             return new I(O.Repne, args);
         }
         
-        internal static I Ret(params A[] args)
+        /// <summary>
+        /// Return from call within segment
+        /// </summary>
+        internal static I Ret()
         {
-            return new I(O.Ret, args);
+            return new I(O.Ret);
         }
         
-        internal static I Retf(params A[] args)
+        /// <summary>
+        /// Return from call within segment adding imm to SP
+        /// </summary>
+        internal static I? Ret(byte? low, byte? high)
         {
-            return new I(O.Retf, args);
+            return low is { } l && high is { } h ? new I(O.Ret, l, h) : null;
+        }
+        
+        /// <summary>
+        /// Return from call within intersegment
+        /// </summary>
+        internal static I Retf()
+        {
+            return new I(O.Retf);
+        }
+        
+        /// <summary>
+        /// Return from call within intersegment adding imm to SP
+        /// </summary>
+        internal static I? Retf(byte? low, byte? high)
+        {
+            return low is {} l && high is { } h ? new I(O.Retf, l, h) : null;
         }
         
         internal static I Rol(params A[] args)
@@ -464,9 +695,13 @@ namespace Thawed.Auto
             return new I(O.Ror, args);
         }
         
-        internal static I Sahf(params A[] args)
+        /// <summary>
+        /// Store AH into flags
+        /// <remarks>SAHF</remarks>
+        /// </summary>
+        internal static I Sahf()
         {
-            return new I(O.Sahf, args);
+            return new I(O.Sahf);
         }
         
         internal static I Sar(params A[] args)
@@ -499,24 +734,37 @@ namespace Thawed.Auto
             return new I(O.Shr, args);
         }
         
-        internal static I Ss(params A[] args)
+        /// <summary>
+        /// SS: override
+        /// <remarks>SS</remarks>
+        /// </summary>
+        internal static I Ss()
         {
-            return new I(O.Ss, args);
+            return new I(O.Ss);
         }
         
-        internal static I Stc(params A[] args)
+        /// <summary>
+        /// Set carry
+        /// </summary>
+        internal static I Stc()
         {
-            return new I(O.Stc, args);
+            return new I(O.Stc);
         }
         
-        internal static I Std(params A[] args)
+        /// <summary>
+        /// Set direction
+        /// </summary>
+        internal static I Std()
         {
-            return new I(O.Std, args);
+            return new I(O.Std);
         }
         
-        internal static I Sti(params A[] args)
+        /// <summary>
+        /// Set interrupt
+        /// </summary>
+        internal static I Sti()
         {
-            return new I(O.Sti, args);
+            return new I(O.Sti);
         }
         
         internal static I Stosb(params A[] args)
@@ -539,9 +787,12 @@ namespace Thawed.Auto
             return new I(O.Test, args);
         }
         
-        internal static I Wait(params A[] args)
+        /// <summary>
+        /// Wait
+        /// </summary>
+        internal static I Wait()
         {
-            return new I(O.Wait, args);
+            return new I(O.Wait);
         }
         
         internal static I Xchg(params A[] args)
@@ -549,9 +800,13 @@ namespace Thawed.Auto
             return new I(O.Xchg, args);
         }
         
-        internal static I Xlat(params A[] args)
+        /// <summary>
+        /// Translate byte to AL
+        /// <remarks>XLAT/XLATB</remarks>
+        /// </summary>
+        internal static I Xlat()
         {
-            return new I(O.Xlat, args);
+            return new I(O.Xlat);
         }
         
         internal static I Xor(params A[] args)
