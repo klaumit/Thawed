@@ -91,13 +91,15 @@ namespace Thawed.Auto
                 case 0b11101001: i = I.Jmp(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 // Three arguments
                 case 0b11001000: i = I.Enter(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
-                
-                
-                
+
+
+
                 // TODO
-                
-                
-                
+
+
+
+                /*
+
                 case 0b01101100: i = I.Insb(); break;
                 case 0b01101101: i = I.Insw(); break;
                 case 0b01101110: i = I.Outsb(); break;
@@ -140,6 +142,7 @@ namespace Thawed.Auto
                     if (i == null)
                         Console.WriteLine($" {i0:b8} ");
                     break;
+                    */
             }
 
             return fail ? throw new DecodeException(b0, b1) : i;
