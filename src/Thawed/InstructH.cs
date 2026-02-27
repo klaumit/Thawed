@@ -40,21 +40,39 @@ namespace Thawed
             }
         }
 
-        public static Arg MaskReg(byte? b)
+        public static Arg GetSegmentRegister(byte? b)
         {
-            var end = b & 0b00000_111;
+            var end = b & 0b000000_11;
             switch (end)
             {
-                case 0b000: return R.ax;
-                case 0b001: return R.cx;
-                case 0b010: return R.dx;
-                case 0b011: return R.bx;
-                case 0b100: return R.sp;
-                case 0b101: return R.bp;
-                case 0b110: return R.si;
-                case 0b111: return R.di;
+                case 0b00: return R.es;
+                case 0b01: return R.cs;
+                case 0b10: return R.ss;
+                case 0b11: return R.ds;
                 default: return null!;
             }
+        }
+
+        public static Arg MaskReg(byte? b, bool is16Bit = true, bool atEnd = true)
+        {
+            var end = atEnd ? b & 0b_00_000_111 : (b & 0b_00_111_000) >> 3;
+            return is16Bit switch
+            {
+                /* (w = 1) */
+                true => end switch
+                {
+                    0b000 => R.ax, 0b001 => R.cx, 0b010 => R.dx, 0b011 => R.bx,
+                    0b100 => R.sp, 0b101 => R.bp, 0b110 => R.si, 0b111 => R.di,
+                    _ => null!
+                },
+                /* (w = 0) */
+                false => end switch
+                {
+                    0b000 => R.al, 0b001 => R.cl, 0b010 => R.dl, 0b011 => R.bl,
+                    0b100 => R.ah, 0b101 => R.ch, 0b110 => R.dh, 0b111 => R.bh,
+                    _ => null!
+                }
+            };
         }
     }
 }
