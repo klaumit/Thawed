@@ -10,19 +10,19 @@ namespace Crppy
     internal static class Program
     {
         private static readonly WinExtractor Win = new();
+        private static readonly JsonExtractor WinC = new(Win);
 
         private static async Task Main(string[] args)
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
             var byteArrays = FuzzerX.AddFuzzy([]);
-            await foreach (var lines in Win.Decode(byteArrays))
+            await foreach (var lines in WinC.Decode(byteArrays))
             {
                 foreach (var line in lines)
                 {
                     if (line.Offset != 0) continue;
                     var bytes = Convert.FromHexString(line.Hex);
-                    if (bytes.Length != 2) continue;
                     if (line.Dis.Contains("???")) continue;
                     var parts = line.Dis.Split("  ", 2);
                     var op = parts[0].Trim();

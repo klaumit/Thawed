@@ -13,7 +13,7 @@ namespace Generator.Extractors
         private readonly string _file;
         private readonly D _cache;
 
-        private JsonExtractor(IExtractor extractor)
+        public JsonExtractor(IExtractor extractor)
         {
             _extractor = extractor;
             var name = extractor.GetType().Name.Replace("Extractor", "");
