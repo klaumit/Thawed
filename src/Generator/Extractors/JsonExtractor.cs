@@ -7,16 +7,18 @@ using D = System.Collections.Generic.SortedDictionary<string, Generator.API.Deco
 
 namespace Generator.Extractors
 {
-    public sealed class JsonExtractor : IExtractor, IDisposable
+    public sealed class JsonExtractor<T> : IExtractor, IDisposable
+        where T : class, IExtractor
     {
-        private readonly IExtractor _extractor;
+        private readonly T? _extractor;
         private readonly string _file;
         private readonly D _cache;
 
-        public JsonExtractor(IExtractor extractor)
+        public JsonExtractor(T? extractor = null)
         {
             _extractor = extractor;
-            var name = extractor.GetType().Name.Replace("Extractor", "");
+            var type = extractor?.GetType() ?? typeof(T);
+            var name = type.Name.Replace("Extractor", "");
             _file = $"cache_{name}.json";
             _cache = JsonTool.FromFile<D>(_file, true) ?? new D();
         }
@@ -25,19 +27,20 @@ namespace Generator.Extractors
         {
             if (byteArrays is not IReadOnlyList<byte[]> list)
                 throw new InvalidOperationException($"Not a list! {byteArrays.GetType().FullName}");
-            
+
             var ba = list
                 .Select(l => (a: l, c: IsArgCached(l, out var d) ? d : null))
                 .ToArray();
-            
+
             var cached = ba.Where(y => y.c != null).Select(x => x.c);
             foreach (var item in cached)
             {
                 yield return [item!];
             }
-            
+
             var missing = ba.Where(y => y.c == null).Select(x => x.a);
-            await foreach (var real in _extractor.Decode(missing))
+            await foreach (var real in _extractor?.Decode(missing)
+                                       ?? AsyncEnumerable.Empty<Decoded[]>())
             {
                 var isDirty = false;
                 foreach (var decoded in real)

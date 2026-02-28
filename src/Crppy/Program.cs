@@ -6,13 +6,14 @@ using Generator.Extractors;
 using Generator.Tools;
 using Iced.Intel;
 using Thawed;
+using WE = Generator.Extractors.WinExtractor;
 
 namespace Crppy
 {
     internal static class Program
     {
-        private static readonly WinExtractor Win = new();
-        private static readonly JsonExtractor WinC = new(Win);
+        private static readonly WE Win = new();
+        private static readonly JsonExtractor<WE> WinC = new();
 
         private static async Task Main2(string[] args)
         {
