@@ -8192,12 +8192,12 @@
     "Left": 0
   },
   "03FF": {
-    "Input": "03FF",
+    "Input": "03",
     "Offset": 0,
     "Count": 2,
     "Hex": "03FF",
     "Dis": "ADD     DI,DI",
-    "Left": 0
+    "Left": -1
   },
   "0400": {
     "Input": "0400",
@@ -10831,6 +10831,14 @@
     "Dis": "OR      AH,AH",
     "Left": 0
   },
+  "08FB": {
+    "Input": "08",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "08FB",
+    "Dis": "OR      BL,BH",
+    "Left": -1
+  },
   "08FF": {
     "Input": "08",
     "Offset": 0,
@@ -10871,6 +10879,14 @@
     "Dis": "OR      SP,DI",
     "Left": -1
   },
+  "09FF": {
+    "Input": "09",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "09FF",
+    "Dis": "OR      DI,DI",
+    "Left": -1
+  },
   "0AFB": {
     "Input": "0A",
     "Offset": 0,
@@ -10895,6 +10911,14 @@
     "Dis": "OR      DI,BX",
     "Left": -1
   },
+  "0CFB": {
+    "Input": "0C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "0CFB",
+    "Dis": "OR      AL,FB",
+    "Left": -1
+  },
   "0CFF": {
     "Input": "0C",
     "Offset": 0,
@@ -10909,6 +10933,14 @@
     "Count": 3,
     "Hex": "0DFB17",
     "Dis": "OR      AX,17FB",
+    "Left": -2
+  },
+  "0DFF17": {
+    "Input": "0D",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "0DFF17",
+    "Dis": "OR      AX,17FF",
     "Left": -2
   },
   "0E": {
@@ -10943,6 +10975,14 @@
     "Dis": "ADC     BL,BH",
     "Left": -1
   },
+  "10FF": {
+    "Input": "10",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "10FF",
+    "Dis": "ADC     BH,BH",
+    "Left": -1
+  },
   "11D8": {
     "Input": "11D8",
     "Offset": 0,
@@ -10965,6 +11005,14 @@
     "Count": 2,
     "Hex": "11FB",
     "Dis": "ADC     BX,DI",
+    "Left": -1
+  },
+  "11FF": {
+    "Input": "11",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "11FF",
+    "Dis": "ADC     DI,DI",
     "Left": -1
   },
   "12FB": {
@@ -10991,6 +11039,14 @@
     "Dis": "ADC     AL,FB",
     "Left": -1
   },
+  "14FF": {
+    "Input": "14",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "14FF",
+    "Dis": "ADC     AL,FF",
+    "Left": -1
+  },
   "15FB17": {
     "Input": "15",
     "Offset": 0,
@@ -10998,6 +11054,22 @@
     "Hex": "15FB17",
     "Dis": "ADC     AX,17FB",
     "Left": -2
+  },
+  "16": {
+    "Input": "16",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "16",
+    "Dis": "PUSH    SS",
+    "Left": 0
+  },
+  "17": {
+    "Input": "17",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "17",
+    "Dis": "POP     SS",
+    "Left": 0
   },
   "18E4": {
     "Input": "18E4",
@@ -11007,6 +11079,22 @@
     "Dis": "SBB     AH,AH",
     "Left": 0
   },
+  "18FB": {
+    "Input": "18",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "18FB",
+    "Dis": "SBB     BL,BH",
+    "Left": -1
+  },
+  "18FF": {
+    "Input": "18",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "18FF",
+    "Dis": "SBB     BH,BH",
+    "Left": -1
+  },
   "19DB": {
     "Input": "19DB",
     "Offset": 0,
@@ -11015,6 +11103,38 @@
     "Dis": "SBB     BX,BX",
     "Left": 0
   },
+  "19FB": {
+    "Input": "19",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "19FB",
+    "Dis": "SBB     BX,DI",
+    "Left": -1
+  },
+  "19FC": {
+    "Input": "19",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "19FC",
+    "Dis": "SBB     SP,DI",
+    "Left": -1
+  },
+  "1AFB": {
+    "Input": "1A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "1AFB",
+    "Dis": "SBB     BH,BL",
+    "Left": -1
+  },
+  "1BFB": {
+    "Input": "1B",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "1BFB",
+    "Dis": "SBB     DI,BX",
+    "Left": -1
+  },
   "1C08": {
     "Input": "1C08",
     "Offset": 0,
@@ -11022,6 +11142,30 @@
     "Hex": "1C08",
     "Dis": "SBB     AL,08",
     "Left": 0
+  },
+  "1CFB": {
+    "Input": "1C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "1CFB",
+    "Dis": "SBB     AL,FB",
+    "Left": -1
+  },
+  "1CFF": {
+    "Input": "1C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "1CFF",
+    "Dis": "SBB     AL,FF",
+    "Left": -1
+  },
+  "1DFB17": {
+    "Input": "1D",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "1DFB17",
+    "Dis": "SBB     AX,17FB",
+    "Left": -2
   },
   "1E": {
     "Input": "1E",
@@ -11047,6 +11191,22 @@
     "Dis": "AND     AH,AH",
     "Left": 0
   },
+  "20FB": {
+    "Input": "20",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "20FB",
+    "Dis": "AND     BL,BH",
+    "Left": -1
+  },
+  "20FF": {
+    "Input": "20",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "20FF",
+    "Dis": "AND     BH,BH",
+    "Left": -1
+  },
   "21D8": {
     "Input": "21D8",
     "Offset": 0,
@@ -11061,6 +11221,78 @@
     "Count": 2,
     "Hex": "21DB",
     "Dis": "AND     BX,BX",
+    "Left": 0
+  },
+  "21FB": {
+    "Input": "21",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "21FB",
+    "Dis": "AND     BX,DI",
+    "Left": -1
+  },
+  "21FF": {
+    "Input": "21",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "21FF",
+    "Dis": "AND     DI,DI",
+    "Left": -1
+  },
+  "22FB": {
+    "Input": "22",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "22FB",
+    "Dis": "AND     BH,BL",
+    "Left": -1
+  },
+  "22FF": {
+    "Input": "22",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "22FF",
+    "Dis": "AND     BH,BH",
+    "Left": -1
+  },
+  "23FB": {
+    "Input": "23",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "23FB",
+    "Dis": "AND     DI,BX",
+    "Left": -1
+  },
+  "24FB": {
+    "Input": "24",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "24FB",
+    "Dis": "AND     AL,FB",
+    "Left": -1
+  },
+  "24FF": {
+    "Input": "24",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "24FF",
+    "Dis": "AND     AL,FF",
+    "Left": -1
+  },
+  "25FB17": {
+    "Input": "25",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "25FB17",
+    "Dis": "AND     AX,17FB",
+    "Left": -2
+  },
+  "26": {
+    "Input": "26",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "26",
+    "Dis": "ES:     ",
     "Left": 0
   },
   "27": {
@@ -11079,6 +11311,14 @@
     "Dis": "SUB     AH,AH",
     "Left": 0
   },
+  "28FF": {
+    "Input": "28",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "28FF",
+    "Dis": "SUB     BH,BH",
+    "Left": -1
+  },
   "29DB": {
     "Input": "29DB",
     "Offset": 0,
@@ -11087,6 +11327,46 @@
     "Dis": "SUB     BX,BX",
     "Left": 0
   },
+  "29FB": {
+    "Input": "29",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "29FB",
+    "Dis": "SUB     BX,DI",
+    "Left": -1
+  },
+  "29FF": {
+    "Input": "29",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "29FF",
+    "Dis": "SUB     DI,DI",
+    "Left": -1
+  },
+  "2AFB": {
+    "Input": "2A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "2AFB",
+    "Dis": "SUB     BH,BL",
+    "Left": -1
+  },
+  "2BFB": {
+    "Input": "2B",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "2BFB",
+    "Dis": "SUB     DI,BX",
+    "Left": -1
+  },
+  "2BFF": {
+    "Input": "2B",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "2BFF",
+    "Dis": "SUB     DI,DI",
+    "Left": -1
+  },
   "2C08": {
     "Input": "2C08",
     "Offset": 0,
@@ -11094,6 +11374,38 @@
     "Hex": "2C08",
     "Dis": "SUB     AL,08",
     "Left": 0
+  },
+  "2CFB": {
+    "Input": "2C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "2CFB",
+    "Dis": "SUB     AL,FB",
+    "Left": -1
+  },
+  "2DFB17": {
+    "Input": "2D",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "2DFB17",
+    "Dis": "SUB     AX,17FB",
+    "Left": -2
+  },
+  "2E": {
+    "Input": "2E",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "2E",
+    "Dis": "CS:     ",
+    "Left": 0
+  },
+  "2EFF17": {
+    "Input": "2E",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "2EFF17",
+    "Dis": "CALL    CS:[BX]",
+    "Left": -2
   },
   "2F": {
     "Input": "2F",
@@ -11159,6 +11471,22 @@
     "Dis": "XOR     DH,DH",
     "Left": 0
   },
+  "30FB": {
+    "Input": "30",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "30FB",
+    "Dis": "XOR     BL,BH",
+    "Left": -1
+  },
+  "30FD": {
+    "Input": "30",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "30FD",
+    "Dis": "XOR     CH,BH",
+    "Left": -1
+  },
   "30FF": {
     "Input": "30FF",
     "Offset": 0,
@@ -11173,6 +11501,54 @@
     "Count": 2,
     "Hex": "31DB",
     "Dis": "XOR     BX,BX",
+    "Left": 0
+  },
+  "31FB": {
+    "Input": "31",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "31FB",
+    "Dis": "XOR     BX,DI",
+    "Left": -1
+  },
+  "32FB": {
+    "Input": "32",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "32FB",
+    "Dis": "XOR     BH,BL",
+    "Left": -1
+  },
+  "33FB": {
+    "Input": "33",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "33FB",
+    "Dis": "XOR     DI,BX",
+    "Left": -1
+  },
+  "34FB": {
+    "Input": "34",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "34FB",
+    "Dis": "XOR     AL,FB",
+    "Left": -1
+  },
+  "35FB17": {
+    "Input": "35",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "35FB17",
+    "Dis": "XOR     AX,17FB",
+    "Left": -2
+  },
+  "36": {
+    "Input": "36",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "36",
+    "Dis": "SS:     ",
     "Left": 0
   },
   "37": {
@@ -11239,6 +11615,22 @@
     "Dis": "CMP     DH,DH",
     "Left": 0
   },
+  "38FB": {
+    "Input": "38",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "38FB",
+    "Dis": "CMP     BL,BH",
+    "Left": -1
+  },
+  "38FC": {
+    "Input": "38",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "38FC",
+    "Dis": "CMP     AH,BH",
+    "Left": -1
+  },
   "38FF": {
     "Input": "38FF",
     "Offset": 0,
@@ -11255,6 +11647,62 @@
     "Dis": "CMP     BX,BX",
     "Left": 0
   },
+  "39FB": {
+    "Input": "39",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "39FB",
+    "Dis": "CMP     BX,DI",
+    "Left": -1
+  },
+  "3AFB": {
+    "Input": "3A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "3AFB",
+    "Dis": "CMP     BH,BL",
+    "Left": -1
+  },
+  "3BFB": {
+    "Input": "3B",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "3BFB",
+    "Dis": "CMP     DI,BX",
+    "Left": -1
+  },
+  "3CFB": {
+    "Input": "3C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "3CFB",
+    "Dis": "CMP     AL,FB",
+    "Left": -1
+  },
+  "3DFB17": {
+    "Input": "3D",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "3DFB17",
+    "Dis": "CMP     AX,17FB",
+    "Left": -2
+  },
+  "3DFF17": {
+    "Input": "3D",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "3DFF17",
+    "Dis": "CMP     AX,17FF",
+    "Left": -2
+  },
+  "3E": {
+    "Input": "3E",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "3E",
+    "Dis": "DS:     ",
+    "Left": 0
+  },
   "3F": {
     "Input": "3F",
     "Offset": 0,
@@ -11263,12 +11711,68 @@
     "Dis": "AAS     ",
     "Left": 0
   },
+  "40": {
+    "Input": "40",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "40",
+    "Dis": "INC     AX",
+    "Left": 0
+  },
+  "41": {
+    "Input": "41",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "41",
+    "Dis": "INC     CX",
+    "Left": 0
+  },
+  "42": {
+    "Input": "42",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "42",
+    "Dis": "INC     DX",
+    "Left": 0
+  },
   "43": {
     "Input": "43",
     "Offset": 0,
     "Count": 1,
     "Hex": "43",
     "Dis": "INC     BX",
+    "Left": 0
+  },
+  "44": {
+    "Input": "44",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "44",
+    "Dis": "INC     SP",
+    "Left": 0
+  },
+  "45": {
+    "Input": "45",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "45",
+    "Dis": "INC     BP",
+    "Left": 0
+  },
+  "46": {
+    "Input": "46",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "46",
+    "Dis": "INC     SI",
+    "Left": 0
+  },
+  "47": {
+    "Input": "47",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "47",
+    "Dis": "INC     DI",
     "Left": 0
   },
   "48": {
@@ -11487,6 +11991,38 @@
     "Dis": "BOUND   AX,Word Ptr [BX]",
     "Left": 0
   },
+  "62FB": {
+    "Input": "62",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "62FB",
+    "Dis": "BOUND   DI,BX",
+    "Left": -1
+  },
+  "63": {
+    "Input": "63",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "63",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "64": {
+    "Input": "64",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "64",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "65": {
+    "Input": "65",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "65",
+    "Dis": "???     ",
+    "Left": 0
+  },
   "66": {
     "Input": "6601C9",
     "Offset": 0,
@@ -11503,6 +12039,22 @@
     "Dis": "???     ",
     "Left": 8
   },
+  "68FF17": {
+    "Input": "68",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "68FF17",
+    "Dis": "PUSH    17FF",
+    "Left": -2
+  },
+  "69FB1700": {
+    "Input": "69",
+    "Offset": 0,
+    "Count": 4,
+    "Hex": "69FB1700",
+    "Dis": "IMUL    DI,BX,0017",
+    "Left": -3
+  },
   "6A09": {
     "Input": "6A09",
     "Offset": 0,
@@ -11511,6 +12063,22 @@
     "Dis": "PUSH    09",
     "Left": 0
   },
+  "6AFB": {
+    "Input": "6A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "6AFB",
+    "Dis": "PUSH    FB",
+    "Left": -1
+  },
+  "6AFF": {
+    "Input": "6A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "6AFF",
+    "Dis": "PUSH    FF",
+    "Left": -1
+  },
   "6BDB09": {
     "Input": "6BDB09",
     "Offset": 0,
@@ -11518,6 +12086,14 @@
     "Hex": "6BDB09",
     "Dis": "IMUL    BX,BX,09",
     "Left": 0
+  },
+  "6BFB17": {
+    "Input": "6B",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "6BFB17",
+    "Dis": "IMUL    DI,BX,17",
+    "Left": -2
   },
   "6C": {
     "Input": "6C",
@@ -11583,6 +12159,14 @@
     "Dis": "JO      000D",
     "Left": 0
   },
+  "70FB": {
+    "Input": "70",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "70FB",
+    "Dis": "JO      FFFD",
+    "Left": -1
+  },
   "70FE": {
     "Input": "70FE",
     "Offset": 0,
@@ -11630,6 +12214,14 @@
     "Hex": "710B",
     "Dis": "JNO     000D",
     "Left": 0
+  },
+  "71FB": {
+    "Input": "71",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "71FB",
+    "Dis": "JNO     FFFD",
+    "Left": -1
   },
   "71FE": {
     "Input": "71FE",
@@ -11679,6 +12271,14 @@
     "Dis": "JB      000D",
     "Left": 0
   },
+  "72FB": {
+    "Input": "72",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "72FB",
+    "Dis": "JB      FFFD",
+    "Left": -1
+  },
   "72FE": {
     "Input": "72FE",
     "Offset": 0,
@@ -11688,12 +12288,12 @@
     "Left": 0
   },
   "72FF": {
-    "Input": "72FF",
+    "Input": "72",
     "Offset": 0,
     "Count": 2,
     "Hex": "72FF",
     "Dis": "JB      0001",
-    "Left": 0
+    "Left": -1
   },
   "7301": {
     "Input": "7301",
@@ -11727,6 +12327,14 @@
     "Dis": "JNB     000D",
     "Left": 0
   },
+  "73FB": {
+    "Input": "73",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "73FB",
+    "Dis": "JNB     FFFD",
+    "Left": -1
+  },
   "73FE": {
     "Input": "73FE",
     "Offset": 0,
@@ -11736,12 +12344,12 @@
     "Left": 0
   },
   "73FF": {
-    "Input": "73FF",
+    "Input": "73",
     "Offset": 0,
     "Count": 2,
     "Hex": "73FF",
     "Dis": "JNB     0001",
-    "Left": 0
+    "Left": -1
   },
   "7401": {
     "Input": "7401",
@@ -11774,6 +12382,14 @@
     "Hex": "740B",
     "Dis": "JZ      000D",
     "Left": 0
+  },
+  "74FB": {
+    "Input": "74",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "74FB",
+    "Dis": "JZ      FFFD",
+    "Left": -1
   },
   "74FE": {
     "Input": "74FE",
@@ -11823,6 +12439,14 @@
     "Dis": "JNZ     000D",
     "Left": 0
   },
+  "75FB": {
+    "Input": "75",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "75FB",
+    "Dis": "JNZ     FFFD",
+    "Left": -1
+  },
   "75FE": {
     "Input": "75FE",
     "Offset": 0,
@@ -11870,6 +12494,14 @@
     "Hex": "760B",
     "Dis": "JBE     000D",
     "Left": 0
+  },
+  "76FB": {
+    "Input": "76",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "76FB",
+    "Dis": "JBE     FFFD",
+    "Left": -1
   },
   "76FE": {
     "Input": "76FE",
@@ -11919,6 +12551,14 @@
     "Dis": "JA      000D",
     "Left": 0
   },
+  "77FB": {
+    "Input": "77",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "77FB",
+    "Dis": "JA      FFFD",
+    "Left": -1
+  },
   "77FE": {
     "Input": "77FE",
     "Offset": 0,
@@ -11966,6 +12606,14 @@
     "Hex": "780B",
     "Dis": "JS      000D",
     "Left": 0
+  },
+  "78FB": {
+    "Input": "78",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "78FB",
+    "Dis": "JS      FFFD",
+    "Left": -1
   },
   "78FE": {
     "Input": "78FE",
@@ -12015,6 +12663,14 @@
     "Dis": "JNS     000D",
     "Left": 0
   },
+  "79FB": {
+    "Input": "79",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "79FB",
+    "Dis": "JNS     FFFD",
+    "Left": -1
+  },
   "79FE": {
     "Input": "79FE",
     "Offset": 0,
@@ -12024,12 +12680,12 @@
     "Left": 0
   },
   "79FF": {
-    "Input": "79FF",
+    "Input": "79",
     "Offset": 0,
     "Count": 2,
     "Hex": "79FF",
     "Dis": "JNS     0001",
-    "Left": 0
+    "Left": -1
   },
   "7A01": {
     "Input": "7A01",
@@ -12063,6 +12719,14 @@
     "Dis": "JPE     000D",
     "Left": 0
   },
+  "7AFB": {
+    "Input": "7A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7AFB",
+    "Dis": "JPE     FFFD",
+    "Left": -1
+  },
   "7AFE": {
     "Input": "7AFE",
     "Offset": 0,
@@ -12072,12 +12736,12 @@
     "Left": 0
   },
   "7AFF": {
-    "Input": "7AFF",
+    "Input": "7A",
     "Offset": 0,
     "Count": 2,
     "Hex": "7AFF",
     "Dis": "JPE     0001",
-    "Left": 0
+    "Left": -1
   },
   "7B01": {
     "Input": "7B01",
@@ -12110,6 +12774,14 @@
     "Hex": "7B0B",
     "Dis": "JPO     000D",
     "Left": 0
+  },
+  "7BFB": {
+    "Input": "7B",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7BFB",
+    "Dis": "JPO     FFFD",
+    "Left": -1
   },
   "7BFE": {
     "Input": "7BFE",
@@ -12159,6 +12831,14 @@
     "Dis": "JL      000D",
     "Left": 0
   },
+  "7CFB": {
+    "Input": "7C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7CFB",
+    "Dis": "JL      FFFD",
+    "Left": -1
+  },
   "7CFE": {
     "Input": "7CFE",
     "Offset": 0,
@@ -12168,12 +12848,12 @@
     "Left": 0
   },
   "7CFF": {
-    "Input": "7CFF",
+    "Input": "7C",
     "Offset": 0,
     "Count": 2,
     "Hex": "7CFF",
     "Dis": "JL      0001",
-    "Left": 0
+    "Left": -1
   },
   "7D01": {
     "Input": "7D01",
@@ -12207,6 +12887,14 @@
     "Dis": "JGE     000D",
     "Left": 0
   },
+  "7DFB": {
+    "Input": "7D",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7DFB",
+    "Dis": "JGE     FFFD",
+    "Left": -1
+  },
   "7DFE": {
     "Input": "7DFE",
     "Offset": 0,
@@ -12216,12 +12904,12 @@
     "Left": 0
   },
   "7DFF": {
-    "Input": "7DFF",
+    "Input": "7D",
     "Offset": 0,
     "Count": 2,
     "Hex": "7DFF",
     "Dis": "JGE     0001",
-    "Left": 0
+    "Left": -1
   },
   "7E01": {
     "Input": "7E01",
@@ -12254,6 +12942,14 @@
     "Hex": "7E0B",
     "Dis": "JLE     000D",
     "Left": 0
+  },
+  "7EFB": {
+    "Input": "7E",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7EFB",
+    "Dis": "JLE     FFFD",
+    "Left": -1
   },
   "7EFE": {
     "Input": "7EFE",
@@ -12302,6 +12998,22 @@
     "Hex": "7F0B",
     "Dis": "JG      000D",
     "Left": 0
+  },
+  "7FFB": {
+    "Input": "7F",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7FFB",
+    "Dis": "JG      FFFD",
+    "Left": -1
+  },
+  "7FFC": {
+    "Input": "7F",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "7FFC",
+    "Dis": "JG      FFFE",
+    "Left": -1
   },
   "7FFE": {
     "Input": "7FFE",
@@ -12495,6 +13207,38 @@
     "Dis": "CMP     AH,09",
     "Left": 0
   },
+  "80FF17": {
+    "Input": "80",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "80FF17",
+    "Dis": "CMP     BH,17",
+    "Left": -2
+  },
+  "81FB1700": {
+    "Input": "81",
+    "Offset": 0,
+    "Count": 4,
+    "Hex": "81FB1700",
+    "Dis": "CMP     BX,0017",
+    "Left": -3
+  },
+  "82FB17": {
+    "Input": "82",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "82FB17",
+    "Dis": "CMP     BL,17",
+    "Left": -2
+  },
+  "82FC17": {
+    "Input": "82",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "82FC17",
+    "Dis": "CMP     AH,17",
+    "Left": -2
+  },
   "83C309": {
     "Input": "83C309",
     "Offset": 0,
@@ -12559,6 +13303,14 @@
     "Dis": "CMP     BX,+09",
     "Left": 0
   },
+  "83FB17": {
+    "Input": "83",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "83FB17",
+    "Dis": "CMP     BX,+17",
+    "Left": -2
+  },
   "84E4": {
     "Input": "84E4",
     "Offset": 0,
@@ -12567,6 +13319,14 @@
     "Dis": "TEST    AH,AH",
     "Left": 0
   },
+  "84FB": {
+    "Input": "84",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "84FB",
+    "Dis": "TEST    BL,BH",
+    "Left": -1
+  },
   "85DB": {
     "Input": "85DB",
     "Offset": 0,
@@ -12574,6 +13334,14 @@
     "Hex": "85DB",
     "Dis": "TEST    BX,BX",
     "Left": 0
+  },
+  "85FB": {
+    "Input": "85",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "85FB",
+    "Dis": "TEST    BX,DI",
+    "Left": -1
   },
   "86C0": {
     "Input": "86C0",
@@ -12631,6 +13399,14 @@
     "Dis": "XCHG    DH,DH",
     "Left": 0
   },
+  "86FB": {
+    "Input": "86",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "86FB",
+    "Dis": "XCHG    BL,BH",
+    "Left": -1
+  },
   "86FF": {
     "Input": "86FF",
     "Offset": 0,
@@ -12647,6 +13423,14 @@
     "Dis": "XCHG    BX,BX",
     "Left": 0
   },
+  "87FB": {
+    "Input": "87",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "87FB",
+    "Dis": "XCHG    BX,DI",
+    "Left": -1
+  },
   "88E4": {
     "Input": "88E4",
     "Offset": 0,
@@ -12654,6 +13438,14 @@
     "Hex": "88E4",
     "Dis": "MOV     AH,AH",
     "Left": 0
+  },
+  "88FB": {
+    "Input": "88",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "88FB",
+    "Dis": "MOV     BL,BH",
+    "Left": -1
   },
   "89D8": {
     "Input": "89D8",
@@ -12671,6 +13463,38 @@
     "Dis": "MOV     BX,BX",
     "Left": 0
   },
+  "89FB": {
+    "Input": "89",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "89FB",
+    "Dis": "MOV     BX,DI",
+    "Left": -1
+  },
+  "89FF": {
+    "Input": "89",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "89FF",
+    "Dis": "MOV     DI,DI",
+    "Left": -1
+  },
+  "8AFB": {
+    "Input": "8A",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8AFB",
+    "Dis": "MOV     BH,BL",
+    "Left": -1
+  },
+  "8BFB": {
+    "Input": "8B",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8BFB",
+    "Dis": "MOV     DI,BX",
+    "Left": -1
+  },
   "8CDB": {
     "Input": "8CDB",
     "Offset": 0,
@@ -12678,6 +13502,14 @@
     "Hex": "8CDB",
     "Dis": "MOV     BX,DS",
     "Left": 0
+  },
+  "8CFB": {
+    "Input": "8C",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8CFB",
+    "Dis": "MOV     BX,DS",
+    "Left": -1
   },
   "8D07": {
     "Input": "8D07",
@@ -12687,6 +13519,22 @@
     "Dis": "LEA     AX,[BX]",
     "Left": 0
   },
+  "8DFB": {
+    "Input": "8D",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8DFB",
+    "Dis": "LEA     DI,BX",
+    "Left": -1
+  },
+  "8DFD": {
+    "Input": "8D",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8DFD",
+    "Dis": "LEA     DI,BP",
+    "Left": -1
+  },
   "8EDB": {
     "Input": "8EDB",
     "Offset": 0,
@@ -12695,12 +13543,84 @@
     "Dis": "MOV     DS,BX",
     "Left": 0
   },
+  "8EFB": {
+    "Input": "8E",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8EFB",
+    "Dis": "MOV     DS,BX",
+    "Left": -1
+  },
+  "8FFB": {
+    "Input": "8F",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "8FFB",
+    "Dis": "POP     BX",
+    "Left": -1
+  },
   "90": {
     "Input": "90",
     "Offset": 0,
     "Count": 1,
     "Hex": "90",
     "Dis": "NOP     ",
+    "Left": 0
+  },
+  "91": {
+    "Input": "91",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "91",
+    "Dis": "XCHG    AX,CX",
+    "Left": 0
+  },
+  "92": {
+    "Input": "92",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "92",
+    "Dis": "XCHG    AX,DX",
+    "Left": 0
+  },
+  "93": {
+    "Input": "93",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "93",
+    "Dis": "XCHG    AX,BX",
+    "Left": 0
+  },
+  "94": {
+    "Input": "94",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "94",
+    "Dis": "XCHG    AX,SP",
+    "Left": 0
+  },
+  "95": {
+    "Input": "95",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "95",
+    "Dis": "XCHG    AX,BP",
+    "Left": 0
+  },
+  "96": {
+    "Input": "96",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "96",
+    "Dis": "XCHG    AX,SI",
+    "Left": 0
+  },
+  "97": {
+    "Input": "97",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "97",
+    "Dis": "XCHG    AX,DI",
     "Left": 0
   },
   "98": {
@@ -12726,6 +13646,22 @@
     "Hex": "9A09000900",
     "Dis": "CALL    0009:0009",
     "Left": 0
+  },
+  "9AFB1700D8": {
+    "Input": "9A",
+    "Offset": 0,
+    "Count": 5,
+    "Hex": "9AFB1700D8",
+    "Dis": "CALL    D800:17FB",
+    "Left": -4
+  },
+  "9AFF1700D8": {
+    "Input": "9A",
+    "Offset": 0,
+    "Count": 5,
+    "Hex": "9AFF1700D8",
+    "Dis": "CALL    D800:17FF",
+    "Left": -4
   },
   "9B": {
     "Input": "9B",
@@ -12767,6 +13703,38 @@
     "Dis": "LAHF    ",
     "Left": 0
   },
+  "A0FB17": {
+    "Input": "A0",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "A0FB17",
+    "Dis": "MOV     AL,[17FB]",
+    "Left": -2
+  },
+  "A1FB17": {
+    "Input": "A1",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "A1FB17",
+    "Dis": "MOV     AX,[17FB]",
+    "Left": -2
+  },
+  "A2FB17": {
+    "Input": "A2",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "A2FB17",
+    "Dis": "MOV     [17FB],AL",
+    "Left": -2
+  },
+  "A3FB17": {
+    "Input": "A3",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "A3FB17",
+    "Dis": "MOV     [17FB],AX",
+    "Left": -2
+  },
   "A4": {
     "Input": "A4",
     "Offset": 0,
@@ -12806,6 +13774,22 @@
     "Hex": "A808",
     "Dis": "TEST    AL,08",
     "Left": 0
+  },
+  "A8FB": {
+    "Input": "A8",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "A8FB",
+    "Dis": "TEST    AL,FB",
+    "Left": -1
+  },
+  "A9FB17": {
+    "Input": "A9",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "A9FB17",
+    "Dis": "TEST    AX,17FB",
+    "Left": -2
   },
   "AA": {
     "Input": "AA",
@@ -12855,6 +13839,54 @@
     "Dis": "SCASW   ",
     "Left": 0
   },
+  "B0FB": {
+    "Input": "B0",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B0FB",
+    "Dis": "MOV     AL,FB",
+    "Left": -1
+  },
+  "B1FB": {
+    "Input": "B1",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B1FB",
+    "Dis": "MOV     CL,FB",
+    "Left": -1
+  },
+  "B1FF": {
+    "Input": "B1",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B1FF",
+    "Dis": "MOV     CL,FF",
+    "Left": -1
+  },
+  "B2FB": {
+    "Input": "B2",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B2FB",
+    "Dis": "MOV     DL,FB",
+    "Left": -1
+  },
+  "B2FF": {
+    "Input": "B2",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B2FF",
+    "Dis": "MOV     DL,FF",
+    "Left": -1
+  },
+  "B3FB": {
+    "Input": "B3",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B3FB",
+    "Dis": "MOV     BL,FB",
+    "Left": -1
+  },
   "B409": {
     "Input": "B409",
     "Offset": 0,
@@ -12863,6 +13895,70 @@
     "Dis": "MOV     AH,09",
     "Left": 0
   },
+  "B4FB": {
+    "Input": "B4",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B4FB",
+    "Dis": "MOV     AH,FB",
+    "Left": -1
+  },
+  "B5FB": {
+    "Input": "B5",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B5FB",
+    "Dis": "MOV     CH,FB",
+    "Left": -1
+  },
+  "B6FB": {
+    "Input": "B6",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B6FB",
+    "Dis": "MOV     DH,FB",
+    "Left": -1
+  },
+  "B7FB": {
+    "Input": "B7",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "B7FB",
+    "Dis": "MOV     BH,FB",
+    "Left": -1
+  },
+  "B8FB17": {
+    "Input": "B8",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "B8FB17",
+    "Dis": "MOV     AX,17FB",
+    "Left": -2
+  },
+  "B9FB17": {
+    "Input": "B9",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "B9FB17",
+    "Dis": "MOV     CX,17FB",
+    "Left": -2
+  },
+  "B9FF17": {
+    "Input": "B9",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "B9FF17",
+    "Dis": "MOV     CX,17FF",
+    "Left": -2
+  },
+  "BAFB17": {
+    "Input": "BA",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BAFB17",
+    "Dis": "MOV     DX,17FB",
+    "Left": -2
+  },
   "BB0900": {
     "Input": "BB0900",
     "Offset": 0,
@@ -12870,6 +13966,54 @@
     "Hex": "BB0900",
     "Dis": "MOV     BX,0009",
     "Left": 0
+  },
+  "BBFB17": {
+    "Input": "BB",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BBFB17",
+    "Dis": "MOV     BX,17FB",
+    "Left": -2
+  },
+  "BCFB17": {
+    "Input": "BC",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BCFB17",
+    "Dis": "MOV     SP,17FB",
+    "Left": -2
+  },
+  "BCFF17": {
+    "Input": "BC",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BCFF17",
+    "Dis": "MOV     SP,17FF",
+    "Left": -2
+  },
+  "BDFB17": {
+    "Input": "BD",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BDFB17",
+    "Dis": "MOV     BP,17FB",
+    "Left": -2
+  },
+  "BEFB17": {
+    "Input": "BE",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BEFB17",
+    "Dis": "MOV     SI,17FB",
+    "Left": -2
+  },
+  "BFFB17": {
+    "Input": "BF",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "BFFB17",
+    "Dis": "MOV     DI,17FB",
+    "Left": -2
   },
   "C0C008": {
     "Input": "C0C008",
@@ -13335,6 +14479,14 @@
     "Dis": "SAR     BL,08",
     "Left": 0
   },
+  "C0FB17": {
+    "Input": "C0",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "C0FB17",
+    "Dis": "SAR     BL,17",
+    "Left": -2
+  },
   "C0FC08": {
     "Input": "C0FC08",
     "Offset": 0,
@@ -13431,6 +14583,22 @@
     "Dis": "SAR     BX,09",
     "Left": 0
   },
+  "C1FB17": {
+    "Input": "C1",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "C1FB17",
+    "Dis": "SAR     BX,17",
+    "Left": -2
+  },
+  "C1FC17": {
+    "Input": "C1",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "C1FC17",
+    "Dis": "SAR     SP,17",
+    "Left": -2
+  },
   "C20900": {
     "Input": "C20900",
     "Offset": 0,
@@ -13438,6 +14606,14 @@
     "Hex": "C20900",
     "Dis": "RET     0009",
     "Left": 0
+  },
+  "C2FB17": {
+    "Input": "C2",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "C2FB17",
+    "Dis": "RET     17FB",
+    "Left": -2
   },
   "C3": {
     "Input": "C3",
@@ -13455,6 +14631,14 @@
     "Dis": "LES     AX,DWord Ptr [BX]",
     "Left": 0
   },
+  "C4FB": {
+    "Input": "C4",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "C4FB",
+    "Dis": "LES     DI,DBX",
+    "Left": -1
+  },
   "C507": {
     "Input": "C507",
     "Offset": 0,
@@ -13462,6 +14646,38 @@
     "Hex": "C507",
     "Dis": "LDS     AX,DWord Ptr [BX]",
     "Left": 0
+  },
+  "C5FB": {
+    "Input": "C5",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "C5FB",
+    "Dis": "LDS     DI,DBX",
+    "Left": -1
+  },
+  "C6FB17": {
+    "Input": "C6",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "C6FB17",
+    "Dis": "MOV     BL,17",
+    "Left": -2
+  },
+  "C7FB1700": {
+    "Input": "C7",
+    "Offset": 0,
+    "Count": 4,
+    "Hex": "C7FB1700",
+    "Dis": "MOV     BX,0017",
+    "Left": -3
+  },
+  "C7FF1700": {
+    "Input": "C7",
+    "Offset": 0,
+    "Count": 4,
+    "Hex": "C7FF1700",
+    "Dis": "MOV     DI,0017",
+    "Left": -3
   },
   "C8090007": {
     "Input": "C8090007",
@@ -13479,6 +14695,14 @@
     "Dis": "ENTER   0009,09",
     "Left": 0
   },
+  "C8FB1700": {
+    "Input": "C8",
+    "Offset": 0,
+    "Count": 4,
+    "Hex": "C8FB1700",
+    "Dis": "ENTER   17FB,00",
+    "Left": -3
+  },
   "C9": {
     "Input": "C9",
     "Offset": 0,
@@ -13494,6 +14718,14 @@
     "Hex": "CA0900",
     "Dis": "RETF    0009",
     "Left": 0
+  },
+  "CAFB17": {
+    "Input": "CA",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "CAFB17",
+    "Dis": "RETF    17FB",
+    "Left": -2
   },
   "CB": {
     "Input": "CB",
@@ -13551,6 +14783,22 @@
     "Dis": "INT     0D",
     "Left": 0
   },
+  "CDFB": {
+    "Input": "CD",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "CDFB",
+    "Dis": "INT     FB",
+    "Left": -1
+  },
+  "CDFC": {
+    "Input": "CD",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "CDFC",
+    "Dis": "INT     FC",
+    "Left": -1
+  },
   "CE": {
     "Input": "CE",
     "Offset": 0,
@@ -13566,6 +14814,38 @@
     "Hex": "CF",
     "Dis": "IRET    ",
     "Left": 0
+  },
+  "D0FB": {
+    "Input": "D0",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "D0FB",
+    "Dis": "SAR     BL,1",
+    "Left": -1
+  },
+  "D1FB": {
+    "Input": "D1",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "D1FB",
+    "Dis": "SAR     BX,1",
+    "Left": -1
+  },
+  "D2FB": {
+    "Input": "D2",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "D2FB",
+    "Dis": "SAR     BL,CL",
+    "Left": -1
+  },
+  "D3FB": {
+    "Input": "D3",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "D3FB",
+    "Dis": "SAR     BX,CL",
+    "Left": -1
   },
   "D4": {
     "Input": "D409",
@@ -13583,12 +14863,84 @@
     "Dis": "???     ",
     "Left": 1
   },
+  "D6": {
+    "Input": "D6",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "D6",
+    "Dis": "???     ",
+    "Left": 0
+  },
   "D7": {
     "Input": "D7",
     "Offset": 0,
     "Count": 1,
     "Hex": "D7",
     "Dis": "XLAT    ",
+    "Left": 0
+  },
+  "D8": {
+    "Input": "D8",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "D8",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "D9": {
+    "Input": "D9",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "D9",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "DA": {
+    "Input": "DA",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "DA",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "DB": {
+    "Input": "DB",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "DB",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "DC": {
+    "Input": "DC",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "DC",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "DD": {
+    "Input": "DD",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "DD",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "DE": {
+    "Input": "DE",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "DE",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "DF": {
+    "Input": "DF",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "DF",
+    "Dis": "???     ",
     "Left": 0
   },
   "E001": {
@@ -13623,6 +14975,14 @@
     "Dis": "LOOPNZ  000D",
     "Left": 0
   },
+  "E0FB": {
+    "Input": "E0",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E0FB",
+    "Dis": "LOOPNZ  FFFD",
+    "Left": -1
+  },
   "E0FE": {
     "Input": "E0FE",
     "Offset": 0,
@@ -13632,12 +14992,12 @@
     "Left": 0
   },
   "E0FF": {
-    "Input": "E0FF",
+    "Input": "E0",
     "Offset": 0,
     "Count": 2,
     "Hex": "E0FF",
     "Dis": "LOOPNZ  0001",
-    "Left": 0
+    "Left": -1
   },
   "E101": {
     "Input": "E101",
@@ -13670,6 +15030,14 @@
     "Hex": "E10B",
     "Dis": "LOOPZ   000D",
     "Left": 0
+  },
+  "E1FB": {
+    "Input": "E1",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E1FB",
+    "Dis": "LOOPZ   FFFD",
+    "Left": -1
   },
   "E1FE": {
     "Input": "E1FE",
@@ -13719,6 +15087,14 @@
     "Dis": "LOOP    000D",
     "Left": 0
   },
+  "E2FC": {
+    "Input": "E2",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E2FC",
+    "Dis": "LOOP    FFFE",
+    "Left": -1
+  },
   "E2FE": {
     "Input": "E2FE",
     "Offset": 0,
@@ -13767,6 +15143,14 @@
     "Dis": "JCXZ    000D",
     "Left": 0
   },
+  "E3FB": {
+    "Input": "E3",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E3FB",
+    "Dis": "JCXZ    FFFD",
+    "Left": -1
+  },
   "E3FE": {
     "Input": "E3FE",
     "Offset": 0,
@@ -13783,6 +15167,46 @@
     "Dis": "JCXZ    0001",
     "Left": 0
   },
+  "E4FB": {
+    "Input": "E4",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E4FB",
+    "Dis": "IN      AL,FB",
+    "Left": -1
+  },
+  "E5FF": {
+    "Input": "E5",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E5FF",
+    "Dis": "IN      AX,FF",
+    "Left": -1
+  },
+  "E6FB": {
+    "Input": "E6",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E6FB",
+    "Dis": "OUT     FB,AL",
+    "Left": -1
+  },
+  "E6FF": {
+    "Input": "E6",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E6FF",
+    "Dis": "OUT     FF,AL",
+    "Left": -1
+  },
+  "E7FB": {
+    "Input": "E7",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "E7FB",
+    "Dis": "OUT     FB,AX",
+    "Left": -1
+  },
   "E80600": {
     "Input": "E80600",
     "Offset": 0,
@@ -13790,6 +15214,14 @@
     "Hex": "E80600",
     "Dis": "CALL    0009",
     "Left": 0
+  },
+  "E8FB17": {
+    "Input": "E8",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "E8FB17",
+    "Dis": "CALL    17FE",
+    "Left": -2
   },
   "E8FEFF": {
     "Input": "E8FEFF",
@@ -13799,6 +15231,22 @@
     "Dis": "CALL    0001",
     "Left": 0
   },
+  "E9FB17": {
+    "Input": "E9",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "E9FB17",
+    "Dis": "JMP     17FE",
+    "Left": -2
+  },
+  "E9FF17": {
+    "Input": "E9",
+    "Offset": 0,
+    "Count": 3,
+    "Hex": "E9FF17",
+    "Dis": "JMP     1802",
+    "Left": -2
+  },
   "EA09000900": {
     "Input": "EA09000900",
     "Offset": 0,
@@ -13806,6 +15254,14 @@
     "Hex": "EA09000900",
     "Dis": "JMP     0009:0009",
     "Left": 0
+  },
+  "EAFB1700D8": {
+    "Input": "EA",
+    "Offset": 0,
+    "Count": 5,
+    "Hex": "EAFB1700D8",
+    "Dis": "JMP     D800:17FB",
+    "Left": -4
   },
   "EB07": {
     "Input": "EB07",
@@ -13815,12 +15271,84 @@
     "Dis": "JMP     0009",
     "Left": 0
   },
+  "EBFB": {
+    "Input": "EB",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "EBFB",
+    "Dis": "JMP     FFFD",
+    "Left": -1
+  },
   "EBFF": {
     "Input": "EBFF",
     "Offset": 0,
     "Count": 2,
     "Hex": "EBFF",
     "Dis": "JMP     0001",
+    "Left": 0
+  },
+  "EC": {
+    "Input": "EC",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "EC",
+    "Dis": "IN      AL,DX",
+    "Left": 0
+  },
+  "ED": {
+    "Input": "ED",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "ED",
+    "Dis": "IN      AX,DX",
+    "Left": 0
+  },
+  "EE": {
+    "Input": "EE",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "EE",
+    "Dis": "OUT     DX,AL",
+    "Left": 0
+  },
+  "EF": {
+    "Input": "EF",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "EF",
+    "Dis": "OUT     DX,AX",
+    "Left": 0
+  },
+  "F0": {
+    "Input": "F0",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "F0",
+    "Dis": "LOCK    ",
+    "Left": 0
+  },
+  "F1": {
+    "Input": "F1",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "F1",
+    "Dis": "???     ",
+    "Left": 0
+  },
+  "F2": {
+    "Input": "F2",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "F2",
+    "Dis": "REPNE   ",
+    "Left": 0
+  },
+  "F3": {
+    "Input": "F3",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "F3",
+    "Dis": "REPE    ",
     "Left": 0
   },
   "F4": {
@@ -13942,6 +15470,14 @@
     "Hex": "F6F4",
     "Dis": "DIV     AH",
     "Left": 0
+  },
+  "F6FB": {
+    "Input": "F6",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "F6FB",
+    "Dis": "IDIV    BL",
+    "Left": -1
   },
   "F6FC": {
     "Input": "F6FC",
@@ -14304,20 +15840,20 @@
     "Left": 0
   },
   "F7FB": {
-    "Input": "F7FB",
+    "Input": "F7",
     "Offset": 0,
     "Count": 2,
     "Hex": "F7FB",
     "Dis": "IDIV    BX",
-    "Left": 0
+    "Left": -1
   },
   "F7FC": {
-    "Input": "F7FC",
+    "Input": "F7",
     "Offset": 0,
     "Count": 2,
     "Hex": "F7FC",
     "Dis": "IDIV    SP",
-    "Left": 0
+    "Left": -1
   },
   "F7FD": {
     "Input": "F7FD",
@@ -14461,6 +15997,22 @@
     "Count": 2,
     "Hex": "FECC",
     "Dis": "DEC     AH",
+    "Left": 0
+  },
+  "FEFB": {
+    "Input": "FE",
+    "Offset": 0,
+    "Count": 2,
+    "Hex": "FEFB",
+    "Dis": "DEC     BL",
+    "Left": -1
+  },
+  "FF": {
+    "Input": "FF",
+    "Offset": 0,
+    "Count": 1,
+    "Hex": "FF",
+    "Dis": "???     ",
     "Left": 0
   },
   "FFD0": {
