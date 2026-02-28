@@ -34,7 +34,16 @@ namespace Generator.Extractors
             return mem.ToArray();
         }
 
-        public static IEnumerable<byte[]> AddFuzzy(this IEnumerable<byte[]> bytes)
+        public static byte[][] GetAllCandidates()
+        {
+            var num08 = IterTool.Iter8Bit().Select(BitTool.AsByte);
+            var num16 = IterTool.Iter16Bit().Select(BitTool.AsShort);
+            var numbers = num08.Concat(num16);
+            var cands = numbers.AddFuzzy().ToArray();
+            return cands;
+        }
+
+        private static IEnumerable<byte[]> AddFuzzy(this IEnumerable<byte[]> bytes)
         {
             var dict = new SortedDictionary<string, byte[]>();
             Fuzzer.DoAll(a =>
@@ -47,7 +56,11 @@ namespace Generator.Extractors
             {
                 dict[Convert.ToHexString(bits)] = bits;
             }
-            return bytes.Concat(dict.Values);
+            foreach (var bits in bytes)
+            {
+                dict[Convert.ToHexString(bits)] = bits;
+            }
+            return dict.Values;
         }
         
         private static IEnumerable<byte[]> GoAll()

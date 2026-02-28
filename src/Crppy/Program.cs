@@ -15,7 +15,7 @@ namespace Crppy
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
-            var byteArrays = FuzzerX.AddFuzzy([]);
+            var byteArrays = FuzzerX.GetAllCandidates();
             await foreach (var lines in WinC.Decode(byteArrays))
             {
                 foreach (var line in lines)

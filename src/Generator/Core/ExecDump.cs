@@ -21,7 +21,7 @@ namespace Generator.Core
                 return;
             }
 
-            var cands = GetAllCandidates();
+            var cands = FuzzerX.GetAllCandidates();
             var appS = (o.Misc ?? "").Split(';');
 
             var extractors = CreateExtractors(appS);
@@ -30,13 +30,6 @@ namespace Generator.Core
             );
 
             Console.WriteLine("Done.");
-        }
-
-        internal static byte[][] GetAllCandidates()
-        {
-            var numbers = IterTool.Iter16Bit();
-            var cands = numbers.Select(BitTool.AsShort).AddFuzzy().ToArray();
-            return cands;
         }
 
         private static IEnumerable<IExtractor> CreateExtractors(string[] apps)

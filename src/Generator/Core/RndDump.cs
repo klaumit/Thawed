@@ -78,7 +78,7 @@ namespace Generator.Core
 
             async Task Produce()
             {
-                foreach (var item in ExecDump.GetAllCandidates())
+                foreach (var item in FuzzerX.GetAllCandidates())
                 {
                     var array = GetRandomArray(item);
                     await writer.WriteAsync(array);
