@@ -49,7 +49,7 @@ namespace Crppy
                 {
                     if (line.O != 0) continue;
                     var bytes = Convert.FromHexString(line.H);
-                    if (bytes.Length >= 2) continue;
+                    // if (bytes.Length >= 3) continue;
                     if (line.D.Contains("???")) continue;
                     var parts = line.D.Split(" ", 2);
                     var op = parts[0].Trim();

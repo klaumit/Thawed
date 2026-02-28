@@ -45,20 +45,74 @@ namespace Thawed.Auto
         {
             return new I(O.Aas);
         }
-        
-        internal static I Adc(params A[] args)
+
+        /// <summary>
+        /// Add with carry imm to accumulator
+        /// <remarks>ADC</remarks>
+        /// </summary>
+        internal static I? AdcAx(byte? v0)
         {
-            return new I(O.Adc, args);
+            return v0 is { } b0 ? new I(O.Adc, b0) : null;
+        }
+
+        /// <summary>
+        /// Add with carry imm to accumulator
+        /// <remarks>ADC</remarks>
+        /// </summary>
+        internal static I? AdcAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Adc, b0, b1) : null;
+        }
+
+        internal static I Adc()
+        {
+            return new I(O.Adc);
         }
         
-        internal static I Add(params A[] args)
+        internal static I Add()
         {
-            return new I(O.Add, args);
+            return new I(O.Add);
         }
         
-        internal static I And(params A[] args)
+        /// <summary>
+        /// Add imm to accumulator
+        /// <remarks>ADD</remarks>
+        /// </summary>
+        internal static I? AddAx(byte? v0)
         {
-            return new I(O.And, args);
+            return v0 is { } b0 ? new I(O.Add, b0) : null;
+        }
+
+        /// <summary>
+        /// Add imm to accumulator
+        /// <remarks>ADD</remarks>
+        /// </summary>
+        internal static I? AddAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Add, b0, b1) : null;
+        }
+
+        /// <summary>
+        /// And imm to accumulator
+        /// <remarks>AND</remarks>
+        /// </summary>
+        internal static I? AndAx(byte? v0)
+        {
+            return v0 is { } b0 ? new I(O.And, b0) : null;
+        }
+
+        /// <summary>
+        /// And imm to accumulator
+        /// <remarks>AND</remarks>
+        /// </summary>
+        internal static I? AndAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.And, b0, b1) : null;
+        }
+        
+        internal static I And()
+        {
+            return new I(O.And);
         }
         
         internal static I Bound(params A[] args)
@@ -116,9 +170,27 @@ namespace Thawed.Auto
             return new I(O.Cmc);
         }
         
-        internal static I Cmp(params A[] args)
+        internal static I Cmp()
         {
-            return new I(O.Cmp, args);
+            return new I(O.Cmp);
+        }
+
+        /// <summary>
+        /// Compare imm to accumulator
+        /// <remarks>CMP</remarks>
+        /// </summary>
+        internal static I? CmpAx(byte? v0)
+        {
+            return v0 is { } b0 ? new I(O.Cmp, b0) : null;
+        }
+
+        /// <summary>
+        /// Compare imm with accumulator
+        /// <remarks>CMP</remarks>
+        /// </summary>
+        internal static I? CmpAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Cmp, b0, b1) : null;
         }
         
         /// <summary>
@@ -607,10 +679,28 @@ namespace Thawed.Auto
         {
             return new I(O.Not, args);
         }
-        
-        internal static I Or(params A[] args)
+
+        /// <summary>
+        /// Or imm to accumulator
+        /// <remarks>OR</remarks>
+        /// </summary>
+        internal static I? OrAx(byte? v0)
         {
-            return new I(O.Or, args);
+            return v0 is { } b0 ? new I(O.Or, b0) : null;
+        }
+
+        /// <summary>
+        /// Or imm to accumulator
+        /// <remarks>OR</remarks>
+        /// </summary>
+        internal static I? OrAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Or, b0, b1) : null;
+        }
+        
+        internal static I Or()
+        {
+            return new I(O.Or);
         }
         
         internal static I Out(params A[] args)
@@ -793,11 +883,29 @@ namespace Thawed.Auto
             return new I(O.Sar, args);
         }
         
-        internal static I Sbb(params A[] args)
+        internal static I Sbb()
         {
-            return new I(O.Sbb, args);
+            return new I(O.Sbb);
         }
-        
+
+        /// <summary>
+        /// Subtract with borrow imm from accumulator
+        /// <remarks>SBB</remarks>
+        /// </summary>
+        internal static I? SbbAx(byte? v0)
+        {
+            return v0 is { } b0 ? new I(O.Sbb, R.al, b0) : null;
+        }
+
+        /// <summary>
+        /// Subtract with borrow imm from accumulator
+        /// <remarks>SBB</remarks>
+        /// </summary>
+        internal static I? SbbAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Sbb, b0, b1) : null;
+        }
+
         /// <summary>
         /// Scan byte
         /// <remarks>SCASB</remarks>
@@ -877,14 +985,52 @@ namespace Thawed.Auto
             return new I(O.Stosw);
         }
         
-        internal static I Sub(params A[] args)
+        internal static I Sub()
         {
-            return new I(O.Sub, args);
+            return new I(O.Sub);
         }
         
-        internal static I Test(params A[] args)
+        /// <summary>
+        /// Subtract imm from accumulator
+        /// <remarks>SUB</remarks>
+        /// </summary>
+        internal static I? SubAx(byte? v0)
         {
-            return new I(O.Test, args);
+            return v0 is { } b0 ? new I(O.Sub, R.al, b0) : null;
+        }
+
+        /// <summary>
+        /// Subtract imm from accumulator
+        /// <remarks>SUB</remarks>
+        /// </summary>
+        internal static I? SubAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Sub, b0, b1) : null;
+        }
+
+        /// <summary>
+        /// And function to flags, no result
+        /// imm data and accumulator
+        /// <remarks>TEST</remarks>
+        /// </summary>
+        internal static I? TestAx(byte? v0)
+        {
+            return v0 is { } b0 ? new I(O.Test, b0) : null;
+        }
+
+        /// <summary>
+        /// And function to flags, no result
+        /// imm data and accumulator
+        /// <remarks>TEST</remarks>
+        /// </summary>
+        internal static I? TestAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Test, b0, b1) : null;
+        }
+
+        internal static I Test()
+        {
+            return new I(O.Test);
         }
         
         /// <summary>
@@ -912,10 +1058,28 @@ namespace Thawed.Auto
         {
             return new I(O.Xlat);
         }
-        
-        internal static I Xor(params A[] args)
+
+        /// <summary>
+        /// Exclusive or imm to accumulator
+        /// <remarks>XOR</remarks>
+        /// </summary>
+        internal static I? XorAx(byte? v0)
         {
-            return new I(O.Xor, args);
+            return v0 is { } b0 ? new I(O.Xor, b0) : null;
+        }
+
+        /// <summary>
+        /// Exclusive or imm to accumulator
+        /// <remarks>XOR</remarks>
+        /// </summary>
+        internal static I? XorAx(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1 ? new I(O.Xor, b0, b1) : null;
+        }
+
+        internal static I Xor()
+        {
+            return new I(O.Xor);
         }
     }
 }

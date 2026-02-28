@@ -100,11 +100,29 @@ namespace Thawed.Auto
                 case 0b11100001: i = I.Loopz(b1 = r.ReadByte()); break;
                 case 0b11100000: i = I.Loopnz(b1 = r.ReadByte()); break;
                 case 0b11101011: i = I.Jmp(b1 = r.ReadByte()); break;
+                case 0b00010100: i = I.AdcAx(b1 = r.ReadByte()); break;
+                case 0b00100100: i = I.AndAx(b1 = r.ReadByte()); break;
+                case 0b10101000: i = I.TestAx(b1 = r.ReadByte()); break;
+                case 0b00001100: i = I.OrAx(b1 = r.ReadByte()); break;
+                case 0b00110100: i = I.XorAx(b1 = r.ReadByte()); break;
+                case 0b00101100: i = I.SubAx(b1 = r.ReadByte()); break;
+                case 0b00011100: i = I.SbbAx(b1 = r.ReadByte()); break;
+                case 0b00111100: i = I.CmpAx(b1 = r.ReadByte()); break;
+                case 0b00000100: i = I.AddAx(b1 = r.ReadByte()); break;
                 // Two arguments
                 case 0b11000010: i = I.Ret(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11001010: i = I.Retf(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11101000: i = I.Call(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11101001: i = I.Jmp(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00010101: i = I.AdcAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00100101: i = I.AndAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10101001: i = I.TestAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00001101: i = I.OrAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00110101: i = I.XorAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00101101: i = I.SubAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00011101: i = I.SbbAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00111101: i = I.CmpAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00000101: i = I.AddAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 // Three arguments
                 case 0b11001000: i = I.Enter(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
             }
