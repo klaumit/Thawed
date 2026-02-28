@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.Tools;
+using Iced.Intel;
 using Thawed;
 
 namespace Crppy
