@@ -34,11 +34,11 @@ namespace Generator.Extractors
             return mem.ToArray();
         }
 
-        public static byte[][] GetAllCandidates()
+        public static byte[][] GetAllCandidates(bool withNum = true)
         {
             var num08 = IterTool.Iter8Bit().Select(BitTool.AsByte);
             var num16 = IterTool.Iter16Bit().Select(BitTool.AsShort);
-            var numbers = num08.Concat(num16);
+            var numbers = withNum ? num08.Concat(num16) : [];
             var cands = numbers.AddFuzzy().ToArray();
             return cands;
         }
