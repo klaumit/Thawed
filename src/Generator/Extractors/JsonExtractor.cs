@@ -42,8 +42,8 @@ namespace Generator.Extractors
                 var isDirty = false;
                 foreach (var decoded in real)
                 {
-                    if (decoded.Offset != 0) continue;
-                    var rHex = decoded.Hex;
+                    if (decoded.O != 0) continue;
+                    var rHex = decoded.H;
                     if (!_cache.ContainsKey(rHex)) isDirty = true;
                     _cache[rHex] = decoded;
                 }

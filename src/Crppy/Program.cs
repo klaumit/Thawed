@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.Tools;
 using Thawed;
@@ -10,21 +11,21 @@ namespace Crppy
         private static readonly WinExtractor Win = new();
         private static readonly JsonExtractor WinC = new(Win);
 
-        // private static async Task Main(string[] args)
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
+        // private static void Main(string[] args)
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
-            // var byteArrays = FuzzerX.GetAllCandidates();
-            // await foreach (var lines in WinC.Decode(byteArrays)
-            foreach (var lines in WinC.All)
+            var byteArrays = FuzzerX.GetAllCandidates();
+            await foreach (var lines in WinC.Decode(byteArrays))
+            // foreach (var lines in WinC.All)
             {
                 foreach (var line in lines)
                 {
-                    if (line.Offset != 0) continue;
-                    var bytes = Convert.FromHexString(line.Hex);
-                    if (line.Dis.Contains("???")) continue;
-                    var parts = line.Dis.Split("  ", 2);
+                    if (line.O != 0) continue;
+                    var bytes = Convert.FromHexString(line.H);
+                    if (line.D.Contains("???")) continue;
+                    var parts = line.D.Split("  ", 2);
                     var op = parts[0].Trim();
                     var ag = parts[1].Trim();
                     var bin = bytes.Format('b');

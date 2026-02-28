@@ -51,18 +51,18 @@ namespace Generator.Core
                         {
                             foreach (var o in d)
                             {
-                                if (o.Offset == 0)
+                                if (o.O == 0)
                                 {
-                                    var txt = o.Dis.Trim();
+                                    var txt = o.D.Trim();
                                     if (txt.Equals("???"))
                                         continue;
                                     if (txt.Length == 3 && txt.EndsWith(':'))
                                         continue;
-                                    dict[o.Hex] = txt;
-                                    Console.WriteLine($"    {o.Hex,-(7 * 2)} =>   {txt}");
+                                    dict[o.H] = txt;
+                                    Console.WriteLine($"    {o.H,-(7 * 2)} =>   {txt}");
                                     continue;
                                 }
-                                var rest = GetRandomArray(Convert.FromHexString(o.Hex));
+                                var rest = GetRandomArray(Convert.FromHexString(o.H));
                                 _ = Task.Run(async () => await writer.WriteAsync(rest));
                             }
                         }

@@ -63,16 +63,16 @@ namespace Generator.Core
             {
                 foreach (var o in decoded)
                 {
-                    var of = o.Offset;
+                    var of = o.O;
                     if (of != 0)
                         continue;
-                    var tp = o.Dis.Split(' ', 2);
-                    var ih = o.Input;
-                    var he = o.Hex;
+                    var tp = o.D.Split(' ', 2);
+                    var ih = o.I;
+                    var he = o.H;
                     var op = tp[0].Trim();
                     var ar = tp.Length == 2 ? tp[1].Trim() : string.Empty;
                     he = he.ToUpper();
-                    var fld = new[] { typ, ih, $"{of:D5}", $"{o.Count:D2}", he, op, ar, $"{o.Left:D2}" };
+                    var fld = new[] { typ, ih, $"{of:D5}", $"{o.C:D2}", he, op, ar, $"{o.L:D2}" };
                     var txt = string.Join(",", fld.Select(f => $"\"{f}\""));
                     await file.WriteLineAsync(txt);
                 }
