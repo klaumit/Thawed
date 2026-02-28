@@ -17,7 +17,7 @@ namespace Generator.Extractors
 {
     public static class FuzzerX
     {
-        private static byte[]? Assemble(Action<A> action)
+        public static byte[]? Assemble(Action<A> action)
         {
             var asm = new A(16);
             action(asm);

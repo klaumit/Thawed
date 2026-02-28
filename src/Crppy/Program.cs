@@ -14,14 +14,35 @@ namespace Crppy
         private static readonly WinExtractor Win = new();
         private static readonly JsonExtractor WinC = new(Win);
 
+        private static async Task Main2(string[] args)
+        {
+            var dict = new SortedDictionary<string, byte[]>();
+            Fuzzer.DoAll(a =>
+            {
+                Action<Assembler> b1 = x => a(x.@lock);
+                Action<Assembler> b2 = x => a(x.repe);
+                Action<Assembler> b3 = x => a(x.repne);
+                foreach (var aa in new[] { b1, b2, b3 })
+                {
+                    if (FuzzerX.Assemble(aa) is not { } bits)
+                        return;
+                    dict[Convert.ToHexString(bits)] = bits;
+                }
+            });
+            await Display(dict.Values.ToArray());
+        }
+
         private static async Task Main(string[] args)
-        // private static void Main(string[] args)
+        {
+            var byteArrays = FuzzerX.GetAllCandidates();
+            await Display(byteArrays);
+        }
+
+        private static async Task Display(IEnumerable<byte[]> byteArrays)
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
-            var byteArrays = FuzzerX.GetAllCandidates();
             await foreach (var lines in WinC.Decode(byteArrays))
-            // foreach (var lines in WinC.All)
             {
                 foreach (var line in lines)
                 {
