@@ -51,7 +51,7 @@ namespace Crppy
                     if (line.D.Contains("???")) continue;
                     var parts = line.D.Split("  ", 2);
                     var op = parts[0].Trim();
-                    var ag = parts[1].Trim();
+                    var ag = parts.Length == 2 ? parts[1] : "";
                     var bin = bytes.Format('b');
                     var oct = bytes.Format('o');
                     var hex = bytes.Format('h');
