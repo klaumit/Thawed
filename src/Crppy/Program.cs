@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Generator.Extractors;
@@ -31,16 +32,20 @@ namespace Crppy
                 }
             });
             await Display(dict.Values.ToArray());
+            Console.WriteLine("Done.");
         }
 
         private static async Task Main(string[] args)
         {
             var byteArrays = FuzzerX.GetAllCandidates(false);
             await Display(byteArrays);
+            Console.WriteLine("Done.");
         }
 
         private static async Task Display(IEnumerable<byte[]> byteArrays)
         {
+            await using var fileO = File.CreateText("file_o.txt");
+            await using var fileN = File.CreateText("file_n.txt");
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
             await foreach (var lines in WinC.Decode(byteArrays))
@@ -65,8 +70,12 @@ namespace Crppy
                     var sx = $"{op,-5} | {ag}";
                     var tx = $"{pp,-5} | {pg}";
                     if (sx.Equals(tx)) continue;
-                    var dbg = $" \t=> {tx}";
-                    Console.WriteLine($" {bin} | {oct} | {hex} | {sx} {dbg}");
+                    var r0 = $" {bin} | {oct} | {hex} | {sx}";
+                    var r1 = $" {bin} | {oct} | {hex} | {tx}";
+                    await fileO.WriteLineAsync(r0);
+                    await fileO.FlushAsync();
+                    await fileN.WriteLineAsync(r1);
+                    await fileN.FlushAsync();
                 }
             }
             WinC.Dispose();
