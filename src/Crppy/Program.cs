@@ -44,8 +44,7 @@ namespace Crppy
 
         private static async Task Display(IEnumerable<byte[]> byteArrays)
         {
-            await using var fileO = File.CreateText("file_o.txt");
-            await using var fileN = File.CreateText("file_n.txt");
+            await using var fileD = File.CreateText("dis_log.txt");
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
             await foreach (var lines in WinC.Decode(byteArrays))
@@ -70,12 +69,9 @@ namespace Crppy
                     var sx = $"{op,-5} | {ag}";
                     var tx = $"{pp,-5} | {pg}";
                     if (sx.Equals(tx)) continue;
-                    var r0 = $" {bin} | {oct} | {hex} | {sx}";
-                    var r1 = $" {bin} | {oct} | {hex} | {tx}";
-                    await fileO.WriteLineAsync(r0);
-                    await fileO.FlushAsync();
-                    await fileN.WriteLineAsync(r1);
-                    await fileN.FlushAsync();
+                    var sl = $" {bin} | {oct} | {hex} | {sx} \t=> {tx}";
+                    await fileD.WriteLineAsync(sl);
+                    await fileD.FlushAsync();
                 }
             }
             WinC.Dispose();
