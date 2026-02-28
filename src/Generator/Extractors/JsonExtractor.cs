@@ -67,7 +67,7 @@ namespace Generator.Extractors
 
         private void Save()
         {
-            JsonTool.ToFile(_file, _cache, true);
+            JsonTool.ToFile(_file, _cache, false);
         }
 
         public void Dispose()
