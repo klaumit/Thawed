@@ -35,7 +35,7 @@ namespace Crppy
 
         private static async Task Main(string[] args)
         {
-            var byteArrays = FuzzerX.GetAllCandidates();
+            var byteArrays = FuzzerX.GetAllCandidates(false);
             await Display(byteArrays);
         }
 
@@ -49,10 +49,11 @@ namespace Crppy
                 {
                     if (line.O != 0) continue;
                     var bytes = Convert.FromHexString(line.H);
+                    if (bytes.Length >= 2) continue;
                     if (line.D.Contains("???")) continue;
-                    var parts = line.D.Split("  ", 2);
+                    var parts = line.D.Split(" ", 2);
                     var op = parts[0].Trim();
-                    var ag = parts.Length == 2 ? parts[1] : "";
+                    var ag = parts.Length == 2 ? parts[1].Trim() : "";
                     var bin = bytes.Format('b');
                     var oct = bytes.Format('o');
                     var hex = bytes.Format('h');
