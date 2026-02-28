@@ -59,6 +59,20 @@ namespace Thawed.Auto
                 case 0b00111111: i = I.Aas(); break;
                 case 0b00101111: i = I.Das(); break;
                 case 0b11001001: i = I.Leave(); break;
+                case 0b01101100: i = I.Insb(); break;
+                case 0b01101101: i = I.Insw(); break;
+                case 0b01101110: i = I.Outsb(); break;
+                case 0b01101111: i = I.Outsw(); break;
+                case 0b10101100: i = I.Lodsb(); break;
+                case 0b10101101: i = I.Lodsw(); break;
+                case 0b10101010: i = I.Stosb(); break;
+                case 0b10101011: i = I.Stosw(); break;
+                case 0b10101110: i = I.Scasb(); break;
+                case 0b10101111: i = I.Scasw(); break;
+                case 0b10100110: i = I.Cmpsb(); break;
+                case 0b10100111: i = I.Cmpsw(); break;
+                case 0b10100100: i = I.Movsb(); break;
+                case 0b10100101: i = I.Movsw(); break;
                 // One argument
                 case 0b11010100: i = I.Aam(b1 = r.ReadByte()); break;
                 case 0b11010101: i = I.Aad(b1 = r.ReadByte()); break;
@@ -96,24 +110,10 @@ namespace Thawed.Auto
 
                 // TODO
 
-
-
-                /*
-
-                case 0b01101100: i = I.Insb(); break;
-                case 0b01101101: i = I.Insw(); break;
-                case 0b01101110: i = I.Outsb(); break;
-                case 0b01101111: i = I.Outsw(); break;
-                case 0b10100100: i = I.Movsb(); break;
-                case 0b10100101: i = I.Movsw(); break;
-                case 0b10100110: i = I.Cmpsb(); break;
-                case 0b10100111: i = I.Cmpsw(); break;
-                case 0b10101010: i = I.Stosb(); break;
-                case 0b10101011: i = I.Stosw(); break;
-                case 0b10101100: i = I.Lodsb(); break;
-                case 0b10101101: i = I.Lodsw(); break;
-                case 0b10101110: i = I.Scasb(); break;
-                case 0b10101111: i = I.Scasw(); break;
+                
+                
+                
+                /*                
                 // Special one
                 case 0b00011110: i = I.Push(R.ds); break;
                 case 0b00011111: i = I.Pop(R.ds); break;

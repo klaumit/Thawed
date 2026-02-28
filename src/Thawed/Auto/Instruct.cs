@@ -120,14 +120,22 @@ namespace Thawed.Auto
             return new I(O.Cmp, args);
         }
         
-        internal static I Cmpsb(params A[] args)
+        /// <summary>
+        /// Compare byte
+        /// <remarks>CMPSB</remarks>
+        /// </summary>
+        internal static I Cmpsb()
         {
-            return new I(O.Cmpsb, args);
+            return new I(O.Cmpsb);
         }
         
-        internal static I Cmpsw(params A[] args)
+        /// <summary>
+        /// Compare word
+        /// <remarks>CMPSW</remarks>
+        /// </summary>
+        internal static I Cmpsw()
         {
-            return new I(O.Cmpsw, args);
+            return new I(O.Cmpsw);
         }
         
         /// <summary>
@@ -233,14 +241,22 @@ namespace Thawed.Auto
             return new I(O.Inc, args);
         }
         
-        internal static I Insb(params A[] args)
+        /// <summary>
+        /// Input byte from DX port
+        /// <remarks>INSB</remarks>
+        /// </summary>
+        internal static I Insb()
         {
-            return new I(O.Insb, args);
+            return new I(O.Insb);
         }
         
-        internal static I Insw(params A[] args)
+        /// <summary>
+        /// Input word from DX port
+        /// <remarks>INSW</remarks>
+        /// </summary>
+        internal static I Insw()
         {
-            return new I(O.Insw, args);
+            return new I(O.Insw);
         }
         
         /// <summary>
@@ -492,14 +508,22 @@ namespace Thawed.Auto
             return new I(O.Lock);
         }
         
-        internal static I Lodsb(params A[] args)
+        /// <summary>
+        /// Load byte to AL
+        /// <remarks>LODSB</remarks>
+        /// </summary>
+        internal static I Lodsb()
         {
-            return new I(O.Lodsb, args);
+            return new I(O.Lodsb);
         }
         
-        internal static I Lodsw(params A[] args)
+        /// <summary>
+        /// Load word to AX
+        /// <remarks>LODSW</remarks>
+        /// </summary>
+        internal static I Lodsw()
         {
-            return new I(O.Lodsw, args);
+            return new I(O.Lodsw);
         }
         
         /// <summary>
@@ -534,14 +558,22 @@ namespace Thawed.Auto
             return new I(O.Mov, args);
         }
         
-        internal static I Movsb(params A[] args)
+        /// <summary>
+        /// Move byte
+        /// <remarks>MOVSB</remarks>
+        /// </summary>
+        internal static I Movsb()
         {
-            return new I(O.Movsb, args);
+            return new I(O.Movsb);
         }
         
-        internal static I Movsw(params A[] args)
+        /// <summary>
+        /// Move word
+        /// <remarks>MOVSW</remarks>
+        /// </summary>
+        internal static I Movsw()
         {
-            return new I(O.Movsw, args);
+            return new I(O.Movsw);
         }
         
         internal static I Mul(params A[] args)
@@ -577,14 +609,22 @@ namespace Thawed.Auto
             return new I(O.Out, args);
         }
         
-        internal static I Outsb(params A[] args)
+        /// <summary>
+        /// Output byte to DX port
+        /// <remarks>OUTSB</remarks>
+        /// </summary>
+        internal static I Outsb()
         {
-            return new I(O.Outsb, args);
+            return new I(O.Outsb);
         }
         
-        internal static I Outsw(params A[] args)
+        /// <summary>
+        /// Output word to DX port
+        /// <remarks>OUTSW</remarks>
+        /// </summary>
+        internal static I Outsw()
         {
-            return new I(O.Outsw, args);
+            return new I(O.Outsw);
         }
         
         internal static I Pop(params A[] args)
@@ -714,14 +754,22 @@ namespace Thawed.Auto
             return new I(O.Sbb, args);
         }
         
-        internal static I Scasb(params A[] args)
+        /// <summary>
+        /// Scan byte
+        /// <remarks>SCASB</remarks>
+        /// </summary>
+        internal static I Scasb()
         {
-            return new I(O.Scasb, args);
+            return new I(O.Scasb);
         }
         
-        internal static I Scasw(params A[] args)
+        /// <summary>
+        /// Scan word
+        /// <remarks>SCASW</remarks>
+        /// </summary>
+        internal static I Scasw()
         {
-            return new I(O.Scasw, args);
+            return new I(O.Scasw);
         }
         
         internal static I Shl(params A[] args)
@@ -767,14 +815,22 @@ namespace Thawed.Auto
             return new I(O.Sti);
         }
         
-        internal static I Stosb(params A[] args)
+        /// <summary>
+        /// Store byte from AL
+        /// <remarks>STOSB</remarks>
+        /// </summary>
+        internal static I Stosb()
         {
-            return new I(O.Stosb, args);
+            return new I(O.Stosb);
         }
         
-        internal static I Stosw(params A[] args)
+        /// <summary>
+        /// Store word from AX
+        /// <remarks>STOSW</remarks>
+        /// </summary>
+        internal static I Stosw()
         {
-            return new I(O.Stosw, args);
+            return new I(O.Stosw);
         }
         
         internal static I Sub(params A[] args)
