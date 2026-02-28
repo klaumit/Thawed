@@ -683,14 +683,22 @@ namespace Thawed.Auto
             return new I(O.Rcr, args);
         }
         
-        internal static I Repe(params A[] args)
+        /// <summary>
+        /// Repeat while equal
+        /// <remarks>REPE</remarks>
+        /// </summary>
+        internal static I Repe()
         {
-            return new I(O.Repe, args);
+            return new I(O.Repe);
         }
         
-        internal static I Repne(params A[] args)
+        /// <summary>
+        /// Repeat while not equal
+        /// <remarks>REPNE</remarks>
+        /// </summary>
+        internal static I Repne()
         {
-            return new I(O.Repne, args);
+            return new I(O.Repne);
         }
         
         /// <summary>

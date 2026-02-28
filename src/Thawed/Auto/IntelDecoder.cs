@@ -25,10 +25,12 @@ namespace Thawed.Auto
             {
                 // Prefixes
                 case 0b00101110: i = I.Cs(); break;
-                case 0b00110110: i = I.Ss(); break;
                 case 0b00111110: i = I.Ds(); break;
                 case 0b00100110: i = I.Es(); break;
+                case 0b00110110: i = I.Ss(); break;
                 case 0b11110000: i = I.Lock(); break;
+                case 0b11110011: i = I.Repe(); break;
+                case 0b11110010: i = I.Repne(); break;
                 // No arguments
                 case 0b11111000: i = I.Clc(); break;
                 case 0b11110101: i = I.Cmc(); break;
