@@ -40,19 +40,6 @@ namespace Thawed
             }
         }
 
-        public static Arg GetSegmentRegister(byte? b)
-        {
-            var end = b & 0b_000000_11;
-            switch (end)
-            {
-                case 0b00: return R.es;
-                case 0b01: return R.cs;
-                case 0b10: return R.ss;
-                case 0b11: return R.ds;
-                default: return null!;
-            }
-        }
-
         public static Arg GetEffectiveAddress(byte? b)
         {
             var end = b & 0b_00000_111;
@@ -67,6 +54,19 @@ namespace Thawed
                 case 0b110: return R.bp; // (BP) + DISP
                 case 0b111: return R.bx; // (BX) + DISP
                 default: return null!;
+            }
+        }
+
+        public static R MaskSeg(byte? b, bool atEnd = false)
+        {
+            var end = atEnd ? b & 0b_000_000_11 : (b & 0b_000_11_000) >> 3;
+            switch (end)
+            {
+                case 0b00: return R.es;
+                case 0b01: return R.cs;
+                case 0b10: return R.ss;
+                case 0b11: return R.ds;
+                default: return default;
             }
         }
 

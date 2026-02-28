@@ -646,6 +646,16 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Pop segment register
+        /// <remarks>POP</remarks>
+        /// </summary>
+        internal static I PopSr(R reg)
+        {
+            // TODO: Handle reg != 01 
+            return new I(O.Pop, reg);
+        }
+        
+        /// <summary>
         /// Pop all
         /// <remarks>POPA</remarks>
         /// </summary>
@@ -668,6 +678,15 @@ namespace Thawed.Auto
         /// <remarks>PUSH</remarks>
         /// </summary>
         internal static I Push(R reg)
+        {
+            return new I(O.Push, reg);
+        }
+        
+        /// <summary>
+        /// Push segment register
+        /// <remarks>PUSH</remarks>
+        /// </summary>
+        internal static I PushSr(R reg)
         {
             return new I(O.Push, reg);
         }

@@ -123,18 +123,23 @@ namespace Thawed.Auto
                 case 0b10010_000: i = I.Xchg(MaskReg(b0)); break;
             }
             
+            if (i != null) 
+                return i;
+
+            switch (i0 = b0 & 0b111_00_111)
+            {
+                // Middle register
+                case 0b000_00_111: i = I.PopSr(MaskSeg(b0)); break;
+                case 0b000_00_110: i = I.PushSr(MaskSeg(b0)); break;
+            }
             
-            
-            
+
             
             
 
             // TODO
             
                 /*                
-                // Special one
-                case 0b00011110: i = I.Push(R.ds); break;
-                case 0b00011_000: i = I.Pop(MaskReg(b0)); break;
                 // More?
                 default:
                     if (i == null)
