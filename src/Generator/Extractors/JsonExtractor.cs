@@ -62,5 +62,8 @@ namespace Generator.Extractors
         {
             Save();
         }
+
+        public IEnumerable<Decoded[]> All
+            => _cache.Values.Select(d => new[] { d });
     }
 }

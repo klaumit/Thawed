@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.Tools;
 using Thawed;
@@ -11,12 +10,14 @@ namespace Crppy
         private static readonly WinExtractor Win = new();
         private static readonly JsonExtractor WinC = new(Win);
 
-        private static async Task Main(string[] args)
+        // private static async Task Main(string[] args)
+        private static void Main(string[] args)
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
-            var byteArrays = FuzzerX.GetAllCandidates();
-            await foreach (var lines in WinC.Decode(byteArrays))
+            // var byteArrays = FuzzerX.GetAllCandidates();
+            // await foreach (var lines in WinC.Decode(byteArrays)
+            foreach (var lines in WinC.All)
             {
                 foreach (var line in lines)
                 {
