@@ -19,6 +19,7 @@ namespace Thawed.Auto
             byte? b1 = 0;
             byte? b2 = 0;
             byte? b3 = 0;
+            int? i0 = null;
             Instruction? i = null;
 
             switch (b0 = r.ReadByte())
@@ -109,6 +110,28 @@ namespace Thawed.Auto
                 case 0b00011100: i = I.SbbAx(b1 = r.ReadByte()); break;
                 case 0b00111100: i = I.CmpAx(b1 = r.ReadByte()); break;
                 case 0b00000100: i = I.AddAx(b1 = r.ReadByte()); break;
+                case 0b11110110:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_101_000: i = I.Imul(); break;
+                        case 0b00_110_000: i = I.Div(); break;
+                        case 0b00_111_000: i = I.Idiv(); break;
+                        case 0b00_011_000: i = I.Neg(); break;
+                        case 0b00_010_000: i = I.Not(); break;
+                        case 0b00_100_000: i = I.Mul(); break;
+                    }
+                    break;
+                case 0b11110111:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_101_000: i = I.Imul(); break;
+                        case 0b00_110_000: i = I.Div(); break;
+                        case 0b00_111_000: i = I.Idiv(); break;
+                        case 0b00_011_000: i = I.Neg(); break;
+                        case 0b00_010_000: i = I.Not(); break;
+                        case 0b00_100_000: i = I.Mul(); break;
+                    }
+                    break;
                 // Two arguments
                 case 0b11000010: i = I.Ret(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11001010: i = I.Retf(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
@@ -130,7 +153,6 @@ namespace Thawed.Auto
             if (i != null) 
                 return i;
             
-            int? i0 = null;
             switch (i0 = b0 & 0b11111_000)
             {
                 // One register

@@ -657,11 +657,19 @@ namespace Thawed.Auto
             return new I(O.Movsw);
         }
         
+        /// <summary>
+        /// Multiply unsigned
+        /// <remarks>MUL</remarks>
+        /// </summary>
         internal static I Mul(params A[] args)
         {
             return new I(O.Mul, args);
         }
         
+        /// <summary>
+        /// Change sign register/memory
+        /// <remarks>NEG</remarks>
+        /// </summary>
         internal static I Neg(params A[] args)
         {
             return new I(O.Neg, args);
@@ -675,6 +683,10 @@ namespace Thawed.Auto
             return new I(O.Nop);
         }
         
+        /// <summary>
+        /// Invert register/memory
+        /// <remarks>NOT</remarks>
+        /// </summary>
         internal static I Not(params A[] args)
         {
             return new I(O.Not, args);
