@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.Tools;
-using Iced.Intel;
 using Thawed;
 
 namespace Crppy
@@ -42,6 +41,7 @@ namespace Crppy
                     Console.WriteLine($" {bin} | {oct} | {hex} | {sx} {dbg}");
                 }
             }
+            WinC.Dispose();
         }
     }
 }
