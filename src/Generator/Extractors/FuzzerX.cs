@@ -72,20 +72,23 @@ namespace Generator.Extractors
         {
             foreach (var (b, c) in new[]
                      {
-                         (ah, (byte)7)
+                         (ah, (byte)7),
+                         (bl, (byte)10),
+                         (ch, (byte)13),
+                         (dl, (byte)19)
                      })
                 yield return E.GetBytes(a => func(a, b, c));
         }
 
         private static IEnumerable<byte[]?> IterUl(Action<A, ulong> func)
         {
-            foreach (var it in new ulong[] { 0, 3, 7, 9, 13 })
+            foreach (var it in new ulong[] { 0, 3, 7, 9, 10, 13 })
                 yield return E.GetBytes(a => func(a, it));
         }
 
         private static IEnumerable<byte[]?> IterUb(Action<A, byte> func)
         {
-            foreach (var it in new byte[] { 0, 3, 7, 9, 13 })
+            foreach (var it in new byte[] { 0, 3, 7, 9, 10, 13 })
                 yield return E.GetBytes(a => func(a, it));
         }
 
@@ -102,7 +105,10 @@ namespace Generator.Extractors
         {
             foreach (var (b, c) in new[]
                      {
-                         ((short)9, (sbyte)7)
+                         ((short)9, (sbyte)17),
+                         ((short)19, (sbyte)7),
+                         ((short)29, (sbyte)37),
+                         ((short)59, (sbyte)47)
                      })
                 yield return E.GetBytes(a => func(a, b, c));
         }
@@ -120,7 +126,10 @@ namespace Generator.Extractors
         {
             foreach (var (b, c) in new[]
                      {
-                         (ax, __word_ptr[bx])
+                         (ax, __word_ptr[bx]),
+                         (bx, __word_ptr[ax]),
+                         (ax, __byte_ptr[bx]),
+                         (bx, __byte_ptr[ax])
                      })
                 yield return E.GetBytes(a => func(a, b, c));
         }
@@ -129,7 +138,10 @@ namespace Generator.Extractors
         {
             foreach (var (b, c) in new[]
                      {
-                         (ax, bx)
+                         (ax, bx),
+                         (bx, ax),
+                         (dx, cx),
+                         (bx, dx)
                      })
                 yield return E.GetBytes(a => func(a, b, c));
         }
