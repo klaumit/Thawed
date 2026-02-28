@@ -1,6 +1,7 @@
 ﻿using I = Thawed.Instruction;
 using O = Thawed.Auto.Opcode;
 using A = Thawed.Args.Arg;
+using R = Thawed.Register;
 
 // ReSharper disable RedundantAssignment
 // ReSharper disable InconsistentNaming
@@ -174,9 +175,13 @@ namespace Thawed.Auto
             return new I(O.Das);
         }
         
-        internal static I Dec(params A[] args)
+        /// <summary>
+        /// Decrement register
+        /// <remarks>DEC</remarks>
+        /// </summary>
+        internal static I Dec(R reg)
         {
-            return new I(O.Dec, args);
+            return new I(O.Dec, reg);
         }
         
         internal static I Div(params A[] args)
@@ -236,9 +241,13 @@ namespace Thawed.Auto
             return new I(O.In, args);
         }
         
-        internal static I Inc(params A[] args)
+        /// <summary>
+        /// Increment register
+        /// <remarks>INC</remarks>
+        /// </summary>
+        internal static I Inc(R reg)
         {
-            return new I(O.Inc, args);
+            return new I(O.Inc, reg);
         }
         
         /// <summary>
@@ -627,9 +636,13 @@ namespace Thawed.Auto
             return new I(O.Outsw);
         }
         
-        internal static I Pop(params A[] args)
+        /// <summary>
+        /// Pop register
+        /// <remarks>POP</remarks>
+        /// </summary>
+        internal static I Pop(R reg)
         {
-            return new I(O.Pop, args);
+            return new I(O.Pop, reg);
         }
         
         /// <summary>
@@ -650,9 +663,13 @@ namespace Thawed.Auto
             return new I(O.Popf);
         }
         
-        internal static I Push(params A[] args)
+        /// <summary>
+        /// Push register
+        /// <remarks>PUSH</remarks>
+        /// </summary>
+        internal static I Push(R reg)
         {
-            return new I(O.Push, args);
+            return new I(O.Push, reg);
         }
         
         /// <summary>
@@ -859,9 +876,13 @@ namespace Thawed.Auto
             return new I(O.Wait);
         }
         
-        internal static I Xchg(params A[] args)
+        /// <summary>
+        /// Exchange register with accumulator
+        /// <remarks>XCHG</remarks>
+        /// </summary>
+        internal static I Xchg(R reg)
         {
-            return new I(O.Xchg, args);
+            return new I(O.Xchg, R.ax, reg);
         }
         
         /// <summary>

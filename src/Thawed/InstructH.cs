@@ -70,7 +70,7 @@ namespace Thawed
             }
         }
 
-        public static Arg MaskReg(byte? b, bool is16Bit = true, bool atEnd = true)
+        public static R MaskReg(byte? b, bool is16Bit = true, bool atEnd = true)
         {
             var end = atEnd ? b & 0b_00_000_111 : (b & 0b_00_111_000) >> 3;
             return is16Bit switch
@@ -80,14 +80,14 @@ namespace Thawed
                 {
                     0b000 => R.ax, 0b001 => R.cx, 0b010 => R.dx, 0b011 => R.bx,
                     0b100 => R.sp, 0b101 => R.bp, 0b110 => R.si, 0b111 => R.di,
-                    _ => null!
+                    _ => default
                 },
                 /* (w = 0) */
                 false => end switch
                 {
                     0b000 => R.al, 0b001 => R.cl, 0b010 => R.dl, 0b011 => R.bl,
                     0b100 => R.ah, 0b101 => R.ch, 0b110 => R.dh, 0b111 => R.bh,
-                    _ => null!
+                    _ => default
                 }
             };
         }

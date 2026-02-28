@@ -107,22 +107,36 @@ namespace Thawed.Auto
                 case 0b11101001: i = I.Jmp(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 // Three arguments
                 case 0b11001000: i = I.Enter(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+            }
+            
+            if (i != null) 
+                return i;
+            
+            int? i0 = null;
+            switch (i0 = b0 & 0b11111_000)
+            {
+                // One register
+                case 0b01000_000: i = I.Inc(MaskReg(b0)); break;
+                case 0b01011_000: i = I.Pop(MaskReg(b0)); break;
+                case 0b01001_000: i = I.Dec(MaskReg(b0)); break;
+                case 0b01010_000: i = I.Push(MaskReg(b0)); break;
+                case 0b10010_000: i = I.Xchg(MaskReg(b0)); break;
+            }
+            
+            
+            
+            
+            
+            
 
-
-
-                // TODO
-
-                
-                
-                
+            // TODO
+            
                 /*                
                 // Special one
                 case 0b00011110: i = I.Push(R.ds); break;
-                case 0b00011111: i = I.Pop(R.ds); break;
-                case 0b01000011: i = I.Inc(R.bx); break;
+                case 0b00011_000: i = I.Pop(MaskReg(b0)); break;
                 // More?
                 default:
-                    int? i0 = null;
                     if (i == null)
                         switch (i0 = b0 & 0b1111111_0)
                         {
@@ -135,19 +149,11 @@ namespace Thawed.Auto
                             case 0b00111000: i = I.Cmp(MaskRegs(b0, b1 = r.ReadByte())); break;
                         }
                     if (i == null)
-                        switch (i0 = b0 & 0b11111_000)
-                        {
-                            case 0b01001000: i = I.Dec(MaskReg(b0)); break;
-                            case 0b01010000: i = I.Push(MaskReg(b0)); break;
-                            case 0b01011000: i = I.Pop(MaskReg(b0)); break;
-                        }
-                    if (i == null)
                         Console.WriteLine($" {i0:b8} ");
                     break;
                     */
-            }
 
-            return fail ? throw new DecodeException(b0, b1) : i;
+            return fail ? throw new DecodeException(b0, b1, b2, b3) : i;
         }
     }
 }
