@@ -1,4 +1,5 @@
-﻿using I = Thawed.Auto.Instruct;
+using System;
+using I = Thawed.Auto.Instruct;
 using R = Thawed.Register;
 using static Thawed.InstructH;
 
@@ -18,238 +19,133 @@ namespace Thawed.Auto
             byte? b1 = 0;
             byte? b2 = 0;
             byte? b3 = 0;
-            
-            var i = (b0 = r.ReadByte()) switch
+            Instruction? i = null;
+
+            switch (b0 = r.ReadByte())
             {
-                0x00 or 0x01 or 0x02 or 0x03 or 0x04 or 0x05 or 0x08 or 0x09 or 0x0A or 0x0B or 0x0C or 0x0D or 0x0F or 0x10 or 0x11 or 0x12 or 0x13 or 0x14 or 0x15 or 0x18 or 0x19 or 0x1A or 0x1B or 0x1C or 0x1D or 0x20 or 0x21 or 0x22 or 0x23 or 0x24 or 0x25 or 0x26 or 0x28 or 0x29 or 0x2A or 0x2B or 0x2C or 0x2D or 0x2E or 0x30 or 0x31 or 0x32 or 0x33 or 0x34 or 0x35 or 0x36 or 0x38 or 0x39 or 0x3A or 0x3B or 0x3C or 0x3D or 0x3E or 0x62 or 0x63 or 0x64 or 0x65 or 0x66 or 0x67 or 0x68 or 0x69 or 0x6A or 0x6B or 0x70 or 0x71 or 0x72 or 0x73 or 0x74 or 0x75 or 0x76 or 0x77 or 0x78 or 0x79 or 0x7A or 0x7B or 0x7C or 0x7D or 0x7E or 0x7F or 0x80 or 0x81 or 0x82 or 0x83 or 0x84 or 0x85 or 0x86 or 0x87 or 0x88 or 0x89 or 0x8A or 0x8B or 0x8C or 0x8D or 0x8E or 0x8F or 0x9A or 0xA0 or 0xA1 or 0xA2 or 0xA3 or 0xA8 or 0xA9 or 0xB0 or 0xB1 or 0xB2 or 0xB3 or 0xB4 or 0xB5 or 0xB6 or 0xB7 or 0xB8 or 0xB9 or 0xBA or 0xBB or 0xBC or 0xBD or 0xBE or 0xBF or 0xC0 or 0xC1 or 0xC2 or 0xC4 or 0xC5 or 0xC6 or 0xC7 or 0xC8 or 0xCA or 0xCD or 0xD0 or 0xD1 or 0xD2 or 0xD3 or 0xD4 or 0xD5 or 0xD6 or 0xD8 or 0xD9 or 0xDA or 0xDB or 0xDC or 0xDD or 0xDE or 0xDF or 0xE0 or 0xE1 or 0xE2 or 0xE3 or 0xE4 or 0xE5 or 0xE6 or 0xE7 or 0xE8 or 0xE9 or 0xEA or 0xEB or 0xF1 or 0xF6 or 0xF7 or 0xFE or 0xFF => (b1 = r.ReadByte()) switch
-                {
-                    0x06 or 0x0E or 0x16 or 0x1E or 0x26 or 0x2E or 0x36 or 0x3E or 0x40 or 0x41 or 0x42 or 0x43 or 0x44 or 0x45 or 0x46 or 0x47 or 0x48 or 0x49 or 0x4A or 0x4B or 0x4C or 0x4D or 0x4E or 0x4F or 0x50 or 0x51 or 0x52 or 0x53 or 0x54 or 0x55 or 0x56 or 0x57 or 0x58 or 0x59 or 0x5A or 0x5B or 0x5C or 0x5D or 0x5E or 0x5F or 0x60 or 0x61 or 0x62 or 0x63 or 0x64 or 0x65 or 0x66 or 0x67 or 0x68 or 0x69 or 0x6A or 0x6B or 0x6C or 0x6D or 0x6E or 0x6F or 0x70 or 0x71 or 0x72 or 0x73 or 0x74 or 0x75 or 0x76 or 0x77 or 0x78 or 0x79 or 0x7A or 0x7B or 0x7C or 0x7D or 0x7E or 0x7F or 0x80 or 0x81 or 0x82 or 0x83 or 0x84 or 0x85 or 0x86 or 0x87 or 0x88 or 0x89 or 0x8A or 0x8B or 0x8C or 0x8D or 0x8E or 0x8F or 0x90 or 0x91 or 0x92 or 0x93 or 0x94 or 0x95 or 0x96 or 0x97 or 0x98 or 0x99 or 0x9A or 0x9B or 0x9C or 0x9D or 0x9E or 0x9F or 0xA0 or 0xA1 or 0xA2 or 0xA3 or 0xA4 or 0xA5 or 0xA6 or 0xA7 or 0xA8 or 0xA9 or 0xAA or 0xAB or 0xAC or 0xAD or 0xAE or 0xAF or 0xB0 or 0xB1 or 0xB2 or 0xB3 or 0xB4 or 0xB5 or 0xB6 or 0xB7 or 0xB8 or 0xB9 or 0xBA or 0xBB or 0xBC or 0xBD or 0xBE or 0xBF => (b2 = r.ReadByte()) switch
-                    {
-                        0x11 => (b3 = r.ReadByte()) switch
+                // Prefixes
+                case 0b00101110: i = I.Cs(); break;
+                case 0b00110110: i = I.Ss(); break;
+                case 0b00111110: i = I.Ds(); break;
+                case 0b00100110: i = I.Es(); break;
+                case 0b11110000: i = I.Lock(); break;
+                // No arguments
+                case 0b11111000: i = I.Clc(); break;
+                case 0b11110101: i = I.Cmc(); break;
+                case 0b11111001: i = I.Stc(); break;
+                case 0b11111100: i = I.Cld(); break;
+                case 0b11111101: i = I.Std(); break;
+                case 0b11111010: i = I.Cli(); break;
+                case 0b11111011: i = I.Sti(); break;
+                case 0b11110100: i = I.Hlt(); break;
+                case 0b10011011: i = I.Wait(); break;
+                case 0b10010000: i = I.Nop(); break;
+                case 0b11000011: i = I.Ret(); break;
+                case 0b11001011: i = I.Retf(); break;
+                case 0b01100000: i = I.Pusha(); break;
+                case 0b10011100: i = I.Pushf(); break;
+                case 0b01100001: i = I.Popa(); break;
+                case 0b10011101: i = I.Popf(); break;
+                case 0b10011110: i = I.Sahf(); break;
+                case 0b10011111: i = I.Lahf(); break;
+                case 0b11010111: i = I.Xlat(); break;
+                case 0b11001111: i = I.Iret(); break;
+                case 0b11001110: i = I.Into(); break;
+                case 0b11001100: i = I.Int3(); break;
+                case 0b10011000: i = I.Cbw(); break;
+                case 0b10011001: i = I.Cwd(); break;
+                case 0b00110111: i = I.Aaa(); break;
+                case 0b00100111: i = I.Daa(); break;
+                case 0b00111111: i = I.Aas(); break;
+                case 0b00101111: i = I.Das(); break;
+                case 0b11001001: i = I.Leave(); break;
+                // One argument
+                case 0b11010100: i = I.Aam(b1 = r.ReadByte()); break;
+                case 0b11010101: i = I.Aad(b1 = r.ReadByte()); break;
+                case 0b11001101: i = I.Int(b1 = r.ReadByte()); break;
+                case 0b01110100: i = I.Jz(b1 = r.ReadByte()); break;
+                case 0b01111100: i = I.Jl(b1 = r.ReadByte()); break;
+                case 0b01111110: i = I.Jle(b1 = r.ReadByte()); break;
+                case 0b01110010: i = I.Jb(b1 = r.ReadByte()); break;
+                case 0b01110110: i = I.Jbe(b1 = r.ReadByte()); break;
+                case 0b01111010: i = I.Jpe(b1 = r.ReadByte()); break;
+                case 0b01110000: i = I.Jo(b1 = r.ReadByte()); break;
+                case 0b01111000: i = I.Js(b1 = r.ReadByte()); break;
+                case 0b01110101: i = I.Jnz(b1 = r.ReadByte()); break;
+                case 0b01111101: i = I.Jge(b1 = r.ReadByte()); break;
+                case 0b01111111: i = I.Jg(b1 = r.ReadByte()); break;
+                case 0b01110011: i = I.Jnb(b1 = r.ReadByte()); break;
+                case 0b01110111: i = I.Ja(b1 = r.ReadByte()); break;
+                case 0b01111011: i = I.Jpo(b1 = r.ReadByte()); break;
+                case 0b01110001: i = I.Jno(b1 = r.ReadByte()); break;
+                case 0b01111001: i = I.Jns(b1 = r.ReadByte()); break;
+                case 0b11100011: i = I.Jcxz(b1 = r.ReadByte()); break;
+                case 0b11100010: i = I.Loop(b1 = r.ReadByte()); break;
+                case 0b11100001: i = I.Loopz(b1 = r.ReadByte()); break;
+                case 0b11100000: i = I.Loopnz(b1 = r.ReadByte()); break;
+                case 0b11101011: i = I.Jmp(b1 = r.ReadByte()); break;
+                // Two arguments
+                case 0b11000010: i = I.Ret(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b11001010: i = I.Retf(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b11101000: i = I.Call(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b11101001: i = I.Jmp(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                // Three arguments
+                case 0b11001000: i = I.Enter(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+
+
+
+                // TODO
+
+
+
+                /*
+
+                case 0b01101100: i = I.Insb(); break;
+                case 0b01101101: i = I.Insw(); break;
+                case 0b01101110: i = I.Outsb(); break;
+                case 0b01101111: i = I.Outsw(); break;
+                case 0b10100100: i = I.Movsb(); break;
+                case 0b10100101: i = I.Movsw(); break;
+                case 0b10100110: i = I.Cmpsb(); break;
+                case 0b10100111: i = I.Cmpsw(); break;
+                case 0b10101010: i = I.Stosb(); break;
+                case 0b10101011: i = I.Stosw(); break;
+                case 0b10101100: i = I.Lodsb(); break;
+                case 0b10101101: i = I.Lodsw(); break;
+                case 0b10101110: i = I.Scasb(); break;
+                case 0b10101111: i = I.Scasw(); break;
+                // Special one
+                case 0b00011110: i = I.Push(R.ds); break;
+                case 0b00011111: i = I.Pop(R.ds); break;
+                case 0b01000011: i = I.Inc(R.bx); break;
+                // More?
+                default:
+                    int? i0 = null;
+                    if (i == null)
+                        switch (i0 = b0 & 0b1111111_0)
                         {
-                            0x00 => I.Add(byte_ptr(br(0011)), R.al),
-                        },
-                    },
-                    0x23 => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.ah),
-                    0x03 => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.al),
-                    0x3B => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.bh),
-                    0x1B => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.bl),
-                    0x2B => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.ch),
-                    0x0B => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.cl),
-                    0x33 => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.dh),
-                    0x13 => I.Add(byte_ptr(br_plus(R.bp, R.di)), R.dl),
-                    0x22 => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.ah),
-                    0x02 => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.al),
-                    0x3A => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.bh),
-                    0x1A => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.bl),
-                    0x2A => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.ch),
-                    0x0A => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.cl),
-                    0x32 => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.dh),
-                    0x12 => I.Add(byte_ptr(br_plus(R.bp, R.si)), R.dl),
-                    0x21 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.ah),
-                    0x01 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.al),
-                    0x39 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.bh),
-                    0x19 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.bl),
-                    0x29 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.ch),
-                    0x09 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.cl),
-                    0x31 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.dh),
-                    0x11 => I.Add(byte_ptr(br_plus(R.bx, R.di)), R.dl),
-                    0x20 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.ah),
-                    0x00 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.al),
-                    0x38 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.bh),
-                    0x18 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.bl),
-                    0x28 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.ch),
-                    0x08 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.cl),
-                    0x30 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.dh),
-                    0x10 => I.Add(byte_ptr(br_plus(R.bx, R.si)), R.dl),
-                    0x27 => I.Add(byte_ptr(br(R.bx)), R.ah),
-                    0x07 => I.Add(byte_ptr(br(R.bx)), R.al),
-                    0x3F => I.Add(byte_ptr(br(R.bx)), R.bh),
-                    0x1F => I.Add(byte_ptr(br(R.bx)), R.bl),
-                    0x2F => I.Add(byte_ptr(br(R.bx)), R.ch),
-                    0x0F => I.Add(byte_ptr(br(R.bx)), R.cl),
-                    0x37 => I.Add(byte_ptr(br(R.bx)), R.dh),
-                    0x17 => I.Add(byte_ptr(br(R.bx)), R.dl),
-                    0x25 => I.Add(byte_ptr(br(R.di)), R.ah),
-                    0x05 => I.Add(byte_ptr(br(R.di)), R.al),
-                    0x3D => I.Add(byte_ptr(br(R.di)), R.bh),
-                    0x1D => I.Add(byte_ptr(br(R.di)), R.bl),
-                    0x2D => I.Add(byte_ptr(br(R.di)), R.ch),
-                    0x0D => I.Add(byte_ptr(br(R.di)), R.cl),
-                    0x35 => I.Add(byte_ptr(br(R.di)), R.dh),
-                    0x15 => I.Add(byte_ptr(br(R.di)), R.dl),
-                    0x24 => I.Add(byte_ptr(br(R.si)), R.ah),
-                    0x04 => I.Add(byte_ptr(br(R.si)), R.al),
-                    0x3C => I.Add(byte_ptr(br(R.si)), R.bh),
-                    0x1C => I.Add(byte_ptr(br(R.si)), R.bl),
-                    0x2C => I.Add(byte_ptr(br(R.si)), R.ch),
-                    0x0C => I.Add(byte_ptr(br(R.si)), R.cl),
-                    0x34 => I.Add(byte_ptr(br(R.si)), R.dh),
-                    0x14 => I.Add(byte_ptr(br(R.si)), R.dl),
-                    0xE4 => I.Add(R.ah, R.ah),
-                    0xC4 => I.Add(R.ah, R.al),
-                    0xFC => I.Add(R.ah, R.bh),
-                    0xDC => I.Add(R.ah, R.bl),
-                    0xEC => I.Add(R.ah, R.ch),
-                    0xCC => I.Add(R.ah, R.cl),
-                    0xF4 => I.Add(R.ah, R.dh),
-                    0xD4 => I.Add(R.ah, R.dl),
-                    0xE0 => I.Add(R.al, R.ah),
-                    0xC0 => I.Add(R.al, R.al),
-                    0xF8 => I.Add(R.al, R.bh),
-                    0xD8 => I.Add(R.al, R.bl),
-                    0xE8 => I.Add(R.al, R.ch),
-                    0xC8 => I.Add(R.al, R.cl),
-                    0xF0 => I.Add(R.al, R.dh),
-                    0xD0 => I.Add(R.al, R.dl),
-                    0xE7 => I.Add(R.bh, R.ah),
-                    0xC7 => I.Add(R.bh, R.al),
-                    0xFF => I.Add(R.bh, R.bh),
-                    0xDF => I.Add(R.bh, R.bl),
-                    0xEF => I.Add(R.bh, R.ch),
-                    0xCF => I.Add(R.bh, R.cl),
-                    0xF7 => I.Add(R.bh, R.dh),
-                    0xD7 => I.Add(R.bh, R.dl),
-                    0xE3 => I.Add(R.bl, R.ah),
-                    0xC3 => I.Add(R.bl, R.al),
-                    0xFB => I.Add(R.bl, R.bh),
-                    0xDB => I.Add(R.bl, R.bl),
-                    0xEB => I.Add(R.bl, R.ch),
-                    0xCB => I.Add(R.bl, R.cl),
-                    0xF3 => I.Add(R.bl, R.dh),
-                    0xD3 => I.Add(R.bl, R.dl),
-                    0xE5 => I.Add(R.ch, R.ah),
-                    0xC5 => I.Add(R.ch, R.al),
-                    0xFD => I.Add(R.ch, R.bh),
-                    0xDD => I.Add(R.ch, R.bl),
-                    0xED => I.Add(R.ch, R.ch),
-                    0xCD => I.Add(R.ch, R.cl),
-                    0xF5 => I.Add(R.ch, R.dh),
-                    0xD5 => I.Add(R.ch, R.dl),
-                    0xE1 => I.Add(R.cl, R.ah),
-                    0xC1 => I.Add(R.cl, R.al),
-                    0xF9 => I.Add(R.cl, R.bh),
-                    0xD9 => I.Add(R.cl, R.bl),
-                    0xE9 => I.Add(R.cl, R.ch),
-                    0xC9 => I.Add(R.cl, R.cl),
-                    0xF1 => I.Add(R.cl, R.dh),
-                    0xD1 => I.Add(R.cl, R.dl),
-                    0xE6 => I.Add(R.dh, R.ah),
-                    0xC6 => I.Add(R.dh, R.al),
-                    0xFE => I.Add(R.dh, R.bh),
-                    0xDE => I.Add(R.dh, R.bl),
-                    0xEE => I.Add(R.dh, R.ch),
-                    0xCE => I.Add(R.dh, R.cl),
-                    0xF6 => I.Add(R.dh, R.dh),
-                    0xD6 => I.Add(R.dh, R.dl),
-                    0xE2 => I.Add(R.dl, R.ah),
-                    0xC2 => I.Add(R.dl, R.al),
-                    0xFA => I.Add(R.dl, R.bh),
-                    0xDA => I.Add(R.dl, R.bl),
-                    0xEA => I.Add(R.dl, R.ch),
-                    0xCA => I.Add(R.dl, R.cl),
-                    0xF2 => I.Add(R.dl, R.dh),
-                    0xD2 => I.Add(R.dl, R.dl),
-                },
-                0x37 => I.Aaa(),
-                0x3F => I.Aas(),
-                0x98 => I.Cbw(),
-                0xF8 => I.Clc(),
-                0xFC => I.Cld(),
-                0xFA => I.Cli(),
-                0xF5 => I.Cmc(),
-                0xA6 => I.Cmpsb(),
-                0xA7 => I.Cmpsw(),
-                0x99 => I.Cwd(),
-                0x27 => I.Daa(),
-                0x2F => I.Das(),
-                0x48 => I.Dec(R.ax),
-                0x4D => I.Dec(R.bp),
-                0x4B => I.Dec(R.bx),
-                0x49 => I.Dec(R.cx),
-                0x4F => I.Dec(R.di),
-                0x4A => I.Dec(R.dx),
-                0x4E => I.Dec(R.si),
-                0x4C => I.Dec(R.sp),
-                0xF4 => I.Hlt(),
-                0xEC => I.In(R.al, R.dx),
-                0xED => I.In(R.ax, R.dx),
-                0x40 => I.Inc(R.ax),
-                0x45 => I.Inc(R.bp),
-                0x43 => I.Inc(R.bx),
-                0x41 => I.Inc(R.cx),
-                0x47 => I.Inc(R.di),
-                0x42 => I.Inc(R.dx),
-                0x46 => I.Inc(R.si),
-                0x44 => I.Inc(R.sp),
-                0x6C => I.Insb(),
-                0x6D => I.Insw(),
-                0xCC => I.Int3(),
-                0xCE => I.Into(),
-                0xCF => I.Iret(),
-                0x9F => I.Lahf(),
-                0xC9 => I.Leave(),
-                0xF0 => I.Lock(),
-                0xAC => I.Lodsb(),
-                0xAD => I.Lodsw(),
-                0xA4 => I.Movsb(),
-                0xA5 => I.Movsw(),
-                0x90 => I.Nop(),
-                0xEE => I.Out(R.dx, R.al),
-                0xEF => I.Out(R.dx, R.ax),
-                0x6E => I.Outsb(),
-                0x6F => I.Outsw(),
-                0x58 => I.Pop(R.ax),
-                0x5D => I.Pop(R.bp),
-                0x5B => I.Pop(R.bx),
-                0x59 => I.Pop(R.cx),
-                0x5F => I.Pop(R.di),
-                0x1F => I.Pop(R.ds),
-                0x5A => I.Pop(R.dx),
-                0x07 => I.Pop(R.es),
-                0x5E => I.Pop(R.si),
-                0x5C => I.Pop(R.sp),
-                0x17 => I.Pop(R.ss),
-                0x61 => I.Popa(),
-                0x9D => I.Popf(),
-                0x50 => I.Push(R.ax),
-                0x55 => I.Push(R.bp),
-                0x53 => I.Push(R.bx),
-                0x0E => I.Push(R.cs),
-                0x51 => I.Push(R.cx),
-                0x57 => I.Push(R.di),
-                0x1E => I.Push(R.ds),
-                0x52 => I.Push(R.dx),
-                0x06 => I.Push(R.es),
-                0x56 => I.Push(R.si),
-                0x54 => I.Push(R.sp),
-                0x16 => I.Push(R.ss),
-                0x60 => I.Pusha(),
-                0x9C => I.Pushf(),
-                0xF3 => I.Repe(),
-                0xF2 => I.Repne(),
-                0xC3 => I.Ret(),
-                0xCB => I.Retf(),
-                0x9E => I.Sahf(),
-                0xAE => I.Scasb(),
-                0xAF => I.Scasw(),
-                0xF9 => I.Stc(),
-                0xFD => I.Std(),
-                0xFB => I.Sti(),
-                0xAA => I.Stosb(),
-                0xAB => I.Stosw(),
-                0x9B => I.Wait(),
-                0x95 => I.Xchg(R.ax, R.bp),
-                0x93 => I.Xchg(R.ax, R.bx),
-                0x91 => I.Xchg(R.ax, R.cx),
-                0x97 => I.Xchg(R.ax, R.di),
-                0x92 => I.Xchg(R.ax, R.dx),
-                0x96 => I.Xchg(R.ax, R.si),
-                0x94 => I.Xchg(R.ax, R.sp),
-                0xD7 => I.Xlat(),
-            };
-            
-            return fail ? throw new DecodeException(b0) : i;
+                            case 0b00000000: i = I.Add(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00001000: i = I.Or(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00010000: i = I.Adc(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00011000: i = I.Sbb(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00100000: i = I.And(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00110000: i = I.Xor(MaskRegs(b0, b1 = r.ReadByte())); break;
+                            case 0b00111000: i = I.Cmp(MaskRegs(b0, b1 = r.ReadByte())); break;
+                        }
+                    if (i == null)
+                        switch (i0 = b0 & 0b11111_000)
+                        {
+                            case 0b01001000: i = I.Dec(MaskReg(b0)); break;
+                            case 0b01010000: i = I.Push(MaskReg(b0)); break;
+                            case 0b01011000: i = I.Pop(MaskReg(b0)); break;
+                        }
+                    if (i == null)
+                        Console.WriteLine($" {i0:b8} ");
+                    break;
+                    */
+            }
+
+            return fail ? throw new DecodeException(b0, b1) : i;
         }
     }
 }
