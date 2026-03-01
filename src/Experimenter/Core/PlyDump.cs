@@ -33,6 +33,7 @@ namespace Experimenter.Core
             var only = args.As<int?>("only");
             var rnd = new Random();
 
+            const string s = " ";
             var sd = new Sd();
             var byteArrays = new List<byte[]>();
             for (var i = 1; i <= count; i++)
@@ -46,7 +47,7 @@ namespace Experimenter.Core
             var e1 = new IE();
             var ex1 = new JsonExtractor<IE>(oD, e1);
             var en1 = FuzzerX.GetName(e1);
-            await BinDump.Display(so1, byteArrays, ex1, Filter, false, false);
+            await BinDump.Display(so1, byteArrays, ex1, Filter, false, false, s);
             await so1.FlushAsync();
             ParseOut(sd, en1, so1);
 
@@ -54,7 +55,7 @@ namespace Experimenter.Core
             var e2 = new GE();
             var ex2 = new JsonExtractor<GE>(oD, e2);
             var en2 = FuzzerX.GetName(e2);
-            await BinDump.Display(so2, byteArrays, ex2, Filter, false, false);
+            await BinDump.Display(so2, byteArrays, ex2, Filter, false, false, s);
             await so2.FlushAsync();
             ParseOut(sd, en2, so2);
 
@@ -62,7 +63,7 @@ namespace Experimenter.Core
             var e3 = new NE();
             var ex3 = new JsonExtractor<NE>(oD, e3);
             var en3 = FuzzerX.GetName(e3);
-            await BinDump.Display(so3, byteArrays, ex3, Filter, false, false);
+            await BinDump.Display(so3, byteArrays, ex3, Filter, false, false, s);
             await so3.FlushAsync();
             ParseOut(sd, en3, so3);
 
@@ -70,7 +71,7 @@ namespace Experimenter.Core
             var e4 = new WE();
             var ex4 = new JsonExtractor<WE>(oD, e4);
             var en4 = FuzzerX.GetName(e4);
-            await BinDump.Display(so4, byteArrays, ex4, Filter, false, false);
+            await BinDump.Display(so4, byteArrays, ex4, Filter, false, false, s);
             await so4.FlushAsync();
             ParseOut(sd, en4, so4);
 

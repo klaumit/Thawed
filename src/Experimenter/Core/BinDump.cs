@@ -34,7 +34,7 @@ namespace Experimenter.Core
         }
 
         internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays, IExtractor ex, 
-            Func<string, bool>? filter = null, bool noBad = true, bool noSame = true)
+            Func<string, bool>? filter = null, bool noBad = true, bool noSame = true, string sep = " | ")
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
@@ -59,8 +59,8 @@ namespace Experimenter.Core
                     var iPt = $"{ins}".Split(" ", 2);
                     var pp = iPt[0].Trim();
                     var pg = iPt.Length == 2 ? iPt[1].Trim() : "";
-                    var sx = $"{op,-5} | {ag}";
-                    var tx = $"{pp,-5} | {pg}";
+                    var sx = $"{op,-5}{sep}{ag}";
+                    var tx = $"{pp,-5}{sep}{pg}";
                     if (noSame && sx.Equals(tx))
                         continue;
                     if (filter != null && !filter(hex))
