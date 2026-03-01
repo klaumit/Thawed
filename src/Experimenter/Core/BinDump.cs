@@ -7,6 +7,7 @@ using Generator.Extractors;
 using Generator.Tools;
 using Thawed;
 using WE = Generator.Extractors.WinExtractor;
+using static Generator.Tools.FileTool;
 
 namespace Experimenter.Core
 {
@@ -14,14 +15,23 @@ namespace Experimenter.Core
     {
         internal static async Task Run(Options o)
         {
+            if (CreateOrGetDir(o.OutputDir) is not { } outDir)
+            {
+                await Console.Error.WriteLineAsync("No output dir given!");
+                return;
+            }
+
             var byteArrays = FuzzerX.GetAllCandidates(false);
-            await using var fileD = File.CreateText("dis_log.txt");
-            await Display(fileD, byteArrays, WinC);
+
+            // WE Win = new();
+            var winC = new JsonExtractor<WE>(outDir);
+
+            var path = Path.Combine(outDir, "dis_log.txt");
+            await using var fileD = File.CreateText(path);
+            await Display(fileD, byteArrays, winC);
+
             Console.WriteLine("Done.");
         }
-        
-        private static readonly WE Win = new();
-        private static readonly JsonExtractor<WE> WinC = new();
 
         internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays, IExtractor ex)
         {
