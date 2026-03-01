@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Generator.Tools
@@ -19,6 +20,24 @@ namespace Generator.Tools
                 dict[key] = val;
             }
             return dict;
+        }
+
+        public static T? As<T>(this IDictionary<string, string> dict, string name)
+            => dict.TryGetValue(name, out var value) ? As<T>(value) : default;
+
+        private static T? As<T>(string value)
+        {
+            var type = $"{typeof(T)}";
+            object? obj = null;
+            switch (type)
+            {
+                case "System.Nullable`1[System.Int32]":
+                    if (int.TryParse(value, out var i)) obj = i;
+                    break;
+                default:
+                    throw new InvalidOperationException($"{type} '{value}'");
+            }
+            return (T?)obj;
         }
     }
 }

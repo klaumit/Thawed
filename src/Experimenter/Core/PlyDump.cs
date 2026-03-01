@@ -8,6 +8,7 @@ using Generator.Tools;
 using Thawed;
 using WE = Generator.Extractors.WinExtractor;
 using static Generator.Tools.FileTool;
+using static Generator.Tools.ArgTool;
 
 namespace Experimenter.Core
 {
@@ -21,12 +22,13 @@ namespace Experimenter.Core
                 return;
             }
 
-            var args = ArgTool.ParseDict(o.Misc);
+            var args = ParseDict(o.Misc);
+            var count = args.As<int?>("count") ?? 10;
 
             Console.WriteLine(args);
             Console.WriteLine(JsonTool.ToJson(args));
-            
-            
+
+
 
             Console.WriteLine("Done.");
         }
