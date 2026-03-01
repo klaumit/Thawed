@@ -24,24 +24,7 @@ namespace Thawed
         internal static WordPtrArg word_ptr(Arg a) => new(a);
 
         internal static DwordPtrArg dword_ptr(Arg a) => new(a);
-
-        public static Arg GetEffectiveAddress(byte? b, int disp)
-        {
-            var end = b & 0b_00000_111;
-            switch (end)
-            {
-                case 0b000: return br_plus(R.bx, R.si, disp);
-                case 0b001: return br_plus(R.bx, R.di, disp);
-                case 0b010: return br_plus(R.bp, R.si, disp);
-                case 0b011: return br_plus(R.bp, R.di, disp);
-                case 0b100: return br_plus(R.si, disp);
-                case 0b101: return br_plus(R.di, disp);
-                case 0b110: return br_plus(R.bp, disp);
-                case 0b111: return br_plus(R.bx, disp);
-                default: return null!;
-            }
-        }
-
+        
         public static (OpMod mod, int reg, int rm)? DecodeModRM(byte? modRM)
         {
             if (modRM is not { } bModRM) return null;
@@ -102,11 +85,53 @@ namespace Thawed
                 _ => default
             };
 
-        private static R DecodeReg(OpWidth s, int b)
-            => s switch
+        private static R DecodeReg(OpWidth w, int b)
+            => w switch
             {
                 OpWidth.Bits8 => DecodeReg8(b), OpWidth.Bits16 => DecodeReg16(b),
                 _ => default
+            };
+
+        private static Arg? DecodeEffNo(int b) 
+            => b switch
+            {
+                0b000 => br_plus(R.bx, R.si), 0b001 => br_plus(R.bx, R.di),
+                0b010 => br_plus(R.bp, R.si), 0b011 => br_plus(R.bp, R.di),
+                0b100 => br(R.si), 0b101 => br(R.di), 0b110 => OpWidth.None,
+                0b111 => br(R.bx), _ => null
+            };
+
+        private static Arg? DecodeEff8(int b) 
+            => b switch
+            {
+                0b000 => br_plus(R.bx, R.si, OpWidth.Bits8), 0b001 => br_plus(R.bx, R.di, OpWidth.Bits8),
+                0b010 => br_plus(R.bp, R.si, OpWidth.Bits8), 0b011 => br_plus(R.bp, R.di, OpWidth.Bits8),
+                0b100 => br_plus(R.si, OpWidth.Bits8), 0b101 => br_plus(R.di, OpWidth.Bits8),
+                0b110 => br_plus(R.bp, OpWidth.Bits8), 0b111 => br_plus(R.bx, OpWidth.Bits8), _ => null
+            };
+
+        private static Arg? DecodeEff16(int b) 
+            => b switch
+            {
+                0b000 => br_plus(R.bx, R.si, OpWidth.Bits16), 0b001 => br_plus(R.bx, R.di, OpWidth.Bits16),
+                0b010 => br_plus(R.bp, R.si, OpWidth.Bits16), 0b011 => br_plus(R.bp, R.di, OpWidth.Bits16),
+                0b100 => br_plus(R.si, OpWidth.Bits16), 0b101 => br_plus(R.di, OpWidth.Bits16),
+                0b110 => br_plus(R.bp, OpWidth.Bits16), 0b111 => br_plus(R.bx, OpWidth.Bits16),
+                _ => null
+            };
+
+        private static Arg? DecodeEff(OpMod m, int b)
+            => m switch
+            {
+                OpMod.NoDisplacement => DecodeEffNo(b), OpMod.Bit8Displace => DecodeEff8(b), 
+                OpMod.Bit16Displace => DecodeEff16(b), _ => null
+            };
+
+        private static Arg? DecodeRm(OpMod m, OpWidth w, int b)
+            => m switch
+            {
+                OpMod.NoDisplacement or OpMod.Bit8Displace or OpMod.Bit16Displace => DecodeEff(m, b),
+                OpMod.RegisterDirect => DecodeReg(w, b), _ => null
             };
 
         public static Arg[]? GetArgs(int d, int w, (OpMod mod, int reg, int rm)? p)
@@ -116,12 +141,14 @@ namespace Thawed
             {
                 switch (mod)
                 {
+                    /*
                     case OpMod.NoDisplacement:
                         break;
                     case OpMod.Bit8Displacement:
                         break;
                     case OpMod.Bit16Displacement:
                         break;
+                    */
                     case OpMod.RegisterDirect:
                         var dReg = DecodeReg(xW, reg);
                         var dRm = DecodeReg(xW, rm);
@@ -131,6 +158,8 @@ namespace Thawed
                             case OpDirection.RegIsDst: return [dReg, dRm];
                         }
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             return null;
@@ -140,14 +169,15 @@ namespace Thawed
     public enum OpWidth
     {
         Bits8 = 0,
-        Bits16 = 1
+        Bits16 = 1,
+        None
     }
 
     public enum OpMod
     {
         NoDisplacement = 0b00,
-        Bit8Displacement = 0b01,
-        Bit16Displacement = 0b10,
+        Bit8Displace = 0b01,
+        Bit16Displace = 0b10,
         RegisterDirect = 0b11
     }
 

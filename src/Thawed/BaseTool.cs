@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace Thawed
@@ -13,6 +14,12 @@ namespace Thawed
 		{
 			return string.Join("", bytes.Select(ToHexString));
 		}
+
+		public static string ToSymbol(this OpWidth val)
+			=> val switch
+			{
+				OpWidth.Bits8 => "D8", OpWidth.Bits16 => "D16", _ => "DA"
+			};
 
 		public static string ToSymbol(this Register val)
 		{
