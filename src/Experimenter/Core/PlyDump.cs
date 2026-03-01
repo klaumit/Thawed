@@ -24,11 +24,21 @@ namespace Experimenter.Core
 
             var args = ParseDict(o.Misc);
             var count = args.As<int?>("count") ?? 10;
+            var cntSp = $"{count}".Length;
+            var rnd = new Random();
 
-            Console.WriteLine(args);
-            Console.WriteLine(JsonTool.ToJson(args));
+            var byteArrays = new List<byte[]>();
+            for (var i = 1; i <= count; i++)
+            {
+                var idx = $"{i}".PadLeft(cntSp, '0');
+                var num = rnd.NextInt64();
+                var bits = BitConverter.GetBytes(num);
+                Console.WriteLine($" #{idx} {Convert.ToHexString(bits)}");
+                byteArrays.Add(bits);
+            }
 
-
+            var ex = new IcedExtractor();
+            await BinDump.Display(Console.Out, byteArrays, ex);
 
             Console.WriteLine("Done.");
         }
