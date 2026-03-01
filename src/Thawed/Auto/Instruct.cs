@@ -121,10 +121,28 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Detect value out of range
+        /// <remarks>BOUND</remarks>
+        /// </summary>
+        internal static I? Bound(byte? v0)
+        {
+            return v0 is { } b0 ? new I(O.Bound, b0) : null;
+        }
+        
+        /// <summary>
         /// Call direct within segment
         /// <remarks>CALL</remarks>
         /// </summary>
         internal static I? Call(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Call, l, h) : null;
+        }
+        
+        /// <summary>
+        /// Call direct intersegment
+        /// <remarks>CALL</remarks>
+        /// </summary>
+        internal static I? CallDis(byte? low, byte? high)
         {
             return low is { } l && high is { } h ? new I(O.Call, l, h) : null;
         }
@@ -136,6 +154,15 @@ namespace Thawed.Auto
         internal static I? Call(byte? low)
         {
             // TODO mod != 11
+            return low is { } l ? new I(O.Call, l) : null;
+        }
+
+        /// <summary>
+        /// Call register/memory indirect within segment
+        /// <remarks>CALL</remarks>
+        /// </summary>
+        internal static I? CallIrm(byte? low)
+        {
             return low is { } l ? new I(O.Call, l) : null;
         }
         
@@ -347,10 +374,45 @@ namespace Thawed.Auto
         {
             return new I(O.Imul, args);
         }
-        
-        internal static I In(params A[] args)
+
+        /// <summary>
+        /// Integer immediate multiply signed
+        /// <remarks>IMUL</remarks>
+        /// </summary>
+        internal static I? Imul(byte? v0, byte? v1)
         {
-            return new I(O.In, args);
+            return v0 is { } b0 && v1 is { } b1
+                ? new I(O.Imul, b0, b1)
+                : null;
+        }
+
+        /// <summary>
+        /// Integer immediate multiply signed
+        /// <remarks>IMUL</remarks>
+        /// </summary>
+        internal static I? Imul(byte? v0, byte? v1, byte? v2)
+        {
+            return v0 is { } b0 && v1 is { } b1 && v2 is { } b2
+                ? new I(O.Imul, b0, b1, b2)
+                : null;
+        }
+
+        /// <summary>
+        /// Input from variable port
+        /// <remarks>IN</remarks>
+        /// </summary>
+        internal static I In()
+        {
+            return new I(O.In);
+        }
+        
+        /// <summary>
+        /// Input from fixed port
+        /// <remarks>IN</remarks>
+        /// </summary>
+        internal static I? In(byte? v0)
+        {
+            return v0 is {} b0 ? new I(O.In) : null;
         }
         
         /// <summary>
@@ -360,6 +422,15 @@ namespace Thawed.Auto
         internal static I Inc(R reg)
         {
             return new I(O.Inc, reg);
+        }
+        
+        /// <summary>
+        /// Increment register/memory
+        /// <remarks>INC</remarks>
+        /// </summary>
+        internal static I? Inc(byte? v0)
+        {
+            return v0 is {} b0 ? new I(O.Inc, b0) : null;
         }
         
         /// <summary>
@@ -895,6 +966,24 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Output to fixed port
+        /// <remarks>OUT</remarks>
+        /// </summary>
+        internal static I? Out(byte? v0)
+        {
+            return v0 is {} b0 ?  new I(O.Out, b0) : null;
+        }
+        
+        /// <summary>
+        /// Output to variable port
+        /// <remarks>OUT</remarks>
+        /// </summary>
+        internal static I Out()
+        {
+            return new I(O.Out);
+        }
+        
+        /// <summary>
         /// Output byte to DX port
         /// <remarks>OUTSB</remarks>
         /// </summary>
@@ -966,6 +1055,15 @@ namespace Thawed.Auto
         internal static I Push(R reg)
         {
             return new I(O.Push, reg);
+        }
+        
+        /// <summary>
+        /// Push memory
+        /// <remarks>PUSH</remarks>
+        /// </summary>
+        internal static I? Push(byte? v0)
+        {
+            return v0 is {} b0 ? new I(O.Push, b0) : null;
         }
         
         /// <summary>
@@ -1291,6 +1389,37 @@ namespace Thawed.Auto
         internal static I? XorAx(byte? v0, byte? v1)
         {
             return v0 is { } b0 && v1 is { } b1 ? new I(O.Xor, b0, b1) : null;
+        }
+
+        /// <summary>
+        /// Exclusive or reg/memory and register to either
+        /// <remarks>XOR</remarks>
+        /// </summary>
+        internal static I? Xor(byte? v0)
+        {
+            return v0 is {} b0 ? new I(O.Xor, b0) : null;
+        }
+
+        /// <summary>
+        /// Exclusive or imm to register/memory
+        /// <remarks>XOR</remarks>
+        /// </summary>
+        internal static I? Xor(byte? v0, byte? v1)
+        {
+            return v0 is { } b0 && v1 is { } b1
+                ? new I(O.Xor, b0, b1)
+                : null;
+        }
+
+        /// <summary>
+        /// Exclusive or imm to register/memory
+        /// <remarks>XOR</remarks>
+        /// </summary>
+        internal static I? Xor(byte? v0, byte? v1, byte? v2)
+        {
+            return v0 is { } b0 && v1 is { } b1 && v2 is { } b2
+                ? new I(O.Xor, b0, b1, b2)
+                : null;
         }
 
         internal static I Xor()
