@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+
 namespace Thawed.Args
 {
     public sealed class BracketP2Arg : Arg
     {
         public Arg Val1 { get; }
         public Arg Val2 { get; }
-        public Arg Val3 { get; }
+        public Arg Val3 { get; internal set; }
 
         public BracketP2Arg(Arg val1, Arg val2, Arg val3)
         {

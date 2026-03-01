@@ -120,27 +120,27 @@ namespace Thawed.Auto
                 case 0b00111100: i = I.CmpAx(b1 = r.ReadByte()); break;
                 case 0b00000100: i = I.AddAx(b1 = r.ReadByte()); break;
                 case 0b00110000: i = I.Xor(b1 = r.ReadByte()); break;
-                case 0b00110001: i = I.Xor(b1 = r.ReadByte()); break;
+                case 0b00110001: i = I.Xor(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00110010: i = I.Xor(b1 = r.ReadByte()); break;
-                case 0b00110011: i = I.Xor(b1 = r.ReadByte()); break;
-                case 0b10001101: i = I.Lea(0,1,b1 = r.ReadByte()); break;
-                case 0b11000101: i = I.Lds(0,1,b1 = r.ReadByte()); break;
+                case 0b00110011: i = I.Xor(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10001101: i = I.Lea(0,1,b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b11000101: i = I.Lds(0,1,b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11000100: i = I.Les(0,0,b1 = r.ReadByte()); break;
                 case 0b10000110: i = I.Xchg(b1 = r.ReadByte()); break;
                 case 0b10000111: i = I.Xchg(b1 = r.ReadByte()); break;
                 case 0b10001111: i = I.Pop(b1 = r.ReadByte()); break;
                 case 0b00111010: i = I.Cmp(1, 0, b1 = r.ReadByte()); break;
-                case 0b00111011: i = I.Cmp(1, 1, b1 = r.ReadByte()); break;
+                case 0b00111011: i = I.Cmp(1, 1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00111000: i = I.CmpRm(0, 0, b1 = r.ReadByte()); break;
-                case 0b00111001: i = I.CmpRm(0,1, b1 = r.ReadByte()); break;
+                case 0b00111001: i = I.CmpRm(0,1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b10001000: i = I.MovRm(0, 0, b1 = r.ReadByte()); break;
-                case 0b10001001: i = I.MovRm(0, 1, b1 = r.ReadByte()); break;
+                case 0b10001001: i = I.MovRm(0, 1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b10001010: i = I.MovR(1,0, b1 = r.ReadByte()); break;
-                case 0b10001011: i = I.MovR(1,1, b1 = r.ReadByte()); break;
+                case 0b10001011: i = I.MovR(1,1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b10001110: i = I.MovSr(b1 = r.ReadByte()); break;
                 case 0b10001100: i = I.MovSm(b1 = r.ReadByte()); break;
                 case 0b10000100: i = I.TestRm(0,0,b1 = r.ReadByte()); break;
-                case 0b10000101: i = I.TestRm(0,1,b1 = r.ReadByte()); break;
+                case 0b10000101: i = I.TestRm(0,1,b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11110110:
                     switch ((b1 = r.ReadByte()) & 0b00_111_000)
                     {

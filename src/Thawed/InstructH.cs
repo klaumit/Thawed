@@ -15,7 +15,7 @@ namespace Thawed
 
         internal static BracketArg br(Arg a) => new(a);
 
-        internal static BracketPlusArg br_plus(Arg a, Arg b) => new(a, b);
+        internal static BracketP1Arg br_plus(Arg a, Arg b) => new(a, b);
 
         internal static BracketP2Arg br_plus(Arg a, Arg b, Arg c) => new(a, b, c);
 
@@ -134,13 +134,15 @@ namespace Thawed
                 OpMod.RegisterDirect => DecodeReg(w, b), _ => null
             };
 
-        public static Arg[]? GetArgs(int d, int w, (OpMod mod, int reg, int rm)? p)
+        public static Arg[]? GetArgs(int d, int w, (OpMod mod, int reg, int rm)? p, params byte?[] data)
         {
             var (xD, xW) = ((OpDirection)d, (OpWidth)w);
             if (p is var (mod, reg, rm))
             {
                 var dReg = DecodeReg(xW, reg);
                 var dRm = DecodeRm(mod, xW, rm)!;
+                if (data is { Length: >= 1 })
+                    dRm = FixData(dRm, data);
                 switch (xD)
                 {
                     case OpDirection.RegIsSrc: return [dRm, dReg];
@@ -149,6 +151,28 @@ namespace Thawed
                 }
             }
             return null;
+        }
+
+        private static Arg FixData(Arg arg, byte?[] data)
+        {
+            if (arg is BracketP1Arg { Val2: DispArg d2 } b1)
+            {
+                b1.Val2 = ToNumber(data, d2.Val);
+            }
+            else if (arg is BracketP2Arg { Val3: DispArg d3 } b2)
+            {
+                b2.Val3 = ToNumber(data, d3.Val);
+            }
+            return arg;
+        }
+
+        private static Arg ToNumber(byte?[] data, OpWidth w)
+        {
+            switch (data.Length)
+            {
+                case 1: return (byte)data[0]!;
+                default: throw new InvalidOperationException($"{w} | {data.ToHexString()}");
+            }
         }
     }
 

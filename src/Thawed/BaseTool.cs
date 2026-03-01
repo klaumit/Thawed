@@ -5,15 +5,11 @@ namespace Thawed
 {
 	internal static class BaseTool
 	{
-		private static string ToHexString(byte b)
-		{
-			return $"{b:X2}";
-		}
+		private static string ToHexString(byte b) => $"{b:X2}";
+		internal static string ToHexString(this byte[] bytes) => string.Join("", bytes.Select(ToHexString));
 
-		internal static string ToHexString(this byte[] bytes)
-		{
-			return string.Join("", bytes.Select(ToHexString));
-		}
+		private static string ToHexString(byte? b) => b == null ? "__" : $"{b:X2}";
+		internal static string ToHexString(this byte?[] bytes) => string.Join("", bytes.Select(ToHexString));
 
 		public static string ToSymbol(this OpWidth val)
 			=> val switch
