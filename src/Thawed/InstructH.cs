@@ -145,8 +145,8 @@ namespace Thawed
                     dRm = FixData(dRm, data);
                 switch (xD)
                 {
-                    case OpDirection.RegIsSrc: return [dRm, dReg];
-                    case OpDirection.RegIsDst: return [dReg, dRm];
+                    case OpDirection.RegIsSrc: return [dRm!, dReg];
+                    case OpDirection.RegIsDst: return [dReg, dRm!];
                     default: throw new ArgumentOutOfRangeException();
                 }
             }
