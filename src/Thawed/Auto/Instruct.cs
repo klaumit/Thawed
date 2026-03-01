@@ -217,20 +217,18 @@ namespace Thawed.Auto
         /// Compare register/memory with register
         /// <remarks>CMP</remarks>
         /// </summary>
-        internal static I? Cmp(byte? v0)
+        internal static I? Cmp(int d, int w, byte? v)
         {
-            // TODO mod reg r/m
-            return v0 is { } b0 ? new I(O.Cmp, b0) : null;
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Cmp, a) : null;
         }
         
         /// <summary>
         /// Compare register with register/memory
         /// <remarks>CMP</remarks>
         /// </summary>
-        internal static I? CmpRm(byte? v0)
+        internal static I? CmpRm(int d, int w, byte? v)
         {
-            // TODO mod reg r/m
-            return v0 is { } b0 ? new I(O.Cmp, b0) : null;
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Cmp, a) : null;
         }
 
         /// <summary>
@@ -705,10 +703,10 @@ namespace Thawed.Auto
         /// Load pointer to DS
         /// <remarks>LDS</remarks>
         /// </summary>
-        internal static I? Lds(byte? v0)
+        internal static I? Lds(int d, int w, byte? v)
         {
-            // TODO mod reg r/m (mod != 11)
-            return v0 is {} b0 ? new I(O.Lds, b0) : null;
+            // TODO (mod != 11)
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Lds, a) : null;
         }
         
         internal static I Lea(params A[] args)
@@ -720,10 +718,9 @@ namespace Thawed.Auto
         /// Load EA to register
         /// <remarks>LEA</remarks>
         /// </summary>
-        internal static I? Lea(byte? v0)
+        internal static I? Lea(int d, int w, byte? v)
         {
-            // TODO mod reg r/m
-            return v0 is {} b0 ? new I(O.Lea, b0) : null;
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Lea, a) : null;
         }
         
         /// <summary>
@@ -744,10 +741,10 @@ namespace Thawed.Auto
         /// Load pointer to ES
         /// <remarks>LES</remarks>
         /// </summary>
-        internal static I? Les(byte? v0)
+        internal static I? Les(int d, int w, byte? v)
         {
-            // TODO mod reg r/m (mod != 11)
-            return v0 is {} b0 ? new I(O.Les, b0) : null;
+            // TODO (mod != 11)
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Les, a) : null;
         }
         
         /// <summary>
@@ -822,10 +819,9 @@ namespace Thawed.Auto
         /// Move register/memory to register
         /// <remarks>MOV</remarks>
         /// </summary>
-        internal static I? MovR(byte? v)
+        internal static I? MovR(int d, int w, byte? v)
         {
-            // TODO mod reg r/m
-            return v is {} b? new I(O.Mov, b) : null;
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Mov, a) : null;
         }
         
         /// <summary>
@@ -1332,10 +1328,9 @@ namespace Thawed.Auto
         /// register/memory and register
         /// <remarks>TEST</remarks>
         /// </summary>
-        internal static I? TestRm(byte? v0)
+        internal static I? TestRm(int d, int w, byte? v)
         {
-            // TODO mod reg r/m
-            return v0 is { } b0 ? new I(O.Test, b0) : null;
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Test, a) : null;
         }
         
         /// <summary>
