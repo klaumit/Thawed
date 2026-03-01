@@ -2,7 +2,7 @@
   "profiles": {
     "be": {
       "commandName": "Project",
-      "commandLineArgs": "-b -o cached"
+      "commandLineArgs": "-b -o ../../../Data"
     }
   }
 }

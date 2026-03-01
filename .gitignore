@@ -419,6 +419,6 @@ FodyWeavers.xsd
 /src/.idea/
 tmp_win/
 
-/src/Experimenter/*.txt
-/src/Experimenter/*.png
+/src/Experimenter/Data/*.txt
+/src/Experimenter/Data/*.png
 
