@@ -153,26 +153,30 @@ namespace Thawed
             return null;
         }
 
-        private static Arg FixData(Arg arg, byte?[] data)
+        private static Arg? FixData(Arg arg, byte?[] data)
         {
-            if (arg is BracketP1Arg { Val2: DispArg d2 } b1)
+            if (arg is BracketP1Arg { Val2: DispArg d2 } b1
+                && ToNumber(data, d2.Val) is { } n2)
             {
-                b1.Val2 = ToNumber(data, d2.Val);
+                b1.Val2 = n2;
             }
-            else if (arg is BracketP2Arg { Val3: DispArg d3 } b2)
+            else if (arg is BracketP2Arg { Val3: DispArg d3 } b2
+                     && ToNumber(data, d3.Val) is { } n3)
             {
-                b2.Val3 = ToNumber(data, d3.Val);
+                b2.Val3 = n3;
             }
             return arg;
         }
 
-        private static Arg ToNumber(byte?[] data, OpWidth w)
+        private static Arg? ToNumber(byte?[] data, OpWidth w)
         {
+            Arg? res = null;
             switch (data.Length)
             {
-                case 1: return (byte)data[0]!;
+                case 1: res = data[0]; break;
                 default: throw new InvalidOperationException($"{w} | {data.ToHexString()}");
             }
+            return res;
         }
     }
 

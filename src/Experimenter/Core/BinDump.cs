@@ -33,7 +33,8 @@ namespace Experimenter.Core
             Console.WriteLine("Done.");
         }
 
-        internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays, IExtractor ex)
+        internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays,
+            IExtractor ex, Func<string, bool>? filter = null)
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
@@ -41,9 +42,11 @@ namespace Experimenter.Core
             {
                 foreach (var line in lines)
                 {
-                    if (line.O != 0) continue;
+                    if (line.O != 0)
+                        continue;
                     var bytes = Convert.FromHexString(line.H);
-                    if (line.D.Contains("???")) continue;
+                    if (line.D.Contains("???") || line.D.Contains("(bad)"))
+                        continue;
                     var parts = line.D.Split(" ", 2);
                     var op = parts[0].Trim();
                     var ag = parts.Length == 2 ? parts[1].Trim() : "";
@@ -53,11 +56,14 @@ namespace Experimenter.Core
                     reader.Reset(bytes);
                     var ins = decoder.Decode(reader, false);
                     var iPt = $"{ins}".Split(" ", 2);
-                    var pp = iPt[0];
-                    var pg = iPt.Length == 2 ? iPt[1] : "";
+                    var pp = iPt[0].Trim();
+                    var pg = iPt.Length == 2 ? iPt[1].Trim() : "";
                     var sx = $"{op,-5} | {ag}";
                     var tx = $"{pp,-5} | {pg}";
-                    if (sx.Equals(tx)) continue;
+                    if (sx.Equals(tx))
+                        continue;
+                    if (filter != null && !filter(hex))
+                        continue;
                     var sl = $" {bin} | {oct} | {hex} | {sx} \t=> {tx}";
                     await writer.WriteLineAsync(sl);
                     await writer.FlushAsync();
