@@ -110,6 +110,24 @@ namespace Thawed.Auto
                 case 0b00011100: i = I.SbbAx(b1 = r.ReadByte()); break;
                 case 0b00111100: i = I.CmpAx(b1 = r.ReadByte()); break;
                 case 0b00000100: i = I.AddAx(b1 = r.ReadByte()); break;
+                case 0b10001101: i = I.Lea(b1 = r.ReadByte()); break;
+                case 0b11000101: i = I.Lds(b1 = r.ReadByte()); break;
+                case 0b11000100: i = I.Les(b1 = r.ReadByte()); break;
+                case 0b10000110: i = I.Xchg(b1 = r.ReadByte()); break;
+                case 0b10000111: i = I.Xchg(b1 = r.ReadByte()); break;
+                case 0b10001111: i = I.Pop(b1 = r.ReadByte()); break;
+                case 0b00111010: i = I.Cmp(b1 = r.ReadByte()); break;
+                case 0b00111011: i = I.Cmp(b1 = r.ReadByte()); break;
+                case 0b00111000: i = I.CmpRm(b1 = r.ReadByte()); break;
+                case 0b00111001: i = I.CmpRm(b1 = r.ReadByte()); break;
+                case 0b10001000: i = I.MovRm(b1 = r.ReadByte()); break;
+                case 0b10001001: i = I.MovRm(b1 = r.ReadByte()); break;
+                case 0b10001010: i = I.MovR(b1 = r.ReadByte()); break;
+                case 0b10001011: i = I.MovR(b1 = r.ReadByte()); break;
+                case 0b10001110: i = I.MovSr(b1 = r.ReadByte()); break;
+                case 0b10001100: i = I.MovSm(b1 = r.ReadByte()); break;
+                case 0b10000100: i = I.TestRm(b1 = r.ReadByte()); break;
+                case 0b10000101: i = I.TestRm(b1 = r.ReadByte()); break;
                 case 0b11110110:
                     switch ((b1 = r.ReadByte()) & 0b00_111_000)
                     {
@@ -132,6 +150,21 @@ namespace Thawed.Auto
                         case 0b00_100_000: i = I.Mul(MaskReg(b1)); break;
                     }
                     break;
+                case 0b11111110:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_001_000: i = I.Dec(b1 = r.ReadByte()); break;
+                    }
+                    break;
+                case 0b11111111:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_001_000: i = I.Dec(b1 = r.ReadByte()); break;
+                        case 0b00_011_000: i = I.Call(b1 = r.ReadByte()); break;
+                        case 0b00_100_000: i = I.JmpSg(b1 = r.ReadByte()); break;
+                        case 0b00_101_000: i = I.JmpIt(b1 = r.ReadByte()); break;
+                    }
+                    break;
                 // Two arguments
                 case 0b11000010: i = I.Ret(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11001010: i = I.Retf(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
@@ -146,13 +179,18 @@ namespace Thawed.Auto
                 case 0b00011101: i = I.SbbAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00111101: i = I.CmpAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00000101: i = I.AddAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10100010: i = I.MovAlM(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10100011: i = I.MovAxM(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10100000: i = I.MovAlT(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10100001: i = I.MovAxT(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b11101010: i = I.JmpDg(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 // Three arguments
                 case 0b11001000: i = I.Enter(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
             }
-            
-            if (i != null) 
+
+            if (i != null)
                 return i;
-            
+
             switch (i0 = b0 & 0b11111_000)
             {
                 // One register
@@ -162,8 +200,8 @@ namespace Thawed.Auto
                 case 0b01010_000: i = I.Push(MaskReg(b0)); break;
                 case 0b10010_000: i = I.Xchg(MaskReg(b0)); break;
             }
-            
-            if (i != null) 
+
+            if (i != null)
                 return i;
 
             switch (i0 = b0 & 0b111_00_111)
@@ -172,31 +210,6 @@ namespace Thawed.Auto
                 case 0b000_00_111: i = I.PopSr(MaskSeg(b0)); break;
                 case 0b000_00_110: i = I.PushSr(MaskSeg(b0)); break;
             }
-            
-
-            
-            
-
-            // TODO
-            
-                /*                
-                // More?
-                default:
-                    if (i == null)
-                        switch (i0 = b0 & 0b1111111_0)
-                        {
-                            case 0b00000000: i = I.Add(MaskRegs(b0, b1 = r.ReadByte())); break;
-                            case 0b00001000: i = I.Or(MaskRegs(b0, b1 = r.ReadByte())); break;
-                            case 0b00010000: i = I.Adc(MaskRegs(b0, b1 = r.ReadByte())); break;
-                            case 0b00011000: i = I.Sbb(MaskRegs(b0, b1 = r.ReadByte())); break;
-                            case 0b00100000: i = I.And(MaskRegs(b0, b1 = r.ReadByte())); break;
-                            case 0b00110000: i = I.Xor(MaskRegs(b0, b1 = r.ReadByte())); break;
-                            case 0b00111000: i = I.Cmp(MaskRegs(b0, b1 = r.ReadByte())); break;
-                        }
-                    if (i == null)
-                        Console.WriteLine($" {i0:b8} ");
-                    break;
-                    */
 
             return fail ? throw new DecodeException(b0, b1, b2, b3) : i;
         }

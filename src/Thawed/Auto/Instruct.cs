@@ -130,6 +130,16 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Call indirect intersegment
+        /// <remarks>CALL</remarks>
+        /// </summary>
+        internal static I? Call(byte? low)
+        {
+            // TODO mod != 11
+            return low is { } l ? new I(O.Call, l) : null;
+        }
+        
+        /// <summary>
         /// Convert byte to word
         /// <remarks>CBW</remarks>
         /// </summary>
@@ -173,6 +183,26 @@ namespace Thawed.Auto
         internal static I Cmp()
         {
             return new I(O.Cmp);
+        }
+        
+        /// <summary>
+        /// Compare register/memory with register
+        /// <remarks>CMP</remarks>
+        /// </summary>
+        internal static I? Cmp(byte? v0)
+        {
+            // TODO mod reg r/m
+            return v0 is { } b0 ? new I(O.Cmp, b0) : null;
+        }
+        
+        /// <summary>
+        /// Compare register with register/memory
+        /// <remarks>CMP</remarks>
+        /// </summary>
+        internal static I? CmpRm(byte? v0)
+        {
+            // TODO mod reg r/m
+            return v0 is { } b0 ? new I(O.Cmp, b0) : null;
         }
 
         /// <summary>
@@ -254,6 +284,16 @@ namespace Thawed.Auto
         internal static I Dec(R reg)
         {
             return new I(O.Dec, reg);
+        }
+        
+        /// <summary>
+        /// Decrement register/memory
+        /// <remarks>DEC</remarks>
+        /// </summary>
+        internal static I? Dec(byte? v0)
+        {
+            // TODO mod 001 r/m
+            return v0 is {} b0 ? new I(O.Dec, b0) : null;
         }
         
         internal static I Div(params A[] args)
@@ -456,12 +496,40 @@ namespace Thawed.Auto
         {
             return low is { } l ? new I(O.Jmp, l) : null;
         }
+        
+        /// <summary>
+        /// Unconditional jump register/memory indirect within segment
+        /// <remarks>JMP</remarks>
+        /// </summary>
+        internal static I? JmpSg(byte? low)
+        {
+            return low is { } l ? new I(O.Jmp, l) : null;
+        }
+        
+        /// <summary>
+        /// Unconditional jump indirect intersegment
+        /// <remarks>JMP</remarks>
+        /// </summary>
+        internal static I? JmpIt(byte? low)
+        {
+            // TODO mod != 11
+            return low is { } l ? new I(O.Jmp, l) : null;
+        }
 
         /// <summary>
         /// Unconditional jump direct within segment
         /// <remarks>JMP</remarks>
         /// </summary>
         internal static I? Jmp(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Jmp, l, h) : null;
+        }
+        
+        /// <summary>
+        /// Unconditional jump direct intersegment
+        /// <remarks>JMP</remarks>
+        /// </summary>
+        internal static I? JmpDg(byte? low, byte? high)
         {
             return low is { } l && high is { } h ? new I(O.Jmp, l, h) : null;
         }
@@ -561,9 +629,29 @@ namespace Thawed.Auto
             return new I(O.Lds, args);
         }
         
+        /// <summary>
+        /// Load pointer to DS
+        /// <remarks>LDS</remarks>
+        /// </summary>
+        internal static I? Lds(byte? v0)
+        {
+            // TODO mod reg r/m (mod != 11)
+            return v0 is {} b0 ? new I(O.Lds, b0) : null;
+        }
+        
         internal static I Lea(params A[] args)
         {
             return new I(O.Lea, args);
+        }
+        
+        /// <summary>
+        /// Load EA to register
+        /// <remarks>LEA</remarks>
+        /// </summary>
+        internal static I? Lea(byte? v0)
+        {
+            // TODO mod reg r/m
+            return v0 is {} b0 ? new I(O.Lea, b0) : null;
         }
         
         /// <summary>
@@ -578,6 +666,16 @@ namespace Thawed.Auto
         internal static I Les(params A[] args)
         {
             return new I(O.Les, args);
+        }
+        
+        /// <summary>
+        /// Load pointer to ES
+        /// <remarks>LES</remarks>
+        /// </summary>
+        internal static I? Les(byte? v0)
+        {
+            // TODO mod reg r/m (mod != 11)
+            return v0 is {} b0 ? new I(O.Les, b0) : null;
         }
         
         /// <summary>
@@ -637,6 +735,82 @@ namespace Thawed.Auto
         internal static I Mov(params A[] args)
         {
             return new I(O.Mov, args);
+        }
+        
+        /// <summary>
+        /// Move register to register/memory
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovRm(byte? v)
+        {
+            // TODO mod reg r/m
+            return v is {} b? new I(O.Mov, b) : null;
+        }
+        
+        /// <summary>
+        /// Move register/memory to register
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovR(byte? v)
+        {
+            // TODO mod reg r/m
+            return v is {} b? new I(O.Mov, b) : null;
+        }
+        
+        /// <summary>
+        /// Move register/memory to segment register
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovSr(byte? v)
+        {
+            // TODO mod 0 reg r/m
+            return v is {} b? new I(O.Mov, b) : null;
+        }
+        
+        /// <summary>
+        /// Move segment register to register/memory
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovSm(byte? v)
+        {
+            // TODO mod 0 reg r/m
+            return v is {} b? new I(O.Mov, b) : null;
+        }
+        
+        /// <summary>
+        /// Move accumulator to memory
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovAlM(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Mov, R.al, l, h) : null;
+        }
+
+        /// <summary>
+        /// Move accumulator to memory
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovAxM(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Mov, R.ax, l, h) : null;
+        }
+        
+        /// <summary>
+        /// Move memory to accumulator 
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovAlT(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Mov, R.al, l, h) : null;
+        }
+
+        /// <summary>
+        /// Move memory to accumulator 
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovAxT(byte? low, byte? high)
+        {
+            return low is { } l && high is { } h ? new I(O.Mov, R.ax, l, h) : null;
         }
         
         /// <summary>
@@ -745,6 +919,16 @@ namespace Thawed.Auto
         internal static I Pop(R reg)
         {
             return new I(O.Pop, reg);
+        }
+        
+        /// <summary>
+        /// Pop memory
+        /// <remarks>POP</remarks>
+        /// </summary>
+        internal static I? Pop(byte? v0)
+        {
+            // TODO mod 000 r/m
+            return v0 is { } b0 ? new I(O.Pop, b0) : null;
         }
         
         /// <summary>
@@ -1046,6 +1230,17 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// And function to flags, no result
+        /// register/memory and register
+        /// <remarks>TEST</remarks>
+        /// </summary>
+        internal static I? TestRm(byte? v0)
+        {
+            // TODO mod reg r/m
+            return v0 is { } b0 ? new I(O.Test, b0) : null;
+        }
+        
+        /// <summary>
         /// Wait
         /// </summary>
         internal static I Wait()
@@ -1060,6 +1255,15 @@ namespace Thawed.Auto
         internal static I Xchg(R reg)
         {
             return new I(O.Xchg, R.ax, reg);
+        }
+        
+        /// <summary>
+        /// Exchange register/memory with register
+        /// <remarks>XCHG</remarks>
+        /// </summary>
+        internal static I? Xchg(byte? v0)
+        {
+            return v0 is {} b0 ?  new I(O.Xchg, R.ax, b0) : null;
         }
         
         /// <summary>
