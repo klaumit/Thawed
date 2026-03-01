@@ -16,43 +16,27 @@ namespace Thawed
 
         internal static BracketPlusArg br_plus(Arg a, Arg b) => new(a, b);
 
+        internal static BracketP2Arg br_plus(Arg a, Arg b, Arg c) => new(a, b, c);
+
         internal static BytePtrArg byte_ptr(Arg a) => new(a);
 
         internal static WordPtrArg word_ptr(Arg a) => new(a);
 
         internal static DwordPtrArg dword_ptr(Arg a) => new(a);
 
-        public static Arg[] MaskRegs(byte? b0, byte? b1)
-        {
-            var w = b0 & 0b0000000_1;
-            var r = b1;
-            switch (w, r)
-            {
-                case (0b0, 0b11000000): return [R.al, R.al];
-                case (0b0, 0b11011011): return [R.bl, R.bl];
-                case (0b0, 0b11001001): return [R.cl, R.cl];
-                case (0b0, 0b11010010): return [R.dl, R.dl];
-                case (0b1, 0b11000000): return [R.ah, R.ah];
-                case (0b1, 0b11011011): return [R.bh, R.bh];
-                case (0b1, 0b11001001): return [R.ch, R.ch];
-                case (0b1, 0b11010010): return [R.dh, R.dh];
-                default: return null!;
-            }
-        }
-
-        public static Arg GetEffectiveAddress(byte? b)
+        public static Arg GetEffectiveAddress(byte? b, int disp)
         {
             var end = b & 0b_00000_111;
             switch (end)
             {
-                case 0b000: return R.bx; // (BX) + (SI) + DISP  
-                case 0b001: return R.bx; // (BX) + (DI) + DISP
-                case 0b010: return R.bp; // (BP) + (SI) + DISP
-                case 0b011: return R.bp; // (BP) + (DI) + DISP
-                case 0b100: return R.si; // (SI) + DISP
-                case 0b101: return R.di; // (DI) + DISP
-                case 0b110: return R.bp; // (BP) + DISP
-                case 0b111: return R.bx; // (BX) + DISP
+                case 0b000: return br_plus(R.bx, R.si, disp);
+                case 0b001: return br_plus(R.bx, R.di, disp);
+                case 0b010: return br_plus(R.bp, R.si, disp);
+                case 0b011: return br_plus(R.bp, R.di, disp);
+                case 0b100: return br_plus(R.si, disp);
+                case 0b101: return br_plus(R.di, disp);
+                case 0b110: return br_plus(R.bp, disp);
+                case 0b111: return br_plus(R.bx, disp);
                 default: return null!;
             }
         }
