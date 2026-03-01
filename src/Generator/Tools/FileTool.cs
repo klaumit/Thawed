@@ -6,7 +6,7 @@ using Generator.Common;
 
 namespace Generator.Tools
 {
-    internal static class FileTool
+    public static class FileTool
     {
         public static string? CreateOrGetDir(string? name)
         {

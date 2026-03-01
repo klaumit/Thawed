@@ -418,5 +418,7 @@ FodyWeavers.xsd
 *.msp
 /src/.idea/
 tmp_win/
-/src/Crppy/*.txt
-/src/Crppy/*.png
+
+/src/Experimenter/*.txt
+/src/Experimenter/*.png
+

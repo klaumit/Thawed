@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Generator.Tools
 {
-    internal static class JsonTool
+    public static class JsonTool
     {
         private static JsonSerializerSettings GetConfig(bool format)
         {

@@ -1,0 +1,82 @@
+using System;
+using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
+using Generator.Extractors;
+using System.Threading.Channels;
+using Generator.Core;
+using static Generator.Tools.FileTool;
+using static Generator.Tools.JsonTool;
+using D = System.Collections.Concurrent.ConcurrentDictionary<string, string>;
+using S = System.Collections.Generic.SortedDictionary<string, string>;
+using System;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Generator.API;
+using Generator.Extractors;
+using Generator.Tools;
+using Iced.Intel;
+using Thawed;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Generator.API;
+using Generator.Extractors;
+using Generator.Tools;
+using Iced.Intel;
+using Thawed;
+using WE = Generator.Extractors.WinExtractor;
+
+namespace xxx
+{
+    internal static class BinDump
+    {
+        internal static async Task Run(Options o)
+        {
+            var byteArrays = FuzzerX.GetAllCandidates(false);
+            await using var fileD = File.CreateText("dis_log.txt");
+            await Display(fileD, byteArrays, WinC);
+            Console.WriteLine("Done.");
+        }
+        
+        private static readonly WE Win = new();
+        private static readonly JsonExtractor<WE> WinC = new();
+
+        internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays, IExtractor ex)
+        {
+            var decoder = Decoders.GetDecoder();
+            var reader = new ArrayReader([]);
+            await foreach (var lines in ex.Decode(byteArrays))
+            {
+                foreach (var line in lines)
+                {
+                    if (line.O != 0) continue;
+                    var bytes = Convert.FromHexString(line.H);
+                    if (line.D.Contains("???")) continue;
+                    var parts = line.D.Split(" ", 2);
+                    var op = parts[0].Trim();
+                    var ag = parts.Length == 2 ? parts[1].Trim() : "";
+                    var bin = bytes.Format('b');
+                    var oct = bytes.Format('o');
+                    var hex = bytes.Format('h');
+                    reader.Reset(bytes);
+                    var ins = decoder.Decode(reader, false);
+                    var iPt = $"{ins}".Split(" ", 2);
+                    var pp = iPt[0];
+                    var pg = iPt.Length == 2 ? iPt[1] : "";
+                    var sx = $"{op,-5} | {ag}";
+                    var tx = $"{pp,-5} | {pg}";
+                    if (sx.Equals(tx)) continue;
+                    var sl = $" {bin} | {oct} | {hex} | {sx} \t=> {tx}";
+                    await writer.WriteLineAsync(sl);
+                    await writer.FlushAsync();
+                }
+            }
+            (ex as IDisposable)?.Dispose();
+        }
+    }
+}

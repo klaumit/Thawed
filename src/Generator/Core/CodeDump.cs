@@ -11,6 +11,8 @@ using static Generator.Tools.CsvTool;
 using CodeWriter = Generator.Common.CodeWriter;
 using static Generator.Tools.FileTool;
 
+#pragma warning disable CS0642 
+
 namespace Generator.Core
 {
     internal static class CodeDump
