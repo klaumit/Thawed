@@ -110,7 +110,8 @@ namespace Experimenter.Core
                     dict[key] = sub = new SortedDictionary<string, ISet<string>>();
                 if (!sub.TryGetValue(prefix, out var hit))
                     sub[prefix] = hit = new SortedSet<string>();
-                hit.Add(line);
+                var one = line.TrimEnd('>', '=', ' ', '\t');
+                hit.Add(one);
             }
         }
     }
