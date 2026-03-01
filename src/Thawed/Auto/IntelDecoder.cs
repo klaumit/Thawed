@@ -113,23 +113,23 @@ namespace Thawed.Auto
                 case 0b11110110:
                     switch ((b1 = r.ReadByte()) & 0b00_111_000)
                     {
-                        case 0b00_101_000: i = I.Imul(); break;
-                        case 0b00_110_000: i = I.Div(); break;
-                        case 0b00_111_000: i = I.Idiv(); break;
-                        case 0b00_011_000: i = I.Neg(); break;
-                        case 0b00_010_000: i = I.Not(); break;
-                        case 0b00_100_000: i = I.Mul(); break;
+                        case 0b00_101_000: i = I.Imul(MaskReg(b1, false)); break;
+                        case 0b00_110_000: i = I.Div(MaskReg(b1, false)); break;
+                        case 0b00_111_000: i = I.Idiv(MaskReg(b1, false)); break;
+                        case 0b00_011_000: i = I.Neg(MaskReg(b1, false)); break;
+                        case 0b00_010_000: i = I.Not(MaskReg(b1, false)); break;
+                        case 0b00_100_000: i = I.Mul(MaskReg(b1, false)); break;
                     }
                     break;
                 case 0b11110111:
                     switch ((b1 = r.ReadByte()) & 0b00_111_000)
                     {
-                        case 0b00_101_000: i = I.Imul(); break;
-                        case 0b00_110_000: i = I.Div(); break;
-                        case 0b00_111_000: i = I.Idiv(); break;
-                        case 0b00_011_000: i = I.Neg(); break;
-                        case 0b00_010_000: i = I.Not(); break;
-                        case 0b00_100_000: i = I.Mul(); break;
+                        case 0b00_101_000: i = I.Imul(MaskReg(b1)); break;
+                        case 0b00_110_000: i = I.Div(MaskReg(b1)); break;
+                        case 0b00_111_000: i = I.Idiv(MaskReg(b1)); break;
+                        case 0b00_011_000: i = I.Neg(MaskReg(b1)); break;
+                        case 0b00_010_000: i = I.Not(MaskReg(b1)); break;
+                        case 0b00_100_000: i = I.Mul(MaskReg(b1)); break;
                     }
                     break;
                 // Two arguments
