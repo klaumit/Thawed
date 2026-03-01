@@ -49,7 +49,7 @@ namespace Thawed.UnitTests
             var t2F = $"win_{op}_mine.txt";
             await File.WriteAllLinesAsync(t2F, got, Encoding.UTF8);
 
-            await TestTool.Compare(t1F, t2F);
+            await T.Compare(t1F, t2F);
         }
     }
 }
