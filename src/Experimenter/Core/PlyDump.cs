@@ -44,28 +44,32 @@ namespace Experimenter.Core
             await using var so1 = new StringWriter();
             var e1 = new IE();
             var ex1 = new JsonExtractor<IE>(oD, e1);
-            Console.WriteLine($" {{ {FuzzerX.GetName(e1)} }} ");
+            var en1 = FuzzerX.GetName(e1);
+            Console.WriteLine($" {{ {en1} }} ");
             await BinDump.Display(so1, byteArrays, ex1, Filter, false, false);
             await so1.FlushAsync();
 
             await using var so2 = new StringWriter();
             var e2 = new GE();
             var ex2 = new JsonExtractor<GE>(oD, e2);
-            Console.WriteLine($" {{ {FuzzerX.GetName(e2)} }} ");
+            var en2 = FuzzerX.GetName(e2);
+            Console.WriteLine($" {{ {en2} }} ");
             await BinDump.Display(so2, byteArrays, ex2, Filter, false, false);
             await so2.FlushAsync();
 
             await using var so3 = new StringWriter();
             var e3 = new NE();
             var ex3 = new JsonExtractor<NE>(oD, e3);
-            Console.WriteLine($" {{ {FuzzerX.GetName(e3)} }} ");
+            var en3 = FuzzerX.GetName(e3);
+            Console.WriteLine($" {{ {en3} }} ");
             await BinDump.Display(so3, byteArrays, ex3, Filter, false, false);
             await so3.FlushAsync();
 
             await using var so4 = new StringWriter();
             var e4 = new WE();
             var ex4 = new JsonExtractor<WE>(oD, e4);
-            Console.WriteLine($" {{ {FuzzerX.GetName(e4)} }} ");
+            var en4 = FuzzerX.GetName(e4);
+            Console.WriteLine($" {{ {en4} }} ");
             await BinDump.Display(so4, byteArrays, ex4, Filter, false, false);
             await so4.FlushAsync();
 
