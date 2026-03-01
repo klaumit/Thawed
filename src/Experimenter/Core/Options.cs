@@ -12,6 +12,9 @@ namespace Experimenter.Core
 		[Option('p', "play", HelpText = "Play binary codes.")]
 		public bool TryPlay { get; set; }
 
+		[Option('m', "misc", HelpText = "Set misc parameters.")]
+		public string? Misc { get; set; }
+
 		[Option('o', "output", HelpText = "Set output directory.")]
 		public string? OutputDir { get; set; }
 	}

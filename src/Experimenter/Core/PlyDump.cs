@@ -15,7 +15,18 @@ namespace Experimenter.Core
     {
         internal static async Task Run(Options o)
         {
+            if (CreateOrGetDir(o.OutputDir) is not { } outDir)
+            {
+                await Console.Error.WriteLineAsync("No output dir given!");
+                return;
+            }
 
+            var args = ArgTool.ParseDict(o.Misc);
+
+            Console.WriteLine(args);
+            Console.WriteLine(JsonTool.ToJson(args));
+            
+            
 
             Console.WriteLine("Done.");
         }

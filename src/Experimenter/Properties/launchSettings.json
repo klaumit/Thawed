@@ -6,7 +6,7 @@
     },
     "pp": {
       "commandName": "Project",
-      "commandLineArgs": "-p"
+      "commandLineArgs": "-p -o cache"
     }
   }
 }

@@ -18,7 +18,7 @@ namespace Generator.Tools
             };
         }
 
-        internal static string ToJson(object? obj, bool format = false)
+        public static string ToJson(object? obj, bool format = false)
         {
             var cfg = GetConfig(format);
             return JsonConvert.SerializeObject(obj, cfg);
