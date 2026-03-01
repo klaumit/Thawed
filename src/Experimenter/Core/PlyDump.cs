@@ -8,6 +8,9 @@ using Generator.Extractors;
 using Generator.Tools;
 using Thawed;
 using WE = Generator.Extractors.WinExtractor;
+using IE = Generator.Extractors.IcedExtractor;
+using NE = Generator.Extractors.NasmExtractor;
+using GE = Generator.Extractors.GnuExtractor;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.ArgTool;
 
@@ -17,7 +20,7 @@ namespace Experimenter.Core
     {
         internal static async Task Run(Options o)
         {
-            if (CreateOrGetDir(o.OutputDir) is not { } outDir)
+            if (CreateOrGetDir(o.OutputDir) is not { } oD)
             {
                 await Console.Error.WriteLineAsync("No output dir given!");
                 return;
@@ -37,9 +40,27 @@ namespace Experimenter.Core
                 byteArrays.Add(bits);
             }
 
-            var ex = new IcedExtractor();
-            await BinDump.Display(Console.Out, byteArrays, ex, Filter);
+            var e1 = new IE();
+            var ex1 = new JsonExtractor<IE>(oD, e1);
+            Console.WriteLine($" {{ {FuzzerX.GetName(e1)} }} ");
+            await BinDump.Display(Console.Out, byteArrays, ex1, Filter);
 
+            var e2 = new GE();
+            var ex2 = new JsonExtractor<GE>(oD, e2);
+            Console.WriteLine($" {{ {FuzzerX.GetName(e2)} }} ");
+            await BinDump.Display(Console.Out, byteArrays, ex2, Filter);
+
+            var e3 = new NE();
+            var ex3 = new JsonExtractor<NE>(oD, e3);
+            Console.WriteLine($" {{ {FuzzerX.GetName(e3)} }} ");
+            await BinDump.Display(Console.Out, byteArrays, ex3, Filter);
+
+            var e4 = new WE();
+            var ex4 = new JsonExtractor<WE>(oD, e4);
+            Console.WriteLine($" {{ {FuzzerX.GetName(e4)} }} ");
+            await BinDump.Display(Console.Out, byteArrays, ex4, Filter);
+
+            Console.WriteLine();
             Console.WriteLine("Done.");
             return;
 

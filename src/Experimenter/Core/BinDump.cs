@@ -45,9 +45,10 @@ namespace Experimenter.Core
                     if (line.O != 0)
                         continue;
                     var bytes = Convert.FromHexString(line.H);
-                    if (line.D.Contains("???") || line.D.Contains("(bad)"))
+                    var ld = line.D;
+                    if (IsBad(line.D))
                         continue;
-                    var parts = line.D.Split(" ", 2);
+                    var parts = ld.Split(" ", 2);
                     var op = parts[0].Trim();
                     var ag = parts.Length == 2 ? parts[1].Trim() : "";
                     var bin = bytes.Format('b');
@@ -71,5 +72,9 @@ namespace Experimenter.Core
             }
             (ex as IDisposable)?.Dispose();
         }
+
+        private static bool IsBad(string ld)
+            => ld.Contains("???") || ld.Contains("(bad)") ||
+               ld.Contains(".byte") || ld.Contains("db ");
     }
 }

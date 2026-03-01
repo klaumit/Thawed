@@ -6,7 +6,7 @@
     },
     "pp": {
       "commandName": "Project",
-      "commandLineArgs": "-p -o cache"
+      "commandLineArgs": "-p -o ../../../Data -m count=15;limit=1;only=1"
     }
   }
 }

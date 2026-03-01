@@ -18,8 +18,7 @@ namespace Generator.Extractors
         public JsonExtractor(string cacheDir = "", T? extractor = null)
         {
             _extractor = extractor;
-            var type = extractor?.GetType() ?? typeof(T);
-            var name = type.Name.Replace("Extractor", "");
+            var name = FuzzerX.GetName(extractor);
             _file = Path.Combine(cacheDir, $"cache_{name}.json");
             _cache = JsonTool.FromFile<D>(_file, true) ?? new D();
         }

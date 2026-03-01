@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Generator.API;
 using Generator.Tools;
 using Iced.Intel;
 using E = Generator.Tools.ExtTool;
@@ -445,6 +446,13 @@ namespace Generator.Extractors
                      })
             foreach (var item in items)
                 yield return item;
+        }
+
+        public static string GetName<T>(T? extractor = null) where T : class, IExtractor
+        {
+            var type = extractor?.GetType() ?? typeof(T);
+            var name = type.Name.Replace("Extractor", "");
+            return name;
         }
     }
 }
