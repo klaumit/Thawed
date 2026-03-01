@@ -33,8 +33,8 @@ namespace Experimenter.Core
             Console.WriteLine("Done.");
         }
 
-        internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays,
-            IExtractor ex, Func<string, bool>? filter = null)
+        internal static async Task Display(TextWriter writer, IEnumerable<byte[]> byteArrays, IExtractor ex, 
+            Func<string, bool>? filter = null, bool noBad = true, bool noSame = true)
         {
             var decoder = Decoders.GetDecoder();
             var reader = new ArrayReader([]);
@@ -46,7 +46,7 @@ namespace Experimenter.Core
                         continue;
                     var bytes = Convert.FromHexString(line.H);
                     var ld = line.D;
-                    if (IsBad(line.D))
+                    if (noBad && IsBad(line.D))
                         continue;
                     var parts = ld.Split(" ", 2);
                     var op = parts[0].Trim();
@@ -61,7 +61,7 @@ namespace Experimenter.Core
                     var pg = iPt.Length == 2 ? iPt[1].Trim() : "";
                     var sx = $"{op,-5} | {ag}";
                     var tx = $"{pp,-5} | {pg}";
-                    if (sx.Equals(tx))
+                    if (noSame && sx.Equals(tx))
                         continue;
                     if (filter != null && !filter(hex))
                         continue;

@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Generator.API;
 using Generator.Extractors;
 using Generator.Tools;
-using Thawed;
 using WE = Generator.Extractors.WinExtractor;
 using IE = Generator.Extractors.IcedExtractor;
 using NE = Generator.Extractors.NasmExtractor;
@@ -40,25 +37,27 @@ namespace Experimenter.Core
                 byteArrays.Add(bits);
             }
 
+            var co = Console.Out;
+
             var e1 = new IE();
             var ex1 = new JsonExtractor<IE>(oD, e1);
             Console.WriteLine($" {{ {FuzzerX.GetName(e1)} }} ");
-            await BinDump.Display(Console.Out, byteArrays, ex1, Filter);
+            await BinDump.Display(co, byteArrays, ex1, Filter, false, false);
 
             var e2 = new GE();
             var ex2 = new JsonExtractor<GE>(oD, e2);
             Console.WriteLine($" {{ {FuzzerX.GetName(e2)} }} ");
-            await BinDump.Display(Console.Out, byteArrays, ex2, Filter);
+            await BinDump.Display(co, byteArrays, ex2, Filter, false, false);
 
             var e3 = new NE();
             var ex3 = new JsonExtractor<NE>(oD, e3);
             Console.WriteLine($" {{ {FuzzerX.GetName(e3)} }} ");
-            await BinDump.Display(Console.Out, byteArrays, ex3, Filter);
+            await BinDump.Display(co, byteArrays, ex3, Filter, false, false);
 
             var e4 = new WE();
             var ex4 = new JsonExtractor<WE>(oD, e4);
             Console.WriteLine($" {{ {FuzzerX.GetName(e4)} }} ");
-            await BinDump.Display(Console.Out, byteArrays, ex4, Filter);
+            await BinDump.Display(co, byteArrays, ex4, Filter, false, false);
 
             Console.WriteLine();
             Console.WriteLine("Done.");
