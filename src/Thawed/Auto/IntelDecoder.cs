@@ -133,8 +133,8 @@ namespace Thawed.Auto
                 case 0b00111011: i = I.Cmp(b1 = r.ReadByte()); break;
                 case 0b00111000: i = I.CmpRm(b1 = r.ReadByte()); break;
                 case 0b00111001: i = I.CmpRm(b1 = r.ReadByte()); break;
-                case 0b10001000: i = I.MovRm(b1 = r.ReadByte()); break;
-                case 0b10001001: i = I.MovRm(b1 = r.ReadByte()); break;
+                case 0b10001000: i = I.MovRm(0, 0, b1 = r.ReadByte()); break;
+                case 0b10001001: i = I.MovRm(0, 1, b1 = r.ReadByte()); break;
                 case 0b10001010: i = I.MovR(b1 = r.ReadByte()); break;
                 case 0b10001011: i = I.MovR(b1 = r.ReadByte()); break;
                 case 0b10001110: i = I.MovSr(b1 = r.ReadByte()); break;

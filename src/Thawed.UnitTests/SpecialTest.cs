@@ -13,9 +13,10 @@ namespace Thawed.UnitTests
     public class SpecialTest
     {
         [Theory]
-        [InlineData("89 D8", "MOV AX, BX")]
-        [InlineData("8B 47 05", "MOV AX, [BX + 5]")]
-        [InlineData("8B 4E 10", "MOV AX, [AX + DX + 16]")]
+        [InlineData("89 D8", "MOV AX,BX")]
+        [InlineData("89 C3", "MOV BX,AX")]
+        [InlineData("8B 47 05", "MOV AX,[BX+5]")]
+        [InlineData("8B 4E 10", "MOV AX,[AX+DX+16]")]
         public void ShouldDecode(string hex, string expected)
         {
             var bytes = Convert.FromHexString(hex.Replace(" ", ""));
@@ -28,7 +29,5 @@ namespace Thawed.UnitTests
     }
 }
 
-// MOV AX, BX = 89 D8
 // MOV AX, [BX + 5] = 8B 47 05
 // MOV AX, [AX + DX + 16] = 8B 4E 10
-

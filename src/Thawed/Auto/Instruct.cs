@@ -1,4 +1,5 @@
-﻿using I = Thawed.Instruction;
+﻿using static Thawed.InstructH;
+using I = Thawed.Instruction;
 using O = Thawed.Auto.Opcode;
 using A = Thawed.Args.Arg;
 using R = Thawed.Register;
@@ -812,10 +813,9 @@ namespace Thawed.Auto
         /// Move register to register/memory
         /// <remarks>MOV</remarks>
         /// </summary>
-        internal static I? MovRm(byte? v)
+        internal static I? MovRm(int d, int w, byte? v)
         {
-            // TODO mod reg r/m
-            return v is {} b? new I(O.Mov, b) : null;
+            return GetArgs(d, w, DecodeModRM(v)) is { } a ? new I(O.Mov, a) : null;
         }
         
         /// <summary>

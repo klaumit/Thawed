@@ -1,3 +1,4 @@
+using System;
 using Thawed.Args;
 using R = Thawed.Register;
 
@@ -41,6 +42,15 @@ namespace Thawed
             }
         }
 
+        public static (OpMod mod, int reg, int rm)? DecodeModRM(byte? modRM)
+        {
+            if (modRM is not { } bModRM) return null;
+            var mod = (bModRM >> 6) & 0b11;
+            var reg = (bModRM >> 3) & 0b111;
+            var rm = bModRM & 0b111;
+            return ((OpMod)mod, reg, rm);
+        }
+
         public static R MaskSeg(byte? b, bool atEnd = false)
         {
             var end = atEnd ? b & 0b_000_000_11 : (b & 0b_000_11_000) >> 3;
@@ -75,5 +85,82 @@ namespace Thawed
                 }
             };
         }
+
+        private static R DecodeReg8(int b)
+            => b switch
+            {
+                0b000 => R.al, 0b001 => R.cl, 0b010 => R.dl, 0b011 => R.bl,
+                0b100 => R.ah, 0b101 => R.ch, 0b110 => R.dh, 0b111 => R.bh,
+                _ => default
+            };
+
+        private static R DecodeReg16(int b)
+            => b switch
+            {
+                0b000 => R.ax, 0b001 => R.cx, 0b010 => R.dx, 0b011 => R.bx,
+                0b100 => R.sp, 0b101 => R.bp, 0b110 => R.si, 0b111 => R.di,
+                _ => default
+            };
+
+        private static R DecodeReg(OpWidth s, int b)
+            => s switch
+            {
+                OpWidth.Bits8 => DecodeReg8(b), OpWidth.Bits16 => DecodeReg16(b),
+                _ => default
+            };
+
+        public static Arg[]? GetArgs(int d, int w, (OpMod mod, int reg, int rm)? p)
+        {
+            var (xD, xW) = ((OpDirection)d, (OpWidth)w);
+            if (p is var (mod, reg, rm))
+            {
+                switch (mod)
+                {
+                    case OpMod.NoDisplacement:
+                        break;
+                    case OpMod.Bit8Displacement:
+                        break;
+                    case OpMod.Bit16Displacement:
+                        break;
+                    case OpMod.RegisterDirect:
+                        var dReg = DecodeReg(xW, reg);
+                        var dRm = DecodeReg(xW, rm);
+                        switch (xD)
+                        {
+                            case OpDirection.RegIsSrc: return [dRm, dReg];
+                            case OpDirection.RegIsDst: return [dReg, dRm];
+                        }
+                        break;
+                }
+            }
+            return null;
+        }
+    }
+
+    public enum OpWidth
+    {
+        Bits8 = 0,
+        Bits16 = 1
+    }
+
+    public enum OpMod
+    {
+        NoDisplacement = 0b00,
+        Bit8Displacement = 0b01,
+        Bit16Displacement = 0b10,
+        RegisterDirect = 0b11
+    }
+
+    public enum OpDirection
+    {
+        /// <summary>
+        /// REG --> MOD R/M  
+        /// </summary>
+        RegIsSrc = 0,
+
+        /// <summary>
+        /// MOD R/M --> REG
+        /// </summary>
+        RegIsDst = 1
     }
 }
