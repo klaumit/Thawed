@@ -2,7 +2,7 @@ using CommandLine;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace Generator.Core
+namespace Experimenter.Core
 {
 	public class Options
 	{

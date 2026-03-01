@@ -1,12 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Generator.Meta;
-using Thawed.Auto;
 using Xunit;
-using System.IO;
-using System.Text;
-using T = Thawed.UnitTests.TestTool;
 
 namespace Thawed.UnitTests
 {

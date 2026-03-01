@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using CommandLine;
-using Generator.Core;
-using xxx;
+using Experimenter.Core;
 
-namespace Generator
+namespace Experimenter
 {
     internal static class Program
     {

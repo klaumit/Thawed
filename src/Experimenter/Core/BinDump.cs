@@ -1,37 +1,14 @@
 using System;
-using System.Threading.Tasks;
-using System.IO;
-using System.Linq;
-using Generator.Extractors;
-using System.Threading.Channels;
-using Generator.Core;
-using static Generator.Tools.FileTool;
-using static Generator.Tools.JsonTool;
-using D = System.Collections.Concurrent.ConcurrentDictionary<string, string>;
-using S = System.Collections.Generic.SortedDictionary<string, string>;
-using System;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Generator.API;
 using Generator.Extractors;
 using Generator.Tools;
-using Iced.Intel;
-using Thawed;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Generator.API;
-using Generator.Extractors;
-using Generator.Tools;
-using Iced.Intel;
 using Thawed;
 using WE = Generator.Extractors.WinExtractor;
 
-namespace xxx
+namespace Experimenter.Core
 {
     internal static class BinDump
     {

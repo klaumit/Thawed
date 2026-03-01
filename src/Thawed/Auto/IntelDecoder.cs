@@ -1,6 +1,4 @@
-using System;
 using I = Thawed.Auto.Instruct;
-using R = Thawed.Register;
 using static Thawed.InstructH;
 
 // ReSharper disable RedundantAssignment

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Thawed.Args
 {
     public sealed class BracketP1Arg : Arg
