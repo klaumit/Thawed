@@ -20,8 +20,8 @@ namespace Thawed.UnitTests
         [InlineData("8B 47 05", "MOV AX,[BX+5]")]
         [InlineData("89 47 05", "MOV [BX+5],AX")]
         // Variant 3
-        [InlineData("8B 4E 10", "mov cx,word ptr [bp+0x10]")]
-        [InlineData("89 4E 10", "mov word ptr [bp+0x10],cx")]
+        [InlineData("8B 4E 10", "MOV CX,Word ptr [BP+0X10]")]
+        [InlineData("89 4E 10", "MOV Word ptr [BP+0X10],CX")]
         public void ShouldDecode(string hex, string expected)
         {
             var bytes = Convert.FromHexString(hex.Replace(" ", ""));

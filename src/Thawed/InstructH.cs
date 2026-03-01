@@ -139,27 +139,13 @@ namespace Thawed
             var (xD, xW) = ((OpDirection)d, (OpWidth)w);
             if (p is var (mod, reg, rm))
             {
-                switch (mod)
+                var dReg = DecodeReg(xW, reg);
+                var dRm = DecodeRm(mod, xW, rm)!;
+                switch (xD)
                 {
-                    /*
-                    case OpMod.NoDisplacement:
-                        break;
-                    case OpMod.Bit8Displacement:
-                        break;
-                    case OpMod.Bit16Displacement:
-                        break;
-                    */
-                    case OpMod.RegisterDirect:
-                        var dReg = DecodeReg(xW, reg);
-                        var dRm = DecodeReg(xW, rm);
-                        switch (xD)
-                        {
-                            case OpDirection.RegIsSrc: return [dRm, dReg];
-                            case OpDirection.RegIsDst: return [dReg, dRm];
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    case OpDirection.RegIsSrc: return [dRm, dReg];
+                    case OpDirection.RegIsDst: return [dReg, dRm];
+                    default: throw new ArgumentOutOfRangeException();
                 }
             }
             return null;
