@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Generator.Extractors;
@@ -38,26 +39,35 @@ namespace Experimenter.Core
             }
 
             var co = Console.Out;
+            Console.WriteLine();
 
+            await using var so1 = new StringWriter();
             var e1 = new IE();
             var ex1 = new JsonExtractor<IE>(oD, e1);
             Console.WriteLine($" {{ {FuzzerX.GetName(e1)} }} ");
-            await BinDump.Display(co, byteArrays, ex1, Filter, false, false);
+            await BinDump.Display(so1, byteArrays, ex1, Filter, false, false);
+            await so1.FlushAsync();
 
+            await using var so2 = new StringWriter();
             var e2 = new GE();
             var ex2 = new JsonExtractor<GE>(oD, e2);
             Console.WriteLine($" {{ {FuzzerX.GetName(e2)} }} ");
-            await BinDump.Display(co, byteArrays, ex2, Filter, false, false);
+            await BinDump.Display(so2, byteArrays, ex2, Filter, false, false);
+            await so2.FlushAsync();
 
+            await using var so3 = new StringWriter();
             var e3 = new NE();
             var ex3 = new JsonExtractor<NE>(oD, e3);
             Console.WriteLine($" {{ {FuzzerX.GetName(e3)} }} ");
-            await BinDump.Display(co, byteArrays, ex3, Filter, false, false);
+            await BinDump.Display(so3, byteArrays, ex3, Filter, false, false);
+            await so3.FlushAsync();
 
+            await using var so4 = new StringWriter();
             var e4 = new WE();
             var ex4 = new JsonExtractor<WE>(oD, e4);
             Console.WriteLine($" {{ {FuzzerX.GetName(e4)} }} ");
-            await BinDump.Display(co, byteArrays, ex4, Filter, false, false);
+            await BinDump.Display(so4, byteArrays, ex4, Filter, false, false);
+            await so4.FlushAsync();
 
             Console.WriteLine();
             Console.WriteLine("Done.");
