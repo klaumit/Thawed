@@ -3,6 +3,10 @@
     "be": {
       "commandName": "Project",
       "commandLineArgs": "-b -o ../../../Data"
+    },
+    "pp": {
+      "commandName": "Project",
+      "commandLineArgs": "-p"
     }
   }
 }
