@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RefX86Asm\RefX86Asm.csproj" />
+    <ProjectReference Include="..\..\ext\RefX86Asm\RefX86Asm.csproj" />
     <ProjectReference Include="..\Thawed\Thawed.csproj" />
   </ItemGroup>
 
