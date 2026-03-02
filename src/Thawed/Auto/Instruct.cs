@@ -111,6 +111,69 @@ namespace Thawed.Auto
             return v0 is { } b0 && v1 is { } b1 ? new I(O.And, b0, b1) : null;
         }
         
+        /// <summary>
+        /// And reg/memory and register to either
+        /// <remarks>AND</remarks>
+        /// </summary>
+        internal static I? AndRe(int d, int w, byte? v0, byte? v1 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1) is { } a ? new I(O.And, a) : null;
+        }
+        
+        /// <summary>
+        /// And imm to register/memory
+        /// <remarks>AND</remarks>
+        /// </summary>
+        internal static I? AndIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.And, a) : null;
+        }
+        
+        /// <summary>
+        /// Or imm to register/memory
+        /// <remarks>OR</remarks>
+        /// </summary>
+        internal static I? OrIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Or, a) : null;
+        }
+
+        /// <summary>
+        /// Subtract imm from register/memory
+        /// <remarks>SUB</remarks>
+        /// </summary>
+        internal static I? SubIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Sub, a) : null;
+        }
+        
+        /// <summary>
+        /// Subtract with borrow imm from register/memory
+        /// <remarks>SBB</remarks> 
+        /// </summary>
+        internal static I? SbbIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Sbb, a) : null;
+        }
+        
+        /// <summary>
+        /// Add imm to register/memory
+        /// <remarks>ADD</remarks>
+        /// </summary>
+        internal static I? AddIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Add, a) : null;
+        }
+        
+        /// <summary>
+        /// Add with carry imm to register/memory
+        /// <remarks>ADC</remarks>
+        /// </summary>
+        internal static I? AdcIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Adc, a) : null;
+        }
+
         internal static I And()
         {
             return new I(O.And);
@@ -225,6 +288,15 @@ namespace Thawed.Auto
         {
             return GetArgs(d, w, DecodeModRM(v0), v1) is { } a ? new I(O.Cmp, a) : null;
         }
+        
+        /// <summary>
+        /// Or reg/memory and register to either
+        /// <remarks>OR</remarks>
+        /// </summary>
+        internal static I? OrRm(int d, int w, byte? v0, byte? v1 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1) is { } a ? new I(O.Or, a) : null;
+        }
 
         /// <summary>
         /// Compare imm to accumulator
@@ -248,7 +320,7 @@ namespace Thawed.Auto
         /// Compare byte
         /// <remarks>CMPSB</remarks>
         /// </summary>
-        internal static I Cmpsb()
+        internal static I Cmpsb(O? prefix)
         {
             return new I(O.Cmpsb);
         }
@@ -257,7 +329,7 @@ namespace Thawed.Auto
         /// Compare word
         /// <remarks>CMPSW</remarks>
         /// </summary>
-        internal static I Cmpsw()
+        internal static I Cmpsw(O? prefix)
         {
             return new I(O.Cmpsw);
         }
@@ -266,9 +338,9 @@ namespace Thawed.Auto
         /// CS: override
         /// <remarks>CS</remarks>
         /// </summary>
-        internal static I Cs()
+        internal static O Cs()
         {
-            return new I(O.Cs);
+            return O.Cs;
         }
         
         /// <summary>
@@ -326,9 +398,9 @@ namespace Thawed.Auto
         /// DS: override
         /// <remarks>DS</remarks>
         /// </summary>
-        internal static I Ds()
+        internal static O Ds()
         {
-            return new I(O.Ds);
+            return O.Ds;
         }
         
         /// <summary>
@@ -346,9 +418,9 @@ namespace Thawed.Auto
         /// ES: override
         /// <remarks>ES</remarks>
         /// </summary>
-        internal static I Es()
+        internal static O Es()
         {
-            return new I(O.Es);
+            return O.Es;
         }
         
         /// <summary>
@@ -431,7 +503,7 @@ namespace Thawed.Auto
         /// Input byte from DX port
         /// <remarks>INSB</remarks>
         /// </summary>
-        internal static I Insb()
+        internal static I Insb(O? prefix)
         {
             return new I(O.Insb);
         }
@@ -440,7 +512,7 @@ namespace Thawed.Auto
         /// Input word from DX port
         /// <remarks>INSW</remarks>
         /// </summary>
-        internal static I Insw()
+        internal static I Insw(O? prefix)
         {
             return new I(O.Insw);
         }
@@ -736,16 +808,16 @@ namespace Thawed.Auto
         /// Bus lock prefix
         /// <remarks>LOCK</remarks>
         /// </summary>
-        internal static I Lock()
+        internal static O Lock()
         {
-            return new I(O.Lock);
+            return O.Lock;
         }
         
         /// <summary>
         /// Load byte to AL
         /// <remarks>LODSB</remarks>
         /// </summary>
-        internal static I Lodsb()
+        internal static I Lodsb(O? prefix)
         {
             return new I(O.Lodsb);
         }
@@ -754,7 +826,7 @@ namespace Thawed.Auto
         /// Load word to AX
         /// <remarks>LODSW</remarks>
         /// </summary>
-        internal static I Lodsw()
+        internal static I Lodsw(O? prefix)
         {
             return new I(O.Lodsw);
         }
@@ -789,6 +861,15 @@ namespace Thawed.Auto
         internal static I Mov(params A[] args)
         {
             return new I(O.Mov, args);
+        }
+        
+        /// <summary>
+        /// Move imm to register
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? Mov(R reg, byte? v0, byte? v1 = null)
+        {
+            return v0 is {} b0 && v1 is {} b1 ? new I(O.Mov, reg, b0, b1) : null;
         }
         
         /// <summary>
@@ -869,7 +950,7 @@ namespace Thawed.Auto
         /// Move byte
         /// <remarks>MOVSB</remarks>
         /// </summary>
-        internal static I Movsb()
+        internal static I Movsb(O? prefix)
         {
             return new I(O.Movsb);
         }
@@ -878,7 +959,7 @@ namespace Thawed.Auto
         /// Move word
         /// <remarks>MOVSW</remarks>
         /// </summary>
-        internal static I Movsw()
+        internal static I Movsw(O? prefix)
         {
             return new I(O.Movsw);
         }
@@ -968,7 +1049,7 @@ namespace Thawed.Auto
         /// Output byte to DX port
         /// <remarks>OUTSB</remarks>
         /// </summary>
-        internal static I Outsb()
+        internal static I Outsb(O? prefix)
         {
             return new I(O.Outsb);
         }
@@ -977,7 +1058,7 @@ namespace Thawed.Auto
         /// Output word to DX port
         /// <remarks>OUTSW</remarks>
         /// </summary>
-        internal static I Outsw()
+        internal static I Outsw(O? prefix)
         {
             return new I(O.Outsw);
         }
@@ -1057,6 +1138,15 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Add with carry segment register
+        /// <remarks>ADC</remarks>
+        /// </summary>
+        internal static I AdcSr(R reg)
+        {
+            return new I(O.Adc, reg);
+        }
+        
+        /// <summary>
         /// Push all
         /// <remarks>PUSHA</remarks>
         /// </summary>
@@ -1088,18 +1178,18 @@ namespace Thawed.Auto
         /// Repeat while equal
         /// <remarks>REPE</remarks>
         /// </summary>
-        internal static I Repe()
+        internal static O Repe()
         {
-            return new I(O.Repe);
+            return O.Repe;
         }
         
         /// <summary>
         /// Repeat while not equal
         /// <remarks>REPNE</remarks>
         /// </summary>
-        internal static I Repne()
+        internal static O Repne()
         {
-            return new I(O.Repne);
+            return O.Repne;
         }
         
         /// <summary>
@@ -1138,6 +1228,153 @@ namespace Thawed.Auto
         {
             return new I(O.Rol, args);
         }
+        
+        /// <summary>
+        /// Rotate left reg/memory by 1
+        /// <remarks>ROL</remarks>
+        /// </summary>
+        internal static I? Rol1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rol, a) : null;
+        
+        /// <summary>
+        /// Rotate right reg/memory by 1
+        /// <remarks>ROR</remarks>
+        /// </summary>
+        internal static I? Ror1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Ror, a) : null;
+
+        /// <summary>
+        /// Rotate left with carry reg/memory by 1
+        /// <remarks>RCL</remarks>
+        /// </summary>
+        internal static I? Rcl1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rcl, a) : null;
+
+        /// <summary>
+        /// Rotate right with carry reg/memory by 1
+        /// <remarks>RCR</remarks>
+        /// </summary>
+        internal static I? Rcr1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rcr, a) : null;
+
+        /// <summary>
+        /// Shift left reg/memory by 1
+        /// <remarks>SHL</remarks>
+        /// </summary>
+        internal static I? Shl1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Shl, a) : null;
+
+        /// <summary>
+        /// Shift right reg/memory by 1
+        /// <remarks>SHR</remarks>
+        /// </summary>
+        internal static I? Shr1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Shr, a) : null;
+
+        /// <summary>
+        /// Shift arithmetic right reg/memory by 1
+        /// <remarks>SAR</remarks>
+        /// </summary>
+        internal static I? Sar1(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Sar, a) : null;
+        
+        /// <summary>
+        /// Rotate left reg/memory by CL
+        /// <remarks>ROL</remarks>
+        /// </summary>
+        internal static I? RolCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rol, a) : null;
+        
+        /// <summary>
+        /// Rotate right reg/memory by CL
+        /// <remarks>ROR</remarks>
+        /// </summary>
+        internal static I? RorCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Ror, a) : null;
+        
+        /// <summary>
+        /// Rotate left with carry reg/memory by CL
+        /// <remarks>RCL</remarks>
+        /// </summary>
+        internal static I? RclCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rcl, a) : null;
+
+        /// <summary>
+        /// Rotate right with carry reg/memory by CL
+        /// <remarks>RCR</remarks>
+        /// </summary>
+        internal static I? RcrCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rcr, a) : null;
+        
+        /// <summary>
+        /// Shift left reg/memory by CL
+        /// <remarks>SHL</remarks>
+        /// </summary>
+        internal static I? ShlCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Shl, a) : null;
+
+        /// <summary>
+        /// Shift right reg/memory by CL
+        /// <remarks>SHR</remarks>
+        /// </summary>
+        internal static I? ShrCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Shr, a) : null;
+
+        /// <summary>
+        /// Shift arithmetic right reg/memory by CL
+        /// <remarks>SAR</remarks>
+        /// </summary>
+        internal static I? SarCl(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Sar, a) : null;
+        
+        /// <summary>
+        /// Rotate left reg/memory by count
+        /// <remarks>ROL</remarks>
+        /// </summary>
+        internal static I? RolC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rol, a) : null;
+        
+        /// <summary>
+        /// Rotate right reg/memory by count
+        /// <remarks>ROR</remarks>
+        /// </summary>
+        internal static I? RorC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Ror, a) : null;
+        
+        /// <summary>
+        /// Rotate left with carry reg/memory by count
+        /// <remarks>RCL</remarks>
+        /// </summary>
+        internal static I? RclC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rcl, a) : null;
+
+        /// <summary>
+        /// Rotate right with carry reg/memory by count
+        /// <remarks>RCR</remarks>
+        /// </summary>
+        internal static I? RcrC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Rcr, a) : null;
+        
+        /// <summary>
+        /// Shift left reg/memory by count
+        /// <remarks>SHL</remarks>
+        /// </summary>
+        internal static I? ShlC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Shl, a) : null;
+
+        /// <summary>
+        /// Shift right reg/memory by count
+        /// <remarks>SHR</remarks>
+        /// </summary>
+        internal static I? ShrC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Shr, a) : null;
+
+        /// <summary>
+        /// Shift arithmetic right reg/memory by count
+        /// <remarks>SAR</remarks>
+        /// </summary>
+        internal static I? SarC(int d, int w, byte? v0) 
+            => GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Sar, a) : null;
         
         internal static I Ror(params A[] args)
         {
@@ -1185,7 +1422,7 @@ namespace Thawed.Auto
         /// Scan byte
         /// <remarks>SCASB</remarks>
         /// </summary>
-        internal static I Scasb()
+        internal static I Scasb(O? prefix)
         {
             return new I(O.Scasb);
         }
@@ -1194,7 +1431,7 @@ namespace Thawed.Auto
         /// Scan word
         /// <remarks>SCASW</remarks>
         /// </summary>
-        internal static I Scasw()
+        internal static I Scasw(O? prefix)
         {
             return new I(O.Scasw);
         }
@@ -1213,9 +1450,9 @@ namespace Thawed.Auto
         /// SS: override
         /// <remarks>SS</remarks>
         /// </summary>
-        internal static I Ss()
+        internal static O Ss()
         {
-            return new I(O.Ss);
+            return O.Ss;
         }
         
         /// <summary>
@@ -1246,7 +1483,7 @@ namespace Thawed.Auto
         /// Store byte from AL
         /// <remarks>STOSB</remarks>
         /// </summary>
-        internal static I Stosb()
+        internal static I Stosb(O? prefix)
         {
             return new I(O.Stosb);
         }
@@ -1255,7 +1492,7 @@ namespace Thawed.Auto
         /// Store word from AX
         /// <remarks>STOSW</remarks>
         /// </summary>
-        internal static I Stosw()
+        internal static I Stosw(O? prefix)
         {
             return new I(O.Stosw);
         }
@@ -1310,12 +1547,76 @@ namespace Thawed.Auto
         
         /// <summary>
         /// And function to flags, no result
+        /// imm data and register/memory
+        /// <remarks>AND</remarks>
+        /// </summary>
+        internal static I? TestIr(int d, int w, byte? v0, byte? v1 = null, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Test, a) : null;
+        }
+        
+        /// <summary>
+        /// Subtract reg/memory and register to either
+        /// <remarks>SUB</remarks>
+        /// </summary>
+        internal static I? Sub(int d, int w, byte? v0)
+        {
+            return GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Sub, a) : null;
+        }
+        
+        /// <summary>
+        /// Subtract with borrow reg/memory and register to either
+        /// <remarks>SBB</remarks>
+        /// </summary>
+        internal static I? Sbb(int d, int w, byte? v0)
+        {
+            return GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Sbb, a) : null;
+        }
+
+        /// <summary>
+        /// Add reg/memory with register to either
+        /// <remarks>ADD</remarks>
+        /// </summary>
+        internal static I? Add(int d, int w, byte? v0)
+        {
+            return GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Add, a) : null;
+        }
+        
+        /// <summary>
+        /// Add with carry reg/memory with register to either
+        /// <remarks>ADC</remarks>
+        /// </summary>
+        internal static I? Adc(int d, int w, byte? v0)
+        {
+            return GetArgs(d, w, DecodeModRM(v0)) is { } a ? new I(O.Adc, a) : null;
+        }
+
+        /// <summary>
+        /// Add with carry immediate
+        /// <remarks>ADC</remarks>
+        /// </summary>
+        internal static I? AdcI(int d, int w, byte? v0, byte? v1 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1) is { } a ? new I(O.Adc, a) : null;
+        }
+        
+        /// <summary>
+        /// And function to flags, no result
         /// register/memory and register
         /// <remarks>TEST</remarks>
         /// </summary>
         internal static I? TestRm(int d, int w, byte? v0, byte? v1 = null)
         {
             return GetArgs(d, w, DecodeModRM(v0), v1) is { } a ? new I(O.Test, a) : null;
+        }
+        
+        /// <summary>
+        /// Move imm to register/memory
+        /// <remarks>MOV</remarks>
+        /// </summary>
+        internal static I? MovIr(int d, int w, byte? v0, byte? v1, byte? v2 = null)
+        {
+            return GetArgs(d, w, DecodeModRM(v0), v1, v2) is { } a ? new I(O.Mov, a) : null;
         }
         
         /// <summary>

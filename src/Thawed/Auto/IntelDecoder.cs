@@ -19,17 +19,23 @@ namespace Thawed.Auto
             byte? b3 = 0;
             int? i0 = null;
             Instruction? i = null;
+            Opcode? p = null;
 
             switch (b0 = r.ReadByte())
             {
                 // Prefixes
-                case 0b00101110: i = I.Cs(); break;
-                case 0b00111110: i = I.Ds(); break;
-                case 0b00100110: i = I.Es(); break;
-                case 0b00110110: i = I.Ss(); break;
-                case 0b11110000: i = I.Lock(); break;
-                case 0b11110011: i = I.Repe(); break;
-                case 0b11110010: i = I.Repne(); break;
+                case 0b00101110: p = I.Cs(); break;
+                case 0b00111110: p = I.Ds(); break;
+                case 0b00100110: p = I.Es(); break;
+                case 0b00110110: p = I.Ss(); break;
+                case 0b11110000: p = I.Lock(); break;
+                case 0b11110010: p = I.Repne(); break;
+                case 0b11110011: p = I.Repe(); break;
+            }
+            if (p != null) b0 = r.ReadByte();
+
+            switch (b0)
+            {
                 // No arguments
                 case 0b11111000: i = I.Clc(); break;
                 case 0b11110101: i = I.Cmc(); break;
@@ -60,25 +66,127 @@ namespace Thawed.Auto
                 case 0b00111111: i = I.Aas(); break;
                 case 0b00101111: i = I.Das(); break;
                 case 0b11001001: i = I.Leave(); break;
-                case 0b01101100: i = I.Insb(); break;
-                case 0b01101101: i = I.Insw(); break;
-                case 0b01101110: i = I.Outsb(); break;
-                case 0b01101111: i = I.Outsw(); break;
-                case 0b10101100: i = I.Lodsb(); break;
-                case 0b10101101: i = I.Lodsw(); break;
-                case 0b10101010: i = I.Stosb(); break;
-                case 0b10101011: i = I.Stosw(); break;
-                case 0b10101110: i = I.Scasb(); break;
-                case 0b10101111: i = I.Scasw(); break;
-                case 0b10100110: i = I.Cmpsb(); break;
-                case 0b10100111: i = I.Cmpsw(); break;
-                case 0b10100100: i = I.Movsb(); break;
-                case 0b10100101: i = I.Movsw(); break;
+                case 0b01101100: i = I.Insb(p); break;
+                case 0b01101101: i = I.Insw(p); break;
+                case 0b01101110: i = I.Outsb(p); break;
+                case 0b01101111: i = I.Outsw(p); break;
+                case 0b10101100: i = I.Lodsb(p); break;
+                case 0b10101101: i = I.Lodsw(p); break;
+                case 0b10101010: i = I.Stosb(p); break;
+                case 0b10101011: i = I.Stosw(p); break;
+                case 0b10101110: i = I.Scasb(p); break;
+                case 0b10101111: i = I.Scasw(p); break;
+                case 0b10100110: i = I.Cmpsb(p); break;
+                case 0b10100111: i = I.Cmpsw(p); break;
+                case 0b10100100: i = I.Movsb(p); break;
+                case 0b10100101: i = I.Movsw(p); break;
                 case 0b11101100: i = I.In(); break;
                 case 0b11101101: i = I.In(); break;
                 case 0b11101110: i = I.Out(); break;
                 case 0b11101111: i = I.Out(); break;
                 // One argument
+                case 0b11010000:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.Rol1(0,0,b1=r.ReadByte()); break;
+                        case 0b00_001_000: i = I.Ror1(0,0,b1=r.ReadByte()); break;
+                        case 0b00_010_000: i = I.Rcl1(0,0,b1=r.ReadByte()); break;
+                        case 0b00_011_000: i = I.Rcr1(0,0,b1=r.ReadByte()); break;
+                        case 0b00_100_000: i = I.Shl1(0,0,b1=r.ReadByte()); break;
+                        case 0b00_101_000: i = I.Shr1(0,0,b1=r.ReadByte()); break;
+                        case 0b00_111_000: i = I.Sar1(0,0,b1=r.ReadByte()); break;
+                    }
+                    break; 
+                case 0b11010001:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.Rol1(0,1,b1=r.ReadByte()); break;
+                        case 0b00_001_000: i = I.Ror1(0,1,b1=r.ReadByte()); break;
+                        case 0b00_010_000: i = I.Rcl1(0,1,b1=r.ReadByte()); break;
+                        case 0b00_011_000: i = I.Rcr1(0,1,b1=r.ReadByte()); break;
+                        case 0b00_100_000: i = I.Shl1(0,1,b1=r.ReadByte()); break;
+                        case 0b00_101_000: i = I.Shr1(0,1,b1=r.ReadByte()); break;
+                        case 0b00_111_000: i = I.Sar1(0,1,b1=r.ReadByte()); break;
+                    }
+                    break;
+                case 0b11010010:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.RolCl(0,0,b1=r.ReadByte()); break;
+                        case 0b00_001_000: i = I.RorCl(0,0,b1=r.ReadByte()); break;
+                        case 0b00_010_000: i = I.RclCl(0,0,b1=r.ReadByte()); break;
+                        case 0b00_011_000: i = I.RcrCl(0,0,b1=r.ReadByte()); break;
+                        case 0b00_100_000: i = I.ShlCl(0,0,b1=r.ReadByte()); break;
+                        case 0b00_101_000: i = I.ShrCl(0,0,b1=r.ReadByte()); break;
+                        case 0b00_111_000: i = I.SarCl(0,0,b1=r.ReadByte()); break;
+                    }
+                    break; 
+                case 0b11010011:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.RolCl(0,1,b1=r.ReadByte()); break;
+                        case 0b00_001_000: i = I.RorCl(0,1,b1=r.ReadByte()); break;
+                        case 0b00_010_000: i = I.RclCl(0,1,b1=r.ReadByte()); break;
+                        case 0b00_011_000: i = I.RcrCl(0,1,b1=r.ReadByte()); break;
+                        case 0b00_100_000: i = I.ShlCl(0,1,b1=r.ReadByte()); break;
+                        case 0b00_101_000: i = I.ShrCl(0,1,b1=r.ReadByte()); break;
+                        case 0b00_111_000: i = I.SarCl(0,1,b1=r.ReadByte()); break;
+                    }
+                    break;
+                case 0b11000000:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.RolC(0,0,b1=r.ReadByte()); break;
+                        case 0b00_001_000: i = I.RorC(0,0,b1=r.ReadByte()); break;
+                        case 0b00_010_000: i = I.RclC(0,0,b1=r.ReadByte()); break;
+                        case 0b00_011_000: i = I.RcrC(0,0,b1=r.ReadByte()); break;
+                        case 0b00_100_000: i = I.ShlC(0,0,b1=r.ReadByte()); break;
+                        case 0b00_101_000: i = I.ShrC(0,0,b1=r.ReadByte()); break;
+                        case 0b00_111_000: i = I.SarC(0,0,b1=r.ReadByte()); break;
+                    }
+                    break; 
+                case 0b11000001:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.RolC(0,1,b1=r.ReadByte()); break;
+                        case 0b00_001_000: i = I.RorC(0,1,b1=r.ReadByte()); break;
+                        case 0b00_010_000: i = I.RclC(0,1,b1=r.ReadByte()); break;
+                        case 0b00_011_000: i = I.RcrC(0,1,b1=r.ReadByte()); break;
+                        case 0b00_100_000: i = I.ShlC(0,1,b1=r.ReadByte()); break;
+                        case 0b00_101_000: i = I.ShrC(0,1,b1=r.ReadByte()); break;
+                        case 0b00_111_000: i = I.SarC(0,1,b1=r.ReadByte()); break;
+                    }
+                    break;
+                case 0b11000110:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.MovIr(0,0,b1,b2=r.ReadByte()); break;
+                    }
+                    break;
+                case 0b11000111:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_000_000: i = I.MovIr(0,1,b1,b2=r.ReadByte(),b3=r.ReadByte()); break;
+                    }
+                    break;
+                case 0b00101000: i = I.Sub(0,0,b1=r.ReadByte()); break;
+                case 0b00101001: i = I.Sub(0,1,b1=r.ReadByte()); break;
+                case 0b00101010: i = I.Sub(1,0,b1=r.ReadByte()); break;
+                case 0b00101011: i = I.Sub(1,1,b1=r.ReadByte()); break;
+                case 0b00011000: i = I.Sbb(0,0,b1=r.ReadByte()); break;
+                case 0b00011001: i = I.Sbb(0,1,b1=r.ReadByte()); break;
+                case 0b00011010: i = I.Sbb(1,0,b1=r.ReadByte()); break;
+                case 0b00011011: i = I.Sbb(1,1,b1=r.ReadByte()); break;
+                case 0b00000000: i = I.Add(0,0,b1=r.ReadByte()); break;
+                case 0b00000001: i = I.Add(0,1,b1=r.ReadByte()); break;
+                case 0b00000010: i = I.Add(1,0,b1=r.ReadByte()); break;
+                case 0b00000011: i = I.Add(1,1,b1=r.ReadByte()); break;
+                case 0b00010000: i = I.Adc(0,0,b1=r.ReadByte()); break;
+                case 0b00010001: i = I.Adc(0,1,b1=r.ReadByte()); break;
+                case 0b00010010: i = I.Adc(1,0,b1=r.ReadByte()); break;
+                case 0b00010011: i = I.Adc(1,1,b1=r.ReadByte()); break;
+                case 0b01101000: i = I.AdcI(0,0,b1=r.ReadByte(),b2=r.ReadByte()); break;
+                case 0b01101010: i = I.AdcI(0,1,b1=r.ReadByte()); break;
                 case 0b11100110: i = I.Out(b1 = r.ReadByte()); break;
                 case 0b11100111: i = I.Out(b1 = r.ReadByte()); break;
                 case 0b11100100: i = I.In(b1 = r.ReadByte()); break;
@@ -127,6 +235,10 @@ namespace Thawed.Auto
                 case 0b10000110: i = I.Xchg(b1 = r.ReadByte()); break;
                 case 0b10000111: i = I.Xchg(b1 = r.ReadByte()); break;
                 case 0b10001111: i = I.Pop(b1 = r.ReadByte()); break;
+                case 0b00001000: i = I.OrRm(0, 0, b1 = r.ReadByte()); break;
+                case 0b00001001: i = I.OrRm(0, 1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00001010: i = I.OrRm(1, 0, b1 = r.ReadByte()); break;
+                case 0b00001011: i = I.OrRm(1, 1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00111010: i = I.Cmp(1, 0, b1 = r.ReadByte()); break;
                 case 0b00111011: i = I.Cmp(1, 1, b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00111000: i = I.CmpRm(0, 0, b1 = r.ReadByte()); break;
@@ -148,6 +260,7 @@ namespace Thawed.Auto
                         case 0b00_011_000: i = I.Neg(MaskReg(b1, false)); break;
                         case 0b00_010_000: i = I.Not(MaskReg(b1, false)); break;
                         case 0b00_100_000: i = I.Mul(MaskReg(b1, false)); break;
+                        case 0b00_000_000: i = I.TestIr(0,0,b1, b2=r.ReadByte()); break;
                     }
                     break;
                 case 0b11110111:
@@ -159,6 +272,7 @@ namespace Thawed.Auto
                         case 0b00_011_000: i = I.Neg(MaskReg(b1)); break;
                         case 0b00_010_000: i = I.Not(MaskReg(b1)); break;
                         case 0b00_100_000: i = I.Mul(MaskReg(b1)); break;
+                        case 0b00_000_000: i = I.TestIr(0,1,b1, b2=r.ReadByte(), b3=r.ReadByte()); break;
                     }
                     break;
                 case 0b11111110:
@@ -186,6 +300,10 @@ namespace Thawed.Auto
                 case 0b11101001: i = I.Jmp(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00010101: i = I.AdcAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00100101: i = I.AndAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b00100000: i = I.AndRe(0,0, b1 = r.ReadByte()); break;
+                case 0b00100001: i = I.AndRe(0,1, b1 = r.ReadByte()); break;
+                case 0b00100010: i = I.AndRe(1,0, b1 = r.ReadByte()); break;
+                case 0b00100011: i = I.AndRe(1,1, b1 = r.ReadByte()); break;
                 case 0b10101001: i = I.TestAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00001101: i = I.OrAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b00110101: i = I.XorAx(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
@@ -199,21 +317,34 @@ namespace Thawed.Auto
                 case 0b10100001: i = I.MovAxT(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b11101010: i = I.JmpDg(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 case 0b10011010: i = I.CallDis(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
-                case 0b10000000: i = I.Xor(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
+                case 0b10000000:
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_111_000: i = I.Xor(b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_100_000: i = I.AndIr(0,0, b1, b2 = r.ReadByte()); break;
+                        case 0b00_001_000: i = I.OrIr(0,0, b1, b2 = r.ReadByte()); break;
+                        case 0b00_101_000: i = I.SubIr(0,0, b1, b2 = r.ReadByte()); break;
+                        case 0b00_011_000: i = I.SbbIr(0,0, b1, b2 = r.ReadByte()); break;
+                        case 0b00_000_000: i = I.AddIr(0, 0, b1, b2 = r.ReadByte()); break;
+                        case 0b00_010_000: i = I.AdcIr(0, 0, b1, b2 = r.ReadByte()); break;
+                    }
+                    break;
                 case 0b01101011: i = I.Imul(b1 = r.ReadByte(), b2 = r.ReadByte()); break;
                 // Three arguments
                 case 0b11001000: i = I.Enter(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
-                case 0b10000001: i = I.Xor(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                case 0b10000001: 
+                    switch ((b1 = r.ReadByte()) & 0b00_111_000)
+                    {
+                        case 0b00_111_000: i = I.Xor(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_100_000: i = I.AndIr(0, 1, b1, b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_001_000: i = I.OrIr(0, 1, b1, b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_101_000: i = I.SubIr(0, 1, b1, b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_011_000: i = I.SbbIr(0, 1, b1, b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_000_000: i = I.AddIr(0, 1, b1, b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                        case 0b00_010_000: i = I.AdcIr(0, 1, b1, b2 = r.ReadByte(), b3 = r.ReadByte()); break;
+                    }
+                    break;
                 case 0b01101001: i = I.Imul(b1 = r.ReadByte(), b2 = r.ReadByte(), b3 = r.ReadByte()); break;
-                
-                /*
-                 Compare immediate with register/memory
-                 mod 111 r/m
-                case 0b10000000: i = I.Cmp(); break;
-                case 0b10000001: i = I.Cmp(); break;
-                case 0b10000010: i = I.Cmp(); break;
-                case 0b10000011: i = I.Cmp(); break;
-                */
             }
 
             if (i != null)
@@ -227,16 +358,19 @@ namespace Thawed.Auto
                 case 0b01001_000: i = I.Dec(MaskReg(b0)); break;
                 case 0b01010_000: i = I.Push(MaskReg(b0)); break;
                 case 0b10010_000: i = I.Xchg(MaskReg(b0)); break;
+                case 0b10110_000: i = I.Mov(MaskReg(b0),b1=r.ReadByte()); break;
+                case 0b10111_000: i = I.Mov(MaskReg(b0),b1=r.ReadByte(),b2=r.ReadByte()); break;
             }
-
+            
             if (i != null)
                 return i;
-
+            
             switch (i0 = b0 & 0b111_00_111)
             {
                 // Middle register
                 case 0b000_00_111: i = I.PopSr(MaskSeg(b0)); break;
-                case 0b000_00_110: i = I.PushSr(MaskSeg(b0)); break;
+                case 0b000_00_010: i = I.PushSr(MaskSeg(b0)); break;
+                case 0b000_00_110: i = I.AdcSr(MaskSeg(b0)); break;
             }
 
             return fail ? throw new DecodeException(b0, b1, b2, b3) : i;
