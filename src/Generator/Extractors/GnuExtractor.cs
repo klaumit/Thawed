@@ -12,9 +12,11 @@ namespace Generator.Extractors
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_gnu")!;
 
+        public int ArgCount { get; set; } = 275;
+
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
-            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(275))
+            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(ArgCount))
             {
                 List<string> dArgs = ["-D", "-Mintel,i8086", "-b", "binary", "-m", "i386", "-z"];
                 Array.ForEach(batch, b => dArgs.Add(b.File));
