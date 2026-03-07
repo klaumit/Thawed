@@ -211,7 +211,7 @@ namespace Experimenter.Core
         {
             if (tree.S is not { Count: >= 1 } list)
                 return;
-            tree.S = list.OrderBy(l => l.H).ToList();
+            tree.S = new(list.OrderBy(l => l.H));
             foreach (var sub in list)
                 SortMe(sub);
         }
