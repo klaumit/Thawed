@@ -1740,6 +1740,14 @@
       "A": "AX,BX"
     }
   },
+  "Vfmadd132sh": {
+    "EVEX_Vfmadd132sh_xmm_k1z_xmm_xmmm16_er": {
+      "C": "AVX512_FP16",
+      "H": "62E6",
+      "M": "BOUND",
+      "A": "SP,SI"
+    }
+  },
   "Vfmaddcsh": {
     "EVEX_Vfmaddcsh_xmm_k1z_xmm_xmmm32_er": {
       "C": "AVX512_FP16",
@@ -1762,6 +1770,22 @@
       "H": "62D2",
       "M": "BOUND",
       "A": "DX,DX"
+    }
+  },
+  "Vfnmsub213ss": {
+    "EVEX_Vfnmsub213ss_xmm_k1z_xmm_xmmm32_er": {
+      "C": "AVX512F",
+      "H": "62F2",
+      "M": "BOUND",
+      "A": "SI,DX"
+    }
+  },
+  "Vminsh": {
+    "EVEX_Vminsh_xmm_k1z_xmm_xmmm16_sae": {
+      "C": "AVX512_FP16",
+      "H": "62D5",
+      "M": "BOUND",
+      "A": "DX,BP"
     }
   },
   "Vmovapd": {
@@ -1802,6 +1826,14 @@
       "H": "62F2",
       "M": "BOUND",
       "A": "SI,DX"
+    }
+  },
+  "Vpmovdb": {
+    "EVEX_Vpmovdb_xmmm128_k1z_zmm": {
+      "C": "AVX512F",
+      "H": "62D2",
+      "M": "BOUND",
+      "A": "DX,DX"
     }
   },
   "Vpmovsxdq": {
