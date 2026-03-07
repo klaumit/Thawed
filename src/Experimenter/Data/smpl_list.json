@@ -138,6 +138,12 @@
       "H": "02F6",
       "M": "ADD",
       "A": "DH,DH"
+    },
+    "Add_rm16_imm16": {
+      "C": "i8086",
+      "H": "26814324ADAB",
+      "M": "ADD",
+      "A": "Word Ptr ES:[BP+DI+24],ABAD"
     }
   },
   "And": {
@@ -989,6 +995,12 @@
       "H": "83CB09",
       "M": "OR",
       "A": "BX,+09"
+    },
+    "Or_rm16_imm16": {
+      "C": "i8086",
+      "H": "26810BE7FD",
+      "M": "OR",
+      "A": "Word Ptr ES:[BP+DI],FDE7"
     }
   },
   "Out": {
@@ -1420,6 +1432,18 @@
       "H": "1A7CB9",
       "M": "SBB",
       "A": "BH,Byte Ptr [SI-47]"
+    },
+    "Sbb_rm16_imm16": {
+      "C": "i8086",
+      "H": "3E815AA30C03",
+      "M": "SBB",
+      "A": "Word Ptr DS:[BP+SI-5D],030C"
+    },
+    "Sbb_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "2E82595B44",
+      "M": "SBB",
+      "A": "Byte Ptr CS:[BX+DI+5B],44"
     }
   },
   "Scasb": {
@@ -1604,6 +1628,12 @@
       "H": "26826FE76D",
       "M": "SUB",
       "A": "Byte Ptr ES:[BX-19],6D"
+    },
+    "Sub_rm16_imm16": {
+      "C": "i8086",
+      "H": "3E816E605CF0",
+      "M": "SUB",
+      "A": "Word Ptr DS:[BP+60],F05C"
     }
   },
   "Test": {
