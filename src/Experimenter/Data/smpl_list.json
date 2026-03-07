@@ -1680,6 +1680,46 @@
       "A": "BX,0009"
     }
   },
+  "Vcvtw2ph": {
+    "EVEX_Vcvtw2ph_zmm_k1z_zmmm512b16_er": {
+      "C": "AVX512_FP16",
+      "H": "62F5",
+      "M": "BOUND",
+      "A": "SI,BP"
+    }
+  },
+  "Vdivps": {
+    "EVEX_Vdivps_zmm_k1z_zmm_zmmm512b32_er": {
+      "C": "AVX512F",
+      "H": "62C1",
+      "M": "BOUND",
+      "A": "AX,CX"
+    }
+  },
+  "Vextractps": {
+    "EVEX_Vextractps_rm32_xmm_imm8": {
+      "C": "AVX512F",
+      "H": "62C3",
+      "M": "BOUND",
+      "A": "AX,BX"
+    }
+  },
+  "Vpmuludq": {
+    "EVEX_Vpmuludq_zmm_k1z_zmm_zmmm512b64": {
+      "C": "AVX512F",
+      "H": "62F1",
+      "M": "BOUND",
+      "A": "SI,CX"
+    }
+  },
+  "Vprorvd": {
+    "EVEX_Vprorvd_ymm_k1z_ymm_ymmm256b32": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62E2",
+      "M": "BOUND",
+      "A": "SP,DX"
+    }
+  },
   "Wait": {
     "Wait": {
       "C": "i8086",
