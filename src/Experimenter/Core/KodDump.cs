@@ -40,7 +40,7 @@ namespace Experimenter.Core
             var tree = FromFile<ND>(stf) ?? new();
 
             var extractor = new WinExtractor();
-            var arrays = CreateRandoms(count, rnd);
+            var arrays = rnd.IterRandom(count);
             if (withFuzz)
                 arrays = arrays.Concat(FuzzerX.GetAllCandidates(withNum));
             int[] i = [0];
@@ -118,17 +118,6 @@ namespace Experimenter.Core
             var node = FindNode(tree, gotBin, 8);
             var iN = Parse16(Convert.FromHexString(first.I));
             node.D = CreateEx(gotOp, gotAg, got, iN);
-        }
-
-        private static IEnumerable<byte[]> CreateRandoms(int count, Random rnd)
-        {
-            for (var i = 0; i < count; i++)
-            {
-                var num = rnd.NextInt64();
-                var hex = $"{num:X16}";
-                var data = Convert.FromHexString(hex);
-                yield return data;
-            }
         }
 
         private static Decoder CreateDecoder(byte[] data)
