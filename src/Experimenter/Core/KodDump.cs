@@ -3,29 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Experimenter.Models;
 using Generator.Extractors;
 using Generator.Tools;
-using WE = Generator.Extractors.WinExtractor;
-using IE = Generator.Extractors.IcedExtractor;
-using NE = Generator.Extractors.NasmExtractor;
-using GE = Generator.Extractors.GnuExtractor;
-using Sd = System.Collections.Generic.SortedDictionary<string, 
-    System.Collections.Generic.IDictionary<string, 
-        System.Collections.Generic.ISet<string>>>;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.ArgTool;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Generator.API;
-using Generator.Extractors;
-using Generator.Tools;
 using Iced.Intel;
 using static Generator.Tools.JsonTool;
 using CF = Iced.Intel.CpuidFeature;
 using SD = System.Collections.Generic.SortedDictionary<string, 
-    System.Collections.Generic.IDictionary<Iced.Intel.Code, Experimenter.Core.Example>>;
+    System.Collections.Generic.IDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
 
 namespace Experimenter.Core
 {

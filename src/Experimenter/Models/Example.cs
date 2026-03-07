@@ -1,4 +1,4 @@
-namespace Experimenter.Core
+namespace Experimenter.Models
 {
     internal record Example
     {
