@@ -120,7 +120,7 @@ namespace Experimenter.Core
         {
             var decoder = CreateDecoder(data);
             var iN = decoder.Decode();
-            if (iN.CodeSize != CodeSize.Code16 || iN.Encoding != EncodingKind.Legacy)
+            if (iN.CodeSize != CodeSize.Code16)
                 throw new InvalidOperationException($"{iN} ?!");
             if (iN.IsInvalid)
                 return null;

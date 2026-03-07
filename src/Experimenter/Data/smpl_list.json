@@ -139,6 +139,12 @@
       "M": "ADD",
       "A": "Word Ptr ES:[BP+DI+24],ABAD"
     },
+    "Add_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "368200B2",
+      "M": "ADD",
+      "A": "Byte Ptr SS:[BX+SI],B2"
+    },
     "Add_rm16_imm8": {
       "C": "i8086",
       "H": "83C309",
