@@ -1692,6 +1692,22 @@
       "A": "BX,0009"
     }
   },
+  "Vbroadcastsd": {
+    "EVEX_Vbroadcastsd_zmm_k1z_xmmm64": {
+      "C": "AVX512F",
+      "H": "62D2",
+      "M": "BOUND",
+      "A": "DX,DX"
+    }
+  },
+  "Vcvttpd2uqq": {
+    "EVEX_Vcvttpd2uqq_ymm_k1z_ymmm256b64": {
+      "C": "AVX512VL|AVX512DQ",
+      "H": "62F1",
+      "M": "BOUND",
+      "A": "SI,CX"
+    }
+  },
   "Vcvtw2ph": {
     "EVEX_Vcvtw2ph_zmm_k1z_zmmm512b16_er": {
       "C": "AVX512_FP16",
