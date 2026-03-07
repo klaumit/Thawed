@@ -752,6 +752,18 @@
       "H": "BB0900",
       "M": "MOV",
       "A": "BX,0009"
+    },
+    "Mov_r16_rm16": {
+      "C": "i8086",
+      "H": "2E8B6B63",
+      "M": "MOV",
+      "A": "BP,Word Ptr CS:[BP+DI+63]"
+    },
+    "Mov_AX_moffs16": {
+      "C": "i8086",
+      "H": "2EA1BF77",
+      "M": "MOV",
+      "A": "AX,CS:[77BF]"
     }
   },
   "Movsb": {
@@ -1005,6 +1017,12 @@
       "H": "C1DB09",
       "M": "RCR",
       "A": "BX,09"
+    },
+    "Rcr_rm8_1": {
+      "C": "i8086",
+      "H": "36D0590B",
+      "M": "RCR",
+      "A": "Byte Ptr SS:[BX+DI+0B],1"
     }
   },
   "Ret": {
@@ -1382,6 +1400,12 @@
       "H": "335A59",
       "M": "XOR",
       "A": "BX,Word Ptr [BP+SI+59]"
+    },
+    "Xor_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "3682B4182188",
+      "M": "XOR",
+      "A": "Byte Ptr SS:[SI+2118],88"
     }
   }
 }
