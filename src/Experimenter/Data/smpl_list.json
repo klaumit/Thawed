@@ -216,6 +216,12 @@
       "H": "FFD0",
       "M": "CALL",
       "A": "AX"
+    },
+    "Call_m1616": {
+      "C": "i8086",
+      "H": "FF18",
+      "M": "CALL",
+      "A": "FAR [BX+SI]"
     }
   },
   "Cbw": {
@@ -355,6 +361,12 @@
       "H": "F0",
       "P": "lock",
       "M": "LOCK"
+    },
+    "Dec_rm16": {
+      "C": "i8086",
+      "H": "FF08",
+      "M": "DEC",
+      "A": "Word Ptr [BX+SI]"
     }
   },
   "Div": {
@@ -427,6 +439,32 @@
       "A": "AX"
     }
   },
+  "In": {
+    "In_AL_imm8": {
+      "C": "i8086",
+      "H": "E400",
+      "M": "IN",
+      "A": "AL,00"
+    },
+    "In_AX_imm8": {
+      "C": "i8086",
+      "H": "E500",
+      "M": "IN",
+      "A": "AX,00"
+    },
+    "In_AL_DX": {
+      "C": "i8086",
+      "H": "EC",
+      "M": "IN",
+      "A": "AL,DX"
+    },
+    "In_AX_DX": {
+      "C": "i8086",
+      "H": "ED",
+      "M": "IN",
+      "A": "AX,DX"
+    }
+  },
   "Inc": {
     "Inc_r16": {
       "C": "i8086",
@@ -439,6 +477,12 @@
       "H": "F0",
       "P": "lock",
       "M": "LOCK"
+    },
+    "Inc_rm16": {
+      "C": "i8086",
+      "H": "FF00",
+      "M": "INC",
+      "A": "Word Ptr [BX+SI]"
     }
   },
   "Insb": {
@@ -461,6 +505,14 @@
       "H": "CD00",
       "M": "INT",
       "A": "00"
+    }
+  },
+  "Int1": {
+    "Int1": {
+      "C": "i386",
+      "H": "F0",
+      "P": "lock",
+      "M": "LOCK"
     }
   },
   "Int3": {
@@ -582,6 +634,12 @@
       "H": "F0",
       "P": "lock",
       "M": "LOCK"
+    },
+    "Jmp_m1616": {
+      "C": "i8086",
+      "H": "FF28",
+      "M": "JMP",
+      "A": "FAR [BX+SI]"
     }
   },
   "Jne": {
@@ -764,6 +822,12 @@
       "H": "2EA1BF77",
       "M": "MOV",
       "A": "AX,CS:[77BF]"
+    },
+    "Mov_r8_rm8": {
+      "C": "i8086",
+      "H": "8A00",
+      "M": "MOV",
+      "A": "AL,Byte Ptr [BX+SI]"
     }
   },
   "Movsb": {
@@ -879,6 +943,32 @@
       "A": "BX,+09"
     }
   },
+  "Out": {
+    "Out_imm8_AL": {
+      "C": "i8086",
+      "H": "E600",
+      "M": "OUT",
+      "A": "00,AL"
+    },
+    "Out_imm8_AX": {
+      "C": "i8086",
+      "H": "E700",
+      "M": "OUT",
+      "A": "00,AX"
+    },
+    "Out_DX_AL": {
+      "C": "i8086",
+      "H": "EE",
+      "M": "OUT",
+      "A": "DX,AL"
+    },
+    "Out_DX_AX": {
+      "C": "i8086",
+      "H": "EF",
+      "M": "OUT",
+      "A": "DX,AX"
+    }
+  },
   "Outsb": {
     "Outsb_DX_m8": {
       "C": "i186",
@@ -917,6 +1007,12 @@
       "H": "58",
       "M": "POP",
       "A": "AX"
+    },
+    "Pop_rm16": {
+      "C": "i8086",
+      "H": "8F00",
+      "M": "POP",
+      "A": "Word Ptr [BX+SI]"
     }
   },
   "Popa": {
@@ -975,6 +1071,12 @@
       "H": "68055B",
       "M": "PUSH",
       "A": "5B05"
+    },
+    "Push_rm16": {
+      "C": "i8086",
+      "H": "FF30",
+      "M": "PUSH",
+      "A": "[BX+SI]"
     }
   },
   "Pusha": {
@@ -1003,6 +1105,30 @@
       "H": "C1D309",
       "M": "RCL",
       "A": "BX,09"
+    },
+    "Rcl_rm8_1": {
+      "C": "i8086",
+      "H": "D010",
+      "M": "RCL",
+      "A": "Byte Ptr [BX+SI],1"
+    },
+    "Rcl_rm16_1": {
+      "C": "i8086",
+      "H": "D110",
+      "M": "RCL",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Rcl_rm8_CL": {
+      "C": "i8086",
+      "H": "D210",
+      "M": "RCL",
+      "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Rcl_rm16_CL": {
+      "C": "i8086",
+      "H": "D310",
+      "M": "RCL",
+      "A": "Word Ptr [BX+SI],CL"
     }
   },
   "Rcr": {
@@ -1023,6 +1149,24 @@
       "H": "36D0590B",
       "M": "RCR",
       "A": "Byte Ptr SS:[BX+DI+0B],1"
+    },
+    "Rcr_rm16_1": {
+      "C": "i8086",
+      "H": "D118",
+      "M": "RCR",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Rcr_rm8_CL": {
+      "C": "i8086",
+      "H": "D218",
+      "M": "RCR",
+      "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Rcr_rm16_CL": {
+      "C": "i8086",
+      "H": "D318",
+      "M": "RCR",
+      "A": "Word Ptr [BX+SI],CL"
     }
   },
   "Ret": {
@@ -1063,6 +1207,30 @@
       "H": "C1C309",
       "M": "ROL",
       "A": "BX,09"
+    },
+    "Rol_rm8_1": {
+      "C": "i8086",
+      "H": "D000",
+      "M": "ROL",
+      "A": "Byte Ptr [BX+SI],1"
+    },
+    "Rol_rm16_1": {
+      "C": "i8086",
+      "H": "D100",
+      "M": "ROL",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Rol_rm8_CL": {
+      "C": "i8086",
+      "H": "D200",
+      "M": "ROL",
+      "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Rol_rm16_CL": {
+      "C": "i8086",
+      "H": "D300",
+      "M": "ROL",
+      "A": "Word Ptr [BX+SI],CL"
     }
   },
   "Ror": {
@@ -1077,6 +1245,30 @@
       "H": "C1CB09",
       "M": "ROR",
       "A": "BX,09"
+    },
+    "Ror_rm8_1": {
+      "C": "i8086",
+      "H": "D008",
+      "M": "ROR",
+      "A": "Byte Ptr [BX+SI],1"
+    },
+    "Ror_rm16_1": {
+      "C": "i8086",
+      "H": "D108",
+      "M": "ROR",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Ror_rm8_CL": {
+      "C": "i8086",
+      "H": "D208",
+      "M": "ROR",
+      "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Ror_rm16_CL": {
+      "C": "i8086",
+      "H": "D308",
+      "M": "ROR",
+      "A": "Word Ptr [BX+SI],CL"
     }
   },
   "Sahf": {
@@ -1084,6 +1276,14 @@
       "C": "i8086",
       "H": "9E",
       "M": "SAHF"
+    }
+  },
+  "Salc": {
+    "Salc": {
+      "C": "i8086",
+      "H": "F0",
+      "P": "lock",
+      "M": "LOCK"
     }
   },
   "Sar": {
@@ -1104,6 +1304,24 @@
       "H": "26D3B81FFF",
       "M": "SAR",
       "A": "Word Ptr ES:[BX+SI-00E1],CL"
+    },
+    "Sar_rm8_1": {
+      "C": "i8086",
+      "H": "D038",
+      "M": "SAR",
+      "A": "Byte Ptr [BX+SI],1"
+    },
+    "Sar_rm16_1": {
+      "C": "i8086",
+      "H": "D138",
+      "M": "SAR",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Sar_rm8_CL": {
+      "C": "i8086",
+      "H": "D238",
+      "M": "SAR",
+      "A": "Byte Ptr [BX+SI],CL"
     }
   },
   "Sbb": {
@@ -1182,6 +1400,30 @@
       "H": "C1E309",
       "M": "SHL",
       "A": "BX,09"
+    },
+    "Shl_rm8_1": {
+      "C": "i8086",
+      "H": "D020",
+      "M": "SHL",
+      "A": "Byte Ptr [BX+SI],1"
+    },
+    "Shl_rm16_1": {
+      "C": "i8086",
+      "H": "D120",
+      "M": "SHL",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Shl_rm8_CL": {
+      "C": "i8086",
+      "H": "D220",
+      "M": "SHL",
+      "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Shl_rm16_CL": {
+      "C": "i8086",
+      "H": "D320",
+      "M": "SHL",
+      "A": "Word Ptr [BX+SI],CL"
     }
   },
   "Shr": {
@@ -1196,6 +1438,30 @@
       "H": "C1EB09",
       "M": "SHR",
       "A": "BX,09"
+    },
+    "Shr_rm8_1": {
+      "C": "i8086",
+      "H": "D028",
+      "M": "SHR",
+      "A": "Byte Ptr [BX+SI],1"
+    },
+    "Shr_rm16_1": {
+      "C": "i8086",
+      "H": "D128",
+      "M": "SHR",
+      "A": "Word Ptr [BX+SI],1"
+    },
+    "Shr_rm8_CL": {
+      "C": "i8086",
+      "H": "D228",
+      "M": "SHR",
+      "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Shr_rm16_CL": {
+      "C": "i8086",
+      "H": "D328",
+      "M": "SHR",
+      "A": "Word Ptr [BX+SI],CL"
     }
   },
   "Stc": {
