@@ -1828,6 +1828,14 @@
       "A": "SI,DX"
     }
   },
+  "Vpminud": {
+    "EVEX_Vpminud_zmm_k1z_zmm_zmmm512b32": {
+      "C": "AVX512F",
+      "H": "62D2",
+      "M": "BOUND",
+      "A": "DX,DX"
+    }
+  },
   "Vpmovdb": {
     "EVEX_Vpmovdb_xmmm128_k1z_zmm": {
       "C": "AVX512F",
@@ -1858,6 +1866,14 @@
       "H": "62E2",
       "M": "BOUND",
       "A": "SP,DX"
+    }
+  },
+  "Vrndscalesd": {
+    "EVEX_Vrndscalesd_xmm_k1z_xmm_xmmm64_imm8_sae": {
+      "C": "AVX512F",
+      "H": "62F3",
+      "M": "BOUND",
+      "A": "SI,BX"
     }
   },
   "Wait": {
