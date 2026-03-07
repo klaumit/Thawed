@@ -1732,6 +1732,14 @@
       "A": "DX,CX"
     }
   },
+  "Vcvtpd2udq": {
+    "EVEX_Vcvtpd2udq_xmm_k1z_ymmm256b64": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62D1",
+      "M": "BOUND",
+      "A": "DX,CX"
+    }
+  },
   "Vcvtph2udq": {
     "EVEX_Vcvtph2udq_ymm_k1z_xmmm128b16": {
       "C": "AVX512VL|AVX512_FP16",
@@ -1828,6 +1836,14 @@
       "A": "DX,SI"
     }
   },
+  "Vfmsubadd231ph": {
+    "EVEX_Vfmsubadd231ph_ymm_k1z_ymm_ymmm256b16": {
+      "C": "AVX512VL|AVX512_FP16",
+      "H": "62D6",
+      "M": "BOUND",
+      "A": "DX,SI"
+    }
+  },
   "Vfnmsub213sd": {
     "EVEX_Vfnmsub213sd_xmm_k1z_xmm_xmmm64_er": {
       "C": "AVX512F",
@@ -1916,6 +1932,14 @@
       "A": "SI,DX"
     }
   },
+  "Vplzcntd": {
+    "EVEX_Vplzcntd_ymm_k1z_ymmm256b32": {
+      "C": "AVX512VL|AVX512CD",
+      "H": "62E2",
+      "M": "BOUND",
+      "A": "SP,DX"
+    }
+  },
   "Vpmadd52huq": {
     "EVEX_Vpmadd52huq_zmm_k1z_zmm_zmmm512b64": {
       "C": "AVX512_IFMA",
@@ -1950,6 +1974,14 @@
   },
   "Vpmovsxdq": {
     "EVEX_Vpmovsxdq_ymm_k1z_xmmm128": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62E2",
+      "M": "BOUND",
+      "A": "SP,DX"
+    }
+  },
+  "Vpmovsxwq": {
+    "EVEX_Vpmovsxwq_xmm_k1z_xmmm32": {
       "C": "AVX512VL|AVX512F",
       "H": "62E2",
       "M": "BOUND",
