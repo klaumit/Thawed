@@ -1932,6 +1932,14 @@
       "A": "SI,DX"
     }
   },
+  "Vpermq": {
+    "EVEX_Vpermq_ymm_k1z_ymmm256b64_imm8": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62D3",
+      "M": "BOUND",
+      "A": "DX,BX"
+    }
+  },
   "Vplzcntd": {
     "EVEX_Vplzcntd_ymm_k1z_ymmm256b32": {
       "C": "AVX512VL|AVX512CD",
