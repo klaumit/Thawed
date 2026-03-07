@@ -11,6 +11,11 @@ namespace Generator.Tools
             return Regex.Replace(txt, @"\s+", " ");
         }
 
+        public static string? TrimOrNull(this string? text)
+        {
+            return string.IsNullOrWhiteSpace(text) ? null : text.Trim();
+        }
+
         public static string[] ToLines(string text)
         {
             var lines = text.Trim().Split('\n');

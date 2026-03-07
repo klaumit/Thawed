@@ -6,6 +6,9 @@ namespace Generator.Tools
 {
     public static class BitTool
     {
+        public static string[] SplitP(string txt, int len = 2)
+            => txt.Chunk(len).Select(c => new string(c)).ToArray();
+
         public static byte[] AsByte(int arg)
         {
             return [(byte)arg];

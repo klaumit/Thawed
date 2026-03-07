@@ -15,6 +15,10 @@ namespace Experimenter
                 {
                     await BinDump.Run(o);
                 }
+                else if (o.TryGroup)
+                {
+                    await KodDump.Run(o);
+                }
                 else if (o.TryPlay)
                 {
                     await PlyDump.Run(o);

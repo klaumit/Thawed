@@ -16,7 +16,7 @@ namespace Generator.Extractors
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
-            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(200))
+            foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(275))
             {
                 List<string> dArgs = [_exePath];
                 Array.ForEach(batch, b => dArgs.Add(b.File));
