@@ -82,6 +82,12 @@
       "H": "1436",
       "M": "ADC",
       "A": "AL,36"
+    },
+    "Adc_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "3E82150B",
+      "M": "ADC",
+      "A": "Byte Ptr DS:[DI],0B"
     }
   },
   "Add": {
@@ -317,6 +323,12 @@
       "H": "3682BAAF03D9",
       "M": "CMP",
       "A": "Byte Ptr SS:[BP+SI+03AF],D9"
+    },
+    "Cmp_rm16_imm16": {
+      "C": "i8086",
+      "H": "2E813A3C5D",
+      "M": "CMP",
+      "A": "Word Ptr CS:[BP+SI],5D3C"
     }
   },
   "Cmpsb": {
@@ -846,6 +858,12 @@
       "H": "2EA30960",
       "M": "MOV",
       "A": "CS:[6009],AX"
+    },
+    "Mov_AL_moffs8": {
+      "C": "i8086",
+      "H": "36A0645B",
+      "M": "MOV",
+      "A": "AL,SS:[5B64]"
     }
   },
   "Movsb": {
@@ -1568,6 +1586,12 @@
       "H": "2AA0AB7A",
       "M": "SUB",
       "A": "AH,Byte Ptr [BX+SI+7AAB]"
+    },
+    "Sub_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "26826FE76D",
+      "M": "SUB",
+      "A": "Byte Ptr ES:[BX-19],6D"
     }
   },
   "Test": {
@@ -1690,6 +1714,12 @@
       "H": "3682B4182188",
       "M": "XOR",
       "A": "Byte Ptr SS:[SI+2118],88"
+    },
+    "Xor_rm16_imm16": {
+      "C": "i8086",
+      "H": "2681306731",
+      "M": "XOR",
+      "A": "Word Ptr ES:[BX+SI],3167"
     }
   }
 }
