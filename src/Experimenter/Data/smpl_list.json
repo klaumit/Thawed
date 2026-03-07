@@ -1708,6 +1708,14 @@
       "A": "AX,DX"
     }
   },
+  "Vbroadcastf32x8": {
+    "EVEX_Vbroadcastf32x8_zmm_k1z_m256": {
+      "C": "AVX512DQ",
+      "H": "62E2",
+      "M": "BOUND",
+      "A": "SP,DX"
+    }
+  },
   "Vbroadcasti32x2": {
     "EVEX_Vbroadcasti32x2_zmm_k1z_xmmm64": {
       "C": "AVX512DQ",
@@ -1909,6 +1917,12 @@
     }
   },
   "Vmovapd": {
+    "EVEX_Vmovapd_xmm_k1z_xmmm128": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62D1",
+      "M": "BOUND",
+      "A": "DX,CX"
+    },
     "EVEX_Vmovapd_zmmm512_k1z_zmm": {
       "C": "AVX512F",
       "H": "62F1",
