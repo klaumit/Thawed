@@ -53,24 +53,6 @@
       "M": "ADC",
       "A": "BH,Byte Ptr [BP+SI+74]"
     },
-    "Adc_AX_imm16": {
-      "C": "i8086",
-      "H": "15152D",
-      "M": "ADC",
-      "A": "AX,2D15"
-    },
-    "Adc_rm8_imm8": {
-      "C": "i8086",
-      "H": "80D409",
-      "M": "ADC",
-      "A": "AH,09"
-    },
-    "Adc_rm16_imm8": {
-      "C": "i8086",
-      "H": "83D309",
-      "M": "ADC",
-      "A": "BX,+09"
-    },
     "Adc_r16_rm16": {
       "C": "i8086",
       "H": "13813920",
@@ -83,11 +65,29 @@
       "M": "ADC",
       "A": "AL,36"
     },
+    "Adc_AX_imm16": {
+      "C": "i8086",
+      "H": "15152D",
+      "M": "ADC",
+      "A": "AX,2D15"
+    },
+    "Adc_rm8_imm8": {
+      "C": "i8086",
+      "H": "80D409",
+      "M": "ADC",
+      "A": "AH,09"
+    },
     "Adc_rm8_imm8_82": {
       "C": "i8086",
       "H": "3E82150B",
       "M": "ADC",
       "A": "Byte Ptr DS:[DI],0B"
+    },
+    "Adc_rm16_imm8": {
+      "C": "i8086",
+      "H": "83D309",
+      "M": "ADC",
+      "A": "BX,+09"
     }
   },
   "Add": {
@@ -102,6 +102,12 @@
       "H": "013C",
       "M": "ADD",
       "A": "Word Ptr [SI],DI"
+    },
+    "Add_r8_rm8": {
+      "C": "i8086",
+      "H": "02F6",
+      "M": "ADD",
+      "A": "DH,DH"
     },
     "Add_r16_rm16": {
       "C": "i8086",
@@ -127,23 +133,17 @@
       "M": "ADD",
       "A": "AH,09"
     },
-    "Add_rm16_imm8": {
-      "C": "i8086",
-      "H": "83C309",
-      "M": "ADD",
-      "A": "BX,+09"
-    },
-    "Add_r8_rm8": {
-      "C": "i8086",
-      "H": "02F6",
-      "M": "ADD",
-      "A": "DH,DH"
-    },
     "Add_rm16_imm16": {
       "C": "i8086",
       "H": "26814324ADAB",
       "M": "ADD",
       "A": "Word Ptr ES:[BP+DI+24],ABAD"
+    },
+    "Add_rm16_imm8": {
+      "C": "i8086",
+      "H": "83C309",
+      "M": "ADD",
+      "A": "BX,+09"
     }
   },
   "And": {
@@ -189,11 +189,11 @@
       "M": "AND",
       "A": "AH,09"
     },
-    "And_rm16_imm8": {
+    "And_rm16_imm16": {
       "C": "i8086",
-      "H": "83E309",
+      "H": "3E81206C8E",
       "M": "AND",
-      "A": "BX,+09"
+      "A": "Word Ptr DS:[BX+SI],8E6C"
     },
     "And_rm8_imm8_82": {
       "C": "i8086",
@@ -201,11 +201,11 @@
       "M": "AND",
       "A": "Byte Ptr DS:[BX-2528],98"
     },
-    "And_rm16_imm16": {
+    "And_rm16_imm8": {
       "C": "i8086",
-      "H": "3E81206C8E",
+      "H": "83E309",
       "M": "AND",
-      "A": "Word Ptr DS:[BX+SI],8E6C"
+      "A": "BX,+09"
     }
   },
   "Bound": {
@@ -324,11 +324,11 @@
       "M": "CMP",
       "A": "AH,09"
     },
-    "Cmp_rm16_imm8": {
+    "Cmp_rm16_imm16": {
       "C": "i8086",
-      "H": "83FB09",
+      "H": "2E813A3C5D",
       "M": "CMP",
-      "A": "BX,+09"
+      "A": "Word Ptr CS:[BP+SI],5D3C"
     },
     "Cmp_rm8_imm8_82": {
       "C": "i8086",
@@ -336,11 +336,11 @@
       "M": "CMP",
       "A": "Byte Ptr SS:[BP+SI+03AF],D9"
     },
-    "Cmp_rm16_imm16": {
+    "Cmp_rm16_imm8": {
       "C": "i8086",
-      "H": "2E813A3C5D",
+      "H": "83FB09",
       "M": "CMP",
-      "A": "Word Ptr CS:[BP+SI],5D3C"
+      "A": "BX,+09"
     }
   },
   "Cmpsb": {
@@ -817,6 +817,18 @@
       "M": "MOV",
       "A": "BX,AX"
     },
+    "Mov_r8_rm8": {
+      "C": "i8086",
+      "H": "8A00",
+      "M": "MOV",
+      "A": "AL,Byte Ptr [BX+SI]"
+    },
+    "Mov_r16_rm16": {
+      "C": "i8086",
+      "H": "2E8B6B63",
+      "M": "MOV",
+      "A": "BP,Word Ptr CS:[BP+DI+63]"
+    },
     "Mov_rm16_Sreg": {
       "C": "i8086",
       "H": "8CDB",
@@ -829,35 +841,17 @@
       "M": "MOV",
       "A": "DS,BX"
     },
-    "Mov_r8_imm8": {
+    "Mov_AL_moffs8": {
       "C": "i8086",
-      "H": "B409",
+      "H": "36A0645B",
       "M": "MOV",
-      "A": "AH,09"
-    },
-    "Mov_r16_imm16": {
-      "C": "i8086",
-      "H": "BB0900",
-      "M": "MOV",
-      "A": "BX,0009"
-    },
-    "Mov_r16_rm16": {
-      "C": "i8086",
-      "H": "2E8B6B63",
-      "M": "MOV",
-      "A": "BP,Word Ptr CS:[BP+DI+63]"
+      "A": "AL,SS:[5B64]"
     },
     "Mov_AX_moffs16": {
       "C": "i8086",
       "H": "2EA1BF77",
       "M": "MOV",
       "A": "AX,CS:[77BF]"
-    },
-    "Mov_r8_rm8": {
-      "C": "i8086",
-      "H": "8A00",
-      "M": "MOV",
-      "A": "AL,Byte Ptr [BX+SI]"
     },
     "Mov_moffs8_AL": {
       "C": "i8086",
@@ -871,11 +865,17 @@
       "M": "MOV",
       "A": "CS:[6009],AX"
     },
-    "Mov_AL_moffs8": {
+    "Mov_r8_imm8": {
       "C": "i8086",
-      "H": "36A0645B",
+      "H": "B409",
       "M": "MOV",
-      "A": "AL,SS:[5B64]"
+      "A": "AH,09"
+    },
+    "Mov_r16_imm16": {
+      "C": "i8086",
+      "H": "BB0900",
+      "M": "MOV",
+      "A": "BX,0009"
     },
     "Mov_rm16_imm16": {
       "C": "i8086",
@@ -990,17 +990,17 @@
       "M": "OR",
       "A": "AH,09"
     },
-    "Or_rm16_imm8": {
-      "C": "i8086",
-      "H": "83CB09",
-      "M": "OR",
-      "A": "BX,+09"
-    },
     "Or_rm16_imm16": {
       "C": "i8086",
       "H": "26810BE7FD",
       "M": "OR",
       "A": "Word Ptr ES:[BP+DI],FDE7"
+    },
+    "Or_rm16_imm8": {
+      "C": "i8086",
+      "H": "83CB09",
+      "M": "OR",
+      "A": "BX,+09"
     }
   },
   "Out": {
@@ -1120,17 +1120,17 @@
       "M": "PUSH",
       "A": "DX"
     },
-    "Pushw_imm8": {
-      "C": "i186",
-      "H": "6ABA",
-      "M": "PUSH",
-      "A": "BA"
-    },
     "Push_imm16": {
       "C": "i186",
       "H": "68055B",
       "M": "PUSH",
       "A": "5B05"
+    },
+    "Pushw_imm8": {
+      "C": "i186",
+      "H": "6ABA",
+      "M": "PUSH",
+      "A": "BA"
     },
     "Push_rm16": {
       "C": "i8086",
@@ -1359,12 +1359,6 @@
       "M": "SAR",
       "A": "BX,09"
     },
-    "Sar_rm16_CL": {
-      "C": "i8086",
-      "H": "26D3B81FFF",
-      "M": "SAR",
-      "A": "Word Ptr ES:[BX+SI-00E1],CL"
-    },
     "Sar_rm8_1": {
       "C": "i8086",
       "H": "D038",
@@ -1382,6 +1376,12 @@
       "H": "D238",
       "M": "SAR",
       "A": "Byte Ptr [BX+SI],CL"
+    },
+    "Sar_rm16_CL": {
+      "C": "i8086",
+      "H": "26D3B81FFF",
+      "M": "SAR",
+      "A": "Word Ptr ES:[BX+SI-00E1],CL"
     }
   },
   "Sbb": {
@@ -1396,6 +1396,12 @@
       "H": "195E55",
       "M": "SBB",
       "A": "Word Ptr [BP+55],BX"
+    },
+    "Sbb_r8_rm8": {
+      "C": "i8086",
+      "H": "1A7CB9",
+      "M": "SBB",
+      "A": "BH,Byte Ptr [SI-47]"
     },
     "Sbb_r16_rm16": {
       "C": "i8086",
@@ -1421,18 +1427,6 @@
       "M": "SBB",
       "A": "CL,08"
     },
-    "Sbb_rm16_imm8": {
-      "C": "i8086",
-      "H": "83DB09",
-      "M": "SBB",
-      "A": "BX,+09"
-    },
-    "Sbb_r8_rm8": {
-      "C": "i8086",
-      "H": "1A7CB9",
-      "M": "SBB",
-      "A": "BH,Byte Ptr [SI-47]"
-    },
     "Sbb_rm16_imm16": {
       "C": "i8086",
       "H": "3E815AA30C03",
@@ -1444,6 +1438,12 @@
       "H": "2E82595B44",
       "M": "SBB",
       "A": "Byte Ptr CS:[BX+DI+5B],44"
+    },
+    "Sbb_rm16_imm8": {
+      "C": "i8086",
+      "H": "83DB09",
+      "M": "SBB",
+      "A": "BX,+09"
     }
   },
   "Scasb": {
@@ -1587,6 +1587,12 @@
       "M": "SUB",
       "A": "Word Ptr [DI-6C24],AX"
     },
+    "Sub_r8_rm8": {
+      "C": "i8086",
+      "H": "2AA0AB7A",
+      "M": "SUB",
+      "A": "AH,Byte Ptr [BX+SI+7AAB]"
+    },
     "Sub_r16_rm16": {
       "C": "i8086",
       "H": "2BF8",
@@ -1611,17 +1617,11 @@
       "M": "SUB",
       "A": "CL,08"
     },
-    "Sub_rm16_imm8": {
+    "Sub_rm16_imm16": {
       "C": "i8086",
-      "H": "83EB09",
+      "H": "3E816E605CF0",
       "M": "SUB",
-      "A": "BX,+09"
-    },
-    "Sub_r8_rm8": {
-      "C": "i8086",
-      "H": "2AA0AB7A",
-      "M": "SUB",
-      "A": "AH,Byte Ptr [BX+SI+7AAB]"
+      "A": "Word Ptr DS:[BP+60],F05C"
     },
     "Sub_rm8_imm8_82": {
       "C": "i8086",
@@ -1629,11 +1629,11 @@
       "M": "SUB",
       "A": "Byte Ptr ES:[BX-19],6D"
     },
-    "Sub_rm16_imm16": {
+    "Sub_rm16_imm8": {
       "C": "i8086",
-      "H": "3E816E605CF0",
+      "H": "83EB09",
       "M": "SUB",
-      "A": "Word Ptr DS:[BP+60],F05C"
+      "A": "BX,+09"
     }
   },
   "Test": {
@@ -1721,6 +1721,12 @@
       "M": "XOR",
       "A": "CL,DL"
     },
+    "Xor_r16_rm16": {
+      "C": "i8086",
+      "H": "335A59",
+      "M": "XOR",
+      "A": "BX,Word Ptr [BP+SI+59]"
+    },
     "Xor_AL_imm8": {
       "C": "i8086",
       "H": "3459",
@@ -1739,17 +1745,11 @@
       "M": "XOR",
       "A": "AH,09"
     },
-    "Xor_rm16_imm8": {
+    "Xor_rm16_imm16": {
       "C": "i8086",
-      "H": "83F309",
+      "H": "2681306731",
       "M": "XOR",
-      "A": "BX,+09"
-    },
-    "Xor_r16_rm16": {
-      "C": "i8086",
-      "H": "335A59",
-      "M": "XOR",
-      "A": "BX,Word Ptr [BP+SI+59]"
+      "A": "Word Ptr ES:[BX+SI],3167"
     },
     "Xor_rm8_imm8_82": {
       "C": "i8086",
@@ -1757,11 +1757,11 @@
       "M": "XOR",
       "A": "Byte Ptr SS:[SI+2118],88"
     },
-    "Xor_rm16_imm16": {
+    "Xor_rm16_imm8": {
       "C": "i8086",
-      "H": "2681306731",
+      "H": "83F309",
       "M": "XOR",
-      "A": "Word Ptr ES:[BX+SI],3167"
+      "A": "BX,+09"
     }
   }
 }
