@@ -1764,6 +1764,14 @@
       "A": "DX,DX"
     }
   },
+  "Vmovapd": {
+    "EVEX_Vmovapd_zmmm512_k1z_zmm": {
+      "C": "AVX512F",
+      "H": "62F1",
+      "M": "BOUND",
+      "A": "SI,CX"
+    }
+  },
   "Vpandnq": {
     "EVEX_Vpandnq_ymm_k1z_ymm_ymmm256b64": {
       "C": "AVX512VL|AVX512F",
