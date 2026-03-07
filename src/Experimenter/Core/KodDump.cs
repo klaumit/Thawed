@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 using Experimenter.Models;
 using Generator.Extractors;
 using Generator.Tools;
-using static Generator.Tools.FileTool;
-using static Generator.Tools.ArgTool;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Generator.API;
+using Generator.Extractors;
+using Generator.Tools;
+using Newtonsoft.Json;
 using Generator.API;
 using Iced.Intel;
+using static Generator.Tools.FileTool;
+using static Generator.Tools.ArgTool;
 using static Generator.Tools.JsonTool;
 using CF = Iced.Intel.CpuidFeature;
+using ND = Experimenter.Models.Node;
 using SD = System.Collections.Generic.SortedDictionary<string, 
     System.Collections.Generic.IDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
 
@@ -31,17 +40,23 @@ namespace Experimenter.Core
             var count = args.As<int?>("count") ?? 270;
             var rnd = new Random();
 
-            string jf = Path.Combine(oD, "samples.json");
-            var dict = FromFile<SD>(jf) ?? new();
+            var slf = Path.Combine(oD, "smpl_list.json");
+            var stf = Path.Combine(oD, "smpl_tree.json");
+            var dict = FromFile<SD>(slf) ?? new();
+            var tree = FromFile<ND>(stf) ?? new();
 
             var extractor = new WinExtractor();
             var arrays = CreateRandoms(count, rnd);
+            arrays = arrays.Concat(FuzzerX.GetAllCandidates());
             int[] i = [0];
             await foreach (var d in extractor.Decode(arrays))
             {
+                GoFor(d, tree);
                 Handle(d, dict, i);
             }
-            ToFile(jf, dict, format: true);
+            SortMe(tree);
+            ToFile(stf, tree, format: true);
+            ToFile(slf, dict, format: true);
 
             Console.WriteLine("Done.");
         }
@@ -53,7 +68,7 @@ namespace Experimenter.Core
                 return;
             var hex = item.I;
             var data = Convert.FromHexString(hex);
-            Console.WriteLine($" #{++i[0]:D3} | {hex} ");
+            Console.WriteLine($" #{++i[0]:D5} | {hex} ");
             var text = item.D.Split(' ', 2);
             var op = text[0].TrimOrNull();
             if (IsBad(op))
@@ -78,6 +93,23 @@ namespace Experimenter.Core
             var pref = string.Join("|", GetPrefixes(iN)).TrimOrNull();
             sub[key2] = new Example { C = feat, H = got, P = pref, M = op, A = ag };
             Console.WriteLine();
+        }
+
+        private static void GoFor(Decoded[] d, ND tree)
+        {
+            var first = d.FirstOrDefault(x => x is { O: 0, L: >= 0 });
+            if (first == null)
+                return;
+            var gotTxt = first.D.Split(' ', 2);
+            var gotOp = gotTxt[0].TrimOrNull();
+            var gotAg = gotTxt[1].TrimOrNull();
+            if (IsBad(gotOp))
+                return;
+            var gotHex = Convert.FromHexString(first.H);
+            var gotBin = gotHex.Format('b', "");
+            var node = FindNode(tree, gotBin, 8);
+            node.D = new() { M = gotOp.TrimOrNull(), A = gotAg.TrimOrNull() };
+            Console.WriteLine($" {node.D}");
         }
 
         private static IEnumerable<byte[]> CreateRandoms(int count, Random rnd)
@@ -136,6 +168,33 @@ namespace Experimenter.Core
             if (i.HasLockPrefix)
                 pre.Add(nameof(Assembler.@lock));
             return pre;
+        }
+
+        private static void SortMe(ND tree)
+        {
+            if (tree.S is not { Count: >= 1 } list)
+                return;
+            tree.S = list.OrderBy(l => l.H).ToList();
+            foreach (var sub in list)
+                SortMe(sub);
+        }
+
+        private static ND FindNode(ND tree, string hex, int len)
+        {
+            var current = tree;
+            var parts = BitTool.SplitP(hex, len);
+            foreach (var part in parts)
+            {
+                var list = current.S ??= [];
+                if (list.FirstOrDefault(l => l.H == part) is var fo
+                    && !string.IsNullOrWhiteSpace(fo?.H))
+                {
+                    current = fo;
+                    continue;
+                }
+                list.Add(current = new ND { H = part });
+            }
+            return current;
         }
 
         private static bool IsBad(string? txt)
