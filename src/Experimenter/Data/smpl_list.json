@@ -311,6 +311,12 @@
       "H": "83FB09",
       "M": "CMP",
       "A": "BX,+09"
+    },
+    "Cmp_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "3682BAAF03D9",
+      "M": "CMP",
+      "A": "Byte Ptr SS:[BP+SI+03AF],D9"
     }
   },
   "Cmpsb": {
@@ -828,6 +834,18 @@
       "H": "8A00",
       "M": "MOV",
       "A": "AL,Byte Ptr [BX+SI]"
+    },
+    "Mov_moffs8_AL": {
+      "C": "i8086",
+      "H": "26A2143D",
+      "M": "MOV",
+      "A": "ES:[3D14],AL"
+    },
+    "Mov_moffs16_AX": {
+      "C": "i8086",
+      "H": "2EA30960",
+      "M": "MOV",
+      "A": "CS:[6009],AX"
     }
   },
   "Movsb": {
