@@ -179,7 +179,7 @@ namespace Experimenter.Core
                     CF.SSE => "sse",
                     CF.SSE2 => "sse2",
                     CF.SYSCALL => "syscall",
-                    _ => txt = fet
+                    _ => fet
                     // _ => throw new ArgumentOutOfRangeException($"{fet} ?!")
                 };
                 pre.Add(txt);
