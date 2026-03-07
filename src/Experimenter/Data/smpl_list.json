@@ -1748,6 +1748,14 @@
       "A": "DX,DX"
     }
   },
+  "Vpcmpd": {
+    "EVEX_Vpcmpd_kr_k1_ymm_ymmm256b32_imm8": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62E3",
+      "M": "BOUND",
+      "A": "SP,BX"
+    }
+  },
   "Vpmuludq": {
     "EVEX_Vpmuludq_zmm_k1z_zmm_zmmm512b64": {
       "C": "AVX512F",
