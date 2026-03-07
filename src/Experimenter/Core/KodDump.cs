@@ -36,6 +36,7 @@ namespace Experimenter.Core
             var withFuzz = args.As<bool?>("fuzz") ?? false;
             var withNum = args.As<bool?>("num") ?? false;
             var withCnt = args.As<bool?>("iter") ?? false;
+            var ib = args.As<int?>("len") ?? 1;
             var rnd = new Random();
 
             var slf = Path.Combine(oD, "smpl_list.json");
@@ -47,7 +48,7 @@ namespace Experimenter.Core
             if (withFuzz)
                 arrays = arrays.Concat(FuzzerX.GetAllCandidates(withNum));
             if (withCnt)
-                arrays = arrays.Concat(IterTool.IterArray(1, 0, 99));
+                arrays = arrays.Concat(IterTool.IterArray(ib));
             int[] i = [0];
 
             const int pktSize = 1355;
