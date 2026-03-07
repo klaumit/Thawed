@@ -52,7 +52,7 @@ namespace Experimenter.Core
             int[] i = [0];
 
             const int pktSize = 1355;
-            var maxCpus = Environment.ProcessorCount - 1;
+            var maxCpus = Environment.ProcessorCount / 2;
             Console.WriteLine($"Starting with {maxCpus} CPUs and {pktSize} args per chunk...");
 
             var tasks = arrays.Chunk(pktSize).AsParallel()
