@@ -5,11 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Experimenter.Models;
 using Generator.Extractors;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Generator.Extractors;
-using Generator.Tools;
 using Generator.Tools;
 using Generator.API;
 using Iced.Intel;
@@ -17,11 +12,12 @@ using static Generator.Tools.FileTool;
 using static Generator.Tools.ArgTool;
 using static Generator.Tools.JsonTool;
 using CF = Iced.Intel.CpuidFeature;
-using ND = Experimenter.Models.Node;
-using JD = System.Collections.Generic.SortedDictionary<string, 
-    System.Collections.Generic.IDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
-using CD = System.Collections.Concurrent.ConcurrentDictionary<string,
+using NDC = Experimenter.Models.NodeC;
+using NDS = Experimenter.Models.NodeD;
+using IDC = System.Collections.Concurrent.ConcurrentDictionary<string,
     System.Collections.Concurrent.ConcurrentDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
+using IDS = System.Collections.Generic.SortedDictionary<string, 
+    System.Collections.Generic.SortedDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
 
 namespace Experimenter.Core
 {
@@ -44,8 +40,8 @@ namespace Experimenter.Core
 
             var slf = Path.Combine(oD, "smpl_list.json");
             var stf = Path.Combine(oD, "smpl_tree.json");
-            var dict = FromFile<CD>(slf) ?? new();
-            var tree = FromFile<ND>(stf) ?? new();
+            var dict = FromFile<IDC>(slf) ?? new();
+            var tree = FromFile<NDC>(stf) ?? new();
 
             var arrays = rnd.IterRandom(count);
             if (withFuzz)
@@ -67,13 +63,12 @@ namespace Experimenter.Core
             var res = await Task.WhenAll(tasks);
             var sum = res.Sum();
 
-            SortMe(tree);
-            ToFile(stf, tree, format: true);
-            ToFile(slf, dict, format: true);
+            ToFile(stf, Prepare(tree), format: true);
+            ToFile(slf, Prepare(dict), format: true);
             Console.WriteLine($"Done with {sum} results (in {res.Length} chunks of {pktSize} args)!");
         }
 
-        private static async Task<int> DecodeBinary(byte[][] arrays, int id, CD dict, ND tree, int[] ix)
+        private static async Task<int> DecodeBinary(byte[][] arrays, int id, IDC dict, NDC tree, int[] ix)
         {
             var tId = Environment.CurrentManagedThreadId;
             var tPre = (char)('A' + tId);
@@ -92,14 +87,14 @@ namespace Experimenter.Core
             return i;
         }
 
-        private static bool Handle(Decoded[] d, CD dict, int[] i)
+        private static bool Handle(Decoded[] d, IDC dict, int[] i)
         {
             var item = d.FirstOrDefault(x => x is { O: 0, L: >= 0 });
             if (item == null)
                 return false;
             var hex = item.I;
             var data = Convert.FromHexString(hex);
-            Console.WriteLine($" #{++i[0]:D5} | {hex} ");
+            Console.WriteLine($"    #{++i[0]:D5} | {hex} ");
             var text = item.D.Split(' ', 2);
             var op = text[0].TrimOrNull();
             if (IsBad(op))
@@ -138,7 +133,7 @@ namespace Experimenter.Core
             return new Example { C = feat, H = got, P = pref, M = op, A = ag };
         }
 
-        private static void GoFor(Decoded[] d, ND tree)
+        private static void GoFor(Decoded[] d, NDC tree)
         {
             var first = d.FirstOrDefault(x => x is { O: 0, L: >= 0 });
             if (first == null)
@@ -207,16 +202,31 @@ namespace Experimenter.Core
             return pre;
         }
 
-        private static void SortMe(ND tree)
+        private static IDS Prepare(IDC dict)
         {
-            if (tree.S is not { Count: >= 1 } list)
-                return;
-            tree.S = new(list.OrderBy(l => l.H));
-            foreach (var sub in list)
-                SortMe(sub);
+            var res = new IDS();
+            foreach (var (key, val) in dict)
+                res[key] = PrepareSub(val);
+            return res;
         }
 
-        private static ND FindNode(ND tree, string hex, int len)
+        private static SortedDictionary<Code, Example> PrepareSub(IDictionary<Code, Example> dict)
+        {
+            var res = new SortedDictionary<Code, Example>();
+            foreach (var (key, val) in dict)
+                res[key] = val;
+            return res;
+        }
+
+        private static NDS Prepare(NDC tree)
+        {
+            var res = new NDS { H = tree.H, D = tree.D };
+            if (tree.S is { Count: >= 1 } list)
+                res.S = [..list.OrderBy(l => l.H).Select(Prepare)];
+            return res;
+        }
+
+        private static NDC FindNode(NDC tree, string hex, int len)
         {
             var current = tree;
             var parts = BitTool.SplitP(hex, len);
@@ -229,7 +239,7 @@ namespace Experimenter.Core
                     current = fo;
                     continue;
                 }
-                list.Add(current = new ND { H = part });
+                list.Add(current = new NDC { H = part });
             }
             return current;
         }
