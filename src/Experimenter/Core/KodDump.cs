@@ -131,7 +131,8 @@ namespace Experimenter.Core
         private static Decoder CreateDecoder(byte[] data)
         {
             const ulong ip = 0;
-            const DecoderOptions opt = DecoderOptions.NoInvalidCheck;
+            const DecoderOptions opt = DecoderOptions.NoInvalidCheck |
+                                       DecoderOptions.NoPause;
             return Decoder.Create(16, data, ip, opt);
         }
 
