@@ -182,6 +182,12 @@
       "H": "83E309",
       "M": "AND",
       "A": "BX,+09"
+    },
+    "And_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "3E82A7D8DA98",
+      "M": "AND",
+      "A": "Byte Ptr DS:[BX-2528],98"
     }
   },
   "Bound": {
@@ -1074,6 +1080,12 @@
       "H": "C1FB09",
       "M": "SAR",
       "A": "BX,09"
+    },
+    "Sar_rm16_CL": {
+      "C": "i8086",
+      "H": "26D3B81FFF",
+      "M": "SAR",
+      "A": "Word Ptr ES:[BX+SI-00E1],CL"
     }
   },
   "Sbb": {

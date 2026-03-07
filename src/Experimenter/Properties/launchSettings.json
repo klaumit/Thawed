@@ -10,7 +10,7 @@
     },
     "kg": {
       "commandName": "Project",
-      "commandLineArgs": "-k -o ../../../Data"
+      "commandLineArgs": "-k -o ../../../Data -m count=250"
     }
   }
 }
