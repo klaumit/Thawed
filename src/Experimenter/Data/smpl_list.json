@@ -1700,6 +1700,14 @@
       "A": "DX,DX"
     }
   },
+  "Vcvtsh2si": {
+    "EVEX_Vcvtsh2si_r32_xmmm16_er": {
+      "C": "AVX512_FP16",
+      "H": "62C5",
+      "M": "BOUND",
+      "A": "AX,BP"
+    }
+  },
   "Vcvttpd2uqq": {
     "EVEX_Vcvttpd2uqq_ymm_k1z_ymmm256b64": {
       "C": "AVX512VL|AVX512DQ",
