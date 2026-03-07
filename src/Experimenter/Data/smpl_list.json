@@ -194,6 +194,12 @@
       "H": "3E82A7D8DA98",
       "M": "AND",
       "A": "Byte Ptr DS:[BX-2528],98"
+    },
+    "And_rm16_imm16": {
+      "C": "i8086",
+      "H": "3E81206C8E",
+      "M": "AND",
+      "A": "Word Ptr DS:[BX+SI],8E6C"
     }
   },
   "Bound": {
