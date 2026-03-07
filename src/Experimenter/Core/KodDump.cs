@@ -51,8 +51,8 @@ namespace Experimenter.Core
             int[] i = [0];
             await foreach (var d in extractor.Decode(arrays))
             {
-                GoFor(d, tree);
-                Handle(d, dict, i);
+                if (Handle(d, dict, i))
+                    GoFor(d, tree);
             }
             SortMe(tree);
             ToFile(stf, tree, format: true);
@@ -61,38 +61,50 @@ namespace Experimenter.Core
             Console.WriteLine("Done.");
         }
 
-        private static void Handle(Decoded[] d, SD dict, int[] i)
+        private static bool Handle(Decoded[] d, SD dict, int[] i)
         {
             var item = d.FirstOrDefault(x => x is { O: 0, L: >= 0 });
             if (item == null)
-                return;
+                return false;
             var hex = item.I;
             var data = Convert.FromHexString(hex);
             Console.WriteLine($" #{++i[0]:D5} | {hex} ");
             var text = item.D.Split(' ', 2);
             var op = text[0].TrimOrNull();
             if (IsBad(op))
-                return;
+                return false;
             var ag = text.Length == 2 ? text[1].TrimOrNull() : null;
             var got = item.H;
+            var iN = Parse16(data);
+            var key1 = iN?.Mnemonic.ToString() ?? "_";
+            if (!dict.TryGetValue(key1, out var sub))
+                dict[key1] = sub = new SortedDictionary<Code, Example>();
+            var key2 = iN?.Code ?? default;
+            if (sub.TryGetValue(key2, out _))
+                return false;
+            var iT = iN.ToString();
+            Console.WriteLine($"    --> {iT} ");
+            sub[key2] = CreateEx(op, ag, got, iN);
+            Console.WriteLine();
+            return true;
+        }
+
+        private static Instruction? Parse16(byte[] data)
+        {
             var decoder = CreateDecoder(data);
             var iN = decoder.Decode();
             if (iN.CodeSize != CodeSize.Code16 || iN.Encoding != EncodingKind.Legacy)
                 throw new InvalidOperationException($"{iN} ?!");
             if (iN.IsInvalid)
-                return;
-            var key1 = iN.Mnemonic.ToString();
-            if (!dict.TryGetValue(key1, out var sub))
-                dict[key1] = sub = new SortedDictionary<Code, Example>();
-            var key2 = iN.Code;
-            if (sub.TryGetValue(key2, out _))
-                return;
-            var iT = iN.ToString();
-            Console.WriteLine($"    --> {iT} ");
+                return null;
+            return iN;
+        }
+
+        private static Example CreateEx(string? op, string? ag, string got, Instruction? iN)
+        {
             var feat = string.Join("|", GetFeatures(iN)).TrimOrNull();
             var pref = string.Join("|", GetPrefixes(iN)).TrimOrNull();
-            sub[key2] = new Example { C = feat, H = got, P = pref, M = op, A = ag };
-            Console.WriteLine();
+            return new Example { C = feat, H = got, P = pref, M = op, A = ag };
         }
 
         private static void GoFor(Decoded[] d, ND tree)
@@ -105,11 +117,12 @@ namespace Experimenter.Core
             var gotAg = gotTxt[1].TrimOrNull();
             if (IsBad(gotOp))
                 return;
-            var gotHex = Convert.FromHexString(first.H);
+            var got = first.H;
+            var gotHex = Convert.FromHexString(got);
             var gotBin = gotHex.Format('b', "");
             var node = FindNode(tree, gotBin, 8);
-            node.D = new() { M = gotOp.TrimOrNull(), A = gotAg.TrimOrNull() };
-            Console.WriteLine($" {node.D}");
+            var iN = Parse16(Convert.FromHexString(first.I));
+            node.D = CreateEx(gotOp, gotAg, got, iN);
         }
 
         private static IEnumerable<byte[]> CreateRandoms(int count, Random rnd)
@@ -130,10 +143,10 @@ namespace Experimenter.Core
             return Decoder.Create(16, data, ip, opt);
         }
 
-        private static List<string> GetFeatures(Instruction i)
+        private static List<string> GetFeatures(Instruction? i)
         {
             var pre = new List<string>();
-            foreach (var fet in i.CpuidFeatures)
+            foreach (var fet in i?.CpuidFeatures ?? [])
             {
                 var txt = fet switch
                 {
@@ -156,17 +169,20 @@ namespace Experimenter.Core
             return pre;
         }
 
-        private static List<string> GetPrefixes(Instruction i)
+        private static List<string> GetPrefixes(Instruction? j)
         {
             var pre = new List<string>();
-            if (i.HasRepPrefix)
-                pre.Add(nameof(Assembler.rep));
-            if (i.HasRepePrefix)
-                pre.Add(nameof(Assembler.repe));
-            if (i.HasRepnePrefix)
-                pre.Add(nameof(Assembler.repne));
-            if (i.HasLockPrefix)
-                pre.Add(nameof(Assembler.@lock));
+            if (j is { } i)
+            {
+                if (i.HasRepPrefix)
+                    pre.Add(nameof(Assembler.rep));
+                if (i.HasRepePrefix)
+                    pre.Add(nameof(Assembler.repe));
+                if (i.HasRepnePrefix)
+                    pre.Add(nameof(Assembler.repne));
+                if (i.HasLockPrefix)
+                    pre.Add(nameof(Assembler.@lock));
+            }
             return pre;
         }
 
