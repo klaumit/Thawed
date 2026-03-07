@@ -1930,6 +1930,14 @@
       "A": "SI,CX"
     }
   },
+  "Vpackusdw": {
+    "EVEX_Vpackusdw_zmm_k1z_zmm_zmmm512b32": {
+      "C": "AVX512BW",
+      "H": "62F2",
+      "M": "BOUND",
+      "A": "SI,DX"
+    }
+  },
   "Vpaddusw": {
     "EVEX_Vpaddusw_ymm_k1z_ymm_ymmm256": {
       "C": "AVX512VL|AVX512BW",
