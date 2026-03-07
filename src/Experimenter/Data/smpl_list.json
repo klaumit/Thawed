@@ -1716,6 +1716,14 @@
       "A": "AX,BX"
     }
   },
+  "Vfnmsub213sd": {
+    "EVEX_Vfnmsub213sd_xmm_k1z_xmm_xmmm64_er": {
+      "C": "AVX512F",
+      "H": "62D2",
+      "M": "BOUND",
+      "A": "DX,DX"
+    }
+  },
   "Vpmuludq": {
     "EVEX_Vpmuludq_zmm_k1z_zmm_zmmm512b64": {
       "C": "AVX512F",
