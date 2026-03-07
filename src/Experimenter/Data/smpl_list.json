@@ -1788,12 +1788,28 @@
       "A": "SP,BX"
     }
   },
+  "Vpcmpw": {
+    "EVEX_Vpcmpw_kr_k1_xmm_xmmm128_imm8": {
+      "C": "AVX512VL|AVX512BW",
+      "H": "62C3",
+      "M": "BOUND",
+      "A": "AX,BX"
+    }
+  },
   "Vpdpwssds": {
     "EVEX_Vpdpwssds_ymm_k1z_ymm_ymmm256b32": {
       "C": "AVX512VL|AVX512_VNNI",
       "H": "62F2",
       "M": "BOUND",
       "A": "SI,DX"
+    }
+  },
+  "Vpmovsxdq": {
+    "EVEX_Vpmovsxdq_ymm_k1z_xmmm128": {
+      "C": "AVX512VL|AVX512F",
+      "H": "62E2",
+      "M": "BOUND",
+      "A": "SP,DX"
     }
   },
   "Vpmuludq": {
