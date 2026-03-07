@@ -5,6 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Experimenter.Models;
 using Generator.Extractors;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Generator.Extractors;
+using Generator.Tools;
 using Generator.Tools;
 using Generator.API;
 using Iced.Intel;
@@ -13,8 +18,10 @@ using static Generator.Tools.ArgTool;
 using static Generator.Tools.JsonTool;
 using CF = Iced.Intel.CpuidFeature;
 using ND = Experimenter.Models.Node;
-using SD = System.Collections.Generic.SortedDictionary<string, 
+using JD = System.Collections.Generic.SortedDictionary<string, 
     System.Collections.Generic.IDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
+using CD = System.Collections.Concurrent.ConcurrentDictionary<string,
+    System.Collections.Concurrent.ConcurrentDictionary<Iced.Intel.Code, Experimenter.Models.Example>>;
 
 namespace Experimenter.Core
 {
@@ -30,33 +37,62 @@ namespace Experimenter.Core
 
             var args = ParseDict(o.Misc);
             var count = args.As<int?>("count") ?? 270;
-            var withNum = args.As<bool?>("num") ?? false;
             var withFuzz = args.As<bool?>("fuzz") ?? false;
+            var withNum = args.As<bool?>("num") ?? false;
+            var withCnt = args.As<bool?>("iter") ?? false;
             var rnd = new Random();
 
             var slf = Path.Combine(oD, "smpl_list.json");
             var stf = Path.Combine(oD, "smpl_tree.json");
-            var dict = FromFile<SD>(slf) ?? new();
+            var dict = FromFile<CD>(slf) ?? new();
             var tree = FromFile<ND>(stf) ?? new();
 
-            var extractor = new WinExtractor();
             var arrays = rnd.IterRandom(count);
             if (withFuzz)
                 arrays = arrays.Concat(FuzzerX.GetAllCandidates(withNum));
+            if (withCnt)
+                arrays = arrays.Concat(IterTool.IterArray(1, 0, 99));
             int[] i = [0];
-            await foreach (var d in extractor.Decode(arrays))
-            {
-                if (Handle(d, dict, i))
-                    GoFor(d, tree);
-            }
+
+            const int pktSize = 1355;
+            var maxCpus = Environment.ProcessorCount - 1;
+            Console.WriteLine($"Starting with {maxCpus} CPUs and {pktSize} args per chunk...");
+
+            var tasks = arrays.Chunk(pktSize).AsParallel()
+                .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+                .WithMergeOptions(ParallelMergeOptions.NotBuffered)
+                .WithDegreeOfParallelism(maxCpus)
+                .Select((ba, id) => DecodeBinary(ba, id, dict, tree, i));
+
+            var res = await Task.WhenAll(tasks);
+            var sum = res.Sum();
+
             SortMe(tree);
             ToFile(stf, tree, format: true);
             ToFile(slf, dict, format: true);
-
-            Console.WriteLine("Done.");
+            Console.WriteLine($"Done with {sum} results (in {res.Length} chunks of {pktSize} args)!");
         }
 
-        private static bool Handle(Decoded[] d, SD dict, int[] i)
+        private static async Task<int> DecodeBinary(byte[][] arrays, int id, CD dict, ND tree, int[] ix)
+        {
+            var tId = Environment.CurrentManagedThreadId;
+            var tPre = (char)('A' + tId);
+            if (tPre > 'Z') tPre = (char)('a' + (tPre - 'Z'));
+            var argCnt = arrays.Length;
+            Console.WriteLine($" * p{id:D2} t{tId:D2} '{tPre}' a{argCnt:D5} ");
+
+            var i = 0;
+            var ex = new WinExtractor { ArgCount = argCnt, ArgPrefix = tPre };
+            await foreach (var d in ex.Decode(arrays))
+            {
+                i++;
+                if (Handle(d, dict, ix))
+                    GoFor(d, tree);
+            }
+            return i;
+        }
+
+        private static bool Handle(Decoded[] d, CD dict, int[] i)
         {
             var item = d.FirstOrDefault(x => x is { O: 0, L: >= 0 });
             if (item == null)
@@ -73,7 +109,7 @@ namespace Experimenter.Core
             var iN = Parse16(data);
             var key1 = iN?.Mnemonic.ToString() ?? "_";
             if (!dict.TryGetValue(key1, out var sub))
-                dict[key1] = sub = new SortedDictionary<Code, Example>();
+                dict[key1] = sub = new();
             var key2 = iN?.Code ?? default;
             if (sub.TryGetValue(key2, out _))
                 return false;
