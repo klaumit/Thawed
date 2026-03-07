@@ -1732,6 +1732,14 @@
       "A": "AX,BX"
     }
   },
+  "Vfmaddcsh": {
+    "EVEX_Vfmaddcsh_xmm_k1z_xmm_xmmm32_er": {
+      "C": "AVX512_FP16",
+      "H": "62D6",
+      "M": "BOUND",
+      "A": "DX,SI"
+    }
+  },
   "Vfmsub231sh": {
     "EVEX_Vfmsub231sh_xmm_k1z_xmm_xmmm16_er": {
       "C": "AVX512_FP16",
