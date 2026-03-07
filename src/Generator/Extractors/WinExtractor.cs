@@ -14,7 +14,7 @@ namespace Generator.Extractors
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
         private readonly string _exePath = FindExe();
 
-        public int ArgCount { get; set; } = 1350;
+        public int ArgCount { get; set; } = 1355;
         public char ArgPrefix { get; set; } = 'a';
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
