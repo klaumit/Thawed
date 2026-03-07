@@ -31,6 +31,9 @@ namespace Generator.Tools
             object? obj = null;
             switch (type)
             {
+                case "System.Nullable`1[System.Boolean]":
+                    if (bool.TryParse(value, out var b)) obj = b;
+                    break;
                 case "System.Nullable`1[System.Int32]":
                     if (int.TryParse(value, out var i)) obj = i;
                     break;

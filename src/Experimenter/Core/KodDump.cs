@@ -30,6 +30,7 @@ namespace Experimenter.Core
 
             var args = ParseDict(o.Misc);
             var count = args.As<int?>("count") ?? 270;
+            var withNum = args.As<bool?>("num") ?? false;
             var rnd = new Random();
 
             var slf = Path.Combine(oD, "smpl_list.json");
@@ -39,7 +40,7 @@ namespace Experimenter.Core
 
             var extractor = new WinExtractor();
             var arrays = CreateRandoms(count, rnd);
-            arrays = arrays.Concat(FuzzerX.GetAllCandidates(withNum: false));
+            arrays = arrays.Concat(FuzzerX.GetAllCandidates(withNum));
             int[] i = [0];
             await foreach (var d in extractor.Decode(arrays))
             {
