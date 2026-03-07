@@ -10,9 +10,9 @@ namespace Generator.Common
         public byte[] Bytes { get; }
         public int Size => Bytes.Length;
 
-        public TempFile(string dir, byte[] bytes)
+        public TempFile(string dir, byte[] bytes, char prefix)
         {
-            File = FileTool.WriteNewFile(dir, Bytes = bytes);
+            File = FileTool.WriteNewFile(dir, Bytes = bytes, prefix);
         }
 
         public void Dispose()

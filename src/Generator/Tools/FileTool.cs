@@ -18,17 +18,17 @@ namespace Generator.Tools
             return path;
         }
 
-        public static string WriteNewFile(string tmpDir, byte[] bytes)
+        public static string WriteNewFile(string tmpDir, byte[] bytes, char p)
         {
             var ticks = DateTime.Now.Ticks;
-            var file = Path.Combine(tmpDir, $"a{ticks}.bin");
+            var file = Path.Combine(tmpDir, $"{p}{ticks}.bin");
             File.WriteAllBytes(file, bytes);
             return file;
         }
 
-        public static IEnumerable<TempFile> Wrap(this IEnumerable<byte[]> arrays, string dir)
+        public static IEnumerable<TempFile> Wrap(this IEnumerable<byte[]> arrays, string dir, char p = 'a')
         {
-            return arrays.Select(a => new TempFile(dir, a));
+            return arrays.Select(a => new TempFile(dir, a, p));
         }
 
         public static string GetPath<T>()
