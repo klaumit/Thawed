@@ -77,6 +77,12 @@
       "M": "ADC",
       "A": "AH,09"
     },
+    "Adc_rm16_imm16": {
+      "C": "i8086",
+      "H": "2681966E8829D5",
+      "M": "ADC",
+      "A": "Word Ptr ES:[BP-7792],D529"
+    },
     "Adc_rm8_imm8_82": {
       "C": "i8086",
       "H": "3E82150B",
@@ -1007,6 +1013,12 @@
       "H": "26810BE7FD",
       "M": "OR",
       "A": "Word Ptr ES:[BP+DI],FDE7"
+    },
+    "Or_rm8_imm8_82": {
+      "C": "i8086",
+      "H": "26820F0D",
+      "M": "OR",
+      "A": "Byte Ptr ES:[BX],0D"
     },
     "Or_rm16_imm8": {
       "C": "i8086",
