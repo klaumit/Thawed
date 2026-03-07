@@ -1764,6 +1764,14 @@
       "A": "SP,BX"
     }
   },
+  "Vpdpwssds": {
+    "EVEX_Vpdpwssds_ymm_k1z_ymm_ymmm256b32": {
+      "C": "AVX512VL|AVX512_VNNI",
+      "H": "62F2",
+      "M": "BOUND",
+      "A": "SI,DX"
+    }
+  },
   "Vpmuludq": {
     "EVEX_Vpmuludq_zmm_k1z_zmm_zmmm512b64": {
       "C": "AVX512F",
