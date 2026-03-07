@@ -864,6 +864,12 @@
       "H": "36A0645B",
       "M": "MOV",
       "A": "AL,SS:[5B64]"
+    },
+    "Mov_rm16_imm16": {
+      "C": "i8086",
+      "H": "3EC780198374ED",
+      "M": "MOV",
+      "A": "Word Ptr DS:[BX+SI-7CE7],ED74"
     }
   },
   "Movsb": {
