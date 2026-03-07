@@ -39,7 +39,7 @@ namespace Experimenter.Core
 
             var extractor = new WinExtractor();
             var arrays = CreateRandoms(count, rnd);
-            arrays = arrays.Concat(FuzzerX.GetAllCandidates());
+            arrays = arrays.Concat(FuzzerX.GetAllCandidates(withNum: false));
             int[] i = [0];
             await foreach (var d in extractor.Decode(arrays))
             {
