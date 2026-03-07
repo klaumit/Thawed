@@ -14,14 +14,14 @@ namespace Generator.Extractors
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
         private readonly string _exePath = FindExe();
 
-        public int ArgCount { get; set; } = 380;
+        public int ArgCount { get; set; } = 1350;
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir).Chunk(ArgCount))
             {
                 List<string> dArgs = [_exePath];
-                Array.ForEach(batch, b => dArgs.Add(b.File));
+                Array.ForEach(batch, b => dArgs.Add(Path.GetRelativePath(_tmpDir, b.File)));
 
                 const string cmd = "wine";
                 var dumpCmd = await Cli.Wrap(cmd)
