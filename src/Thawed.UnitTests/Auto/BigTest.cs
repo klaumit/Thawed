@@ -20214,7 +20214,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10011111", "LAHF", "")]
-        [InlineData("10011111", "LAHF", "")]
         public void CheckLahf(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -20225,7 +20224,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10011110", "SAHF", "")]
         [InlineData("10011110", "SAHF", "")]
         public void CheckSahf(string bin, string op, string arg)
         {
@@ -20828,7 +20826,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("11001110", "INTO", "")]
-        [InlineData("11001110", "INTO", "")]
         public void CheckInto(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -20839,7 +20836,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>RETI</remarks>
         /// </summary>
         [Theory]
-        [InlineData("11001111", "IRET", "")]
         [InlineData("11001111", "IRET", "")]
         public void CheckIret(string bin, string op, string arg)
         {
@@ -22359,7 +22355,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("11000011", "RET", "")]
-        [InlineData("11000011", "RET", "")]
         [InlineData("11000010 00000000 00010001", "RET", "1100")]
         [InlineData("11000010 00000001 00010001", "RET", "1101")]
         [InlineData("11000010 00000001 00110110", "RET", "3601")]
@@ -22643,7 +22638,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>RET</remarks>
         /// </summary>
         [Theory]
-        [InlineData("11001011", "RETF", "")]
         [InlineData("11001011", "RETF", "")]
         [InlineData("11001010 00000000 00010001", "RETF", "1100")]
         [InlineData("11001010 00000000 10010011", "RETF", "9300")]
@@ -32222,7 +32216,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("11010111", "XLAT", "")]
-        [InlineData("11010111", "XLAT", "")]
         public void CheckXlat(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32237,7 +32230,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("00110111", "AAA", "")]
-        [InlineData("00110111", "AAA", "")]
         public void CheckAaa(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32248,7 +32240,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CVTDB</remarks>
         /// </summary>
         [Theory]
-        [InlineData("11010101 00001010", "AAD", "")]
         [InlineData("11010101 00001010", "AAD", "")]
         public void CheckAad(string bin, string op, string arg)
         {
@@ -32261,7 +32252,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("11010100 00001010", "AAM", "")]
-        [InlineData("11010100 00001010", "AAM", "")]
         public void CheckAam(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32272,7 +32262,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>ADJBS</remarks>
         /// </summary>
         [Theory]
-        [InlineData("00111111", "AAS", "")]
         [InlineData("00111111", "AAS", "")]
         public void CheckAas(string bin, string op, string arg)
         {
@@ -32285,7 +32274,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10011000", "CBW", "")]
-        [InlineData("10011000", "CBW", "")]
         public void CheckCbw(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32296,7 +32284,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CVTWL</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10011001", "CWD", "")]
         [InlineData("10011001", "CWD", "")]
         public void CheckCwd(string bin, string op, string arg)
         {
@@ -32309,7 +32296,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("00100111", "DAA", "")]
-        [InlineData("00100111", "DAA", "")]
         public void CheckDaa(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32320,7 +32306,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>ADJ4S</remarks>
         /// </summary>
         [Theory]
-        [InlineData("00101111", "DAS", "")]
         [InlineData("00101111", "DAS", "")]
         public void CheckDas(string bin, string op, string arg)
         {
@@ -32638,7 +32623,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("11001001", "LEAVE", "")]
-        [InlineData("11001001", "LEAVE", "")]
         public void CheckLeave(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32649,7 +32633,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>BUSLOCK</remarks>
         /// </summary>
         [Theory]
-        [InlineData("11110000", "LOCK", "")]
         [InlineData("11110000", "LOCK", "")]
         public void CheckLock(string bin, string op, string arg)
         {
@@ -32662,7 +32645,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10010000", "NOP", "")]
-        [InlineData("10010000", "NOP", "")]
         public void CheckNop(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -32673,7 +32655,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>POLL</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10011011", "WAIT", "")]
         [InlineData("10011011", "WAIT", "")]
         public void CheckWait(string bin, string op, string arg)
         {
@@ -33213,7 +33194,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("01101100", "INSB", "")]
-        [InlineData("01101100", "INSB", "")]
         public void CheckInsb(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -33224,7 +33204,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>INMW</remarks>
         /// </summary>
         [Theory]
-        [InlineData("01101101", "INSW", "")]
         [InlineData("01101101", "INSW", "")]
         public void CheckInsw(string bin, string op, string arg)
         {
@@ -33761,7 +33740,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("01101110", "OUTSB", "")]
-        [InlineData("01101110", "OUTSB", "")]
         public void CheckOutsb(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -33772,7 +33750,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>OUTM</remarks>
         /// </summary>
         [Theory]
-        [InlineData("01101111", "OUTSW", "")]
         [InlineData("01101111", "OUTSW", "")]
         public void CheckOutsw(string bin, string op, string arg)
         {
@@ -35784,7 +35761,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("01100001", "POPA", "")]
-        [InlineData("01100001", "POPA", "")]
         public void CheckPopa(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -35795,7 +35771,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>POP</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10011101", "POPF", "")]
         [InlineData("10011101", "POPF", "")]
         public void CheckPopf(string bin, string op, string arg)
         {
@@ -36398,7 +36373,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("01100000", "PUSHA", "")]
-        [InlineData("01100000", "PUSHA", "")]
         public void CheckPusha(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -36409,7 +36383,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>PUSH</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10011100", "PUSHF", "")]
         [InlineData("10011100", "PUSHF", "")]
         public void CheckPushf(string bin, string op, string arg)
         {
@@ -36424,7 +36397,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CMPBKB</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10100110", "CMPSB", "")]
         [InlineData("10100110", "CMPSB", "")]
         [InlineData("00100110 10100110", "CMPSB", "ES:")]
         [InlineData("00101110 10100110", "CMPSB", "CS:")]
@@ -36456,7 +36428,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10101100", "LODSB", "")]
-        [InlineData("10101100", "LODSB", "")]
         [InlineData("00100110 10101100", "LODSB", "ES:")]
         [InlineData("00101110 10101100", "LODSB", "CS:")]
         [InlineData("00110110 10101100", "LODSB", "SS:")]
@@ -36471,7 +36442,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>LDMW</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10101101", "LODSW", "")]
         [InlineData("10101101", "LODSW", "")]
         [InlineData("00100110 10101101", "LODSW", "ES:")]
         [InlineData("00101110 10101101", "LODSW", "CS:")]
@@ -36488,7 +36458,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10100100", "MOVSB", "")]
-        [InlineData("10100100", "MOVSB", "")]
         [InlineData("00100110 10100100", "MOVSB", "ES:")]
         [InlineData("00101110 10100100", "MOVSB", "CS:")]
         [InlineData("00110110 10100100", "MOVSB", "SS:")]
@@ -36503,7 +36472,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>MOVBKW</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10100101", "MOVSW", "")]
         [InlineData("10100101", "MOVSW", "")]
         [InlineData("00100110 10100101", "MOVSW", "ES:")]
         [InlineData("00101110 10100101", "MOVSW", "CS:")]
@@ -36551,7 +36519,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10101110", "SCASB", "")]
-        [InlineData("10101110", "SCASB", "")]
         [InlineData("00100110 10101110", "SCASB", "ES:")]
         [InlineData("00101110 10101110", "SCASB", "CS:")]
         [InlineData("00110110 10101110", "SCASB", "SS:")]
@@ -36566,7 +36533,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CMPMW</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10101111", "SCASW", "")]
         [InlineData("10101111", "SCASW", "")]
         [InlineData("00100110 10101111", "SCASW", "ES:")]
         [InlineData("00101110 10101111", "SCASW", "CS:")]
@@ -36583,7 +36549,6 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10101010", "STOSB", "")]
-        [InlineData("10101010", "STOSB", "")]
         [InlineData("00100110 10101010", "STOSB", "ES:")]
         [InlineData("00101110 10101010", "STOSB", "CS:")]
         [InlineData("00110110 10101010", "STOSB", "SS:")]
@@ -36598,7 +36563,6 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>STMW</remarks>
         /// </summary>
         [Theory]
-        [InlineData("10101011", "STOSW", "")]
         [InlineData("10101011", "STOSW", "")]
         [InlineData("00100110 10101011", "STOSW", "ES:")]
         [InlineData("00101110 10101011", "STOSW", "CS:")]

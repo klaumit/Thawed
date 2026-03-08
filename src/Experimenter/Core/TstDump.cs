@@ -89,10 +89,15 @@ namespace Experimenter.Core
                     await w.WriteLineAsync("[Theory]");
                     if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
                     {
+                        var doubled = new SortedSet<string>();
                         foreach (var (oh, oo, oa) in opBl.OrderBy(x => x.Hex.Length)
                                      .ThenBy(x => x.Hex))
                         {
-                            await w.WriteLineAsync($"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]");
+                            var line = $"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]";
+                            if (doubled.Contains(line))
+                                continue;
+                            await w.WriteLineAsync(line);
+                            doubled.Add(line);
                         }
                     }
                     await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
