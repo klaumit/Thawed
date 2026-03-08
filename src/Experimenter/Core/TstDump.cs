@@ -47,11 +47,12 @@ namespace Experimenter.Core
             }*/
 
             var opG = ReadOpGroups(inDir).GroupBy(x => x.Group)
-                .ToDictionary(k => k.Key, v => v.ToArray());
+                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
             var opN = ReadOpNames(inDir)
                 .ToDictionary(k => k.Op, v => v.Desc);
             var opB = ReadBinResults(inDir).Concat(ReadHexResults(inDir)
-                    .Select(x => new OpBin(HexToBin(x.Hex), x.Op))).GroupBy(x => x.Op)
+                    .Select(x => new OpBin(HexToBin(x.Hex), x.Op)))
+                .Select(ToMyInstr).GroupBy(x => x.Op)
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
 
             var w = new CodeWriter();
@@ -62,7 +63,7 @@ namespace Experimenter.Core
             await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
             await w.WriteLineAsync("{");
             var first1 = true;
-            foreach (var (groupName, groupList) in opG)
+            foreach (var (groupName, groupList) in opG.OrderBy(x => x.Key))
             {
                 if (first1)
                     first1 = false;
@@ -71,7 +72,7 @@ namespace Experimenter.Core
                 await w.WriteLineAsync($"public class {groupName}Test");
                 await w.WriteLineAsync("{");
                 var first2 = true;
-                foreach (var g in groupList)
+                foreach (var g in groupList.OrderBy(x => x.Op))
                 {
                     if (first2)
                         first2 = false;
@@ -84,12 +85,15 @@ namespace Experimenter.Core
                     await w.WriteLineAsync($"/// {opLong}");
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
-                    await w.WriteLineAsync("[InlineData(' ')]");
-
-                    if (opB.TryGetValue(opCode, out var ox1))
-                        Console.WriteLine("b | " + JsonTool.ToJson(ox1));
-
-                    await w.WriteLineAsync($"public void Check{opTitle}(char x)");
+                    if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
+                    {
+                        foreach (var (oh, oo, oa) in opBl.OrderBy(x => x.Hex.Length)
+                                     .ThenBy(x => x.Hex))
+                        {
+                            await w.WriteLineAsync($"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]");
+                        }
+                    }
+                    await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
                     await w.WriteLineAsync("{");
                     await w.WriteLineAsync("}");
                 }
@@ -102,10 +106,16 @@ namespace Experimenter.Core
             Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
         }
 
+        private static MyInstrR ToMyInstr(OpBin x)
+        {
+            var pt = x.Op.Split(' ', 2);
+            return new MyInstrR(x.Bin, pt[0].Trim(), pt.Length == 2 ? pt[1].Trim() : "");
+        }
+
         private static string HexToBin(string hex)
         {
             var bytes = Convert.FromHexString(hex);
-            return bytes.Format('b', "");
+            return bytes.Format('b', " ");
         }
 
         private const SearchOption So = SearchOption.AllDirectories;
@@ -163,8 +173,7 @@ namespace Experimenter.Core
             var dict = JsonTool.FromFile<SortedDictionary<string, string>>(file);
             foreach (var (key, val) in dict ?? [])
             {
-                if (val.Contains("CMPS"))
-                    yield return new OpHex(key, val);
+                yield return new OpHex(key, val);
             }
         }
 
@@ -174,8 +183,7 @@ namespace Experimenter.Core
             var dict = JsonTool.FromFile<SortedDictionary<string, string>>(file);
             foreach (var (key, val) in dict ?? [])
             {
-                if (val.Contains("CMPS"))
-                    yield return new OpBin(key, val);
+                yield return new OpBin(key, val);
             }
         }
 
