@@ -38,8 +38,7 @@ namespace Experimenter.Core
 
         private static async Task GenerateTest(string inDir, string outDir)
         {
-            /*{                
-                Console.WriteLine(JsonTool.ToJson(ReadWinCache(root)));
+            /*{                              
                 Console.WriteLine(JsonTool.ToJson(ReadWinRes(root).Distinct()));
                 Console.WriteLine(JsonTool.ToJson(ReadSmplList(root)));
             }*/
@@ -49,10 +48,18 @@ namespace Experimenter.Core
             var opN = ReadOpNames(inDir)
                 .ToDictionary(k => k.Op, v => v.Desc);
             var opB = ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
-                .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).GroupBy(x => x.Op)
+                .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir)))
+                .Concat(HexToBin(ReadWinCache(inDir))).GroupBy(x => x.Op)
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
             var opI = ReadIntelInstr(inDir).GroupBy(x => x.Label ?? "")
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
+            
+            
+            
+            
+            
+            
+            
             
             var w = new CodeWriter();
             await w.WriteLineAsync("using Xunit;");

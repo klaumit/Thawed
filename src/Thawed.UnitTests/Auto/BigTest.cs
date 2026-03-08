@@ -2926,6 +2926,10 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10100110", "CMPSB", "")]
+        [InlineData("00100110 10100110", "CMPSB", "ES:")]
+        [InlineData("00101110 10100110", "CMPSB", "CS:")]
+        [InlineData("00110110 10100110", "CMPSB", "SS:")]
+        [InlineData("00111110 10100110", "CMPSB", "DS:")]
         public void CheckCmpsb(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -2937,6 +2941,10 @@ namespace Thawed.UnitTests.Auto
         /// </summary>
         [Theory]
         [InlineData("10100111", "CMPSW", "")]
+        [InlineData("00100110 10100111", "CMPSW", "ES:")]
+        [InlineData("00101110 10100111", "CMPSW", "CS:")]
+        [InlineData("00110110 10100111", "CMPSW", "SS:")]
+        [InlineData("00111110 10100111", "CMPSW", "DS:")]
         public void CheckCmpsw(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
