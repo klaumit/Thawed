@@ -28,6 +28,9 @@ namespace Experimenter.Core
                 return;
             }
 
+            Console.WriteLine($"Input  => {iD}");
+            Console.WriteLine($"Output => {oD}");
+
             // TODO
 
             Console.WriteLine("Done.");
