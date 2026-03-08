@@ -22,6 +22,12 @@ namespace Experimenter.Core
                 return;
             }
 
+            if (CreateOrGetDir(o.InputDir) is not { } iD)
+            {
+                await Console.Error.WriteLineAsync("No input dir given!");
+                return;
+            }
+
             // TODO
 
             Console.WriteLine("Done.");
