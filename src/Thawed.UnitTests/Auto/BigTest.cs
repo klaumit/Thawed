@@ -8,6 +8,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Add With Carry
+        /// <remarks>ADDC</remarks>
         /// </summary>
         [Theory]
         [InlineData("00010000 00000000", "ADC", "Byte Ptr [BX+SI],AL")]
@@ -83,6 +84,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Add
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00000000 00000000", "ADD", "Byte Ptr [BX+SI],AL")]
@@ -192,6 +194,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Compare Two Operands
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00111000 00000000", "CMP", "Byte Ptr [BX+SI],AL")]
@@ -285,6 +288,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Decrement by 1
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("01001000", "DEC", "AX")]
@@ -312,6 +316,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Unsigned Divide
+        /// <remarks>DIVU</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110110 11110100", "DIV", "AH")]
@@ -333,6 +338,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Signed Divide
+        /// <remarks>DIV</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110110 11111100", "IDIV", "AH")]
@@ -352,6 +358,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Signed Multiply
+        /// <remarks>MUL</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110110 11101100", "IMUL", "AH")]
@@ -400,6 +407,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Increment by 1
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("01000000", "INC", "AX")]
@@ -433,6 +441,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Unsigned Multiply
+        /// <remarks>MULU</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110110 11100100", "MUL", "AH")]
@@ -453,6 +462,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Two's Complement Negation
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110110 11011100", "NEG", "AH")]
@@ -472,6 +482,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Integer Subtraction With Borrow
+        /// <remarks>SUBC</remarks>
         /// </summary>
         [Theory]
         [InlineData("00011000 00000000", "SBB", "Byte Ptr [BX+SI],AL")]
@@ -560,6 +571,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Subtract
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00101000 00000000", "SUB", "Byte Ptr [BX+SI],AL")]
@@ -665,6 +677,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Logical AND
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00100000 00000001", "AND", "Byte Ptr [BX+DI],AL")]
@@ -758,6 +771,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// One's Complement Negation
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110110 11010100", "NOT", "AH")]
@@ -776,6 +790,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Logical Inclusive OR
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00001000 00000000", "OR", "Byte Ptr [BX+SI],AL")]
@@ -875,6 +890,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Logical Compare
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("10000100 00000000", "TEST", "Byte Ptr [BX+SI],AL")]
@@ -945,6 +961,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Logical Exclusive OR
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00110000 00000000", "XOR", "Byte Ptr [BX+SI],AL")]
@@ -1043,6 +1060,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Jump If Above
+        /// <remarks>BH</remarks>
         /// </summary>
         [Theory]
         [InlineData("01110111 00000000", "JA", "0002")]
@@ -1070,6 +1088,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Below or Equal
+        /// <remarks>BNH</remarks>
         /// </summary>
         [Theory]
         [InlineData("01110110 00000000", "JBE", "0002")]
@@ -1107,6 +1126,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If CX Register is Zero
+        /// <remarks>BCWZ</remarks>
         /// </summary>
         [Theory]
         [InlineData("11100011 00000000", "JCXZ", "0002")]
@@ -1132,6 +1152,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Greater
+        /// <remarks>BGT</remarks>
         /// </summary>
         [Theory]
         [InlineData("01111111 00000000", "JG", "0002")]
@@ -1159,6 +1180,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Greater or Equal
+        /// <remarks>BGE</remarks>
         /// </summary>
         [Theory]
         [InlineData("01111101 00000000", "JGE", "0002")]
@@ -1181,6 +1203,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Less
+        /// <remarks>BLT</remarks>
         /// </summary>
         [Theory]
         [InlineData("01111100 00000000", "JL", "0002")]
@@ -1207,6 +1230,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Less or Equal
+        /// <remarks>BLE</remarks>
         /// </summary>
         [Theory]
         [InlineData("01111110 00000000", "JLE", "0002")]
@@ -1241,6 +1265,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Not Overflow
+        /// <remarks>BNV</remarks>
         /// </summary>
         [Theory]
         [InlineData("01110001 00000000", "JNO", "0002")]
@@ -1276,6 +1301,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Not Sign
+        /// <remarks>BP</remarks>
         /// </summary>
         [Theory]
         [InlineData("01111001 00000000", "JNS", "0002")]
@@ -1298,6 +1324,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Not Zero
+        /// <remarks>BNE, BNZ, JNE</remarks>
         /// </summary>
         [Theory]
         [InlineData("01110101 00000001", "JNZ", "0003")]
@@ -1321,6 +1348,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Overflow
+        /// <remarks>BV</remarks>
         /// </summary>
         [Theory]
         [InlineData("01110000 00000000", "JO", "0002")]
@@ -1350,6 +1378,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Sign
+        /// <remarks>BN</remarks>
         /// </summary>
         [Theory]
         [InlineData("01111000 00000000", "JS", "0002")]
@@ -1379,6 +1408,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Jump If Zero
+        /// <remarks>BE, BZ, JE</remarks>
         /// </summary>
         [Theory]
         [InlineData("01110100 00000000", "JZ", "0002")]
@@ -1407,6 +1437,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Clear Carry Flag
+        /// <remarks>CLR1 CY</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111000", "CLC", "")]
@@ -1417,6 +1448,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Clear Direction Flag
+        /// <remarks>CLR1 DIR</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111100", "CLD", "")]
@@ -1427,6 +1459,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Clear Interrupt Flag
+        /// <remarks>DI</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111010", "CLI", "")]
@@ -1437,6 +1470,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Complement Carry Flag
+        /// <remarks>NOT1 CY</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110101", "CMC", "")]
@@ -1447,6 +1481,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Load Status Flags Into AH Register
+        /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011111", "LAHF", "")]
@@ -1457,6 +1492,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Store AH Into Flags
+        /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011110", "SAHF", "")]
@@ -1467,6 +1503,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Set Carry Flag
+        /// <remarks>SET1 CY</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111001", "STC", "")]
@@ -1477,6 +1514,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Set Direction Flag
+        /// <remarks>SET1 DIR</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111101", "STD", "")]
@@ -1487,6 +1525,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Set Interrupt Flag
+        /// <remarks>EI</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111011", "STI", "")]
@@ -1500,6 +1539,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Check Index Against Bounds
+        /// <remarks>CHKIND</remarks>
         /// </summary>
         [Theory]
         [InlineData("01100010 00000000", "BOUND", "AX,Word Ptr [BX+SI]")]
@@ -1520,6 +1560,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Halt
+        /// <remarks>HALT</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110100", "HLT", "")]
@@ -1530,6 +1571,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Call to Interrupt
+        /// <remarks>BRK</remarks>
         /// </summary>
         [Theory]
         [InlineData("11001101 00000000", "INT", "00")]
@@ -1557,6 +1599,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Call to Interrupt
+        /// <remarks>BRKV</remarks>
         /// </summary>
         [Theory]
         [InlineData("11001110", "INTO", "")]
@@ -1567,6 +1610,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Interrupt Return
+        /// <remarks>RETI</remarks>
         /// </summary>
         [Theory]
         [InlineData("11001111", "IRET", "")]
@@ -1580,6 +1624,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Call Procedure
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11111111 00010011", "CALL", "[BP+DI]")]
@@ -1626,6 +1671,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Unconditional Jump
+        /// <remarks>BR</remarks>
         /// </summary>
         [Theory]
         [InlineData("11101011 00000000", "JMP", "0002")]
@@ -1674,6 +1720,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Return From Procedure
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11000011", "RET", "")]
@@ -1696,6 +1743,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Return From Far Procedure
+        /// <remarks>RET</remarks>
         /// </summary>
         [Theory]
         [InlineData("11001011", "RETF", "")]
@@ -1721,6 +1769,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Loop According to ECX Counter
+        /// <remarks>DBNZ</remarks>
         /// </summary>
         [Theory]
         [InlineData("11100010 00000000", "LOOP", "0002")]
@@ -1768,6 +1817,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Load Far Pointer
+        /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
         [InlineData("11000101 00000000", "LDS", "AX,DWord Ptr [BX+SI]")]
@@ -1791,6 +1841,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Load Effective Address
+        /// <remarks>LDEA</remarks>
         /// </summary>
         [Theory]
         [InlineData("10001101 00000000", "LEA", "AX,[BX+SI]")]
@@ -1817,6 +1868,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Load Far Pointer
+        /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
         [InlineData("11000100 00000000", "LES", "AX,DWord Ptr [BX+SI]")]
@@ -1842,6 +1894,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Move
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("10001000 00000000", "MOV", "Byte Ptr [BX+SI],AL")]
@@ -2168,6 +2221,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Exchange Register/Memory
+        /// <remarks>XCH</remarks>
         /// </summary>
         [Theory]
         [InlineData("10010001", "XCHG", "AX,CX")]
@@ -2216,6 +2270,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Table Lookup Translation
+        /// <remarks>TRANS</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010111", "XLAT", "")]
@@ -2229,6 +2284,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// ASCII Adjust After Addition
+        /// <remarks>ADJBA</remarks>
         /// </summary>
         [Theory]
         [InlineData("00110111", "AAA", "")]
@@ -2239,6 +2295,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// ASCII Adjust AX Before Division
+        /// <remarks>CVTDB</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010101 00001010", "AAD", "")]
@@ -2249,6 +2306,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// ASCII Adjust AX After Multiply
+        /// <remarks>CVTBD</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010100 00001010", "AAM", "")]
@@ -2259,6 +2317,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// ASCII Adjust AL After Subtraction
+        /// <remarks>ADJBS</remarks>
         /// </summary>
         [Theory]
         [InlineData("00111111", "AAS", "")]
@@ -2269,6 +2328,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Convert Byte to Word
+        /// <remarks>CVTBW</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011000", "CBW", "")]
@@ -2279,6 +2339,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Convert Word to Doubleword
+        /// <remarks>CVTWL</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011001", "CWD", "")]
@@ -2289,6 +2350,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Decimal Adjust AL After Addition
+        /// <remarks>ADJ4A</remarks>
         /// </summary>
         [Theory]
         [InlineData("00100111", "DAA", "")]
@@ -2299,6 +2361,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Decimal Adjust AL After Subtraction
+        /// <remarks>ADJ4S</remarks>
         /// </summary>
         [Theory]
         [InlineData("00101111", "DAS", "")]
@@ -2312,6 +2375,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Make Stack Frame for Params
+        /// <remarks>PREPARE</remarks>
         /// </summary>
         [Theory]
         [InlineData("11001000 00000000 00100101 01110110", "ENTER", "2500,76")]
@@ -2338,6 +2402,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// High Level Procedure Exit
+        /// <remarks>DISPOSE</remarks>
         /// </summary>
         [Theory]
         [InlineData("11001001", "LEAVE", "")]
@@ -2348,6 +2413,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Assert LOCK Signal Prefix
+        /// <remarks>BUSLOCK</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110000", "LOCK", "")]
@@ -2358,6 +2424,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// No Operation
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("10010000", "NOP", "")]
@@ -2368,6 +2435,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Wait
+        /// <remarks>POLL</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011011", "WAIT", "")]
@@ -2381,6 +2449,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Input From Port
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11101100", "IN", "AL,DX")]
@@ -2412,6 +2481,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Input from Port to String
+        /// <remarks>INMB</remarks>
         /// </summary>
         [Theory]
         [InlineData("01101100", "INSB", "")]
@@ -2422,6 +2492,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Input from Port to String
+        /// <remarks>INMW</remarks>
         /// </summary>
         [Theory]
         [InlineData("01101101", "INSW", "")]
@@ -2432,6 +2503,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Output to Port
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11101110", "OUT", "DX,AL")]
@@ -2464,6 +2536,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Output String to Port
+        /// <remarks>OUTM</remarks>
         /// </summary>
         [Theory]
         [InlineData("01101110", "OUTSB", "")]
@@ -2474,6 +2547,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Output String to Port
+        /// <remarks>OUTM</remarks>
         /// </summary>
         [Theory]
         [InlineData("01101111", "OUTSW", "")]
@@ -2487,6 +2561,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Code Segment Register
+        /// <remarks>PS</remarks>
         /// </summary>
         [Theory]
         public void CheckCs(string bin, string op, string arg)
@@ -2496,6 +2571,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Data Segment Register
+        /// <remarks>DS0</remarks>
         /// </summary>
         [Theory]
         public void CheckDs(string bin, string op, string arg)
@@ -2505,6 +2581,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Extra Segment Register
+        /// <remarks>DS1</remarks>
         /// </summary>
         [Theory]
         public void CheckEs(string bin, string op, string arg)
@@ -2514,6 +2591,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Stack Segment Register
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         public void CheckSs(string bin, string op, string arg)
@@ -2526,6 +2604,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Rotate Through Carry Left
+        /// <remarks>ROLC</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010011 11010111", "RCL", "DI,CL")]
@@ -2549,6 +2628,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Rotate Through Carry Right
+        /// <remarks>RORC</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010000 11011111", "RCR", "BH,1")]
@@ -2577,6 +2657,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Rotate Left
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010000 00000000", "ROL", "Byte Ptr [BX+SI],1")]
@@ -2615,6 +2696,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Rotate Right
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010000 00001010", "ROR", "Byte Ptr [BP+SI],1")]
@@ -2639,6 +2721,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Shift Arithmetic Right
+        /// <remarks>SHRA</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010010 00111001", "SAR", "Byte Ptr [BX+DI],CL")]
@@ -2662,6 +2745,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Shift Logical Left
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11000000 11100000 00001000", "SHL", "AL,08")]
@@ -2684,6 +2768,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Shift Logical Right
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("11010010 11101101", "SHR", "CH,CL")]
@@ -2716,6 +2801,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Pop Value From the Stack
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00000111", "POP", "ES")]
@@ -2748,6 +2834,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Pop All General Registers
+        /// <remarks>POP</remarks>
         /// </summary>
         [Theory]
         [InlineData("01100001", "POPA", "")]
@@ -2758,6 +2845,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Pop Stack Into EFLAGS
+        /// <remarks>POP</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011101", "POPF", "")]
@@ -2768,6 +2856,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Push Word Onto the Stack
+        /// <remarks>-</remarks>
         /// </summary>
         [Theory]
         [InlineData("00000110", "PUSH", "ES")]
@@ -2808,6 +2897,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Push All General Registers
+        /// <remarks>PUSH</remarks>
         /// </summary>
         [Theory]
         [InlineData("01100000", "PUSHA", "")]
@@ -2818,6 +2908,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Push EFLAGS Onto Stack
+        /// <remarks>PUSH</remarks>
         /// </summary>
         [Theory]
         [InlineData("10011100", "PUSHF", "")]
@@ -2831,6 +2922,7 @@ namespace Thawed.UnitTests.Auto
     {
         /// <summary>
         /// Compare String Operands
+        /// <remarks>CMPBKB</remarks>
         /// </summary>
         [Theory]
         [InlineData("10100110", "CMPSB", "")]
@@ -2841,6 +2933,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Compare String Operands
+        /// <remarks>CMPBKW</remarks>
         /// </summary>
         [Theory]
         [InlineData("10100111", "CMPSW", "")]
@@ -2851,6 +2944,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Load String
+        /// <remarks>LDMB</remarks>
         /// </summary>
         [Theory]
         [InlineData("10101100", "LODSB", "")]
@@ -2862,6 +2956,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Load String
+        /// <remarks>LDMW</remarks>
         /// </summary>
         [Theory]
         [InlineData("10101101", "LODSW", "")]
@@ -2872,6 +2967,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Move Data From String to String
+        /// <remarks>MOVBKB</remarks>
         /// </summary>
         [Theory]
         [InlineData("10100100", "MOVSB", "")]
@@ -2882,6 +2978,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Move Data From String to String
+        /// <remarks>MOVBKW</remarks>
         /// </summary>
         [Theory]
         [InlineData("10100101", "MOVSW", "")]
@@ -2901,6 +2998,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Repeat String Operation Prefix
+        /// <remarks>REP, REPZ</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110011", "REPE", "")]
@@ -2911,6 +3009,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Repeat String Operation Prefix
+        /// <remarks>REPNZ</remarks>
         /// </summary>
         [Theory]
         [InlineData("11110010", "REPNE", "")]
@@ -2921,6 +3020,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Scan String
+        /// <remarks>CMPMB</remarks>
         /// </summary>
         [Theory]
         [InlineData("10101110", "SCASB", "")]
@@ -2931,6 +3031,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Scan String
+        /// <remarks>CMPMW</remarks>
         /// </summary>
         [Theory]
         [InlineData("10101111", "SCASW", "")]
@@ -2941,6 +3042,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Store String
+        /// <remarks>STMB</remarks>
         /// </summary>
         [Theory]
         [InlineData("10101010", "STOSB", "")]
@@ -2951,6 +3053,7 @@ namespace Thawed.UnitTests.Auto
         
         /// <summary>
         /// Store String
+        /// <remarks>STMW</remarks>
         /// </summary>
         [Theory]
         [InlineData("10101011", "STOSW", "")]

@@ -39,7 +39,6 @@ namespace Experimenter.Core
         private static async Task GenerateTest(string inDir, string outDir)
         {
             /*{                
-                Console.WriteLine(JsonTool.ToJson(ReadIntelInstr(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadWinCache(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadWinRes(root).Distinct()));
                 Console.WriteLine(JsonTool.ToJson(ReadSmplList(root)));
@@ -52,13 +51,8 @@ namespace Experimenter.Core
             var opB = ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
                 .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).GroupBy(x => x.Op)
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
-
-            
-            
-            
-            
-
-            
+            var opI = ReadIntelInstr(inDir).GroupBy(x => x.Label ?? "")
+                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
             
             var w = new CodeWriter();
             await w.WriteLineAsync("using Xunit;");
@@ -88,6 +82,13 @@ namespace Experimenter.Core
                     var opLong = opN[opCode];
                     await w.WriteLineAsync("/// <summary>");
                     await w.WriteLineAsync($"/// {opLong}");
+                    if (opI.TryGetValue(opCode, out var opIl) && opIl.Length >= 1)
+                    {
+                        var ali = opIl.Select(x => x.Aliases.TrimOrNull())
+                            .Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray();
+                        var rma = string.Join(" ", ali).Replace(" | ", ", ");
+                        await w.WriteLineAsync($"/// <remarks>{rma}</remarks>");
+                    }
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
                     if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
@@ -232,8 +233,7 @@ namespace Experimenter.Core
             {
                 if (m.Format is not { } fmt)
                     continue;
-                if (fmt.Contains("CMPS"))
-                    yield return m;
+                yield return m;
             }
         }
 
