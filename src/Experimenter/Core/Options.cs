@@ -12,6 +12,9 @@ namespace Experimenter.Core
 		[Option('k', "grp", HelpText = "Group binary codes.")]
 		public bool TryGroup { get; set; }
 
+		[Option('t', "tst", HelpText = "Write binary codes.")]
+		public bool TryTstWr { get; set; }
+
 		[Option('p', "play", HelpText = "Play binary codes.")]
 		public bool TryPlay { get; set; }
 

@@ -4,6 +4,9 @@ using System.Linq;
 using Experimenter.Models;
 using Generator.Tools;
 using static System.IO.Directory;
+using System;
+using System.Threading.Tasks;
+using static Generator.Tools.FileTool;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -11,6 +14,19 @@ namespace Experimenter.Core
 {
     internal static class TstDump
     {
+        internal static async Task Run(Options o)
+        {
+            if (CreateOrGetDir(o.OutputDir) is not { } oD)
+            {
+                await Console.Error.WriteLineAsync("No output dir given!");
+                return;
+            }
+
+            // TODO
+
+            Console.WriteLine("Done.");
+        }
+
         private const SearchOption So = SearchOption.AllDirectories;
 
         internal static IEnumerable<MyInstrR> ReadWinRes(string r)
