@@ -78,7 +78,8 @@ namespace Experimenter.Core
                     await w.WriteLineAsync($"/// {opLong}");
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
-                    await w.WriteLineAsync($"public void Check{opTitle}()");
+                    await w.WriteLineAsync("[InlineData(' ')]");
+                    await w.WriteLineAsync($"public void Check{opTitle}(char x)");
                     await w.WriteLineAsync("{");
                     await w.WriteLineAsync("}");
                 }
