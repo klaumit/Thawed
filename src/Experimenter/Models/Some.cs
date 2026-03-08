@@ -57,5 +57,5 @@ namespace Experimenter.Models
 
     public record Sample(string C, string H, string M, string A);
 
-    public record SampleR(string N, string K, string C, string H, string M, string A)
+    public record SampleR(string N, string K, string C, string H, string M, string A);
 }

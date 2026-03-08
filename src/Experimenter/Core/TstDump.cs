@@ -35,7 +35,7 @@ namespace Experimenter.Core
     {
         private const SearchOption So = SearchOption.AllDirectories;
 
-        private static IEnumerable<MyInstrR> ReadWinRes(string r)
+        internal static IEnumerable<MyInstrR> ReadWinRes(string r)
         {
             var file = EnumerateFiles(r, "Win.csv", So).First();
             var array = CsvTool.FromFile<WinInstr>(file);
@@ -51,7 +51,7 @@ namespace Experimenter.Core
             }
         }
 
-        private static IEnumerable<SampleR> ReadSmplList(string r)
+        internal static IEnumerable<SampleR> ReadSmplList(string r)
         {
             var file = EnumerateFiles(r, "smpl_list.json", So).First();
             var dict = JsonTool.FromFile<SortedDictionary<string, SortedDictionary<string, Sample>>>(file);
@@ -63,7 +63,7 @@ namespace Experimenter.Core
             }
         }
 
-        private static IEnumerable<MyInstrR> ReadWinCache(string r)
+        internal static IEnumerable<MyInstrR> ReadWinCache(string r)
         {
             var file = EnumerateFiles(r, "cache_Win.json", So).First();
             var dict = JsonTool.FromFile<SortedDictionary<string, Cached>>(file);
@@ -81,8 +81,8 @@ namespace Experimenter.Core
                     yield return new MyInstrR(hex, op, arg);
             }
         }
-        
-        private static IEnumerable<OpHex> ReadHexResults(string r)
+
+        internal static IEnumerable<OpHex> ReadHexResults(string r)
         {
             var file = EnumerateFiles(r, "hex_results.json", So).First();
             var dict = JsonTool.FromFile<SortedDictionary<string, string>>(file);
@@ -93,7 +93,7 @@ namespace Experimenter.Core
             }
         }
 
-        private static IEnumerable<OpBin> ReadBinResults(string r)
+        internal static IEnumerable<OpBin> ReadBinResults(string r)
         {
             var file = EnumerateFiles(r, "bin_results.json", So).First();
             var dict = JsonTool.FromFile<SortedDictionary<string, string>>(file);
@@ -103,8 +103,8 @@ namespace Experimenter.Core
                     yield return new OpBin(key, val);
             }
         }
-        
-        private static IEnumerable<OpName> ReadOpNames(string r)
+
+        internal static IEnumerable<OpName> ReadOpNames(string r)
         {
             var file = EnumerateFiles(r, "opCodeNames.json", So).First();
             var dict = JsonTool.FromFile<SortedDictionary<string, string>>(file);
@@ -115,7 +115,7 @@ namespace Experimenter.Core
             }
         }
 
-        private static IEnumerable<OpGroup> ReadOpGroups(string r)
+        internal static IEnumerable<OpGroup> ReadOpGroups(string r)
         {
             var file = EnumerateFiles(r, "opCodeGroups.json", So).First();
             var dict = JsonTool.FromFile<SortedDictionary<string, string[]>>(file);
@@ -125,8 +125,8 @@ namespace Experimenter.Core
                     yield return new OpGroup(key, val.Last());
             }
         }
-        
-        private static IEnumerable<IntelInstr> ReadIntelInstr(string r)
+
+        internal static IEnumerable<IntelInstr> ReadIntelInstr(string r)
         {
             var file = EnumerateFiles(r, "Intel_Instructions.csv", So).First();
             var array = CsvTool.FromFile<IntelInstr>(file);
@@ -139,7 +139,7 @@ namespace Experimenter.Core
             }
         }
 
-        private static IEnumerable<MyInstrR> ReadMyInstr(string r)
+        internal static IEnumerable<MyInstrR> ReadMyInstr(string r)
         {
             var file = EnumerateFiles(r, "My_Instructions.csv", So).First();
             var array = CsvTool.FromFile<MyInstr>(file);
