@@ -69,7 +69,7 @@ namespace Experimenter.Core
                     first1 = false;
                 else
                     await w.WriteLineAsync();
-                await w.WriteLineAsync($"public class {groupName}Test");
+                await w.WriteLineAsync($"public class {groupName}Test : AbstractDecodeTest");
                 await w.WriteLineAsync("{");
                 var first2 = true;
                 foreach (var g in groupList.OrderBy(x => x.Op))
@@ -95,6 +95,7 @@ namespace Experimenter.Core
                     }
                     await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
                     await w.WriteLineAsync("{");
+                    await w.WriteLineAsync("AssertDecode(bin, op, arg);");
                     await w.WriteLineAsync("}");
                 }
                 await w.WriteLineAsync("}");

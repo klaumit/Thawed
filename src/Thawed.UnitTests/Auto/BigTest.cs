@@ -4,7 +4,7 @@
 
 namespace Thawed.UnitTests.Auto
 {
-    public class ArithmeticTest
+    public class ArithmeticTest : AbstractDecodeTest
     {
         /// <summary>
         /// Add With Carry
@@ -77,6 +77,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00010011 10101001 10001000 01110100", "ADC", "BP,Word Ptr [BX+DI+7488]")]
         public void CheckAdc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -184,6 +185,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000001 10000111 00001111 10001011 01110101 00001110", "ADD", "Word Ptr [BX-74F1],0E75")]
         public void CheckAdd(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -269,6 +271,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000001 10111111 00101000 00100011 00100111 11011111", "CMP", "Word Ptr [BX+2328],DF27")]
         public void CheckCmp(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -295,6 +298,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111110 10001100 00111111 01110000", "DEC", "Byte Ptr [SI+703F]")]
         public void CheckDec(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -308,6 +312,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110111 10110010 01000000 01100011", "DIV", "Word Ptr [BP+SI+6340]")]
         public void CheckDiv(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -319,6 +324,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110111 01111000 10010100", "IDIV", "Word Ptr [BX+SI-6C]")]
         public void CheckIdiv(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -359,6 +365,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00110110 01101001 10101100 01110010 01111101 00100110 00000011", "IMUL", "BP,Word Ptr SS:[SI+7D72],0326")]
         public void CheckImul(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -385,6 +392,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111110 01110000 11110101", "INC", "Byte Ptr [BX+SI-0B]")]
         public void CheckInc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -397,6 +405,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110111 01100000 01001011", "MUL", "Word Ptr [BX+SI+4B]")]
         public void CheckMul(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -409,6 +418,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110110 10011111 00101000 00000000", "NEG", "Byte Ptr [BX+0028]")]
         public void CheckNeg(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -488,6 +498,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000010 10011111 00011111 11110000 11101100", "SBB", "Byte Ptr [BX-0FE1],EC")]
         public void CheckSbb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -581,10 +592,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000001 10101110 10111111 11100000 01101010 01001011", "SUB", "Word Ptr [BP-1F41],4B6A")]
         public void CheckSub(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class BitwiseTest
+    public class BitwiseTest : AbstractDecodeTest
     {
         /// <summary>
         /// Logical AND
@@ -675,6 +687,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000000 10100010 11011100 00011011 00001111", "AND", "Byte Ptr [BP+SI+1BDC],0F")]
         public void CheckAnd(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -685,6 +698,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110111 11010011", "NOT", "BX")]
         public void CheckNot(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -782,6 +796,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000001 10001101 10100010 01011010 00110100 10101001", "OR", "Word Ptr [DI+5AA2],A934")]
         public void CheckOr(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -843,6 +858,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110111 01000001 01010100 00011110 10111001", "TEST", "Word Ptr [BX+DI+54],B91E")]
         public void CheckTest(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -930,10 +946,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000001 00110110 01011110 01000011 10110001 01111110", "XOR", "Word Ptr [435E],7EB1")]
         public void CheckXor(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class BranchTest
+    public class BranchTest : AbstractDecodeTest
     {
         /// <summary>
         /// Jump If Above
@@ -956,6 +973,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01110111 11111111", "JA", "0001")]
         public void CheckJa(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -980,6 +998,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01110110 11111111", "JBE", "0001")]
         public void CheckJbe(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -988,6 +1007,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckJc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1009,6 +1029,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11100011 11111111", "JCXZ", "0001")]
         public void CheckJcxz(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1033,6 +1054,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01111111 11111111", "JG", "0001")]
         public void CheckJg(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1051,6 +1073,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01111101 11111111", "JGE", "0001")]
         public void CheckJge(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1073,6 +1096,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01111100 11111111", "JL", "0001")]
         public void CheckJl(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1094,6 +1118,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01111110 11111111", "JLE", "0001")]
         public void CheckJle(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1102,6 +1127,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckJnc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1124,6 +1150,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01110001 11111111", "JNO", "0001")]
         public void CheckJno(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1132,6 +1159,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckJnp(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1150,6 +1178,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01111001 11111111", "JNS", "0001")]
         public void CheckJns(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1169,6 +1198,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01110101 11111111", "JNZ", "0001")]
         public void CheckJnz(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1185,6 +1215,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01110000 11111111", "JO", "0001")]
         public void CheckJo(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1193,6 +1224,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckJp(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1218,6 +1250,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01111000 11111111", "JS", "0001")]
         public void CheckJs(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1239,10 +1272,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01110100 11111111", "JZ", "0001")]
         public void CheckJz(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class FlagsTest
+    public class FlagsTest : AbstractDecodeTest
     {
         /// <summary>
         /// Clear Carry Flag
@@ -1251,6 +1285,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111000", "CLC", "")]
         public void CheckClc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1260,6 +1295,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111100", "CLD", "")]
         public void CheckCld(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1269,6 +1305,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111010", "CLI", "")]
         public void CheckCli(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1278,6 +1315,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110101", "CMC", "")]
         public void CheckCmc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1287,6 +1325,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011111", "LAHF", "")]
         public void CheckLahf(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1296,6 +1335,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011110", "SAHF", "")]
         public void CheckSahf(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1305,6 +1345,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111001", "STC", "")]
         public void CheckStc(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1314,6 +1355,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111101", "STD", "")]
         public void CheckStd(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1323,10 +1365,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11111011", "STI", "")]
         public void CheckSti(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class InterruptTest
+    public class InterruptTest : AbstractDecodeTest
     {
         /// <summary>
         /// Check Index Against Bounds
@@ -1344,6 +1387,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01100010 10010001 10010101 11001110", "BOUND", "DX,Word Ptr [BX+DI-316B]")]
         public void CheckBound(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1353,6 +1397,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110100", "HLT", "")]
         public void CheckHlt(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1376,6 +1421,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11001101 11110001", "INT", "F1")]
         public void CheckInt(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1385,6 +1431,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11001110", "INTO", "")]
         public void CheckInto(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1394,10 +1441,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11001111", "IRET", "")]
         public void CheckIret(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class JumpTest
+    public class JumpTest : AbstractDecodeTest
     {
         /// <summary>
         /// Call Procedure
@@ -1435,6 +1483,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011010 11111111 01111010 01101001 01101010", "CALL", "6A69:7AFF")]
         public void CheckCall(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1475,6 +1524,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11101010 11010010 10011110 11110101 01011000", "JMP", "58F5:9ED2")]
         public void CheckJmp(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1496,6 +1546,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000010 11011001 00010001", "RET", "11D9")]
         public void CheckRet(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1517,10 +1568,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11001010 11100000 11111101", "RETF", "FDE0")]
         public void CheckRetf(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class LoopTest
+    public class LoopTest : AbstractDecodeTest
     {
         /// <summary>
         /// Loop According to ECX Counter
@@ -1543,6 +1595,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11100010 11111111", "LOOP", "0001")]
         public void CheckLoop(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1551,6 +1604,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckLoope(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1559,10 +1613,11 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckLoopne(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class MemoryTest
+    public class MemoryTest : AbstractDecodeTest
     {
         /// <summary>
         /// Load Far Pointer
@@ -1583,6 +1638,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000101 10110110 00111001 11000110", "LDS", "SI,DWord Ptr [BP-39C7]")]
         public void CheckLds(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1607,6 +1663,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10001101 10110011 01011001 00010010", "LEA", "SI,[BP+DI+1259]")]
         public void CheckLea(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1630,6 +1687,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000100 10111111 00011110 10110111", "LES", "DI,DWord Ptr [BX-48E2]")]
         public void CheckLes(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1954,6 +2012,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000111 10111001 01111110 11101001 10100100 10101010", "MOV", "Word Ptr [BX+DI-1682],AAA4")]
         public void CheckMov(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -1994,6 +2053,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10000111 10111100 00010001 11100110", "XCHG", "Word Ptr [SI-19EF],DI")]
         public void CheckXchg(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2003,10 +2063,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11010111", "XLAT", "")]
         public void CheckXlat(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class NumericTest
+    public class NumericTest : AbstractDecodeTest
     {
         /// <summary>
         /// ASCII Adjust After Addition
@@ -2015,6 +2076,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00110111", "AAA", "")]
         public void CheckAaa(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2023,6 +2085,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckAad(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2031,6 +2094,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckAam(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2040,6 +2104,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00111111", "AAS", "")]
         public void CheckAas(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2049,6 +2114,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011000", "CBW", "")]
         public void CheckCbw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2058,6 +2124,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011001", "CWD", "")]
         public void CheckCwd(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2067,6 +2134,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00100111", "DAA", "")]
         public void CheckDaa(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2076,10 +2144,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00101111", "DAS", "")]
         public void CheckDas(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class OtherTest
+    public class OtherTest : AbstractDecodeTest
     {
         /// <summary>
         /// Make Stack Frame for Params
@@ -2103,6 +2172,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11001000 11011101 01101000 01110000", "ENTER", "68DD,70")]
         public void CheckEnter(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2112,6 +2182,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11001001", "LEAVE", "")]
         public void CheckLeave(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2121,6 +2192,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110000", "LOCK", "")]
         public void CheckLock(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2130,6 +2202,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10010000", "NOP", "")]
         public void CheckNop(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2139,10 +2212,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011011", "WAIT", "")]
         public void CheckWait(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class PortsTest
+    public class PortsTest : AbstractDecodeTest
     {
         /// <summary>
         /// Input From Port
@@ -2172,6 +2246,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11100101 11111111", "IN", "AX,FF")]
         public void CheckIn(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2181,6 +2256,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01101100", "INSB", "")]
         public void CheckInsb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2190,6 +2266,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01101101", "INSW", "")]
         public void CheckInsw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2221,6 +2298,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11100111 11100101", "OUT", "E5,AX")]
         public void CheckOut(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2230,6 +2308,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01101110", "OUTSB", "")]
         public void CheckOutsb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2239,10 +2318,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01101111", "OUTSW", "")]
         public void CheckOutsw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class PrefixTest
+    public class PrefixTest : AbstractDecodeTest
     {
         /// <summary>
         /// Code Segment Register
@@ -2250,6 +2330,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckCs(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2258,6 +2339,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckDs(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2266,6 +2348,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckEs(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2274,10 +2357,11 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckSs(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class ShiftTest
+    public class ShiftTest : AbstractDecodeTest
     {
         /// <summary>
         /// Rotate Through Carry Left
@@ -2291,6 +2375,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000001 10010100 11011010 11001010 10110011", "RCL", "Word Ptr [SI-3526],B3")]
         public void CheckRcl(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2310,6 +2395,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11010001 10011100 11100000 11111110", "RCR", "Word Ptr [SI-0120],1")]
         public void CheckRcr(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2339,6 +2425,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000001 00000110 10111110 10101111 00001010", "ROL", "Word Ptr [AFBE],0A")]
         public void CheckRol(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2354,6 +2441,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11010000 10001110 11101111 10010111", "ROR", "Byte Ptr [BP-6811],1")]
         public void CheckRor(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2368,6 +2456,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11010001 10111011 01011010 10110000", "SAR", "Word Ptr [BP+DI-4FA6],1")]
         public void CheckSar(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2381,6 +2470,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11000000 10100000 01000111 10101110 10001001", "SHL", "Byte Ptr [BX+SI-51B9],89")]
         public void CheckShl(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2401,10 +2491,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11010011 10101000 10100101 11111111", "SHR", "Word Ptr [BX+SI-005B],CL")]
         public void CheckShr(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class StackTest
+    public class StackTest : AbstractDecodeTest
     {
         /// <summary>
         /// Pop Value From the Stack
@@ -2435,6 +2526,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00101110 10001111 00011110 11010001 00001011", "POP", "Word Ptr CS:[0BD1]")]
         public void CheckPop(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2444,6 +2536,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01100001", "POPA", "")]
         public void CheckPopa(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2453,6 +2546,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011101", "POPF", "")]
         public void CheckPopf(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2492,6 +2586,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01101000 10101010 00011000", "PUSH", "18AA")]
         public void CheckPush(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2501,6 +2596,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("01100000", "PUSHA", "")]
         public void CheckPusha(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2510,10 +2606,11 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10011100", "PUSHF", "")]
         public void CheckPushf(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
     
-    public class StringTest
+    public class StringTest : AbstractDecodeTest
     {
         /// <summary>
         /// Compare String Operands
@@ -2522,6 +2619,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10100110", "CMPSB", "")]
         public void CheckCmpsb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2531,6 +2629,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10100111", "CMPSW", "")]
         public void CheckCmpsw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2541,6 +2640,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("00111110 10101100", "LODSB", "DS:")]
         public void CheckLodsb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2550,6 +2650,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10101101", "LODSW", "")]
         public void CheckLodsw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2559,6 +2660,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10100100", "MOVSB", "")]
         public void CheckMovsb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2568,6 +2670,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10100101", "MOVSW", "")]
         public void CheckMovsw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2576,6 +2679,7 @@ namespace Thawed.UnitTests.Auto
         [Theory]
         public void CheckRep(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2585,6 +2689,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110011", "REPE", "")]
         public void CheckRepe(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2594,6 +2699,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("11110010", "REPNE", "")]
         public void CheckRepne(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2603,6 +2709,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10101110", "SCASB", "")]
         public void CheckScasb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2612,6 +2719,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10101111", "SCASW", "")]
         public void CheckScasw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2621,6 +2729,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10101010", "STOSB", "")]
         public void CheckStosb(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
         
         /// <summary>
@@ -2630,6 +2739,7 @@ namespace Thawed.UnitTests.Auto
         [InlineData("10101011", "STOSW", "")]
         public void CheckStosw(string bin, string op, string arg)
         {
+            AssertDecode(bin, op, arg);
         }
     }
 }
