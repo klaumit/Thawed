@@ -38,18 +38,11 @@ namespace Experimenter.Core
 
         private static async Task GenerateTest(string inDir, string outDir)
         {
-            var opG = ReadOpGroups(inDir).GroupBy(x => x.Group)
-                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
-            var opN = ReadOpNames(inDir)
-                .ToDictionary(k => k.Op, v => v.Desc);
-            var opB = ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
-                .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).Concat(HexToBin(ReadWinCache(inDir)))
-                .Concat(HexToBin(ReadSmplList(inDir).Select(ToMyInstr)))
-                .Concat(HexToBin(ReadWinRes(inDir))).GroupBy(x => x.Op)
-                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
-            var opI = ReadIntelInstr(inDir).GroupBy(x => x.Label ?? "")
-                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
-            
+            var opG = GetOpG(inDir);
+            var opN = GetOpN(inDir);
+            var opB = GetOpB(inDir);
+            var opI = GetOpI(inDir);
+
             var w = new CodeWriter();
             await w.WriteLineAsync("using Xunit;");
             await w.WriteLineAsync();
@@ -112,6 +105,25 @@ namespace Experimenter.Core
             await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
             Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
         }
+
+        private static Dictionary<string, IntelInstr[]> GetOpI(string inDir)
+            => ReadIntelInstr(inDir).GroupBy(x => x.Label ?? "")
+                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
+
+        private static Dictionary<string, MyInstrR[]> GetOpB(string inDir)
+            => ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
+                .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).Concat(HexToBin(ReadWinCache(inDir)))
+                .Concat(HexToBin(ReadSmplList(inDir).Select(ToMyInstr)))
+                .Concat(HexToBin(ReadWinRes(inDir))).GroupBy(x => x.Op)
+                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
+
+        private static Dictionary<string, string> GetOpN(string inDir)
+            => ReadOpNames(inDir)
+                .ToDictionary(k => k.Op, v => v.Desc);
+
+        private static Dictionary<string, OpGroup[]> GetOpG(string inDir)
+            => ReadOpGroups(inDir).GroupBy(x => x.Group)
+                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
 
         private static IEnumerable<MyInstrR> HexToBin(IEnumerable<MyInstrR> items)
         {
