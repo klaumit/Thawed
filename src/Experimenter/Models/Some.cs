@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using CsvHelper.Configuration.Attributes;
-using Generator.Tools;
-using static System.IO.Directory;
 
 namespace Experimenter.Models
 {
