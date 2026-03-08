@@ -38,8 +38,7 @@ namespace Experimenter.Core
 
         private static async Task GenerateTest(string inDir, string outDir)
         {
-            /*{
-                Console.WriteLine(JsonTool.ToJson(ReadMyInstr(root)));
+            /*{                
                 Console.WriteLine(JsonTool.ToJson(ReadIntelInstr(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadWinCache(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadWinRes(root).Distinct()));
@@ -50,11 +49,17 @@ namespace Experimenter.Core
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
             var opN = ReadOpNames(inDir)
                 .ToDictionary(k => k.Op, v => v.Desc);
-            var opB = ReadBinResults(inDir).Concat(ReadHexResults(inDir)
-                    .Select(x => new OpBin(HexToBin(x.Hex), x.Op)))
-                .Select(ToMyInstr).GroupBy(x => x.Op)
+            var opB = ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
+                .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).GroupBy(x => x.Op)
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
 
+            
+            
+            
+            
+
+            
+            
             var w = new CodeWriter();
             await w.WriteLineAsync("using Xunit;");
             await w.WriteLineAsync();
@@ -107,6 +112,16 @@ namespace Experimenter.Core
             Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
         }
 
+        private static IEnumerable<MyInstrR> HexToBin(IEnumerable<MyInstrR> items)
+        {
+            return items.Select(x => x with { Hex = HexToBin(x.Hex) });
+        }
+        
+        private static IEnumerable<OpBin> HexToBin(IEnumerable<OpHex> items)
+        {
+            return items.Select(x => new OpBin(HexToBin(x.Hex), x.Op));
+        }
+
         private static MyInstrR ToMyInstr(OpBin x)
         {
             var pt = x.Op.Split(' ', 2);
@@ -115,7 +130,8 @@ namespace Experimenter.Core
 
         private static string HexToBin(string hex)
         {
-            var bytes = Convert.FromHexString(hex);
+            var txt = hex.Replace(" ", "");
+            var bytes = Convert.FromHexString(txt);
             return bytes.Format('b', " ");
         }
 
@@ -230,8 +246,7 @@ namespace Experimenter.Core
                 if (m.Hex.TrimOrNull() is not { } hex || m.Op.TrimOrNull() is not { } op)
                     continue;
                 var arg = m.Args.TrimOrNull() ?? "";
-                if (op.Contains("CMPS"))
-                    yield return new MyInstrR(hex, op, arg);
+                yield return new MyInstrR(hex, op, arg);
             }
         }
     }
