@@ -67,13 +67,12 @@ namespace Experimenter.Core
                 await w.WriteLineAsync($"public class {groupName}Test : AbstractDecodeTest");
                 await w.WriteLineAsync("{");
                 var first2 = true;
-                foreach (var g in groupList.OrderBy(x => x.Op))
+                foreach (var (opCode, _) in groupList.OrderBy(x => x.Op))
                 {
                     if (first2)
                         first2 = false;
                     else
                         await w.WriteLineAsync();
-                    var opCode = g.Op;
                     var opTitle = opCode.Title();
                     var opLong = opN[opCode];
                     await w.WriteLineAsync("/// <summary>");
@@ -118,7 +117,7 @@ namespace Experimenter.Core
         {
             return items.Select(x => x with { Hex = HexToBin(x.Hex) });
         }
-        
+
         private static IEnumerable<OpBin> HexToBin(IEnumerable<OpHex> items)
         {
             return items.Select(x => new OpBin(HexToBin(x.Hex), x.Op));
