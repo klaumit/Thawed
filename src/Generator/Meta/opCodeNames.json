@@ -84,6 +84,7 @@
     "RCL": "Rotate Through Carry Left",
     "RCR": "Rotate Through Carry Right",
     "REP": "Repeat String Operation Prefix",
+    "REPE": "Repeat String Operation Prefix",
     "REPNE": "Repeat String Operation Prefix",
     "RET": "Return From Procedure",
     "RETF": "Return From Far Procedure",

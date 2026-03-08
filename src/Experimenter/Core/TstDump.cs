@@ -31,7 +31,7 @@ namespace Experimenter.Core
             Console.WriteLine($"Input  => {iD}");
             Console.WriteLine($"Output => {oD}");
 
-            await GenerateTest(iD,   oD);
+            await GenerateTest(iD, oD);
 
             Console.WriteLine("Done.");
         }
@@ -60,15 +60,20 @@ namespace Experimenter.Core
             await w.WriteLineAsync();
             await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
             await w.WriteLineAsync("{");
+            var first1 = true;
             foreach (var (groupName, groupList) in opG)
             {
+                if (first1)
+                    first1 = false;
+                else
+                    await w.WriteLineAsync();
                 await w.WriteLineAsync($"public class {groupName}Test");
                 await w.WriteLineAsync("{");
-                var first = true;
+                var first2 = true;
                 foreach (var g in groupList)
                 {
-                    if (first)
-                        first = false;
+                    if (first2)
+                        first2 = false;
                     else
                         await w.WriteLineAsync();
                     var opCode = g.Op;
@@ -179,8 +184,7 @@ namespace Experimenter.Core
             var dict = JsonTool.FromFile<SortedDictionary<string, string[]>>(file);
             foreach (var (key, val) in dict ?? [])
             {
-                if (val.Length >= 2)
-                    yield return new OpGroup(key, val.Last());
+                yield return new OpGroup(key, val.Last());
             }
         }
 
