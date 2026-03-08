@@ -1,4 +1,4 @@
 #!/bin/sh
 
-dotnet run --project Experimenter -- -t -i .. -o ./Thawed.UnitTests
+dotnet run --project Experimenter -- -t -i .. -o ./Thawed.UnitTests/Auto
 

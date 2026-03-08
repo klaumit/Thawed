@@ -1,14 +1,14 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
 using Experimenter.Models;
+using Generator.Common;
 using Generator.Tools;
 using static System.IO.Directory;
-using System;
-using System.Threading.Tasks;
 using static Generator.Tools.FileTool;
-
-// ReSharper disable ClassNeverInstantiated.Global
 
 namespace Experimenter.Core
 {
@@ -31,9 +31,64 @@ namespace Experimenter.Core
             Console.WriteLine($"Input  => {iD}");
             Console.WriteLine($"Output => {oD}");
 
-            // TODO
+            await GenerateTest(iD,   oD);
 
             Console.WriteLine("Done.");
+        }
+
+        private static async Task GenerateTest(string inDir, string outDir)
+        {
+            /*{
+                Console.WriteLine(JsonTool.ToJson(ReadMyInstr(root)));
+                Console.WriteLine(JsonTool.ToJson(ReadIntelInstr(root)));
+                Console.WriteLine(JsonTool.ToJson(ReadBinResults(root)));
+                Console.WriteLine(JsonTool.ToJson(ReadHexResults(root)));
+                Console.WriteLine(JsonTool.ToJson(ReadWinCache(root)));
+                Console.WriteLine(JsonTool.ToJson(ReadWinRes(root).Distinct()));
+                Console.WriteLine(JsonTool.ToJson(ReadSmplList(root)));
+            }*/
+
+            var opG = ReadOpGroups(inDir).GroupBy(x => x.Group)
+                .ToDictionary(k => k.Key, v => v.ToArray());
+            var opN = ReadOpNames(inDir)
+                .ToDictionary(k => k.Op, v => v.Desc);
+
+            var w = new CodeWriter();
+            await w.WriteLineAsync("using Xunit;");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("// ReSharper disable IdentifierTypo");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
+            await w.WriteLineAsync("{");
+            foreach (var (groupName, groupList) in opG)
+            {
+                await w.WriteLineAsync($"public class {groupName}Test");
+                await w.WriteLineAsync("{");
+                var first = true;
+                foreach (var g in groupList)
+                {
+                    if (first)
+                        first = false;
+                    else
+                        await w.WriteLineAsync();
+                    var opCode = g.Op;
+                    var opTitle = opCode.Title();
+                    var opLong = opN[opCode];
+                    await w.WriteLineAsync("/// <summary>");
+                    await w.WriteLineAsync($"/// {opLong}");
+                    await w.WriteLineAsync("/// </summary>");
+                    await w.WriteLineAsync("[Theory]");
+                    await w.WriteLineAsync($"public void Check{opTitle}()");
+                    await w.WriteLineAsync("{");
+                    await w.WriteLineAsync("}");
+                }
+                await w.WriteLineAsync("}");
+            }
+            await w.WriteLineAsync("}");
+
+            var tstF = Path.Combine(outDir, "BigTest.cs");
+            await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
+            Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
         }
 
         private const SearchOption So = SearchOption.AllDirectories;
@@ -113,8 +168,7 @@ namespace Experimenter.Core
             var dict = JsonTool.FromFile<SortedDictionary<string, string>>(file);
             foreach (var (key, val) in dict ?? [])
             {
-                if (key.Contains("CMPS"))
-                    yield return new OpName(key, val);
+                yield return new OpName(key, val);
             }
         }
 
