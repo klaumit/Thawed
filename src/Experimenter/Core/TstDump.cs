@@ -60,7 +60,7 @@ namespace Experimenter.Core
                 await w.WriteLineAsync($"public class {groupName}Test : AbstractDecodeTest");
                 await w.WriteLineAsync("{");
                 var first2 = true;
-                foreach (var (opCode, _) in groupList.OrderBy(x => x.Op))
+                foreach (var opCode in groupList.OrderBy(x => x))
                 {
                     if (first2)
                         first2 = false;
@@ -108,22 +108,27 @@ namespace Experimenter.Core
 
         private static Dictionary<string, IntelInstr[]> GetOpI(string inDir)
             => ReadIntelInstr(inDir).GroupBy(x => x.Label ?? "")
-                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
+                .ToDictionary(k => k.Key, v => v.ToArray());
 
         private static Dictionary<string, MyInstrR[]> GetOpB(string inDir)
             => ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
                 .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).Concat(HexToBin(ReadWinCache(inDir)))
                 .Concat(HexToBin(ReadSmplList(inDir).Select(ToMyInstr)))
                 .Concat(HexToBin(ReadWinRes(inDir))).GroupBy(x => x.Op)
-                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
+                .ToDictionary(k => k.Key, v => v.Select(Clone).Distinct().ToArray());
 
         private static Dictionary<string, string> GetOpN(string inDir)
             => ReadOpNames(inDir)
                 .ToDictionary(k => k.Op, v => v.Desc);
 
-        private static Dictionary<string, OpGroup[]> GetOpG(string inDir)
+        private static Dictionary<string, string[]> GetOpG(string inDir)
             => ReadOpGroups(inDir).GroupBy(x => x.Group)
-                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
+                .ToDictionary(k => k.Key, v => v.Select(x => x.Op).Distinct().ToArray());
+
+        private static MyInstrR Clone(MyInstrR s)
+        {
+            return new(s.Hex.TrimOrNull() ?? "", s.Op.TrimOrNull() ?? "", s.Arg.TrimOrNull() ?? "");
+        }
 
         private static IEnumerable<MyInstrR> HexToBin(IEnumerable<MyInstrR> items)
         {
@@ -150,7 +155,7 @@ namespace Experimenter.Core
         {
             var txt = hex.Replace(" ", "");
             var bytes = Convert.FromHexString(txt);
-            return bytes.Format('b', " ");
+            return bytes.Format('b');
         }
 
         private const SearchOption So = SearchOption.AllDirectories;
@@ -245,7 +250,7 @@ namespace Experimenter.Core
             var array = CsvTool.FromFile<IntelInstr>(file);
             foreach (var m in array)
             {
-                if (m.Format is not { } fmt)
+                if (m.Format is null)
                     continue;
                 yield return m;
             }
