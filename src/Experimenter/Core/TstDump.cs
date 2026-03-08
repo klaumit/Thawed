@@ -38,16 +38,13 @@ namespace Experimenter.Core
 
         private static async Task GenerateTest(string inDir, string outDir)
         {
-            /*{                                             
-                Console.WriteLine(JsonTool.ToJson(ReadSmplList(root)));
-            }*/
-
             var opG = ReadOpGroups(inDir).GroupBy(x => x.Group)
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
             var opN = ReadOpNames(inDir)
                 .ToDictionary(k => k.Op, v => v.Desc);
             var opB = ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
                 .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).Concat(HexToBin(ReadWinCache(inDir)))
+                .Concat(HexToBin(ReadSmplList(inDir).Select(ToMyInstr)))
                 .Concat(HexToBin(ReadWinRes(inDir))).GroupBy(x => x.Op)
                 .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
             var opI = ReadIntelInstr(inDir).GroupBy(x => x.Label ?? "")
@@ -122,6 +119,11 @@ namespace Experimenter.Core
             return items.Select(x => new OpBin(HexToBin(x.Hex), x.Op));
         }
 
+        private static MyInstrR ToMyInstr(SampleR x)
+        {
+            return new MyInstrR(x.H, x.M, x.A);
+        }
+
         private static MyInstrR ToMyInstr(OpBin x)
         {
             var pt = x.Op.Split(' ', 2);
@@ -148,8 +150,7 @@ namespace Experimenter.Core
                 if (m.Offset != "00000")
                     continue;
                 var arg = m.Arg ?? "";
-                if (op.Contains("CMPS"))
-                    yield return new MyInstrR(hex, op, arg);
+                yield return new MyInstrR(hex, op, arg);
             }
         }
 
@@ -160,8 +161,7 @@ namespace Experimenter.Core
             foreach (var (key1, val1) in dict ?? [])
             foreach (var (key2, val2) in val1)
             {
-                if (val2.M.Contains("CMPS"))
-                    yield return new SampleR(key1, key2, val2.C, val2.H, val2.M, val2.A);
+                yield return new SampleR(key1, key2, val2.C, val2.H, val2.M, val2.A);
             }
         }
 
@@ -179,8 +179,7 @@ namespace Experimenter.Core
                 if (pt[0].TrimOrNull() is not { } op)
                     continue;
                 var arg = pt.Length == 2 ? pt[1].TrimOrNull() ?? "" : "";
-                if (op.Contains("CMPS"))
-                    yield return new MyInstrR(hex, op, arg);
+                yield return new MyInstrR(hex, op, arg);
             }
         }
 
