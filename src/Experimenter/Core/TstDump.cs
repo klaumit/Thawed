@@ -41,8 +41,6 @@ namespace Experimenter.Core
             /*{
                 Console.WriteLine(JsonTool.ToJson(ReadMyInstr(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadIntelInstr(root)));
-                Console.WriteLine(JsonTool.ToJson(ReadBinResults(root)));
-                Console.WriteLine(JsonTool.ToJson(ReadHexResults(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadWinCache(root)));
                 Console.WriteLine(JsonTool.ToJson(ReadWinRes(root).Distinct()));
                 Console.WriteLine(JsonTool.ToJson(ReadSmplList(root)));
@@ -52,6 +50,9 @@ namespace Experimenter.Core
                 .ToDictionary(k => k.Key, v => v.ToArray());
             var opN = ReadOpNames(inDir)
                 .ToDictionary(k => k.Op, v => v.Desc);
+            var opB = ReadBinResults(inDir).Concat(ReadHexResults(inDir)
+                    .Select(x => new OpBin(HexToBin(x.Hex), x.Op))).GroupBy(x => x.Op)
+                .ToDictionary(k => k.Key, v => v.Distinct().ToArray());
 
             var w = new CodeWriter();
             await w.WriteLineAsync("using Xunit;");
@@ -84,6 +85,10 @@ namespace Experimenter.Core
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
                     await w.WriteLineAsync("[InlineData(' ')]");
+
+                    if (opB.TryGetValue(opCode, out var ox1))
+                        Console.WriteLine("b | " + JsonTool.ToJson(ox1));
+
                     await w.WriteLineAsync($"public void Check{opTitle}(char x)");
                     await w.WriteLineAsync("{");
                     await w.WriteLineAsync("}");
@@ -95,6 +100,12 @@ namespace Experimenter.Core
             var tstF = Path.Combine(outDir, "BigTest.cs");
             await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
             Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
+        }
+
+        private static string HexToBin(string hex)
+        {
+            var bytes = Convert.FromHexString(hex);
+            return bytes.Format('b', "");
         }
 
         private const SearchOption So = SearchOption.AllDirectories;
