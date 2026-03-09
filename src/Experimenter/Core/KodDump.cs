@@ -37,6 +37,7 @@ namespace Experimenter.Core
             var withNum = args.As<bool?>("num") ?? false;
             var withCnt = args.As<bool?>("iter") ?? false;
             var ib = args.As<int?>("len") ?? 1;
+            var cpu = args.As<int?>("cpus");
             var rnd = new Random();
 
             var slf = Path.Combine(oD, "smpl_list.json");
@@ -52,7 +53,7 @@ namespace Experimenter.Core
             int[] i = [0];
 
             const int pktSize = 1355;
-            var maxCpus = Environment.ProcessorCount - 1;
+            var maxCpus = cpu ?? Environment.ProcessorCount - 1;
             Console.WriteLine($"Starting with {maxCpus} CPUs and {pktSize} args per chunk...");
 
             var tasks = arrays.Chunk(pktSize).AsParallel()
