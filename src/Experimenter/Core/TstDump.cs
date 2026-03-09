@@ -42,6 +42,22 @@ namespace Experimenter.Core
             var opN = GetOpN(inDir);
             var opB = GetOpB(inDir);
             var opI = GetOpI(inDir);
+            
+            var opK = opB.Keys.Select(x => x.TrimEnd(':'))
+                .Concat(opN.Select(x => x.Key))
+                .Concat(opG.SelectMany(x => x.Value))
+                .Concat(opI.Select(x => x.Key))
+                .Order().Distinct().ToArray();
+
+
+
+            Console.WriteLine($" {JsonTool.ToJson(opK)}");
+            
+            
+            
+            
+           
+            return;
 
             var w = new CodeWriter();
             await w.WriteLineAsync("using Xunit;");
