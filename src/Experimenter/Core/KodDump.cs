@@ -52,7 +52,7 @@ namespace Experimenter.Core
             int[] i = [0];
 
             const int pktSize = 1355;
-            var maxCpus = Environment.ProcessorCount / 3;
+            var maxCpus = Environment.ProcessorCount - 1;
             Console.WriteLine($"Starting with {maxCpus} CPUs and {pktSize} args per chunk...");
 
             var tasks = arrays.Chunk(pktSize).AsParallel()
@@ -78,7 +78,7 @@ namespace Experimenter.Core
             Console.WriteLine($" * p{id:D2} t{tId:D2} '{tPre}' a{argCnt:D5} ");
 
             var i = 0;
-            var ex = new WinExtractor { ArgCount = argCnt, ArgPrefix = tPre };
+            var ex = new WinExtractor { ArgCount = argCnt /*, ArgPrefix = tPre */ };
             await foreach (var d in ex.Decode(arrays))
             {
                 i++;

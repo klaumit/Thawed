@@ -11,27 +11,29 @@ namespace Generator.Extractors
 {
     public sealed class WinExtractor : IExtractor
     {
-        private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
+        // private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
         private readonly string _exePath = FindExe();
 
         public int ArgCount { get; set; } = 1355;
-        public char ArgPrefix { get; set; } = 'a';
+        // public char ArgPrefix { get; set; } = 'a';
 
         public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
-            foreach (var batch in byteArrays.Wrap(_tmpDir, ArgPrefix).Chunk(ArgCount))
+            // .Wrap(_tmpDir, ArgPrefix)
+            foreach (var batch in byteArrays.Chunk(ArgCount))
             {
-                List<string> dArgs = [_exePath];
-                Array.ForEach(batch, b => dArgs.Add(Path.GetRelativePath(_tmpDir, b.File)));
+                List<string> dArgs = [_exePath, "-hi"];
+                // Array.ForEach(batch, b => dArgs.Add(Path.GetRelativePath(_tmpDir, b.File)));
+                Array.ForEach(batch, b => dArgs.Add(Convert.ToHexString(b)));
 
                 const string cmd = "wine";
                 var dumpCmd = await Cli.Wrap(cmd)
                     .WithArguments(dArgs)
-                    .WithWorkingDirectory(_tmpDir)
+                    // .WithWorkingDirectory(_tmpDir)
                     .WithValidation(CommandResultValidation.None)
                     .ExecuteBufferedAsync();
 
-                Array.ForEach(batch, b => b.Dispose());
+                // Array.ForEach(batch, b => b.Dispose());
 
                 var error = dumpCmd.StandardError;
                 if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
@@ -41,7 +43,8 @@ namespace Generator.Extractors
                 }
 
                 var stdOut = dumpCmd.StandardOutput;
-                var bytes = batch.Select(b => b.Bytes).ToArray();
+                // var bytes = batch.Select(b => b.Bytes).ToArray();
+                var bytes = batch.Select(b => b).ToArray();
                 foreach (var step in ParseWinOutput(stdOut, bytes))
                     yield return step;
             }
