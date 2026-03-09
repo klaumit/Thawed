@@ -34,4 +34,16 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\src\Thawed.UnitTests\Samples\sample1.com" Link="Data\sample1.com">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\src\Thawed.UnitTests\Samples\sample2.com" Link="Data\sample2.com">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+    <None Include="..\..\src\Thawed.UnitTests\Samples\sample3.com" Link="Data\sample3.com">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

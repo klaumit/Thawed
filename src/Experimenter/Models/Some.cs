@@ -1,5 +1,4 @@
 using CsvHelper.Configuration.Attributes;
-using Generator.Tools;
 
 namespace Experimenter.Models
 {
