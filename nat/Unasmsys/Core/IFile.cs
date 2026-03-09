@@ -1,6 +1,6 @@
 namespace Unasmsys.Core
 {
-	public interface IFile
+	internal interface IFile
 	{
 		string Name { get; }
 		byte[] Bytes { get; }

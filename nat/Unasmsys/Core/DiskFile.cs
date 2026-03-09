@@ -2,11 +2,11 @@ using System.IO;
 
 namespace Unasmsys.Core
 {
-	public sealed class DiskFile : IFile
+	internal sealed class DiskFile : IFile
 	{
 		private readonly string _file;
 
-		public DiskFile(string file)
+		internal DiskFile(string file)
 		{
 			_file = file;
 		}

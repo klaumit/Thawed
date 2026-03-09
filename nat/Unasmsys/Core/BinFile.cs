@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace Unasmsys.Core
 {
-	public sealed class BinFile : IFile
+	internal sealed class BinFile : IFile
 	{
 		private readonly string _bin;
 		private readonly int _idx;
 
-		public BinFile(string bin, int idx)
+		internal BinFile(string bin, int idx)
 		{
 			_bin = bin;
 			_idx = idx;

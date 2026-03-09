@@ -2,12 +2,12 @@ using System;
 
 namespace Unasmsys.Core
 {
-	public sealed class HexFile : IFile
+	internal sealed class HexFile : IFile
 	{
 		private readonly string _hex;
 		private readonly int _idx;
 
-		public HexFile(string hex, int idx)
+		internal HexFile(string hex, int idx)
 		{
 			_hex = hex;
 			_idx = idx;
