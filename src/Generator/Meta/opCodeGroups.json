@@ -49,6 +49,7 @@
   "JMP": [ "Jump" ],
   "JNB": [ "Branch" ],
   "JNC": [ "Branch" ],
+  "JNE": [ "Branch" ],
   "JNO": [ "Branch" ],
   "JNP": [ "Branch" ],
   "JNS": [ "Branch" ],

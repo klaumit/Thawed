@@ -48,6 +48,7 @@ namespace Experimenter.Core
             var opJ = GetOpJ(opK, opG);
             foreach (var (group, opcodes) in opJ)
             {
+                if (group == "Unknown") continue;
                 var gName = $"{group}Test";
                 var w = new CodeWriter();
                 await w.WriteLineAsync("using Xunit;");
@@ -58,18 +59,8 @@ namespace Experimenter.Core
                 await w.WriteLineAsync("{");
                 await w.WriteLineAsync($"public class {gName} : AbstractDecodeTest");
                 await w.WriteLineAsync("{");
-                await w.WriteLineAsync("}");
-                await w.WriteLineAsync("}");
-                var tstF = Path.Combine(outDir, $"{gName}.cs");
-                await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
-                Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
-            }
-
-            /*            
-            foreach (var (groupName, groupList) in opG.OrderBy(x => x.Key))
-            {
                 var first2 = true;
-                foreach (var opCode in groupList.OrderBy(x => x))
+                foreach (var opCode in opcodes)
                 {
                     if (first2)
                         first2 = false;
@@ -85,9 +76,22 @@ namespace Experimenter.Core
                             .Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray();
                         var rma = string.Join(" ", ali).Replace(" | ", ", ");
                         await w.WriteLineAsync($"/// <remarks>{rma}</remarks>");
-                    }
+                    }                    
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
+                    await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
+                    await w.WriteLineAsync("{");
+                    await w.WriteLineAsync("AssertDecode(bin, op, arg);");
+                    await w.WriteLineAsync("}");
+                }
+                await w.WriteLineAsync("}");
+                await w.WriteLineAsync("}");
+                var tstF = Path.Combine(outDir, $"{gName}.cs");
+                await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
+                Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
+            }
+
+            /*            
                     if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
                     {
                         var doubled = new SortedSet<string>();
@@ -101,24 +105,15 @@ namespace Experimenter.Core
                             doubled.Add(line);
                         }
                     }
-                    await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
-                    await w.WriteLineAsync("{");
-                    await w.WriteLineAsync("AssertDecode(bin, op, arg);");
-                    await w.WriteLineAsync("}");
-                }
-                await w.WriteLineAsync("}");
-            }*/
-            
-            
-            
+                */
         }
 
         private static Dictionary<string, string[]> GetOpJ(string[] opK, IDictionary<string, string[]> opG)
         {
             return opK.Select(x => (o: x, g:
-                    opG.FirstOrDefault(y => y.Value.Contains(x)).Key)
+                    opG.FirstOrDefault(y => y.Value.Contains(x)).Key ?? "???")
                 ).GroupBy(x => x.g).OrderBy(x => x.Key)
-                .ToDictionary(k => k.Key, v => v.Select(x => x.o).ToArray());
+                .ToDictionary(k => k.Key, v => v.Select(x => x.o).Order().ToArray());
         }
 
         private static string[] GetOpK(IDictionary<string, string[]> opG, IDictionary<string, string> opN,
