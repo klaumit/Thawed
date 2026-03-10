@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 using Experimenter.Models;
@@ -42,39 +44,30 @@ namespace Experimenter.Core
             var opN = GetOpN(inDir);
             var opB = GetOpB(inDir);
             var opI = GetOpI(inDir);
-            
-            var opK = opB.Keys.Select(x => x.TrimEnd(':'))
-                .Concat(opN.Select(x => x.Key))
-                .Concat(opG.SelectMany(x => x.Value))
-                .Concat(opI.Select(x => x.Key))
-                .Order().Distinct().ToArray();
+            var opK = GetOpK(opG, opN, opB, opI);
+            var opJ = GetOpJ(opK, opG);
+            foreach (var (group, opcodes) in opJ)
+            {
+                var gName = $"{group}Test";
+                var w = new CodeWriter();
+                await w.WriteLineAsync("using Xunit;");
+                await w.WriteLineAsync();
+                await w.WriteLineAsync("// ReSharper disable IdentifierTypo");
+                await w.WriteLineAsync();
+                await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
+                await w.WriteLineAsync("{");
+                await w.WriteLineAsync($"public class {gName} : AbstractDecodeTest");
+                await w.WriteLineAsync("{");
+                await w.WriteLineAsync("}");
+                await w.WriteLineAsync("}");
+                var tstF = Path.Combine(outDir, $"{gName}.cs");
+                await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
+                Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
+            }
 
-
-
-            Console.WriteLine($" {JsonTool.ToJson(opK)}");
-            
-            
-            
-            
-           
-            return;
-
-            var w = new CodeWriter();
-            await w.WriteLineAsync("using Xunit;");
-            await w.WriteLineAsync();
-            await w.WriteLineAsync("// ReSharper disable IdentifierTypo");
-            await w.WriteLineAsync();
-            await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
-            await w.WriteLineAsync("{");
-            var first1 = true;
+            /*            
             foreach (var (groupName, groupList) in opG.OrderBy(x => x.Key))
             {
-                if (first1)
-                    first1 = false;
-                else
-                    await w.WriteLineAsync();
-                await w.WriteLineAsync($"public class {groupName}Test : AbstractDecodeTest");
-                await w.WriteLineAsync("{");
                 var first2 = true;
                 foreach (var opCode in groupList.OrderBy(x => x))
                 {
@@ -114,12 +107,31 @@ namespace Experimenter.Core
                     await w.WriteLineAsync("}");
                 }
                 await w.WriteLineAsync("}");
-            }
-            await w.WriteLineAsync("}");
+            }*/
+            
+            
+            
+        }
 
-            var tstF = Path.Combine(outDir, "BigTest.cs");
-            await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
-            Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
+        private static Dictionary<string, string[]> GetOpJ(string[] opK, IDictionary<string, string[]> opG)
+        {
+            return opK.Select(x => (o: x, g:
+                    opG.FirstOrDefault(y => y.Value.Contains(x)).Key)
+                ).GroupBy(x => x.g).OrderBy(x => x.Key)
+                .ToDictionary(k => k.Key, v => v.Select(x => x.o).ToArray());
+        }
+
+        private static string[] GetOpK(IDictionary<string, string[]> opG, IDictionary<string, string> opN,
+            IDictionary<string, MyInstrR[]> opB, IDictionary<string, IntelInstr[]> opI)
+        {
+            return opB.Keys.Select(CleanOp).Concat(opN.Keys)
+                .Concat(opG.SelectMany(x => x.Value))
+                .Concat(opI.Keys).Order().Distinct().ToArray();
+        }
+
+        private static string CleanOp(string txt)
+        {
+            return txt.TrimEnd(':').ToUpperInvariant();
         }
 
         private static Dictionary<string, IntelInstr[]> GetOpI(string inDir)
