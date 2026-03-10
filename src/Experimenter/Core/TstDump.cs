@@ -79,6 +79,17 @@ namespace Experimenter.Core
                     }                    
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
+                    if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
+                    {
+                        foreach (var ins in opBl)
+                        {
+                            var bytes = BitTool.ParseBin(ins.Hex);
+                            var hex = Convert.ToHexString(bytes);
+                            var iced = KodDump.Parse16(bytes);
+                            
+                            Console.WriteLine($" {hex} | {ins.Op} {ins.Arg} | {iced} ");
+                        }
+                    }
                     await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
                     await w.WriteLineAsync("{");
                     await w.WriteLineAsync("AssertDecode(bin, op, arg);");
@@ -92,8 +103,6 @@ namespace Experimenter.Core
             }
 
             /*            
-                    if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
-                    {
                         var doubled = new SortedSet<string>();
                         foreach (var (oh, oo, oa) in opBl.OrderBy(x => x.Hex.Length)
                                      .ThenBy(x => x.Hex))
@@ -104,7 +113,6 @@ namespace Experimenter.Core
                             await w.WriteLineAsync(line);
                             doubled.Add(line);
                         }
-                    }
                 */
         }
 

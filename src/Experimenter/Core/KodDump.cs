@@ -117,7 +117,7 @@ namespace Experimenter.Core
             return true;
         }
 
-        private static Instruction? Parse16(byte[] data)
+        internal static Instruction? Parse16(byte[] data)
         {
             var decoder = CreateDecoder(data);
             var iN = decoder.Decode();

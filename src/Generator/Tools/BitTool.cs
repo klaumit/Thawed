@@ -44,5 +44,11 @@ namespace Generator.Tools
                 return null;
             }
         }
+
+        public static byte[] ParseBin(string txt)
+        {
+            return txt.Replace(" ", "").Chunk(8).Select(c =>
+                Convert.ToByte(new string(c), 2)).ToArray();
+        }
     }
 }
