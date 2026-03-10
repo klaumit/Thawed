@@ -11,6 +11,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CLR1 CY</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11111000", "CLC", "")]
+        /* */
         public void CheckClc(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -21,6 +24,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CLR1 DIR</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11111100", "CLD", "")]
+        /* */
         public void CheckCld(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -31,6 +37,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>DI</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11111010", "CLI", "")]
+        /* */
         public void CheckCli(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -41,6 +50,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>NOT1 CY</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11110101", "CMC", "")]
+        /* */
         public void CheckCmc(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -51,6 +63,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("10011111", "LAHF", "")]
+        /* */
         public void CheckLahf(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -61,6 +76,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>MOV</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("10011110", "SAHF", "")]
+        /* */
         public void CheckSahf(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -71,6 +89,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>SET1 CY</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11111001", "STC", "")]
+        /* */
         public void CheckStc(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -81,6 +102,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>SET1 DIR</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11111101", "STD", "")]
+        /* */
         public void CheckStd(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -91,6 +115,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>EI</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11111011", "STI", "")]
+        /* */
         public void CheckSti(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);

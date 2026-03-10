@@ -11,6 +11,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>ADJBA</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("00110111", "AAA", "")]
+        /* */
         public void CheckAaa(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -21,6 +24,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CVTDB</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11010101 00001010", "AAD", "")]
+        /* */
         public void CheckAad(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -31,6 +37,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CVTBD</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("11010100 00001010", "AAM", "")]
+        /* */
         public void CheckAam(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -41,6 +50,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>ADJBS</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("00111111", "AAS", "")]
+        /* */
         public void CheckAas(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -51,6 +63,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CVTBW</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("10011000", "CBW", "")]
+        /* */
         public void CheckCbw(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -61,6 +76,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>CVTWL</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("10011001", "CWD", "")]
+        /* */
         public void CheckCwd(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -71,6 +89,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>ADJ4A</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("00100111", "DAA", "")]
+        /* */
         public void CheckDaa(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);
@@ -81,6 +102,9 @@ namespace Thawed.UnitTests.Auto
         /// <remarks>ADJ4S</remarks>
         /// </summary>
         [Theory]
+        /* */
+        [InlineData("00101111", "DAS", "")]
+        /* */
         public void CheckDas(string bin, string op, string arg)
         {
             AssertDecode(bin, op, arg);

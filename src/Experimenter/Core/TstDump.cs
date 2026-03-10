@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 using Experimenter.Models;
@@ -11,6 +9,7 @@ using Generator.Common;
 using Generator.Tools;
 using static System.IO.Directory;
 using static Generator.Tools.FileTool;
+using Instruction = Iced.Intel.Instruction;
 
 namespace Experimenter.Core
 {
@@ -48,7 +47,7 @@ namespace Experimenter.Core
             var opJ = GetOpJ(opK, opG);
             foreach (var (group, opcodes) in opJ)
             {
-                if (group == "Unknown") continue;
+                if (group is "Unknown" or "Prefix") continue;
                 var gName = $"{group}Test";
                 var w = new CodeWriter();
                 await w.WriteLineAsync("using Xunit;");
@@ -62,6 +61,8 @@ namespace Experimenter.Core
                 var first2 = true;
                 foreach (var opCode in opcodes)
                 {
+                    if (!(opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1))
+                        continue;
                     if (first2)
                         first2 = false;
                     else
@@ -76,20 +77,32 @@ namespace Experimenter.Core
                             .Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray();
                         var rma = string.Join(" ", ali).Replace(" | ", ", ");
                         await w.WriteLineAsync($"/// <remarks>{rma}</remarks>");
-                    }                    
+                    }
                     await w.WriteLineAsync("/// </summary>");
                     await w.WriteLineAsync("[Theory]");
-                    if (opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1)
+                    var opBlD = GetOpD(opBl);
+                    foreach (var opBg in opBlD.GroupBy(x => x.Key.Split('|', 2)[0]))
                     {
-                        foreach (var ins in opBl)
+                        await w.WriteLineAsync("/* */");
+                        foreach (var (_, val) in opBg)
                         {
-                            var bytes = BitTool.ParseBin(ins.Hex);
-                            var hex = Convert.ToHexString(bytes);
-                            var iced = KodDump.Parse16(bytes);
-                            
-                            Console.WriteLine($" {hex} | {ins.Op} {ins.Arg} | {iced} ");
+                            var doubled = new SortedSet<string>();
+                            foreach (var ((oh, oo, oa), _) in new[]
+                                         {
+                                             val.MinBy(x => x.i?.ToString().Length),
+                                             val.MaxBy(x => x.i?.ToString().Length)
+                                         }
+                                         .OrderBy(x => x.e.Hex.Length).ThenBy(x => x.e.Hex))
+                            {
+                                var line = $"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]";
+                                if (doubled.Contains(line))
+                                    continue;
+                                await w.WriteLineAsync(line);
+                                doubled.Add(line);
+                            }
                         }
                     }
+                    await w.WriteLineAsync("/* */");
                     await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
                     await w.WriteLineAsync("{");
                     await w.WriteLineAsync("AssertDecode(bin, op, arg);");
@@ -101,19 +114,14 @@ namespace Experimenter.Core
                 await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
                 Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
             }
+        }
 
-            /*            
-                        var doubled = new SortedSet<string>();
-                        foreach (var (oh, oo, oa) in opBl.OrderBy(x => x.Hex.Length)
-                                     .ThenBy(x => x.Hex))
-                        {
-                            var line = $"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]";
-                            if (doubled.Contains(line))
-                                continue;
-                            await w.WriteLineAsync(line);
-                            doubled.Add(line);
-                        }
-                */
+        private static Dictionary<string, (MyInstrR e, Instruction? i)[]> GetOpD(MyInstrR[] opBl)
+        {
+            return opBl.Select(x => (e: x, i: KodDump.Parse16(BitTool.ParseBin(x.Hex))))
+                .GroupBy(x => $"{x.i?.Code}|{x.i?.Length}")
+                .OrderBy(x => x.Key)
+                .ToDictionary(k => k.Key, v => v.ToArray());
         }
 
         private static Dictionary<string, string[]> GetOpJ(string[] opK, IDictionary<string, string[]> opG)
