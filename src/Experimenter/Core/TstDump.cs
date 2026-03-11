@@ -47,7 +47,7 @@ namespace Experimenter.Core
             var opJ = GetOpJ(opK, opG);
             foreach (var (group, opcodes) in opJ)
             {
-                if (group is "Unknown" or "Prefix") continue;
+                if (group is "Unknown") continue;
                 var gName = $"{group}Test";
                 var w = new CodeWriter();
                 await w.WriteLineAsync("using Xunit;");
@@ -153,7 +153,7 @@ namespace Experimenter.Core
             => ReadBinResults(inDir).Concat(HexToBin(ReadHexResults(inDir)))
                 .Select(ToMyInstr).Concat(HexToBin(ReadMyInstr(inDir))).Concat(HexToBin(ReadWinCache(inDir)))
                 .Concat(HexToBin(ReadSmplList(inDir).Select(ToMyInstr)))
-                .Concat(HexToBin(ReadWinRes(inDir))).GroupBy(x => x.Op)
+                .Concat(HexToBin(ReadWinRes(inDir))).GroupBy(x => CleanOp(x.Op))
                 .ToDictionary(k => k.Key, v => v.Select(Clone).Distinct().ToArray());
 
         private static Dictionary<string, string> GetOpN(string inDir)
