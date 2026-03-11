@@ -118,7 +118,7 @@ namespace Experimenter.Core
 
         private static Dictionary<string, (MyInstrR e, Instruction? i)[]> GetOpD(MyInstrR[] opBl)
         {
-            return opBl.Select(x => (e: x, i: KodDump.Parse16(BitTool.ParseBin(x.Hex))))
+            return opBl.Select(x => (e: x, i: IceTool.Parse16(BitTool.ParseBin(x.Hex))))
                 .GroupBy(x => $"{x.i?.Code}|{x.i?.Length}")
                 .OrderBy(x => x.Key)
                 .ToDictionary(k => k.Key, v => v.ToArray());
