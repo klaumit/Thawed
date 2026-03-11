@@ -11,13 +11,18 @@ namespace Thawed.UnitTests
         protected static void AssertDecode(string bin, string op, string arg)
         {
             var bytes = BitTool.ParseBin(bin);
-            var hex = Convert.ToHexString(bytes);
             var ins = IceTool.Parse16(bytes);
             var reader = new ArrayReader(bytes);
             var decoded = Decoder.Decode(reader, fail: true);
             var expected = $"{op} {arg}".Trim();
             var actual = decoded?.ToString();
-            Assert.Equal(expected, actual);
+            var xB = bytes.Format('b');
+            var xH = bytes.Format('h');
+            var n = Environment.NewLine;
+            var dbg = $"({xB}) ({xH}) '{ins}' {ins?.Code} {n}" +
+                      $"    e = '{expected}' {n}" +
+                      $"    a = '{actual}'";
+            Assert.True(expected.Equals(actual), dbg);
         }
     }
 }
