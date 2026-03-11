@@ -5,15 +5,14 @@ namespace Thawed.UnitTests
 {
     public abstract class AbstractDecodeTest
     {
-        protected void AssertDecode(string bin, string op, string arg)
+        protected static void AssertDecode(string bin, string op, string arg)
         {
             var bytes = BitTool.ParseBin(bin);
             var hex = Convert.ToHexString(bytes);
+            var ins = IceTool.Parse16(bytes);
             var txt = $"{op} {arg}".Trim();
 
-            var xxxxx = IceTool.Fuck();
-
-            throw new NotImplementedException(hex + " / " + bin + " / " + txt);
+            throw new NotImplementedException(hex + " / " + bin + " / " + txt + " / " + ins);
         }
     }
 }

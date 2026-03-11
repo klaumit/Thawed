@@ -11,7 +11,6 @@ using Iced.Intel;
 using static Generator.Tools.FileTool;
 using static Generator.Tools.ArgTool;
 using static Generator.Tools.JsonTool;
-using CF = Iced.Intel.CpuidFeature;
 using NDC = Experimenter.Models.NodeC;
 using NDS = Experimenter.Models.NodeD;
 using IDC = System.Collections.Concurrent.ConcurrentDictionary<string,
