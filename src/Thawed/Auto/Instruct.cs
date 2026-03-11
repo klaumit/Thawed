@@ -26,7 +26,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Aad(byte? v)
         {
-            return v is 0b00001010 ? new I(O.Aad, v) : null;
+            return v is 0b00001010 ? new I(O.Aad, hide(v)) : null;
         }
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Aam(byte? v)
         {
-            return v is 0b00001010 ? new I(O.Aam, v) : null;
+            return v is 0b00001010 ? new I(O.Aam, hide(v)) : null;
         }
         
         /// <summary>

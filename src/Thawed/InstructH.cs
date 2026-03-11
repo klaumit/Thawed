@@ -9,6 +9,8 @@ namespace Thawed
 {
     internal static class InstructH
     {
+        internal static HideArg hide(Arg a) => new(a);
+        
         internal static FarArg far(Arg a) => new(a);
 
         internal static Arg d(Arg a) => a;
