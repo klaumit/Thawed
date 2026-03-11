@@ -30,6 +30,14 @@
     <Compile Include="..\Generator\Tools\BitTool.cs">
       <Link>Tools/BitTool.cs</Link>
     </Compile>
+    <Compile Include="..\Generator\Tools\JsonTool.cs">
+      <Link>Tools/JsonTool.cs</Link>
+    </Compile>
+    <Content Include="..\Generator\Meta\x86reference.xml">
+      <Link>Resources/x86reference.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    
     <!--
     <Compile Include="..\Generator\Tools\CsvTool.cs">
       <Link>CsvTool.cs</Link>
@@ -41,11 +49,6 @@
     </Compile>
     -->
     <!--
-    <Compile Include="..\Generator\Tools\JsonTool.cs">
-      <Link>JsonTool.cs</Link>
-    </Compile>
-    -->
-    <!--
     <Compile Include="..\Generator\Meta\Extracted.cs">
       <Link>Extracted.cs</Link>
     </Compile>
@@ -54,12 +57,6 @@
     <Compile Include="..\Generator\Common\TempFile.cs">
       <Link>TempFile.cs</Link>
     </Compile>
-    -->
-    <!--
-    <Content Include="..\Generator\Meta\x86reference.xml">
-      <Link>Resources/x86reference.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     -->
   </ItemGroup>
 
