@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Unasmsys.Core;
 using static Unasmsys.Core.Pipes;
+using static Unasmsys.Core.Serv;
 
 namespace Unasmsys
 {
@@ -18,6 +19,7 @@ namespace Unasmsys
 				"-hi" => (Console.Out, args.Skip(1).Select((a, i) => new HexFile(a, i))),
 				"-bi" => (Console.Out, args.Skip(1).Select((a, i) => new BinFile(a, i))),
 				"-si" => (GetBuffered(Console.Out), ReadArgsByInput(Console.In)),
+				"-ni" => ReadArgsByNetwork(Console.Out, args.Skip(1).ToArray()),
 				_ => throw new InvalidOperationException($"Unknown mode ({mode})!")
 			};
 			var (@out, files) = parsed;
