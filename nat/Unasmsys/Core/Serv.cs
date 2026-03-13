@@ -14,7 +14,16 @@ namespace Unasmsys.Core
 		private static TcpListener _listener;
 		private static CancellationTokenSource _cts = new();
 
-		public static (TextWriter w, IEnumerable<IFile> f) ReadArgsByNetwork(TextWriter con, string[] args)
+		public static IEnumerable<IExFile> ReadArgsByNetwork(TextWriter con, string[] args)
+		{
+
+
+
+
+			throw new NotImplementedException();
+		}
+
+		public static (TextWriter w, IEnumerable<IFile> f) ReadArgsByNetwork5(TextWriter con, string[] args)
 		{
 			if (args.Length != 2)
 			{
