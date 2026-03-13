@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Unasmsys.Core;
+using static Unasmsys.Core.Pipes;
 
 namespace Unasmsys
 {
@@ -16,12 +17,15 @@ namespace Unasmsys
 				"-fi" => (Console.Out, args.Skip(1).Select(a => new DiskFile(a))),
 				"-hi" => (Console.Out, args.Skip(1).Select((a, i) => new HexFile(a, i))),
 				"-bi" => (Console.Out, args.Skip(1).Select((a, i) => new BinFile(a, i))),
+				"-si" => (GetBuffered(Console.Out), ReadArgsByInput(Console.In)),
 				_ => throw new InvalidOperationException($"Unknown mode ({mode})!")
 			};
 			var (@out, files) = parsed;
 			foreach (var file in files)
+			{
 				ProcessFile(file, @out);
-			@out.Flush();
+				@out.Flush();
+			}
 		}
 
 		private static void ProcessFile(IFile obj, TextWriter con)
