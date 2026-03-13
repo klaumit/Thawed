@@ -38,5 +38,17 @@ namespace Unasmsys.Core
 			}
 			return bld.ToString();
 		}
+
+		public static string? TryReadLine(this TextReader reader)
+		{
+			try
+			{
+				return reader.ReadLine();
+			}
+			catch (ObjectDisposedException)
+			{
+				return null;
+			}
+		}
 	}
 }

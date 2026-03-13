@@ -51,7 +51,7 @@ namespace Unasmsys.Core
 		public static IEnumerable<IFile> ReadArgsByInput(TextReader reader)
 		{
 			string? line;
-			while (!string.IsNullOrWhiteSpace(line = reader.ReadLine()))
+			while (!string.IsNullOrWhiteSpace(line = reader.TryReadLine()))
 				if (ReadArgsByInput(line) is { } files)
 					foreach (var file in files)
 						yield return file;

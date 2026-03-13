@@ -4,53 +4,43 @@ using System;
 using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 using IP = System.Net.IPAddress;
 
 namespace Unasmsys.Core
 {
 	internal static class Serv
 	{
-		private static TcpListener _listener;
-		private static CancellationTokenSource _cts = new();
+		private static TcpListener _listener = null!;
+		private static readonly CancellationTokenSource Cts = new();
 
 		public static IEnumerable<IExFile> ReadArgsByNetwork(TextWriter con, string[] args)
 		{
-
-
-
-
-			throw new NotImplementedException();
-		}
-
-		public static (TextWriter w, IEnumerable<IFile> f) ReadArgsByNetwork5(TextWriter con, string[] args)
-		{
 			if (args.Length != 2)
-			{
 				throw new InvalidOperationException("Server needs host and port!");
-			}
+
 			var host = args[0];
 			var addr = host switch { "any" => IP.Any, "local" => IP.Loopback, _ => IP.Parse(args[0]) };
 			var port = int.Parse(args[1]);
 			_listener = new TcpListener(addr, port);
+
 			_listener.Start();
 			con.WriteLine($"Server listening on {_listener.LocalEndpoint} ...");
-			var w = new StringWriter();
-			return (w, ReadArgsByNet(con));
+
+			return ReadArgsByNet(con);
 		}
 
-		private static IEnumerable<IFile> ReadArgsByNet(TextWriter con)
+		private static IEnumerable<IExFile> ReadArgsByNet(TextWriter con)
 		{
-			while (!_cts.IsCancellationRequested)
+			while (!Cts.IsCancellationRequested)
 			{
 				var client = _listener.AcceptTcpClient();
-				Task.Run(() => ReadArgsByNet(con, client));
+				foreach (var item in ReadArgsByNet(con, client))
+					yield return item;
 			}
 			_listener.Stop();
-			yield break;
 		}
 
-		private static void ReadArgsByNet(TextWriter con, TcpClient tcp)
+		private static IEnumerable<IExFile> ReadArgsByNet(TextWriter con, TcpClient tcp)
 		{
 			var endpoint = tcp.Client.RemoteEndPoint;
 			con.WriteLine($"Client connected => {endpoint}");
@@ -64,7 +54,7 @@ namespace Unasmsys.Core
 			var lenTxt = preamble.FirstOrDefault(p => p.StartsWith(tmp))?.Split(tmp, 2).Last();
 			_ = int.TryParse(lenTxt, out var len);
 
-			var content = reader.ReadStr(len).Split('=',2);
+			var content = reader.ReadStr(len).Split('=', 2);
 			var mode = content[0];
 			var arg = content[1];
 			var nl = Environment.NewLine;
@@ -72,16 +62,9 @@ namespace Unasmsys.Core
 
 			writer.WriteLine("HTTP/1.1 200 OK");
 			writer.WriteLine();
-			writer.Flush();
 
-			foreach (var file in Pipes.ReadArgsByInput(fake))
-			{
-				Console.WriteLine(" ? " + file + " / " + file.Name + " / " + file.Bytes.Length);
-
-				;
-			}
-
-			;
+			foreach (var file in writer.Wrap(Pipes.ReadArgsByInput(fake)))
+				yield return file;
 		}
 	}
 }
