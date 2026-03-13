@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace Unasmsys.Core
 {
 	internal sealed class BinFile : IFile
@@ -18,6 +15,6 @@ namespace Unasmsys.Core
 			=> $"bin{_idx}.com";
 
 		public byte[] Bytes
-			=> _bin.Chunk(8).Select(c => Convert.ToByte(new string(c), 2)).ToArray();
+			=> _bin.FromBin();
 	}
 }

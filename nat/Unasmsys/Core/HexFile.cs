@@ -1,5 +1,3 @@
-using System;
-
 namespace Unasmsys.Core
 {
 	internal sealed class HexFile : IFile
@@ -17,6 +15,6 @@ namespace Unasmsys.Core
 			=> $"hex{_idx}.com";
 
 		public byte[] Bytes
-			=> Convert.FromHexString(_hex);
+			=> _hex.FromHex();
 	}
 }
