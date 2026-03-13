@@ -1,5 +1,9 @@
 {
   "profiles": {
+    "Unasmsys_s": {
+      "commandName": "Project",
+      "commandLineArgs": "-si"
+    },
     "Unasmsys_f": {
       "commandName": "Project",
       "commandLineArgs": "-fi Data\\sample1.com Data\\sample2.com Data\\sample3.com"
