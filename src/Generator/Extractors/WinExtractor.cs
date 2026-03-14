@@ -9,7 +9,7 @@ namespace Generator.Extractors
     {
         protected readonly string _exePath = FindExe();
 
-        protected static IEnumerable<Decoded[]> ParseWinOutput(string stdOut, byte[][] bytes)
+        protected static IEnumerable<Decoded[]> ParseWinOutput(string stdOut, byte[][]? bytes)
         {
             var lines = TextTool.ToLines(stdOut);
             const string sep = "[ ";
@@ -25,7 +25,7 @@ namespace Generator.Extractors
                     list = new List<Decoded>();
                     continue;
                 }
-                if (ParseLine(line, bytes[i]) is not { } res)
+                if (ParseLine(line, bytes?[i]) is not { } res)
                     continue;
                 list!.Add(res);
             }
@@ -33,7 +33,7 @@ namespace Generator.Extractors
                 yield return list.ToArray();
         }
 
-        private static Decoded? ParseLine(string one, byte[] bytes)
+        private static Decoded? ParseLine(string one, byte[]? bytes)
         {
             var parts = TextTool.ToCol(one);
             if (parts.Length != 5)
@@ -43,7 +43,8 @@ namespace Generator.Extractors
             var hex = parts[2];
             var dis = parts[3];
             var left = int.Parse(parts[4]);
-            return new Decoded(bytes.ToStr(), offset, count, hex, dis, left);
+            var bs = bytes?.ToStr() ?? string.Empty;
+            return new Decoded(bs, offset, count, hex, dis, left);
         }
 
         private static string FindExe()
