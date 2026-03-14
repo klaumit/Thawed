@@ -46,75 +46,47 @@ namespace Experimenter.Core
             var opI = GetOpI(inDir);
             var opK = GetOpK(opG, opN, opB, opI);
             var opJ = GetOpJ(opK, opG);
+
             foreach (var (group, opcodes) in opJ)
             {
                 if (group is "Unknown") continue;
-                var gName = $"{group}Test";
-                var w = new CodeWriter();
-                await w.WriteLineAsync("using Xunit;");
-                await w.WriteLineAsync();
-                await w.WriteLineAsync("// ReSharper disable IdentifierTypo");
-                await w.WriteLineAsync();
-                await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
-                await w.WriteLineAsync("{");
-                await w.WriteLineAsync($"public class {gName} : AbstractDecodeTest");
-                await w.WriteLineAsync("{");
-                var first2 = true;
-                foreach (var opCode in opcodes)
-                {
-                    if (!(opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1))
-                        continue;
-                    if (first2)
-                        first2 = false;
-                    else
-                        await w.WriteLineAsync();
-                    var opTitle = opCode.Title();
-                    var opLong = opN[opCode];
-                    await w.WriteLineAsync("/// <summary>");
-                    await w.WriteLineAsync($"/// {opLong}");
-                    if (opI.TryGetValue(opCode, out var opIl) && opIl.Length >= 1)
-                    {
-                        var ali = opIl.Select(x => x.Aliases.TrimOrNull())
-                            .Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray();
-                        var rma = string.Join(" ", ali).Replace(" | ", ", ");
-                        await w.WriteLineAsync($"/// <remarks>{rma}</remarks>");
-                    }
-                    await w.WriteLineAsync("/// </summary>");
-                    await w.WriteLineAsync("[Theory]");
-                    var opBlD = GetOpD(opBl);
-                    foreach (var opBg in opBlD.GroupBy(x => x.Key.Split('|', 2)[0]))
-                    {
-                        await w.WriteLineAsync("/* */");
-                        foreach (var (_, val) in opBg)
-                        {
-                            var doubled = new SortedSet<string>();
-                            foreach (var ((oh, oo, oa), _) in new[]
-                                         {
-                                             val.MinBy(x => x.i?.ToString().Length),
-                                             val.MaxBy(x => x.i?.ToString().Length)
-                                         }
-                                         .OrderBy(x => x.e.Hex.Length).ThenBy(x => x.e.Hex))
-                            {
-                                var line = $"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]";
-                                if (doubled.Contains(line))
-                                    continue;
-                                await w.WriteLineAsync(line);
-                                doubled.Add(line);
-                            }
-                        }
-                    }
-                    await w.WriteLineAsync("/* */");
-                    await w.WriteLineAsync($"public void Check{opTitle}(string bin, string op, string arg)");
-                    await w.WriteLineAsync("{");
-                    await w.WriteLineAsync("AssertDecode(bin, op, arg);");
-                    await w.WriteLineAsync("}");
-                }
-                await w.WriteLineAsync("}");
-                await w.WriteLineAsync("}");
-                var tstF = Path.Combine(outDir, $"{gName}.cs");
-                await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
-                Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
+                await GenerateTestGroup(outDir, group, opcodes, opB, opN);
             }
+        }
+
+        private static async Task GenerateTestGroup(string outDir, string group,
+            string[] opcodes, Dictionary<string, MyInstrR[]> opB, Dictionary<string, string> opN)
+        {
+            var gName = $"{group}Test";
+            var w = new CodeWriter();
+            await w.WriteLineAsync("using Xunit;");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("// ReSharper disable IdentifierTypo");
+            await w.WriteLineAsync();
+            await w.WriteLineAsync("namespace Thawed.UnitTests.Auto");
+            await w.WriteLineAsync("{");
+            await w.WriteLineAsync($"public class {gName} : AbstractDecodeTest");
+            await w.WriteLineAsync("{");
+            var first2 = true;
+            foreach (var opCode in opcodes)
+            {
+                if (!(opB.TryGetValue(opCode, out var opBl) && opBl.Length >= 1))
+                    continue;
+                if (first2)
+                    first2 = false;
+                else
+                    await w.WriteLineAsync();
+                var opTitle = opCode.Title();
+                var opLong = opN[opCode];
+                await w.WriteLineAsync($"#region [{opTitle.ToUpper()}] {opLong} ");
+                
+                await w.WriteLineAsync($"#endregion");
+            }
+            await w.WriteLineAsync("}");
+            await w.WriteLineAsync("}");
+            var tstF = Path.Combine(outDir, $"{gName}.cs");
+            await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
+            Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
         }
 
         private static Dictionary<string, (MyInstrR e, Instruction? i)[]> GetOpD(MyInstrR[] opBl)
