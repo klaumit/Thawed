@@ -49,6 +49,26 @@ namespace Generator.Extractors
             return dumpTask;
         }
 
+        private void StopApp()
+        {
+            Console.WriteLine($" {nameof(StopApp)} 1 ");
+            if (_argChannel.Writer.TryWrite(string.Empty))
+            {
+                Console.WriteLine($" {nameof(StopApp)} 2 ");
+                return;
+            }
+            Console.WriteLine($" {nameof(StopApp)} 3 ");
+            Task.Run(() =>
+            {
+                Console.WriteLine($" {nameof(StopApp)} 4 ");
+                _argChannel.Writer.WaitToWriteAsync(_cts.Token);
+                Console.WriteLine($" {nameof(StopApp)} 5 ");
+                _argChannel.Writer.WriteAsync(string.Empty);
+                Console.WriteLine($" {nameof(StopApp)} 6 ");
+            });
+            Console.WriteLine($" {nameof(StopApp)} 7 ");
+        }
+
         public override async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
             Console.WriteLine($" {nameof(Decode)} 1 ");
@@ -204,7 +224,10 @@ namespace Generator.Extractors
 
         public void Dispose()
         {
-            Console.WriteLine($" {nameof(Dispose)} begin ");
+            Console.WriteLine($" {nameof(Dispose)} begin 1");
+            StopApp();
+            Console.WriteLine($" {nameof(Dispose)} begin 2");
+
             using (_cts)
             {
                 _argChannel.Writer.Complete();
