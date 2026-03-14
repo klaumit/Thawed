@@ -9,7 +9,7 @@ using Generator.Tools;
 
 namespace Generator.Extractors
 {
-    public sealed class WinFiExtractor : WinBaseExtractor, IExtractor
+    public sealed class WinFiExtractor : WinExtractor
     {
         private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
 
@@ -20,7 +20,7 @@ namespace Generator.Extractors
         {
             foreach (var batch in byteArrays.Wrap(_tmpDir, ArgPrefix).Chunk(ArgCount))
             {
-                List<string> dArgs = [_exePath, "-fi"];
+                List<string> dArgs = [ExePath, "-fi"];
                 Array.ForEach(batch, b => dArgs.Add(Path.GetRelativePath(_tmpDir, b.File)));
 
                 const string cmd = "wine";

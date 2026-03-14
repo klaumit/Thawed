@@ -5,9 +5,9 @@ using Generator.Tools;
 
 namespace Generator.Extractors
 {
-    public abstract class WinBaseExtractor : IExtractor
+    public abstract class WinExtractor : IExtractor
     {
-        protected readonly string _exePath = FindExe();
+        protected readonly string ExePath = FindExe();
 
         protected static IEnumerable<Decoded[]> ParseWinOutput(string stdOut, byte[][]? bytes)
         {
@@ -49,7 +49,7 @@ namespace Generator.Extractors
 
         private static string FindExe()
         {
-            var exeDir = FileTool.GetPath<WinBaseExtractor>();
+            var exeDir = FileTool.GetPath<WinExtractor>();
             var srcDir = Path.Combine(exeDir, "..", "..", "..", "..", "..");
             return Path.GetFullPath(Path.Combine(srcDir, "nat", "prepared", "Unasmsys.exe"));
         }

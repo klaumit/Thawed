@@ -12,7 +12,7 @@ using Nito.AsyncEx;
 
 namespace Generator.Extractors
 {
-    public sealed class WinSiExtractor : WinBaseExtractor, IExtractor, IDisposable
+    public sealed class WinSiExtractor : WinExtractor, IDisposable
     {
         public int ArgCount { get; set; } = 1000;
         public TextWriter Error { get; set; } = Console.Error;
@@ -34,7 +34,7 @@ namespace Generator.Extractors
 
         private CommandTask<CommandResult> StartApp()
         {
-            List<string> dArgs = [_exePath, "-si"];
+            List<string> dArgs = [ExePath, "-si"];
             const string cmd = "wine";
             var dumpCmd = Cli.Wrap(cmd)
                 .WithArguments(dArgs)

@@ -7,7 +7,7 @@ using Generator.API;
 
 namespace Generator.Extractors
 {
-    public sealed class WinHiExtractor : WinBaseExtractor, IExtractor
+    public sealed class WinHiExtractor : WinExtractor
     {
         public int ArgCount { get; set; } = 1000;
 
@@ -15,7 +15,7 @@ namespace Generator.Extractors
         {
             foreach (var batch in byteArrays.Chunk(ArgCount))
             {
-                List<string> dArgs = [_exePath, "-hi"];
+                List<string> dArgs = [ExePath, "-hi"];
                 Array.ForEach(batch, b => dArgs.Add(Convert.ToHexString(b)));
 
                 const string cmd = "wine";
