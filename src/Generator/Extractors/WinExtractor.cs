@@ -9,48 +9,11 @@ using Generator.Tools;
 
 namespace Generator.Extractors
 {
-    public sealed class WinExtractor : IExtractor
+    public abstract class WinBaseExtractor : IExtractor
     {
-        // private readonly string _tmpDir = FileTool.CreateOrGetDir("tmp_win")!;
-        private readonly string _exePath = FindExe();
+        protected readonly string _exePath = FindExe();
 
-        public int ArgCount { get; set; } = 1355;
-        // public char ArgPrefix { get; set; } = 'a';
-
-        public async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
-        {
-            // .Wrap(_tmpDir, ArgPrefix)
-            foreach (var batch in byteArrays.Chunk(ArgCount))
-            {
-                List<string> dArgs = [_exePath, "-hi"];
-                // Array.ForEach(batch, b => dArgs.Add(Path.GetRelativePath(_tmpDir, b.File)));
-                Array.ForEach(batch, b => dArgs.Add(Convert.ToHexString(b)));
-
-                const string cmd = "wine";
-                var dumpCmd = await Cli.Wrap(cmd)
-                    .WithArguments(dArgs)
-                    // .WithWorkingDirectory(_tmpDir)
-                    .WithValidation(CommandResultValidation.None)
-                    .ExecuteBufferedAsync();
-
-                // Array.ForEach(batch, b => b.Dispose());
-
-                var error = dumpCmd.StandardError;
-                if (!string.IsNullOrWhiteSpace(error) || dumpCmd.ExitCode != 0)
-                {
-                    // throw new InvalidOperationException($"[{dumpCmd.ExitCode}] {error}");
-                    yield return [];
-                }
-
-                var stdOut = dumpCmd.StandardOutput;
-                // var bytes = batch.Select(b => b.Bytes).ToArray();
-                var bytes = batch.Select(b => b).ToArray();
-                foreach (var step in ParseWinOutput(stdOut, bytes))
-                    yield return step;
-            }
-        }
-
-        private static IEnumerable<Decoded[]> ParseWinOutput(string stdOut, byte[][] bytes)
+        protected static IEnumerable<Decoded[]> ParseWinOutput(string stdOut, byte[][] bytes)
         {
             var lines = TextTool.ToLines(stdOut);
             const string sep = "[ ";
@@ -89,9 +52,11 @@ namespace Generator.Extractors
 
         private static string FindExe()
         {
-            var exeDir = FileTool.GetPath<WinExtractor>();
+            var exeDir = FileTool.GetPath<WinBaseExtractor>();
             var srcDir = Path.Combine(exeDir, "..", "..", "..", "..", "..");
             return Path.GetFullPath(Path.Combine(srcDir, "nat", "prepared", "Unasmsys.exe"));
         }
+
+        public abstract IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays);
     }
 }

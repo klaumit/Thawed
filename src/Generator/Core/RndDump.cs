@@ -38,7 +38,7 @@ namespace Generator.Core
 
             async Task Consume()
             {
-                var extractor = new WinExtractor();
+                var extractor = new WinHiExtractor();
 
                 await foreach (var buffer in reader.ReadAllAsync())
                 {

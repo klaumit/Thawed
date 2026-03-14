@@ -46,7 +46,7 @@ namespace Generator.Core
                 case "gnu": return new GnuExtractor();
                 case "iced": return new IcedExtractor();
                 case "nasm": return new NasmExtractor();
-                case "win": return new WinExtractor();
+                case "win": return new WinHiExtractor();
                 default: throw new InvalidOperationException(app);
             }
         }

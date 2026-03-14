@@ -78,7 +78,7 @@ namespace Experimenter.Core
             Console.WriteLine($" * p{id:D2} t{tId:D2} '{tPre}' a{argCnt:D5} ");
 
             var i = 0;
-            var ex = new WinExtractor { ArgCount = argCnt /*, ArgPrefix = tPre */ };
+            var ex = new WinHiExtractor { ArgCount = argCnt /*, ArgPrefix = tPre */ };
             await foreach (var d in ex.Decode(arrays))
             {
                 i++;

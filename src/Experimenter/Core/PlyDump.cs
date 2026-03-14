@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Generator.Extractors;
 using Generator.Tools;
-using WE = Generator.Extractors.WinExtractor;
+using WE = Generator.Extractors.WinHiExtractor;
 using IE = Generator.Extractors.IcedExtractor;
 using NE = Generator.Extractors.NasmExtractor;
 using GE = Generator.Extractors.GnuExtractor;

@@ -6,7 +6,7 @@ using Generator.API;
 using Generator.Extractors;
 using Generator.Tools;
 using Thawed;
-using WE = Generator.Extractors.WinExtractor;
+using WE = Generator.Extractors.WinHiExtractor;
 using static Generator.Tools.FileTool;
 
 namespace Experimenter.Core
