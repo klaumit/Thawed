@@ -50,10 +50,10 @@ namespace Generator.Extractors
         {
             if (_argChannel.Writer.TryWrite(string.Empty))
                 return;
-            Task.Run(() =>
+            Task.Run(async () =>
             {
-                _argChannel.Writer.WaitToWriteAsync(_cts.Token);
-                _argChannel.Writer.WriteAsync(string.Empty);
+                await _argChannel.Writer.WaitToWriteAsync(_cts.Token);
+                await _argChannel.Writer.WriteAsync(string.Empty);
             });
         }
 

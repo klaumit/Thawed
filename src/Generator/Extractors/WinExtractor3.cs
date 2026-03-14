@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using CliWrap;
-using CliWrap.EventStream;
 using Generator.API;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Nito.AsyncEx;
 
 namespace Generator.Extractors
 {
@@ -13,50 +17,68 @@ namespace Generator.Extractors
         public int ArgCount { get; set; } = 1000;
         public int Port { get; set; } = 9097;
 
-        private CancellationTokenSource cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cts;
+        private readonly Lazy<HttpClient> _client;
+        private readonly AsyncLazy<CommandTask<CommandResult>> _app;
+
+        public WinNiExtractor()
+        {
+            _cts = new CancellationTokenSource();
+            _client = new Lazy<HttpClient>(CreateClient);
+            _app = new AsyncLazy<CommandTask<CommandResult>>(() => Task.Factory.StartNew(StartApp));
+        }
+
+        private static HttpClient CreateClient()
+        {
+            var client = new HttpClient();
+            var def = client.DefaultRequestHeaders;
+            def.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+            def.UserAgent.Add(new ProductInfoHeaderValue("Thawed", "1.0.0"));
+            return client;
+        }
+
+        private CommandTask<CommandResult> StartApp()
+        {
+            List<string> dArgs = [_exePath, "-ni", "local", $"{Port}"];
+            const string cmd = "wine";
+            var dumpCmd = Cli.Wrap(cmd)
+                .WithArguments(dArgs)
+                .WithValidation(CommandResultValidation.None);
+            var dumpTask = dumpCmd.ExecuteAsync(_cts.Token);
+            return dumpTask;
+        }
 
         public override async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
+            if (!_app.IsStarted)
+            {
+                _app.Start();
+            }
             foreach (var batch in byteArrays.Chunk(ArgCount))
             {
-                List<string> dArgs = [_exePath, "-ni", "local", $"{Port}"];
-
-                var _output = Console.Out;
-
-                const string cmd = "wine";
-                var dumpCmd = Cli.Wrap(cmd)
-                    .WithArguments(dArgs)
-                    .WithValidation(CommandResultValidation.None);
-
-                await foreach (var cmdEvent in dumpCmd.ListenAsync(cts.Token))
-                {
-                    switch (cmdEvent)
-                    {
-                        case StartedCommandEvent started:
-                            await _output.WriteLineAsync($"Process started; ID: {started.ProcessId}");
-                            break;
-                        case StandardOutputCommandEvent stdOut:
-                            await _output.WriteLineAsync($"Out> {stdOut.Text}");
-                            break;
-                        case StandardErrorCommandEvent stdErr:
-                            await _output.WriteLineAsync($"Err> {stdErr.Text}");
-                            break;
-                        case ExitedCommandEvent exited:
-                            await _output.WriteLineAsync($"Process exited; Code: {exited.ExitCode}");
-                            break;
-                    }
-                }
-
-                // throw new InvalidOperationException($"{dumpCmd} ?!");
+                var hexes = string.Join(" ", batch.Select(Convert.ToHexString));
+                var line = $"h={hexes}";
+                var stdOut = await SendRequest(line);
+                var parsed = ParseWinOutput(stdOut, batch);
+                foreach (var item in parsed)
+                    yield return item;
             }
-            yield break;
+        }
+
+        private async Task<string> SendRequest(string line)
+        {
+            const string scheme = "application/x-www-form-urlencoded";
+            var content = new StringContent(line, Encoding.UTF8, scheme);
+            var url = $"http://localhost:{Port}";
+            var res = await _client.Value.PostAsync(url, content, _cts.Token);
+            return await res.Content.ReadAsStringAsync(_cts.Token);
         }
 
         public void Dispose()
         {
-            Console.WriteLine("1?");
-            cts.Cancel();
-            Console.WriteLine("2!");
+            using (_client.Value)
+            using (_cts)
+                _cts.Cancel();
         }
     }
 }
