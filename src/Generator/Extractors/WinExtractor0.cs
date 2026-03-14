@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using CliWrap;
 using CliWrap.Buffered;
 using Generator.API;
-using Generator.Tools;
 
 namespace Generator.Extractors
 {

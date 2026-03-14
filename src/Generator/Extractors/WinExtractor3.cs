@@ -1,19 +1,33 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using CliWrap;
-using CliWrap.Buffered;
 using Generator.API;
-using Generator.Tools;
 
 namespace Generator.Extractors
 {
-    public sealed class WinNiExtractor : WinBaseExtractor, IExtractor
+    public sealed class WinNiExtractor : WinBaseExtractor, IExtractor, IDisposable
     {
-        public override IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
+        public int ArgCount { get; set; } = 1000;
+
+        public override async IAsyncEnumerable<Decoded[]> Decode(IEnumerable<byte[]> byteArrays)
         {
-            throw new NotImplementedException();
+            foreach (var batch in byteArrays.Chunk(ArgCount))
+            {
+                List<string> dArgs = [_exePath, "-ni"];
+
+                const string cmd = "wine";
+                var dumpCmd = Cli.Wrap(cmd)
+                    .WithArguments(dArgs)
+                    .WithValidation(CommandResultValidation.None);
+
+                throw new InvalidOperationException($"{dumpCmd} ?!");
+            }
+            yield break;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
