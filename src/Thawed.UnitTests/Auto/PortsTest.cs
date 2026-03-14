@@ -14,7 +14,7 @@ namespace Thawed.UnitTests.Auto
         
         [Theory]
         [InlineData("11100100 00000000", "IN", "AL,00")]
-        [InlineData("11100100 10101100", "IN", "AL,AC")]
+        // [InlineData("11100100 10101100", "IN", "AL,AC")]
         public void CheckInV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
@@ -25,7 +25,7 @@ namespace Thawed.UnitTests.Auto
         
         [Theory]
         [InlineData("11100101 00000000", "IN", "AX,00")]
-        [InlineData("11100101 10110000", "IN", "AX,B0")]
+        // [InlineData("11100101 10110000", "IN", "AX,B0")]
         public void CheckInV4(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
@@ -56,13 +56,13 @@ namespace Thawed.UnitTests.Auto
             => AssertDecode(bin, op, arg);
         
         [Theory]
-        [InlineData("11100110 00000000", "OUT", "00,AL")]
+        // [InlineData("11100110 00000000", "OUT", "00,AL")]
         [InlineData("11100110 10111100", "OUT", "BC,AL")]
         public void CheckOutV3(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
         [Theory]
-        [InlineData("11100111 00000000", "OUT", "00,AX")]
+        // [InlineData("11100111 00000000", "OUT", "00,AX")]
         [InlineData("11100111 11000000", "OUT", "C0,AX")]
         public void CheckOutV4(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

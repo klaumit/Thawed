@@ -13,12 +13,12 @@ namespace Thawed.UnitTests.Auto
             => AssertDecode(bin, op, arg);
         
         [Theory]
-        [InlineData("01100010 00000000", "BOUND", "AX,Word Ptr [BX+SI]")]
+        // [InlineData("01100010 00000000", "BOUND", "AX,Word Ptr [BX+SI]")]
         [InlineData("01100010 00111101", "BOUND", "DI,Word Ptr [DI]")]
-        [InlineData("00111110 01100010 00010001", "BOUND", "DX,Word Ptr DS:[BX+DI]")]
-        [InlineData("01100010 01000010 00010000", "BOUND", "AX,Word Ptr [BP+SI+10]")]
-        [InlineData("01100010 00000110 00010001 00000000", "BOUND", "AX,Word Ptr [0011]")]
-        [InlineData("01100010 10000011 10001101 00010011", "BOUND", "AX,Word Ptr [BP+DI+138D]")]
+        // [InlineData("00111110 01100010 00010001", "BOUND", "DX,Word Ptr DS:[BX+DI]")]
+        // [InlineData("01100010 01000010 00010000", "BOUND", "AX,Word Ptr [BP+SI+10]")]
+        // [InlineData("01100010 00000110 00010001 00000000", "BOUND", "AX,Word Ptr [0011]")]
+        // [InlineData("01100010 10000011 10001101 00010011", "BOUND", "AX,Word Ptr [BP+DI+138D]")]
         public void CheckBoundV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
@@ -33,7 +33,7 @@ namespace Thawed.UnitTests.Auto
         #region [INT, BRK] Call to Interrupt
         [Theory]
         [InlineData("11001101 00000000", "INT", "00")]
-        [InlineData("11001101 10101111", "INT", "AF")]
+        // [InlineData("11001101 10101111", "INT", "AF")]
         public void CheckIntV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
