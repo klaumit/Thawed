@@ -6,70 +6,40 @@ namespace Thawed.UnitTests.Auto
 {
     public class OtherTest : AbstractDecodeTest
     {
-        /// <summary>
-        /// Make Stack Frame for Params
-        /// <remarks>PREPARE</remarks>
-        /// </summary>
+        #region [ENTER, PREPARE] Make Stack Frame for Params
         [Theory]
-        /* */
         [InlineData("11001000 00000001 11010001 01010010", "ENTER", "D101,52")]
         [InlineData("11001000 00001001 00000000 00001001", "ENTER", "0009,09")]
-        /* */
-        public void CheckEnter(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckEnterV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// High Level Procedure Exit
-        /// <remarks>DISPOSE</remarks>
-        /// </summary>
+        #region [LEAVE, DISPOSE] High Level Procedure Exit
         [Theory]
-        /* */
         [InlineData("11001001", "LEAVE", "")]
-        /* */
-        public void CheckLeave(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckLeaveV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Assert LOCK Signal Prefix
-        /// <remarks>BUSLOCK</remarks>
-        /// </summary>
+        #region [LOCK, BUSLOCK] Assert LOCK Signal Prefix
         [Theory]
-        /* */
         [InlineData("11110000", "LOCK", "")]
-        /* */
-        public void CheckLock(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckLockV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// No Operation
-        /// <remarks>-</remarks>
-        /// </summary>
+        #region [NOP] No Operation
         [Theory]
-        /* */
         [InlineData("10010000", "NOP", "")]
-        /* */
-        public void CheckNop(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckNopV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Wait
-        /// <remarks>POLL</remarks>
-        /// </summary>
+        #region [WAIT, POLL] Wait
         [Theory]
-        /* */
         [InlineData("10011011", "WAIT", "")]
-        /* */
-        public void CheckWait(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckWaitV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
     }
 }

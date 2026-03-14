@@ -6,56 +6,32 @@ namespace Thawed.UnitTests.Auto
 {
     public class PrefixTest : AbstractDecodeTest
     {
-        /// <summary>
-        /// Code Segment Register
-        /// <remarks>PS</remarks>
-        /// </summary>
+        #region [CS, PS] Code Segment Register
         [Theory]
-        /* */
         [InlineData("00101110", "CS:", "")]
-        /* */
-        public void CheckCs(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckCsV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Data Segment Register
-        /// <remarks>DS0</remarks>
-        /// </summary>
+        #region [DS, DS0] Data Segment Register
         [Theory]
-        /* */
         [InlineData("00111110", "DS:", "")]
-        /* */
-        public void CheckDs(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckDsV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Extra Segment Register
-        /// <remarks>DS1</remarks>
-        /// </summary>
+        #region [ES, DS1] Extra Segment Register
         [Theory]
-        /* */
         [InlineData("00100110", "ES:", "")]
-        /* */
-        public void CheckEs(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckEsV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Stack Segment Register
-        /// <remarks>-</remarks>
-        /// </summary>
+        #region [SS] Stack Segment Register
         [Theory]
-        /* */
         [InlineData("00110110", "SS:", "")]
-        /* */
-        public void CheckSs(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckSsV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
     }
 }

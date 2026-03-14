@@ -6,108 +6,60 @@ namespace Thawed.UnitTests.Auto
 {
     public class NumericTest : AbstractDecodeTest
     {
-        /// <summary>
-        /// ASCII Adjust After Addition
-        /// <remarks>ADJBA</remarks>
-        /// </summary>
+        #region [AAA, ADJBA] ASCII Adjust After Addition
         [Theory]
-        /* */
         [InlineData("00110111", "AAA", "")]
-        /* */
-        public void CheckAaa(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckAaaV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// ASCII Adjust AX Before Division
-        /// <remarks>CVTDB</remarks>
-        /// </summary>
+        #region [AAD, CVTDB] ASCII Adjust AX Before Division
         [Theory]
-        /* */
         [InlineData("11010101 00001010", "AAD", "")]
-        /* */
-        public void CheckAad(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckAadV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// ASCII Adjust AX After Multiply
-        /// <remarks>CVTBD</remarks>
-        /// </summary>
+        #region [AAM, CVTBD] ASCII Adjust AX After Multiply
         [Theory]
-        /* */
         [InlineData("11010100 00001010", "AAM", "")]
-        /* */
-        public void CheckAam(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckAamV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// ASCII Adjust AL After Subtraction
-        /// <remarks>ADJBS</remarks>
-        /// </summary>
+        #region [AAS, ADJBS] ASCII Adjust AL After Subtraction
         [Theory]
-        /* */
         [InlineData("00111111", "AAS", "")]
-        /* */
-        public void CheckAas(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckAasV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Convert Byte to Word
-        /// <remarks>CVTBW</remarks>
-        /// </summary>
+        #region [CBW, CVTBW] Convert Byte to Word
         [Theory]
-        /* */
         [InlineData("10011000", "CBW", "")]
-        /* */
-        public void CheckCbw(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckCbwV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Convert Word to Doubleword
-        /// <remarks>CVTWL</remarks>
-        /// </summary>
+        #region [CWD, CVTWL] Convert Word to Doubleword
         [Theory]
-        /* */
         [InlineData("10011001", "CWD", "")]
-        /* */
-        public void CheckCwd(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckCwdV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Decimal Adjust AL After Addition
-        /// <remarks>ADJ4A</remarks>
-        /// </summary>
+        #region [DAA, ADJ4A] Decimal Adjust AL After Addition
         [Theory]
-        /* */
         [InlineData("00100111", "DAA", "")]
-        /* */
-        public void CheckDaa(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckDaaV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
         
-        /// <summary>
-        /// Decimal Adjust AL After Subtraction
-        /// <remarks>ADJ4S</remarks>
-        /// </summary>
+        #region [DAS, ADJ4S] Decimal Adjust AL After Subtraction
         [Theory]
-        /* */
         [InlineData("00101111", "DAS", "")]
-        /* */
-        public void CheckDas(string bin, string op, string arg)
-        {
-            AssertDecode(bin, op, arg);
-        }
+        public void CheckDasV1(string bin, string op, string arg)
+            => AssertDecode(bin, op, arg);
+        #endregion
     }
 }

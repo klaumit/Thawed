@@ -89,6 +89,7 @@ namespace Experimenter.Core
                 }
                 var rma = string.Join(", ", opTits);
                 await w.WriteLineAsync($"#region [{rma.ToUpper()}] {opLong}");
+                await GenerateTestRegion(w, opTitle, opBl);
                 await w.WriteLineAsync($"#endregion");
             }
             await w.WriteLineAsync("}");
@@ -96,6 +97,41 @@ namespace Experimenter.Core
             var tstF = Path.Combine(outDir, $"{gName}.cs");
             await File.WriteAllTextAsync(tstF, w.ToString(), Encoding.UTF8);
             Console.WriteLine($"Generated '{Path.GetFileNameWithoutExtension(tstF)}'!");
+        }
+
+        private static async Task GenerateTestRegion(CodeWriter w, string opTitle, MyInstrR[] opBl)
+        {
+            var opBlD = GetOpD(opBl);
+            var idx = 0;
+            var first = true;
+            foreach (var opBg in opBlD.GroupBy(x => x.Key.Split('|', 2)[0]))
+            {
+                if (first)
+                    first = false;
+                else
+                    await w.WriteLineAsync();
+                var myTitle = $"{opTitle}V{++idx}";
+                await w.WriteLineAsync("[Theory]");
+                foreach (var (_, val) in opBg)
+                {
+                    var doubled = new SortedSet<string>();
+                    foreach (var ((oh, oo, oa), _) in new[]
+                                 {
+                                     val.MinBy(x => x.i?.ToString().Length),
+                                     val.MaxBy(x => x.i?.ToString().Length)
+                                 }
+                                 .OrderBy(x => x.e.Hex.Length).ThenBy(x => x.e.Hex))
+                    {
+                        var line = $"[InlineData(\"{oh}\", \"{oo}\", \"{oa}\")]";
+                        if (doubled.Contains(line))
+                            continue;
+                        await w.WriteLineAsync(line);
+                        doubled.Add(line);
+                    }
+                }
+                await w.WriteLineAsync($"public void Check{myTitle}(string bin, string op, string arg)");
+                await w.WriteLineAsync($"    => AssertDecode(bin, op, arg);");
+            }
         }
 
         private static Dictionary<string, (MyInstrR e, Instruction? i)[]> GetOpD(MyInstrR[] opBl)
