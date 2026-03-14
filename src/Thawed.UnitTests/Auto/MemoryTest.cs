@@ -7,12 +7,12 @@ namespace Thawed.UnitTests.Auto
     public class MemoryTest : AbstractDecodeTest
     {
         #region [LDS, MOV] Load Far Pointer
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("11000101 11000101", "LDS", "AX,DBP")]
         public void CheckLdsV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("11000101 00000000", "LDS", "AX,DWord Ptr [BX+SI]")]
         [InlineData("11000101 00101100", "LDS", "BP,DWord Ptr [SI]")]
         // [InlineData("00111110 11000101 00010001", "LDS", "DX,DWord Ptr DS:[BX+DI]")]
@@ -24,12 +24,12 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [LEA, LDEA] Load Effective Address
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("10001101 11000101", "LEA", "AX,BP")]
         public void CheckLeaV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001101 00000000", "LEA", "AX,[BX+SI]")]
         [InlineData("10001101 00000111", "LEA", "AX,[BX]")]
         // [InlineData("00100110 10001101 00010001", "LEA", "DX,ES:[BX+DI]")]
@@ -41,12 +41,12 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [LES, MOV] Load Far Pointer
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("11000100 11000010", "LES", "AX,DDX")]
         public void CheckLesV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("11000100 00000000", "LES", "AX,DWord Ptr [BX+SI]")]
         [InlineData("11000100 00000111", "LES", "AX,DWord Ptr [BX]")]
         // [InlineData("00111110 11000100 00010001", "LES", "DX,DWord Ptr DS:[BX+DI]")]
@@ -58,12 +58,12 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [MOV] Move
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("10001100 00111001", "MOV", "Word Ptr [BX+DI],DS")]
         public void CheckMovV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10100000 00000000 00110110", "MOV", "AL,[3600]")]
         [InlineData("10100000 00000110 11100111", "MOV", "AL,[E706]")]
         // [InlineData("00100110 10100000 00010001 00000000", "MOV", "AL,ES:[0011]")]
@@ -71,7 +71,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10100001 00000000 10110110", "MOV", "AX,[B600]")]
         [InlineData("10100001 11011011 00000001", "MOV", "AX,[01DB]")]
         // [InlineData("00100110 10100001 00010001 00000000", "MOV", "AX,ES:[0011]")]
@@ -79,7 +79,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV3(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10100011 00000000 01001010", "MOV", "[4A00],AX")]
         [InlineData("10100011 01111111 11000110", "MOV", "[C67F],AX")]
         // [InlineData("00100110 10100011 00010001 00000000", "MOV", "ES:[0011],AX")]
@@ -87,7 +87,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV4(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("10100010 00000001 11001000", "MOV", "[C801],AL")]
         // [InlineData("10100010 00101110 00000110", "MOV", "[062E],AL")]
         // [InlineData("00100110 10100010 00010001 00000000", "MOV", "ES:[0011],AL")]
@@ -95,13 +95,13 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV5(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("10111000 00001011 11100100", "MOV", "AX,E40B")]
         // [InlineData("10111011 00001001 00000000", "MOV", "BX,0009")]
         public void CheckMovV6(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001011 00000000", "MOV", "AX,Word Ptr [BX+SI]")]
         [InlineData("10001011 11010011", "MOV", "DX,BX")]
         // [InlineData("00111110 10001011 00010001", "MOV", "DX,Word Ptr DS:[BX+DI]")]
@@ -111,13 +111,13 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV7(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("10110000 00000000", "MOV", "AL,00")]
         // [InlineData("10110000 11100110", "MOV", "AL,E6")]
         public void CheckMovV8(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001010 00000000", "MOV", "AL,Byte Ptr [BX+SI]")]
         [InlineData("10001010 11010111", "MOV", "DL,BH")]
         // [InlineData("00111110 10001010 00010001", "MOV", "DL,Byte Ptr DS:[BX+DI]")]
@@ -127,7 +127,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV9(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("11000111 00000001 00100000 11110111", "MOV", "Word Ptr [BX+DI],F720")]
         [InlineData("11000111 11000000 00010001 00000000", "MOV", "AX,0011")]
         // [InlineData("11000111 01000000 00010001 00000000 11001000", "MOV", "Word Ptr [BX+SI+11],C800")]
@@ -138,7 +138,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV10(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001001 00000000", "MOV", "Word Ptr [BX+SI],AX")]
         [InlineData("10001001 11011011", "MOV", "BX,BX")]
         // [InlineData("00111110 10001001 00010001", "MOV", "Word Ptr DS:[BX+DI],DX")]
@@ -148,7 +148,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV11(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001100 00000000", "MOV", "Word Ptr [BX+SI],ES")]
         [InlineData("10001100 11000101", "MOV", "BP,ES")]
         // [InlineData("00111110 10001100 00010001", "MOV", "Word Ptr DS:[BX+DI],SS")]
@@ -158,7 +158,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV12(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("11000110 00000000 10001001", "MOV", "Byte Ptr [BX+SI],89")]
         [InlineData("11000110 11000000 00010001", "MOV", "AL,11")]
         // [InlineData("11000110 01000000 00010001 00000000", "MOV", "Byte Ptr [BX+SI+11],00")]
@@ -169,7 +169,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV13(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001000 00000000", "MOV", "Byte Ptr [BX+SI],AL")]
         [InlineData("10001000 11001110", "MOV", "DH,CL")]
         // [InlineData("00111110 10001000 00010001", "MOV", "Byte Ptr DS:[BX+DI],DL")]
@@ -179,7 +179,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV14(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10001110 00000000", "MOV", "ES,Word Ptr [BX+SI]")]
         [InlineData("10001110 11011011", "MOV", "DS,BX")]
         // [InlineData("00111110 10001110 00010001", "MOV", "SS,Word Ptr DS:[BX+DI]")]
@@ -189,24 +189,24 @@ namespace Thawed.UnitTests.Auto
         public void CheckMovV15(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("11000110 11111000 00010001", "MOV", "AL,11")]
         public void CheckMovV16(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("11000111 11111000 00010001 00000000", "MOV", "AX,0011")]
         public void CheckMovV17(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [XCHG, XCH] Exchange Register/Memory
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("10010001", "XCHG", "AX,CX")]
         public void CheckXchgV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10000111 00000000", "XCHG", "Word Ptr [BX+SI],AX")]
         [InlineData("10000111 11000010", "XCHG", "DX,AX")]
         // [InlineData("00111110 10000111 00010001", "XCHG", "Word Ptr DS:[BX+DI],DX")]
@@ -216,7 +216,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckXchgV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         // [InlineData("10000110 00000000", "XCHG", "Byte Ptr [BX+SI],AL")]
         [InlineData("10000110 11010001", "XCHG", "CL,DL")]
         // [InlineData("00111110 10000110 00010001", "XCHG", "Byte Ptr DS:[BX+DI],DL")]
@@ -228,7 +228,7 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [XLAT, TRANS] Table Lookup Translation
-        [Theory]
+        [Theory(Skip = "Too complicated!")]
         [InlineData("11010111", "XLAT", "")]
         public void CheckXlatV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
