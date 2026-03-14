@@ -1,5 +1,6 @@
 using System;
 using Thawed.Args;
+using Thawed.Auto;
 using R = Thawed.Register;
 
 // ReSharper disable RedundantAssignment
@@ -179,6 +180,11 @@ namespace Thawed
                 default: throw new InvalidOperationException($"{w} | {data.ToHexString()}");
             }
             return res;
+        }
+
+        public static Instruction? FromPrefix(Opcode? prefix)
+        {
+            return prefix is { } p ? new Instruction(p) : null;
         }
     }
 

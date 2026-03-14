@@ -473,12 +473,48 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Input from variable port
+        /// <remarks>IN</remarks>
+        /// </summary>
+        internal static I InAxDx()
+        {
+            return new I(O.In, R.ax, R.dx);
+        }
+
+        /// <summary>
+        /// Input from variable port
+        /// <remarks>IN</remarks>
+        /// </summary>
+        internal static I InAlDx()
+        {
+            return new I(O.In, R.al, R.dx);
+        }
+
+        /// <summary>
         /// Input from fixed port
         /// <remarks>IN</remarks>
         /// </summary>
         internal static I? In(byte? v0)
         {
             return v0 is {} b0 ? new I(O.In) : null;
+        }
+        
+        /// <summary>
+        /// Input from fixed port
+        /// <remarks>IN</remarks>
+        /// </summary>
+        internal static I? InAx(byte? v0)
+        {
+            return v0 is {} b0 ? new I(O.In, R.ax, b0) : null;
+        }
+        
+        /// <summary>
+        /// Input from fixed port
+        /// <remarks>IN</remarks>
+        /// </summary>
+        internal static I? InAl(byte? v0)
+        {
+            return v0 is {} b0 ? new I(O.In, R.al, b0) : null;
         }
         
         /// <summary>
@@ -1037,12 +1073,48 @@ namespace Thawed.Auto
         }
         
         /// <summary>
+        /// Output to fixed port
+        /// <remarks>OUT</remarks>
+        /// </summary>
+        internal static I? OutAl(byte? v0)
+        {
+            return v0 is {} b0 ?  new I(O.Out, b0, R.al) : null;
+        }
+        
+        /// <summary>
+        /// Output to fixed port
+        /// <remarks>OUT</remarks>
+        /// </summary>
+        internal static I? OutAx(byte? v0)
+        {
+            return v0 is { } b0 ? new I(O.Out, b0, R.ax) : null;
+        }
+
+        /// <summary>
         /// Output to variable port
         /// <remarks>OUT</remarks>
         /// </summary>
         internal static I Out()
         {
             return new I(O.Out);
+        }
+        
+        /// <summary>
+        /// Output to variable port
+        /// <remarks>OUT</remarks>
+        /// </summary>
+        internal static I OutDxAl()
+        {
+            return new I(O.Out, R.dx, R.al);
+        }
+        
+        /// <summary>
+        /// Output to variable port
+        /// <remarks>OUT</remarks>
+        /// </summary>
+        internal static I OutDxAx()
+        {
+            return new I(O.Out, R.dx, R.ax);
         }
         
         /// <summary>

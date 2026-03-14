@@ -1,3 +1,4 @@
+using System;
 using I = Thawed.Auto.Instruct;
 using static Thawed.InstructH;
 
@@ -80,10 +81,10 @@ namespace Thawed.Auto
                 case 0b10100111: i = I.Cmpsw(p); break;
                 case 0b10100100: i = I.Movsb(p); break;
                 case 0b10100101: i = I.Movsw(p); break;
-                case 0b11101100: i = I.In(); break;
-                case 0b11101101: i = I.In(); break;
-                case 0b11101110: i = I.Out(); break;
-                case 0b11101111: i = I.Out(); break;
+                case 0b11101100: i = I.InAlDx(); break;
+                case 0b11101101: i = I.InAxDx(); break;
+                case 0b11101110: i = I.OutDxAl(); break;
+                case 0b11101111: i = I.OutDxAx(); break;
                 // One argument
                 case 0b11010000:
                     switch ((b1 = r.ReadByte()) & 0b00_111_000)
@@ -187,10 +188,10 @@ namespace Thawed.Auto
                 case 0b00010011: i = I.Adc(1,1,b1=r.ReadByte()); break;
                 case 0b01101000: i = I.AdcI(0,0,b1=r.ReadByte(),b2=r.ReadByte()); break;
                 case 0b01101010: i = I.AdcI(0,1,b1=r.ReadByte()); break;
-                case 0b11100110: i = I.Out(b1 = r.ReadByte()); break;
-                case 0b11100111: i = I.Out(b1 = r.ReadByte()); break;
-                case 0b11100100: i = I.In(b1 = r.ReadByte()); break;
-                case 0b11100101: i = I.In(b1 = r.ReadByte()); break;
+                case 0b11100110: i = I.OutAl(b1 = r.ReadByte()); break;
+                case 0b11100111: i = I.OutAx(b1 = r.ReadByte()); break;
+                case 0b11100100: i = I.InAl(b1 = r.ReadByte()); break;
+                case 0b11100101: i = I.InAx(b1 = r.ReadByte()); break;
                 case 0b01100010: i = I.Bound(b1 = r.ReadByte()); break;
                 case 0b11010100: i = I.Aam(b1 = r.ReadByte()); break;
                 case 0b11010101: i = I.Aad(b1 = r.ReadByte()); break;
@@ -372,6 +373,9 @@ namespace Thawed.Auto
                 case 0b000_00_010: i = I.PushSr(MaskSeg(b0)); break;
                 case 0b000_00_110: i = I.AdcSr(MaskSeg(b0)); break;
             }
+
+            if (p != null) 
+                return FromPrefix(p);
 
             return fail ? throw new DecodeException(b0, b1, b2, b3) : i;
         }
