@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Iced.Intel;
 using CF = Iced.Intel.CpuidFeature;
 
-namespace Generator.Tools
+namespace Experimenter.Tools
 {
     public static class IceTool
     {

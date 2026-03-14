@@ -1,18 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CommandLine;
 using Generator.Core;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Generator.API;
-using Generator.Extractors;
-using Generator.Tools;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Generator.API;
-using Generator.Extractors;
-using Generator.Tools;
 
 namespace Generator
 {

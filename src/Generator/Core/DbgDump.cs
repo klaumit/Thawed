@@ -1,21 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using Generator.Tools;
-using System.Collections.Generic;
 using System.Linq;
-using Generator.Meta;
-using System.IO;
-using System.Reflection;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Generator.API;
 using Generator.Extractors;
-using Generator.Tools;
-using System.Text;
-using Iced.Intel;
-using CodeWriter = Generator.Common.CodeWriter;
-using static Generator.Tools.FileTool;
 
 namespace Generator.Core
 {
