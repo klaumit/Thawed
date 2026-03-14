@@ -50,12 +50,13 @@ namespace Experimenter.Core
             foreach (var (group, opcodes) in opJ)
             {
                 if (group is "Unknown") continue;
-                await GenerateTestGroup(outDir, group, opcodes, opB, opN);
+                await GenerateTestGroup(outDir, group, opcodes, opB, opN, opI);
             }
         }
 
-        private static async Task GenerateTestGroup(string outDir, string group,
-            string[] opcodes, Dictionary<string, MyInstrR[]> opB, Dictionary<string, string> opN)
+        private static async Task GenerateTestGroup(string outDir, string group, string[] opcodes,
+            Dictionary<string, MyInstrR[]> opB, Dictionary<string, string> opN,
+            Dictionary<string, IntelInstr[]> opI)
         {
             var gName = $"{group}Test";
             var w = new CodeWriter();
@@ -78,8 +79,16 @@ namespace Experimenter.Core
                     await w.WriteLineAsync();
                 var opTitle = opCode.Title();
                 var opLong = opN[opCode];
-                await w.WriteLineAsync($"#region [{opTitle.ToUpper()}] {opLong} ");
-                
+                var opTits = new List<string?> { opTitle };
+                if (opI.TryGetValue(opCode, out var opIl) && opIl.Length >= 1)
+                {
+                    var ali = opIl.Select(x => x.Aliases.TrimOrNull())
+                        .SelectMany(x => x?.Split('|').Select(y => y.TrimOrNull()) ?? [])
+                        .Where(x => !string.IsNullOrWhiteSpace(x) && x != "-").Distinct().ToArray();
+                    opTits.AddRange(ali);
+                }
+                var rma = string.Join(", ", opTits);
+                await w.WriteLineAsync($"#region [{rma.ToUpper()}] {opLong}");
                 await w.WriteLineAsync($"#endregion");
             }
             await w.WriteLineAsync("}");
