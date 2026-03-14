@@ -12,6 +12,9 @@ namespace Generator.Core
 		[Option('r', "rnd", HelpText = "Find random codes.")]
 		public bool TryRandom { get; set; }
 
+		[Option('c', "check", HelpText = "Check all extractors.")]
+		public bool TryCheck { get; set; }
+
 		[Option('d', "doc", HelpText = "Write documentation.")]
 		public bool TryDoc { get; set; }
 
