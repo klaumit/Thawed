@@ -25,5 +25,5 @@
      "DBNZ", "DBNZE", "DBNZNE" ],
   "Interrupt instruction": [ "BRK", "BRKV", "CHKIND", "RETI" ],
   "CPU control instruction": [ "BUSLOCK", "DI", "EI", "FPO1", "HALT", "NOP", "POLL" ],
-  "Segment override prefix": [ "DSO:", "DS1:", "PS:", "SS:" ]
+  "Segment override prefix": [ "DS0:", "DS1:", "PS:", "SS:" ]
 }
