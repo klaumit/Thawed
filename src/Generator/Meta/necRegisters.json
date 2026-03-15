@@ -1,0 +1,18 @@
+{
+    "AL": "AL",
+    "CL": "CL",
+    "DL": "DL",
+    "BL": "BL",
+    "AH": "AH",
+    "CH": "CH",
+    "DH": "DH",
+    "BH": "BH",
+    "AX": "AW",
+    "CX": "CW",
+    "DX": "DW",
+    "BX": "BW",
+    "SP": "SP",
+    "BP": "BP",
+    "SI": "IX",
+    "DI": "IY"
+}
