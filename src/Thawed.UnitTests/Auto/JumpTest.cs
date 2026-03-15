@@ -73,8 +73,8 @@ namespace Thawed.UnitTests.Auto
         public void CheckJmpV4(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
-        // [InlineData("11101011 00000000", "JMP", "0002")]
+        [Theory]
+        [InlineData("11101011 00000000", "JMP", "0002")]
         [InlineData("11101011 10001000", "JMP", "FF8A")]
         public void CheckJmpV5(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

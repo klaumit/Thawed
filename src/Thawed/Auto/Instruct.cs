@@ -667,7 +667,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Jmp(byte? low)
         {
-            return low is { } l ? new I(O.Jmp, l) : null;
+            return low is { } l ? new I(O.Jmp, AsL(l)) : null;
         }
         
         /// <summary>
