@@ -24,7 +24,7 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [HLT, HALT] Halt
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11110100", "HLT", "")]
         public void CheckHltV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

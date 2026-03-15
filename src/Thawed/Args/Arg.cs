@@ -6,6 +6,8 @@ namespace Thawed.Args
 
         public static implicit operator Arg(byte v) => new ByteArg(v);
 
+        public static implicit operator Arg(ushort v) => new ShortArg(v);
+        
         public static implicit operator Arg(int v) => new IntArg(v);
 
         public static implicit operator Arg(OpWidth v) => new DispArg(v);

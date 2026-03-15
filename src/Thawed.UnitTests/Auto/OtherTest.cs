@@ -29,14 +29,14 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [NOP] No Operation
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("10010000", "NOP", "")]
         public void CheckNopV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [WAIT, POLL] Wait
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("10011011", "WAIT", "")]
         public void CheckWaitV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

@@ -186,33 +186,11 @@ namespace Thawed
         {
             return prefix is { } p ? new Instruction(p) : null;
         }
-    }
 
-    public enum OpWidth
-    {
-        Bits8 = 0,
-        Bits16 = 1,
-        None
-    }
-
-    public enum OpMod
-    {
-        NoDisplacement = 0b00,
-        Bit8Displace = 0b01,
-        Bit16Displace = 0b10,
-        RegisterDirect = 0b11
-    }
-
-    public enum OpDirection
-    {
-        /// <summary>
-        /// REG --> MOD R/M  
-        /// </summary>
-        RegIsSrc = 0,
-
-        /// <summary>
-        /// MOD R/M --> REG
-        /// </summary>
-        RegIsDst = 1
+        public static ushort AsS(byte low, byte high)
+        {
+            var val = (high << 8) | low;
+            return (ushort)val;
+        }
     }
 }

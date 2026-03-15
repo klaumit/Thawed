@@ -91,26 +91,26 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [RET] Return From Procedure
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11000010 00001001 00000000", "RET", "0009")]
-        // [InlineData("11000010 01000010 11010100", "RET", "D442")]
+        [InlineData("11000010 01000010 11010100", "RET", "D442")]
         public void CheckRetV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11000011", "RET", "")]
         public void CheckRetV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [RETF, RET] Return From Far Procedure
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001010 00000001 11010001", "RETF", "D101")]
-        // [InlineData("11001010 00001001 00000000", "RETF", "0009")]
+        [InlineData("11001010 00001001 00000000", "RETF", "0009")]
         public void CheckRetfV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001011", "RETF", "")]
         public void CheckRetfV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

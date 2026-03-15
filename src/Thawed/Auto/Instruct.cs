@@ -1277,7 +1277,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Ret(byte? low, byte? high)
         {
-            return low is { } l && high is { } h ? new I(O.Ret, l, h) : null;
+            return low is { } l && high is { } h ? new I(O.Ret, AsS(l, h)) : null;
         }
         
         /// <summary>
@@ -1293,7 +1293,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Retf(byte? low, byte? high)
         {
-            return low is {} l && high is { } h ? new I(O.Retf, l, h) : null;
+            return low is {} l && high is { } h ? new I(O.Retf, AsS(l, h)) : null;
         }
         
         internal static I Rol(params A[] args)
