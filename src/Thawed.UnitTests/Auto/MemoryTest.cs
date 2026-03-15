@@ -113,7 +113,7 @@ namespace Thawed.UnitTests.Auto
         
         [Theory(Skip = "Too complicated!")]
         [InlineData("10110000 00000000", "MOV", "AL,00")]
-        // [InlineData("10110000 11100110", "MOV", "AL,E6")]
+        [InlineData("10110000 11100110", "MOV", "AL,E6")]
         public void CheckMovV8(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
@@ -201,7 +201,7 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [XCHG, XCH] Exchange Register/Memory
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("10010001", "XCHG", "AX,CX")]
         public void CheckXchgV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

@@ -873,7 +873,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Loop(byte? v)
         {
-            return v is {} b ? new I(O.Loop, b) : null;
+            return v is {} b ? new I(O.Loop, AsL(b)) : null;
         }
         
         /// <summary>
@@ -882,7 +882,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Loopnz(byte? v)
         {
-            return v is {} b ? new I(O.Loopnz, b) : null;
+            return v is {} b ? new I(O.Loopnz, AsL(b)) : null;
         }
         
         /// <summary>
@@ -891,7 +891,7 @@ namespace Thawed.Auto
         /// </summary>
         internal static I? Loopz(byte? v)
         {
-            return v is {} b? new I(O.Loopz, b) : null;
+            return v is {} b? new I(O.Loopz, AsL(b)) : null;
         }
         
         internal static I Mov(params A[] args)

@@ -192,5 +192,11 @@ namespace Thawed
             var val = (high << 8) | low;
             return (ushort)val;
         }
+
+        public static ushort AsL(byte b, int len = 2)
+        {
+            var val = (sbyte)b + len;
+            return (ushort)val;
+        }
     }
 }

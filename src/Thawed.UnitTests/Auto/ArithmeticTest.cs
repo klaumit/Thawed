@@ -298,7 +298,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckDecV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("01001000", "DEC", "AX")]
         public void CheckDecV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
@@ -417,7 +417,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckIncV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("01000000", "INC", "AX")]
         public void CheckIncV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
