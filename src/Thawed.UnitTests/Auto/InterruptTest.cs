@@ -31,29 +31,29 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [INT, BRK] Call to Interrupt
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001101 00000000", "INT", "00")]
-        // [InlineData("11001101 10101111", "INT", "AF")]
+        [InlineData("11001101 10101111", "INT", "AF")]
         public void CheckIntV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [INT3, BRK] Call to Interrupt
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001100", "INT3", "")]
         public void CheckInt3V1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [INTO, BRKV] Call to Interrupt
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001110", "INTO", "")]
         public void CheckIntoV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [IRET, RETI] Interrupt Return
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001111", "IRET", "")]
         public void CheckIretV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

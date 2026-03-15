@@ -15,7 +15,7 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [LEAVE, DISPOSE] High Level Procedure Exit
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11001001", "LEAVE", "")]
         public void CheckLeaveV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

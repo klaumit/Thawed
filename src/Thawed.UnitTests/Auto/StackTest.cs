@@ -44,14 +44,14 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [POPA, POP] Pop All General Registers
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("01100001", "POPA", "")]
         public void CheckPopaV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [POPF, POP] Pop Stack Into EFLAGS
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("10011101", "POPF", "")]
         public void CheckPopfV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
@@ -107,14 +107,14 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [PUSHA, PUSH] Push All General Registers
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("01100000", "PUSHA", "")]
         public void CheckPushaV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         #endregion
         
         #region [PUSHF, PUSH] Push EFLAGS Onto Stack
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("10011100", "PUSHF", "")]
         public void CheckPushfV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);

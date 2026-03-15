@@ -228,7 +228,7 @@ namespace Thawed.UnitTests.Auto
         #endregion
         
         #region [XLAT, TRANS] Table Lookup Translation
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("11010111", "XLAT", "")]
         public void CheckXlatV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
