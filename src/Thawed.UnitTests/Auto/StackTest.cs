@@ -12,7 +12,7 @@ namespace Thawed.UnitTests.Auto
         public void CheckPopV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("01011000", "POP", "AX")]
         public void CheckPopV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
@@ -59,12 +59,12 @@ namespace Thawed.UnitTests.Auto
         
         #region [PUSH] Push Word Onto the Stack
         [Theory(Skip = "Too complicated!")]
-        // [InlineData("01101000 00000000 01110101", "PUSH", "7500")]
+        [InlineData("01101000 00000000 01110101", "PUSH", "7500")]
         [InlineData("01101000 01010000 00000100", "PUSH", "0450")]
         public void CheckPushV1(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
         
-        [Theory(Skip = "Too complicated!")]
+        [Theory]
         [InlineData("01010000", "PUSH", "AX")]
         public void CheckPushV2(string bin, string op, string arg)
             => AssertDecode(bin, op, arg);
