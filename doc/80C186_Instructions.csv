@@ -13,7 +13,7 @@
 ,"Segment register to register/memory","10001100","mod 0 reg r/m",,
 ,,,,,
 ,"PUSH = Push:",,,,
-,"Memory","11111111","Mod 110 r/m",,
+,"Memory","11111111","mod 110 r/m",,
 ,"Register","01010 reg",,,
 ,"Segment register","000 reg 110",,,
 ,"Immediate","011010s0"," data","data if s = 0",
